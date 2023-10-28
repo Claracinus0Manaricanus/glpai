@@ -35,21 +35,15 @@ void GameObject::initBuffers(){
 	glGenBuffers(1,&texBuff);
 }
 
-void GameObject::initName(const char* name){
-	NAME=(char*)malloc(strlen(name));
-	memcpy(NAME,name,strlen(name));
-}
-
 
 //constructors
-GameObject::GameObject(const char* name){
-	initName(name);
+GameObject::GameObject(const char* name):
+Transform(name){
 	initBuffers();
 }
 
 GameObject::GameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name):
-Transform(inPos,inRot,inSca),VertexData(inVCount,iVertices){
-	initName(name);
+Transform(inPos,inRot,inSca,name),VertexData(inVCount,iVertices){
 	initBuffers();
 	update();
 }
