@@ -1,0 +1,403 @@
+#include "B1.h"
+#include <math.h>
+#include <GL/glew.h>
+
+
+/*********************************************************************************/
+//camera
+
+
+camera::camera(float Ifov):fov(Ifov){}
+
+void camera::moveForward(float forward){
+	move({sin(rotation.y)*forward,0,cos(rotation.y)*forward});
+}
+
+void camera::moveRight(float right){
+	move({sin(rotation.y+(PI/2))*right,0,cos(rotation.y+(PI/2))*right});
+}
+
+void camera::moveUp(float up){
+	move({0,up,0});
+}
+
+
+/*********************************************************************************/
+//gameObject
+
+//initializers
+void gameObject::initBuffers(){
+	glGenVertexArrays(1,&vArr);
+	glBindVertexArray(vArr);
+	glGenBuffers(1,&posBuff);
+	glGenBuffers(1,&norBuff);
+	glGenBuffers(1,&colBuff);
+	glGenBuffers(1,&texBuff);
+}
+
+void gameObject::initName(const char* name){
+	NAME=(char*)malloc(strlen(name));
+	memcpy(NAME,name,strlen(name));
+}
+
+
+//constructors
+gameObject::gameObject(const char* name){
+	initName(name);
+	initBuffers();
+}
+
+gameObject::gameObject(vec3 inPosition, vec3 inRotation, const char* name):
+transform(inPosition,inRotation){
+	initName(name);
+	initBuffers();
+}
+
+gameObject::gameObject(int inVCount, vertex* iVertices, const char* name):
+vertexData(inVCount,iVertices){
+	initName(name);
+	initBuffers();
+	update();
+}
+
+gameObject::gameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name):
+transform(inPosition,inRotation),vertexData(inVCount,iVertices){
+	initName(name);
+	initBuffers();
+	update();
+}
+
+gameObject::gameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name):
+transform(inPos,inRot,inSca),vertexData(inVCount,iVertices){
+	initName(name);
+	initBuffers();
+	update();
+}
+
+
+//destructors
+gameObject::~gameObject(){
+	glDeleteBuffers(1,&posBuff);
+	glDeleteBuffers(1,&norBuff);
+	glDeleteBuffers(1,&colBuff);
+	glDeleteBuffers(1,&texBuff);
+	glDeleteVertexArrays(1,&vArr);
+}
+
+
+//loaders
+int gameObject::setColor(vec4 inCol){//needed for update()
+	vertexData::setColor(inCol);
+	update();
+	return 0;
+}
+
+int gameObject::loadData(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices){
+	setTransform(inPos,inRot,inSca);
+	loadAll(inVCount,iVertices);
+	update();
+	return 0;
+}
+
+int gameObject::loadData(vec3 inPos, vec3 inRot, int inVCount, vertex* iVertices){
+	setTransform(inPos,inRot,scale);
+	loadAll(inVCount,iVertices);
+	update();
+	return 0;
+}
+
+int gameObject::loadData(int inVCount, vertex* iVertices){
+	loadAll(inVCount,iVertices);
+	update();
+	return 0;
+}
+
+int gameObject::loadTexture(std::string filename, bool mipmap){
+	mainTex.load(filename,mipmap);
+	bTex=true;
+	return 0;
+}
+
+int gameObject::unloadTexture(){
+	mainTex.unload();
+	bTex=false;
+	return 0;
+}
+
+
+//selectors
+int gameObject::useColor(bool newState){
+	bTex=!newState;
+	return 0;
+}
+
+
+//state identifiers
+bool gameObject::usingTexture(){
+	return (bTex&&mainTex.loaded());
+}
+
+
+//utility
+int gameObject::bind(){
+	glBindVertexArray(vArr);
+	mainTex.bind();
+	return 0;
+}
+
+int gameObject::unbind(){
+	glBindVertexArray(0);
+	mainTex.unbind();
+	return 0;
+}
+
+int gameObject::update(){
+	//vertexArray
+	glBindVertexArray(vArr);
+	float tempx,tempy,tempz;//for use in both normal and position
+
+
+	//position
+	//to store modified data
+	float* moddedPos=new float[vCount*3]{0};
+
+	//update according to transform data
+	//rotation (sequence: x->y->z)  needs optimization and quaternions
+	for(int i=0;i<vCount;i++){
+		//debug
+		tempx=vertices[i].pos.x;
+		tempy=vertices[i].pos.y;
+		tempz=vertices[i].pos.z;
+
+		//x rotation
+		moddedPos[i*3]=tempx;//x
+		moddedPos[i*3+1]=tempy*cos(rotation.x)-tempz*sin(rotation.x);//y
+		moddedPos[i*3+2]=tempy*sin(rotation.x)+tempz*cos(rotation.x);//z
+
+		//update
+		tempx=moddedPos[i*3];
+		tempy=moddedPos[i*3+1];
+		tempz=moddedPos[i*3+2];
+
+		//y rotation
+		moddedPos[i*3]=tempx*cos(rotation.y)+tempz*sin(rotation.y);//x
+		moddedPos[i*3+1]=tempy;//y
+		moddedPos[i*3+2]=-tempx*sin(rotation.y)+tempz*cos(rotation.y);//z
+
+		//update
+		tempx=moddedPos[i*3];
+		tempy=moddedPos[i*3+1];
+		tempz=moddedPos[i*3+2];
+
+		//z rotation
+		moddedPos[i*3]=tempx*cos(rotation.z)+tempy*sin(rotation.z);//x
+		moddedPos[i*3+1]=-tempx*sin(rotation.z)+tempy*cos(rotation.z);//y
+		moddedPos[i*3+2]=tempz;//z
+	}
+
+
+	//position
+	for(int i=0;i<vCount;i++){
+		//scale
+		moddedPos[i*3]*=scale.x;//x
+		moddedPos[i*3+1]*=scale.y;//y
+		moddedPos[i*3+2]*=scale.z;//z
+		//position
+		moddedPos[i*3]+=position.x;//x
+		moddedPos[i*3+1]+=position.y;//y
+		moddedPos[i*3+2]+=position.z;//z
+	}
+
+
+	//load modified data to buffer
+	glBindBuffer(GL_ARRAY_BUFFER,posBuff);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*vCount*3,moddedPos,GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(float)*3,(void*)0);
+	glEnableVertexAttribArray(0);
+	delete[] moddedPos;
+
+
+	//normal
+	//to store modified data
+	float* moddedNor=new float[vCount*3]{0};
+
+	//update according to transform data
+	//rotation (sequence: x->y->z)  needs optimization and quaternions
+	for(int i=0;i<vCount;i++){
+		//debug
+		tempx=vertices[i].nor.x;
+		tempy=vertices[i].nor.y;
+		tempz=vertices[i].nor.z;
+
+		//x rotation
+		moddedNor[i*3]=tempx;//x
+		moddedNor[i*3+1]=tempy*cos(rotation.x)-tempz*sin(rotation.x);//y
+		moddedNor[i*3+2]=tempy*sin(rotation.x)+tempz*cos(rotation.x);//z
+
+		//update
+		tempx=moddedNor[i*3];
+		tempy=moddedNor[i*3+1];
+		tempz=moddedNor[i*3+2];
+
+		//y rotation
+		moddedNor[i*3]=tempx*cos(rotation.y)+tempz*sin(rotation.y);//x
+		moddedNor[i*3+1]=tempy;//y
+		moddedNor[i*3+2]=-tempx*sin(rotation.y)+tempz*cos(rotation.y);//z
+
+		//update
+		tempx=moddedNor[i*3];
+		tempy=moddedNor[i*3+1];
+		tempz=moddedNor[i*3+2];
+
+		//z rotation
+		moddedNor[i*3]=tempx*cos(rotation.z)+tempy*sin(rotation.z);//x
+		moddedNor[i*3+1]=-tempx*sin(rotation.z)+tempy*cos(rotation.z);//y
+		moddedNor[i*3+2]=tempz;//z
+
+		//scaling
+		moddedPos[i*3]*=scale.y*scale.z;//x
+		moddedPos[i*3+1]*=scale.x*scale.z;//y
+		moddedPos[i*3+2]*=scale.x*scale.y;//z
+	}
+
+	//load modded data to buffer
+	glBindBuffer(GL_ARRAY_BUFFER,norBuff);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*vCount*3,moddedNor,GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(float)*3,(void*)0);
+	glEnableVertexAttribArray(1);
+
+	delete[] moddedNor;
+
+
+	//color
+	float* vertexCol=new float[vCount*sizeof(float)*4];
+	for(int i=0;i<vCount;i++){
+		vertexCol[i*4]=vertices[i].col.x;//x
+		vertexCol[i*4+1]=vertices[i].col.y;//y
+		vertexCol[i*4+2]=vertices[i].col.z;//z
+		vertexCol[i*4+3]=vertices[i].col.w;//w
+	}
+	//data to buffer
+	glBindBuffer(GL_ARRAY_BUFFER,colBuff);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*vCount*4,vertexCol,GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(2,4,GL_FLOAT,GL_FALSE,sizeof(float)*4,(void*)0);
+	glEnableVertexAttribArray(2);
+
+
+	//textureCoordinates
+	float* vertexTex=new float[vCount*sizeof(float)*2];
+	for(int i=0;i<vCount;i++){
+		vertexTex[i*2]=vertices[i].tex.x;//x
+		vertexTex[i*2+1]=vertices[i].tex.y;//y
+	}
+	//data to buffer
+	glBindBuffer(GL_ARRAY_BUFFER,texBuff);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*vCount*2,vertexTex,GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(3,2,GL_FLOAT,GL_FALSE,sizeof(float)*2,(void*)0);
+	glEnableVertexAttribArray(3);
+	
+	return 0;
+}
+
+
+/*********************************************************************************/
+//UI_Element
+
+
+//constructor
+UI_Element::UI_Element(){
+	glGenVertexArrays(1,&vArr);
+	glGenBuffers(1,&posBuff);
+	glGenBuffers(1,&texBuff);
+	updateArrays();
+}
+
+UI_Element::UI_Element(vec2 iPos, vec2 iScale):
+pos(iPos),scale(iScale){
+	glGenVertexArrays(1,&vArr);
+	glGenBuffers(1,&posBuff);
+	glGenBuffers(1,&texBuff);
+	updateArrays();
+}
+
+
+//destructor
+UI_Element::~UI_Element(){
+	delete[] vPos;
+	delete[] vTex;
+	glDeleteBuffers(1,&posBuff);
+	glDeleteBuffers(1,&texBuff);
+	glDeleteVertexArrays(1,&vArr);
+}
+
+
+//loaders
+int UI_Element::changePos(vec2 iPos){
+	pos=iPos;
+	updateArrays();
+	return 0;
+}
+
+int UI_Element::changeScale(vec2 iScale){
+	scale=iScale;
+	updateArrays();
+	return 0;
+}
+
+int UI_Element::loadTexture(std::string filename, bool mipmap){
+	return mainTex.load(filename,mipmap);
+}
+
+int UI_Element::unloadTexture(){
+	return mainTex.unload();
+}
+
+
+//extractors
+int UI_Element::getVCount(){
+	return 6;
+}
+
+
+//utility
+int UI_Element::bind(){
+	glBindVertexArray(vArr);
+	mainTex.bind();
+	return 0;
+}
+
+int UI_Element::unbind(){
+	glBindVertexArray(0);
+	mainTex.unbind();
+	return 0;
+}
+
+int UI_Element::updateArrays(){
+	delete[] vPos;
+	vPos=new float[12]{
+		pos.x+scale.x,pos.y+scale.y,
+		pos.x+scale.x,pos.y-scale.y,
+		pos.x-scale.x,pos.y-scale.y,
+		pos.x-scale.x,pos.y-scale.y,
+		pos.x-scale.x,pos.y+scale.y,
+		pos.x+scale.x,pos.y+scale.y
+	};
+	updateBuffers();
+	return 0;
+}
+
+int UI_Element::updateBuffers(){
+	glBindVertexArray(vArr);
+	glBindBuffer(GL_ARRAY_BUFFER,posBuff);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*12,vPos,GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(0,2,GL_FLOAT,GL_FALSE,sizeof(float)*2,(void*)0);
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER,texBuff);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*12,vTex,GL_DYNAMIC_DRAW);
+	glVertexAttribPointer(3,2,GL_FLOAT,GL_FALSE,sizeof(float)*2,(void*)0);
+	glEnableVertexAttribArray(3);
+	return 0;
+}
+
+
+/*********************************************************************************/

@@ -1,0 +1,30 @@
+#version 450 core
+
+//from vertex shader
+in vec4 fragCol;
+in vec3 fragPos;
+in vec3 fragNor;
+
+//output
+out vec4 color;
+
+//uniforms
+uniform int count;
+uniform vec4 lights[1000];
+
+//for use in main
+vec4 lCol;
+vec3 lVec;
+float intensity,l_length;
+
+void main(){
+	color=vec4(0,0,0,fragCol.w);
+	for(int i;i<count;i++){
+		lVec=lights[i*2].xyz-fragPos;
+		lCol=lights[i*2+1];
+		intensity=dot(normalize(lVec),normalize(fragNor));
+		if(intensity<0)intensity=0;
+		l_length=length(lVec);
+		color+=vec4(fragCol.xyz*lCol.xyz*lCol.w*intensity/l_length,0);
+	}
+}

@@ -1,0 +1,1 @@
+g++ -g tools/T0.cpp tools/B0.cpp tools/B1.cpp tools/B2.cpp tools/R0.cpp main.cpp -lGL -lGLEW -lglfw -lX11 -o pai

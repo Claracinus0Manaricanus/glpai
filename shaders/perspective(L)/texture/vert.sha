@@ -1,0 +1,57 @@
+#version 450 core
+
+//vertex data
+layout(location=0) in vec3 pos;
+layout(location=1) in vec3 nor;
+layout(location=2) in vec4 col;
+layout(location=3) in vec2 inTexCoord;
+
+//camera and screen
+uniform vec2 rot;
+uniform vec3 mov;
+uniform int w;
+uniform int h;
+
+//to fragment shader
+out vec2 texCoord;
+out vec3 fragPos;
+out vec3 fragNor;
+out vec4 fragCol;
+
+//transformations
+mat4 rotYM4={
+	vec4(cos(rot.y), 0,sin(rot.y),  0),
+	vec4(0,         1,        0,  0),
+	vec4(-sin(rot.y),0,cos(rot.y),  0),
+	vec4(0,         0,        0,  1)
+};
+
+mat4 rotXM4={
+	vec4(1,        0,         0, 0),
+	vec4(0,cos(rot.x),-sin(rot.x), 0),
+	vec4(0,sin(rot.x), cos(rot.x), 0),
+	vec4(0,        0,         0, 1)
+};
+
+mat4 translate={
+	vec4(     1,     0,     0,  0),
+	vec4(     0,     1,     0,  0),
+	vec4(     0,     0,     1,  0),
+	vec4( -mov.x, -mov.y, -mov.z,  1)
+};
+
+//projection
+mat4 pers={
+	vec4(1/tan(1.05),    0,    0,  0),
+	vec4(0,w/(h*tan(1.05)),    0,  0),
+	vec4(0,              0,    1,  1),
+	vec4(0,              0, -0.01, 0)	
+};
+
+void main(){
+	fragPos=pos;
+	fragCol=col;
+	fragNor=nor;
+	texCoord=inTexCoord;
+	gl_Position=pers*rotXM4*rotYM4*translate*vec4(pos.xyz,1.0);
+}
