@@ -4,40 +4,51 @@
 #include "B1.h"
 #include "R0.h"
 
-class sceneManager{
+class SceneManager{
 protected:
+	//state identifiers
+	bool S_FULLBRIGHT=false;
+	//data holders
 	int L_objects=0;
-	gameObject** objects=NULL;
+	GameObject** objects=NULL;
 	int L_lights=0;
-	light* lights=NULL;
+	Light** lights=NULL;
+	int L_UIElements=0;
+	UI_Element** UIElements=NULL;
+	//programs
 	program pFB[2];//perspective fullbright //col 0, tex 1
 	program pL[2];//perspective light //col 0, tex 1
 	program pUI;
 
 public:
 	//constructors
-	sceneManager();
+	SceneManager();
+
+	//destructor
+	~SceneManager();
 
 	//program control
 	int setPrograms(program* in_pFB, program* in_pL, program* in_pUI);
 
 	//array control
-	int addLight(const char* name);
-	int addObject(const char* name, vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* imageFileName=NULL, bool useMipmap=false);
+	Light* addLight(const char* name);
+	GameObject* addObject(const char* name, vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* imageFileName=NULL, bool useMipmap=false);
+	UI_Element* addUI_Element(const char* name, vec2 iPos, vec2 iScale, const char* filename);
 
 	//element selector
-	gameObject* getObject(const char* name);//get gameObject from name
-	gameObject* getObject(int index);//get gameObject from index
-
+	GameObject* getObject(const char* name);//get GameObject from name
+	GameObject* getObject(int index);//get GameObject from index
+	UI_Element* getUI_Element(const char* name);//get UI_Element from name
+	UI_Element* getUI_Element(int index);//get UI_Element from index
 
 	//drawing utility
 	int draw();//draws scene to screen
 
-	//debugging
-	gameObject** getObjects();
+	//state controllers
+	int setFullbright(bool state);
 
-	//destructors
-	~sceneManager();
+	//debugging
+	GameObject** getObjects();
 };
 
 //freetype library

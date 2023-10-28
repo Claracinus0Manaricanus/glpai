@@ -132,7 +132,7 @@ int main(){
 	
 	/******************************************************************************************/
 	//sceneManager setup
-	sceneManager mainManager;
+	SceneManager mainManager;
 	mainManager.setPrograms(pFB,pL,&oUI);
 
 	//vertex datas
@@ -159,8 +159,7 @@ int main(){
 	glUniform1i(glGetUniformLocation(pFB[0].getid(),"tex0"),0);
 
 	//ui elements
-	UI_Element pauseS;
-	pauseS.loadTexture("images/utility/paused.png");
+	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);
 
 
 	/******************************************************************************************/
@@ -169,7 +168,7 @@ int main(){
 	int lC=1;
 	float lightsData[8]={
 		10,5,10,1,
-		1,1,1,1
+		1,1,1,10
 	};
 
 
@@ -182,7 +181,7 @@ int main(){
 	int frame=0;//frame counter (resets per second)
 	float totalTime=0,deltaTime=0,printCheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
-	camera cam0(60);//main camera
+	Camera cam0(60);//main camera
 	
 	/*while loop variables*/
 	cam0.move({1,5,1});
@@ -249,24 +248,25 @@ int main(){
 
 			//mouse input for roty (cursor position of the current frame)
 			glfwGetCursorPos(w0.getid(),&cursorX,&cursorY);
-	
-	
+
 			//update rot
 			cam0.rotate({(float)cursorY*deltaTime,(float)cursorX*deltaTime,0});
-	
-	
+		
 			//movement variable updates (add the trig functions)
 			cam0.moveForward(CgetAxis(w0.getid(),GLFW_KEY_W,GLFW_KEY_S)*deltaTime*2);
 			cam0.moveRight(CgetAxis(w0.getid(),GLFW_KEY_D,GLFW_KEY_A)*deltaTime*2);
 			cam0.moveUp(CgetAxis(w0.getid(),GLFW_KEY_E,GLFW_KEY_Q)*deltaTime*2);
 
-	
 			//reset cursor position
 			glfwSetCursorPos(w0.getid(),0,0);
-	
+
+			//pause screen (unoptimized)
+			mainManager.getUI_Element("pauseScreen")->setActive(false);
 		}else{
 			//make cursor visible
 			glfwSetInputMode(w0.getid(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);
+			//pause screen (unoptimized)
+			mainManager.getUI_Element("pauseScreen")->setActive(true);
 		}
 
 
@@ -291,15 +291,7 @@ int main(){
 
 
 		//drawing to back buffer
-			mainManager.draw();//objects
-
-			//pause screen
-			if(cursor){
-				oUI.use();
-				pauseS.bind();
-				glDrawArrays(GL_TRIANGLES,0,pauseS.getVCount());
-				pauseS.unbind();
-			}
+			mainManager.draw();
 
 
 		//polling events and displaying back buffer
