@@ -77,7 +77,6 @@ protected:
 public:
 	//constructrors
 	VertexData();
-	VertexData(int inVCount);
 	VertexData(int inVCount, vertex* iVertices);
 
 	//destructor

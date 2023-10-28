@@ -37,9 +37,6 @@ protected:
 public:
 	//constructors
 	GameObject(const char* name="default\0");
-	GameObject(vec3 inPosition, vec3 inRotation, const char* name="default\0");
-	GameObject(int inVCount, vertex* iVertices, const char* name="default\0");
-	GameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name="default\0");
 	GameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name="default\0");
 
 	//destructors

@@ -179,10 +179,6 @@ int Texture::unbind(){
 //constructors
 VertexData::VertexData():vCount(0),vertices(nullptr){}
 
-VertexData::VertexData(int inVCount):vCount(inVCount){
-	vertices=new vertex[vCount]{0};
-}
-
 VertexData::VertexData(int inVCount, vertex* iVertices):vCount(inVCount){
 	vertices=new vertex[vCount]{0};
 	memcpy(vertices,iVertices,sizeof(vertex)*vCount);

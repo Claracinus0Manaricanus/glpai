@@ -47,26 +47,6 @@ GameObject::GameObject(const char* name){
 	initBuffers();
 }
 
-GameObject::GameObject(vec3 inPosition, vec3 inRotation, const char* name):
-Transform(inPosition,inRotation){
-	initName(name);
-	initBuffers();
-}
-
-GameObject::GameObject(int inVCount, vertex* iVertices, const char* name):
-VertexData(inVCount,iVertices){
-	initName(name);
-	initBuffers();
-	update();
-}
-
-GameObject::GameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name):
-Transform(inPosition,inRotation),VertexData(inVCount,iVertices){
-	initName(name);
-	initBuffers();
-	update();
-}
-
 GameObject::GameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name):
 Transform(inPos,inRot,inSca),VertexData(inVCount,iVertices){
 	initName(name);
