@@ -4,29 +4,29 @@
 
 
 /*********************************************************************************/
-//camera
+//Camera
 
 
-camera::camera(float Ifov):fov(Ifov){}
+Camera::Camera(float Ifov):fov(Ifov){}
 
-void camera::moveForward(float forward){
+void Camera::moveForward(float forward){
 	move({sin(rotation.y)*forward,0,cos(rotation.y)*forward});
 }
 
-void camera::moveRight(float right){
+void Camera::moveRight(float right){
 	move({sin(rotation.y+(PI/2))*right,0,cos(rotation.y+(PI/2))*right});
 }
 
-void camera::moveUp(float up){
+void Camera::moveUp(float up){
 	move({0,up,0});
 }
 
 
 /*********************************************************************************/
-//gameObject
+//GameObject
 
 //initializers
-void gameObject::initBuffers(){
+void GameObject::initBuffers(){
 	glGenVertexArrays(1,&vArr);
 	glBindVertexArray(vArr);
 	glGenBuffers(1,&posBuff);
@@ -35,40 +35,40 @@ void gameObject::initBuffers(){
 	glGenBuffers(1,&texBuff);
 }
 
-void gameObject::initName(const char* name){
+void GameObject::initName(const char* name){
 	NAME=(char*)malloc(strlen(name));
 	memcpy(NAME,name,strlen(name));
 }
 
 
 //constructors
-gameObject::gameObject(const char* name){
+GameObject::GameObject(const char* name){
 	initName(name);
 	initBuffers();
 }
 
-gameObject::gameObject(vec3 inPosition, vec3 inRotation, const char* name):
-transform(inPosition,inRotation){
+GameObject::GameObject(vec3 inPosition, vec3 inRotation, const char* name):
+Transform(inPosition,inRotation){
 	initName(name);
 	initBuffers();
 }
 
-gameObject::gameObject(int inVCount, vertex* iVertices, const char* name):
-vertexData(inVCount,iVertices){
-	initName(name);
-	initBuffers();
-	update();
-}
-
-gameObject::gameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name):
-transform(inPosition,inRotation),vertexData(inVCount,iVertices){
+GameObject::GameObject(int inVCount, vertex* iVertices, const char* name):
+VertexData(inVCount,iVertices){
 	initName(name);
 	initBuffers();
 	update();
 }
 
-gameObject::gameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name):
-transform(inPos,inRot,inSca),vertexData(inVCount,iVertices){
+GameObject::GameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name):
+Transform(inPosition,inRotation),VertexData(inVCount,iVertices){
+	initName(name);
+	initBuffers();
+	update();
+}
+
+GameObject::GameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name):
+Transform(inPos,inRot,inSca),VertexData(inVCount,iVertices){
 	initName(name);
 	initBuffers();
 	update();
@@ -76,7 +76,7 @@ transform(inPos,inRot,inSca),vertexData(inVCount,iVertices){
 
 
 //destructors
-gameObject::~gameObject(){
+GameObject::~GameObject(){
 	glDeleteBuffers(1,&posBuff);
 	glDeleteBuffers(1,&norBuff);
 	glDeleteBuffers(1,&colBuff);
@@ -86,39 +86,39 @@ gameObject::~gameObject(){
 
 
 //loaders
-int gameObject::setColor(vec4 inCol){//needed for update()
-	vertexData::setColor(inCol);
+int GameObject::setColor(vec4 inCol){//needed for update()
+	VertexData::setColor(inCol);
 	update();
 	return 0;
 }
 
-int gameObject::loadData(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices){
+int GameObject::loadData(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices){
 	setTransform(inPos,inRot,inSca);
 	loadAll(inVCount,iVertices);
 	update();
 	return 0;
 }
 
-int gameObject::loadData(vec3 inPos, vec3 inRot, int inVCount, vertex* iVertices){
+int GameObject::loadData(vec3 inPos, vec3 inRot, int inVCount, vertex* iVertices){
 	setTransform(inPos,inRot,scale);
 	loadAll(inVCount,iVertices);
 	update();
 	return 0;
 }
 
-int gameObject::loadData(int inVCount, vertex* iVertices){
+int GameObject::loadData(int inVCount, vertex* iVertices){
 	loadAll(inVCount,iVertices);
 	update();
 	return 0;
 }
 
-int gameObject::loadTexture(std::string filename, bool mipmap){
+int GameObject::loadTexture(const char* filename, bool mipmap){
 	mainTex.load(filename,mipmap);
 	bTex=true;
 	return 0;
 }
 
-int gameObject::unloadTexture(){
+int GameObject::unloadTexture(){
 	mainTex.unload();
 	bTex=false;
 	return 0;
@@ -126,32 +126,32 @@ int gameObject::unloadTexture(){
 
 
 //selectors
-int gameObject::useColor(bool newState){
+int GameObject::useColor(bool newState){
 	bTex=!newState;
 	return 0;
 }
 
 
 //state identifiers
-bool gameObject::usingTexture(){
+bool GameObject::usingTexture(){
 	return (bTex&&mainTex.loaded());
 }
 
 
 //utility
-int gameObject::bind(){
+int GameObject::bind(){
 	glBindVertexArray(vArr);
 	mainTex.bind();
 	return 0;
 }
 
-int gameObject::unbind(){
+int GameObject::unbind(){
 	glBindVertexArray(0);
 	mainTex.unbind();
 	return 0;
 }
 
-int gameObject::update(){
+int GameObject::update(){
 	//vertexArray
 	glBindVertexArray(vArr);
 	float tempx,tempy,tempz;//for use in both normal and position
@@ -161,7 +161,7 @@ int gameObject::update(){
 	//to store modified data
 	float* moddedPos=new float[vCount*3]{0};
 
-	//update according to transform data
+	//update according to Transform data
 	//rotation (sequence: x->y->z)  needs optimization and quaternions
 	for(int i=0;i<vCount;i++){
 		//debug
@@ -221,7 +221,7 @@ int gameObject::update(){
 	//to store modified data
 	float* moddedNor=new float[vCount*3]{0};
 
-	//update according to transform data
+	//update according to Transform data
 	//rotation (sequence: x->y->z)  needs optimization and quaternions
 	for(int i=0;i<vCount;i++){
 		//debug
@@ -305,15 +305,19 @@ int gameObject::update(){
 
 
 //constructor
-UI_Element::UI_Element(){
+UI_Element::UI_Element(const char* name){
+	NAME=(char*)malloc(strlen(name));
+	memcpy(NAME,name,strlen(name));
 	glGenVertexArrays(1,&vArr);
 	glGenBuffers(1,&posBuff);
 	glGenBuffers(1,&texBuff);
 	updateArrays();
 }
 
-UI_Element::UI_Element(vec2 iPos, vec2 iScale):
+UI_Element::UI_Element(vec2 iPos, vec2 iScale, const char* name):
 pos(iPos),scale(iScale){
+	NAME=(char*)malloc(strlen(name));
+	memcpy(NAME,name,strlen(name));
 	glGenVertexArrays(1,&vArr);
 	glGenBuffers(1,&posBuff);
 	glGenBuffers(1,&texBuff);
@@ -325,6 +329,7 @@ pos(iPos),scale(iScale){
 UI_Element::~UI_Element(){
 	delete[] vPos;
 	delete[] vTex;
+	free(NAME);
 	glDeleteBuffers(1,&posBuff);
 	glDeleteBuffers(1,&texBuff);
 	glDeleteVertexArrays(1,&vArr);
@@ -344,7 +349,7 @@ int UI_Element::changeScale(vec2 iScale){
 	return 0;
 }
 
-int UI_Element::loadTexture(std::string filename, bool mipmap){
+int UI_Element::loadTexture(const char* filename, bool mipmap){
 	return mainTex.load(filename,mipmap);
 }
 

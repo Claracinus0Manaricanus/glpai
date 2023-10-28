@@ -7,12 +7,12 @@
 #include <cstring>
 
 
-class camera : public transform{
+class Camera : public Transform{
 protected:
 	float fov;//field of view (60=default) //add changeFov
 
 public:
-	camera(float Ifov=60);
+	Camera(float Ifov=60);
 	
 	void moveForward(float forward);
 	void moveRight(float right);
@@ -20,12 +20,12 @@ public:
 };
 
 
-class gameObject : public transform, public vertexData{
+class GameObject : public Transform, public VertexData{
 protected:
 	char* NAME;
 	uint32_t vArr;//vertexArray
 	uint32_t posBuff,norBuff,colBuff,texBuff;//buffers
-	texture mainTex;
+	Texture mainTex;
 	//state bools
 	bool bTex=false;//bool color and bool texture
 
@@ -36,21 +36,21 @@ protected:
 
 public:
 	//constructors
-	gameObject(const char* name="default\0");
-	gameObject(vec3 inPosition, vec3 inRotation, const char* name="default\0");
-	gameObject(int inVCount, vertex* iVertices, const char* name="default\0");
-	gameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name="default\0");
-	gameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name="default\0");
+	GameObject(const char* name="default\0");
+	GameObject(vec3 inPosition, vec3 inRotation, const char* name="default\0");
+	GameObject(int inVCount, vertex* iVertices, const char* name="default\0");
+	GameObject(vec3 inPosition, vec3 inRotation, int inVCount, vertex* iVertices, const char* name="default\0");
+	GameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name="default\0");
 
 	//destructors
-	~gameObject();
+	~GameObject();
 
 	//loaders
 	int setColor(vec4 inCol);
 	int loadData(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices);
 	int loadData(vec3 inPos, vec3 inRot, int inVCount, vertex* iVertices);
 	int loadData(int inVCount, vertex* iVertices);
-	int loadTexture(std::string filename, bool mipmap=true);
+	int loadTexture(const char* filename, bool mipmap=true);
 	int unloadTexture();
 
 	//selectors
@@ -65,23 +65,24 @@ public:
 	int update();
 
 	//friend classes
-	friend class sceneManager;
+	friend class SceneManager;
 };
 
 
 class UI_Element{
 protected:
+	char* NAME;
 	uint32_t vArr;//opengl vertex array
 	uint32_t posBuff,texBuff;//opengl buffers
 	float* vPos=NULL;//vertex positions
 	float* vTex=new float[12]{1,0,1,1,0,1,0,1,0,0,1,0};//tex coords
 	vec2 pos={0,0},scale={1,1};//screen coordinates and scale
-	texture mainTex;//texture to use
+	Texture mainTex;//texture to use
 
 public:
 	//constructor
-	UI_Element();
-	UI_Element(vec2 iPos, vec2 iScale);
+	UI_Element(const char* name="default");
+	UI_Element(vec2 iPos, vec2 iScale, const char* name="default");
 
 	//destructor
 	~UI_Element();
@@ -89,7 +90,7 @@ public:
 	//loaders
 	int changePos(vec2 iPos);
 	int changeScale(vec2 iScale);
-	int loadTexture(std::string filename, bool mipmap=true);
+	int loadTexture(const char* filename, bool mipmap=true);
 	int unloadTexture();
 
 	//extractors

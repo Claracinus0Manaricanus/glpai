@@ -132,7 +132,7 @@ int main(){
 	
 	/******************************************************************************************/
 	//sceneManager setup
-	sceneManager mainManager;
+	SceneManager mainManager;
 	mainManager.setPrograms(pFB,pL,&oUI);
 
 	//vertex datas
@@ -169,7 +169,7 @@ int main(){
 	int lC=1;
 	float lightsData[8]={
 		10,5,10,1,
-		1,1,1,1
+		1,1,1,10
 	};
 
 
@@ -182,7 +182,7 @@ int main(){
 	int frame=0;//frame counter (resets per second)
 	float totalTime=0,deltaTime=0,printCheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
-	camera cam0(60);//main camera
+	Camera cam0(60);//main camera
 	
 	/*while loop variables*/
 	cam0.move({1,5,1});

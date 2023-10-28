@@ -7,7 +7,10 @@
 #include <GL/glew.h>
 
 
-class transform{//add scale
+class Transform{//add scale
+protected:
+	char* NAME;
+
 public:
 	vec3 position;
 	vec3 rotation;
@@ -15,8 +18,11 @@ public:
 
 public:
 	//constructor
-	transform();
-	transform(vec3 inPosition, vec3 inRotation, vec3 inScale={1,1,1});
+	Transform(const char* name="default");
+	Transform(vec3 inPosition, vec3 inRotation, vec3 inScale={1,1,1}, const char* name="default");
+
+	//destructor
+	~Transform();
 
 	//loaders
 	void setPosition(vec3 inPos);
@@ -30,7 +36,7 @@ public:
 };
 
 
-class texture{
+class Texture{
 protected:
 	uint32_t id;
 	uint8_t* data;
@@ -38,14 +44,14 @@ protected:
 
 public:
 	//constructors
-	texture();
-	texture(std::string filename);
+	Texture();
+	Texture(const char* filename);
 
 	//destructors
-	~texture();
+	~Texture();
 
 	//loaders
-	int load(std::string filename, bool mipmap);
+	int load(const char* filename, bool mipmap);
 	int unload();
 
 	//extractors
@@ -63,19 +69,19 @@ public:
 };
 
 
-class vertexData{
+class VertexData{
 protected:
 	int vCount;//total vertices
 	vertex* vertices;
 
 public:
 	//constructrors
-	vertexData();
-	vertexData(int inVCount);
-	vertexData(int inVCount, vertex* iVertices);
+	VertexData();
+	VertexData(int inVCount);
+	VertexData(int inVCount, vertex* iVertices);
 
 	//destructor
-	~vertexData();
+	~VertexData();
 
 	//loaders
 	int setVertexCount(int inVCount);
@@ -91,11 +97,11 @@ public:
 
 	//utility
 	int reset();
-	virtual vertexData* getPointer();
+	virtual VertexData* getPointer();
 };//unsafe
 
 
-class light : public transform{
+class Light : public Transform{
 protected:
 	char* NAME;
 	vec3 position;
@@ -105,8 +111,8 @@ protected:
 
 public:
 	//constructors
-	light(const char* name="default\0");
-	light(vec3 iPos, vec4 iCol, const char* name="default\0");
+	Light(const char* name="default\0");
+	Light(vec3 iPos, vec4 iCol, const char* name="default\0");
 
 	//utility
 	int update();

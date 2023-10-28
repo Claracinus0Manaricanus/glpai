@@ -12,31 +12,42 @@ using namespace std;
 
 
 //constructors
-transform::transform(){
+Transform::Transform(const char* name){
+	NAME=(char*)malloc(strlen(name));
+	memcpy(NAME,name,strlen(name));
 	position={0,0,0};
 	rotation={0,0,0};
 	scale={1,1,1};
 }
 
-transform::transform(vec3 inPosition, vec3 inRotation, vec3 inScale):
-position(inPosition),rotation(inRotation),scale(inScale){}
+Transform::Transform(vec3 inPosition, vec3 inRotation, vec3 inScale, const char* name):
+position(inPosition),rotation(inRotation),scale(inScale){
+	NAME=(char*)malloc(strlen(name));
+	memcpy(NAME,name,strlen(name));
+}
+
+
+//destructor
+Transform::~Transform(){
+	free(NAME);
+}
 
 
 //loaders
-void transform::setPosition(vec3 inPos){
+void Transform::setPosition(vec3 inPos){
 	position=inPos;
 }
 
-void transform::move(vec3 movement){
+void Transform::move(vec3 movement){
 	position=position+movement;
 }
 
 
-void transform::setRotation(vec3 inRot){
+void Transform::setRotation(vec3 inRot){
 	rotation=inRot;
 }
 
-void transform::rotate(vec3 inRotation){//if rotation problems occur look here
+void Transform::rotate(vec3 inRotation){//if rotation problems occur look here
 	rotation=rotation+inRotation;
 
 	int result=(int)(rotation.x/PI2);
@@ -49,11 +60,11 @@ void transform::rotate(vec3 inRotation){//if rotation problems occur look here
 	rotation.z-=(result*PI2);
 }
 
-void transform::setScale(vec3 inSca){
+void Transform::setScale(vec3 inSca){
 	scale=inSca;
 }
 
-void transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
+void Transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
 	position=inPos;
 	rotation=inRot;
 	scale=inSca;
@@ -61,32 +72,32 @@ void transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
 
 
 /*********************************************************************************/
-//texture
+//Texture
 
 
 //constructors
-texture::texture(){
+Texture::Texture(){
 	data=nullptr;
 	glGenTextures(1,&id);
 }
 
-texture::texture(std::string filename){
-	data=stbi_load(filename.c_str(),&iWidth,&iHeight,&iChannel,0);
+Texture::Texture(const char* filename){
+	data=stbi_load(filename,&iWidth,&iHeight,&iChannel,0);
 	glGenTextures(1,&id);
 }
 
 
 //destructors
-texture::~texture(){
+Texture::~Texture(){
 	stbi_image_free(data);
 	glDeleteTextures(1,&id);
 }
 
 
 //loaders
-int texture::load(std::string filename,bool mipmap){
+int Texture::load(const char* filename,bool mipmap){
 	stbi_image_free(data);
-	data=stbi_load(filename.c_str(),&iWidth,&iHeight,&iChannel,0);
+	data=stbi_load(filename,&iWidth,&iHeight,&iChannel,0);
 
 	if(iChannel<3)
 		return -1;
@@ -118,24 +129,24 @@ int texture::load(std::string filename,bool mipmap){
 
 
 //extractors
-uint8_t* texture::getData(){
+uint8_t* Texture::getData(){
 	return data;
 }
 
-int texture::width(){
+int Texture::width(){
 	return iWidth;
 }
 
-int texture::height(){
+int Texture::height(){
 	return iHeight;
 }
 
-int texture::spectrum(){
+int Texture::spectrum(){
 	return iChannel;
 }
 
 
-int texture::unload(){
+int Texture::unload(){
 	stbi_image_free(data);
 	data=nullptr;
 	return 0;
@@ -143,19 +154,19 @@ int texture::unload(){
 
 
 //checkers
-bool texture::loaded(){
+bool Texture::loaded(){
 	return data!=nullptr;
 }
 
 
 //utility
-int texture::bind(){
+int Texture::bind(){
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D,id);
 	return 0;
 }
 
-int texture::unbind(){
+int Texture::unbind(){
 	glBindTexture(GL_TEXTURE_2D,0);
 	return 0;
 }
@@ -166,40 +177,40 @@ int texture::unbind(){
 
 
 //constructors
-vertexData::vertexData():vCount(0),vertices(nullptr){}
+VertexData::VertexData():vCount(0),vertices(nullptr){}
 
-vertexData::vertexData(int inVCount):vCount(inVCount){
+VertexData::VertexData(int inVCount):vCount(inVCount){
 	vertices=new vertex[vCount]{0};
 }
 
-vertexData::vertexData(int inVCount, vertex* iVertices):vCount(inVCount){
+VertexData::VertexData(int inVCount, vertex* iVertices):vCount(inVCount){
 	vertices=new vertex[vCount]{0};
 	memcpy(vertices,iVertices,sizeof(vertex)*vCount);
 }
 
 
 //destructors
-vertexData::~vertexData(){
+VertexData::~VertexData(){
 	delete[] vertices;
 }
 
 
 //loaders
-int vertexData::setVertexCount(int inVCount){
+int VertexData::setVertexCount(int inVCount){
 	vCount=inVCount;
 	delete[] vertices;
 	vertices=nullptr;
 	return 0;
 }
 
-int vertexData::setColor(vec4 inCol){
+int VertexData::setColor(vec4 inCol){
 	for(int i=0;i<vCount;i++){
 		vertices[i].col=inCol;
 	}
 	return 0;
 }
 
-int vertexData::loadPos(vec3* inPos){
+int VertexData::loadPos(vec3* inPos){
 	//copy them to vertices[i].pos
 	for(int i=0;i<vCount;i++){
 		vertices[i].pos.x=inPos[i].x;
@@ -209,7 +220,7 @@ int vertexData::loadPos(vec3* inPos){
 	return 0;
 }
 
-int vertexData::loadNor(vec3* inNor){
+int VertexData::loadNor(vec3* inNor){
 	//copy them to vertices[i].nor
 	for(int i=0;i<vCount;i++){
 		vertices[i].nor.x=inNor[i].x;
@@ -219,7 +230,7 @@ int vertexData::loadNor(vec3* inNor){
 	return 0;
 }
 
-int vertexData::loadCol(vec4* inCol){
+int VertexData::loadCol(vec4* inCol){
 	//copy them to vertices[i].col
 	for(int i=0;i<vCount;i++){
 		vertices[i].col.x=inCol[i].x;
@@ -230,7 +241,7 @@ int vertexData::loadCol(vec4* inCol){
 	return 0;
 }
 
-int vertexData::loadTex(vec2* inTex){
+int VertexData::loadTex(vec2* inTex){
 	//copy them to vertices[i].tex
 	for(int i=0;i<vCount;i++){
 		vertices[i].tex.x=inTex[i].x;
@@ -239,7 +250,7 @@ int vertexData::loadTex(vec2* inTex){
 	return 0;
 }
 
-int vertexData::loadAll(int inVCount, vertex* iVertices){
+int VertexData::loadAll(int inVCount, vertex* iVertices){
 	vCount=inVCount;
 	delete[] vertices;
 	vertices=new vertex[vCount]{0};
@@ -249,43 +260,43 @@ int vertexData::loadAll(int inVCount, vertex* iVertices){
 
 	
 //extractors
-int vertexData::getVCount(){
+int VertexData::getVCount(){
 	return vCount;
 }
 
 
 //utility //WIP
-int vertexData::reset(){
+int VertexData::reset(){
 	vCount=0;
 	delete[] vertices;
 	vertices=nullptr;
 	return 0;
 }
 
-vertexData* vertexData::getPointer(){
+VertexData* VertexData::getPointer(){
 	return this;
 }
 
 
 /*********************************************************************************/
-//light
+//Light
 
 
 //constructors
-light::light(const char* name):
+Light::Light(const char* name):
 color({1,1,1,1}){
 	NAME=(char*)malloc(strlen(name));
 	memcpy(NAME,name,strlen(name));
 }
-light::light(vec3 iPos, vec4 iCol, const char* name):
-transform(iPos,{0,0,0}),color(iCol){
+Light::Light(vec3 iPos, vec4 iCol, const char* name):
+Transform(iPos,{0,0,0}),color(iCol){
 	NAME=(char*)malloc(strlen(name));
 	memcpy(NAME,name,strlen(name));
 }
 
 
 //utility
-int light::update(){
+int Light::update(){
 	data[0]=position.x;
 	data[1]=position.y;
 	data[2]=position.z;
@@ -297,7 +308,7 @@ int light::update(){
 	return 0;
 }
 
-int light::move(vec3 movement){
+int Light::move(vec3 movement){
 	position=position+movement;
 	update();
 	return 0;
@@ -305,20 +316,20 @@ int light::move(vec3 movement){
 
 
 //loaders
-int light::loadData(vec3 iPos, vec4 iCol){
+int Light::loadData(vec3 iPos, vec4 iCol){
 	position=iPos;
 	color=iCol;
 	update();
 	return 0;
 }
 
-int light::Color(vec4 iColor){
+int Light::Color(vec4 iColor){
 	color=iColor;
 	update();
 	return 0;
 }
 
-int light::Position(vec3 iPos){
+int Light::Position(vec3 iPos){
 	position=iPos;
 	update();
 	return 0;
@@ -326,7 +337,7 @@ int light::Position(vec3 iPos){
 
 
 //extractors
-float* light::getData(){
+float* Light::getData(){
 	float* temp=new float[8];
 	memcpy(temp,data,sizeof(float)*8);
 	return temp;
