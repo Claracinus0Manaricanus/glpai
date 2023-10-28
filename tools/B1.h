@@ -71,6 +71,7 @@ public:
 
 class UI_Element{
 protected:
+	bool Active=true;
 	char* NAME;
 	uint32_t vArr;//opengl vertex array
 	uint32_t posBuff,texBuff;//opengl buffers
@@ -92,15 +93,20 @@ public:
 	int changeScale(vec2 iScale);
 	int loadTexture(const char* filename, bool mipmap=true);
 	int unloadTexture();
+	int setActive(bool state);
 
 	//extractors
 	int getVCount();
+	bool isActive();
 
 	//utility
 	int bind();
 	int unbind();
 	int updateArrays();
 	int updateBuffers();
+	
+	//friend classes
+	friend class SceneManager;
 };//unsafe
 //NEEDS FIX:
 //unsafe usage without loaded textures

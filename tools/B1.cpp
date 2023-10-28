@@ -357,10 +357,19 @@ int UI_Element::unloadTexture(){
 	return mainTex.unload();
 }
 
+int UI_Element::setActive(bool state){
+	Active=state;
+	return 0;
+}
+
 
 //extractors
 int UI_Element::getVCount(){
 	return 6;
+}
+
+bool UI_Element::isActive(){
+	return Active;
 }
 
 
