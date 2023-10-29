@@ -8,6 +8,7 @@ class SceneManager{
 protected:
 	//state identifiers
 	bool S_FULLBRIGHT=false;
+	bool R_SKYBOX=false;//render skybox
 	//data holders
 	int L_objects=0;
 	GameObject** objects=NULL;
@@ -18,7 +19,8 @@ protected:
 	//programs
 	program pFB[2];//perspective fullbright //col 0, tex 1
 	program pL[2];//perspective light //col 0, tex 1
-	program pUI;
+	program pSky;//skybox renderer
+	program pUI;//UI_Element renderer
 
 public:
 	//constructors

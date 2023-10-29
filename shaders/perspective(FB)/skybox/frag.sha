@@ -1,0 +1,10 @@
+#version 450 core
+
+in vec2 fragTex;//uv coordinates
+uniform sampler2D tex0;//placeholder needs a cubemap
+
+out vec4 color;//output color
+
+void main(){
+    color=vec4(texture(tex0,texCoord));
+}

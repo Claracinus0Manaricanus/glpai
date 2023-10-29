@@ -78,19 +78,19 @@ void Transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
 //constructors
 Texture::Texture(){
 	data=nullptr;
-	glGenTextures(1,&id);
+	glGenTextures(1,&ID);
 }
 
 Texture::Texture(const char* filename){
 	data=stbi_load(filename,&iWidth,&iHeight,&iChannel,0);
-	glGenTextures(1,&id);
+	glGenTextures(1,&ID);
 }
 
 
 //destructors
 Texture::~Texture(){
 	stbi_image_free(data);
-	glDeleteTextures(1,&id);
+	glDeleteTextures(1,&ID);
 }
 
 
@@ -103,7 +103,7 @@ int Texture::load(const char* filename,bool mipmap){
 		return -1;
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D,id);
+	glBindTexture(GL_TEXTURE_2D,ID);
 
 	if(iChannel==3)
 		glTexImage2D(GL_TEXTURE_2D,0,GL_RGB8,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,data);
@@ -162,7 +162,7 @@ bool Texture::loaded(){
 //utility
 int Texture::bind(){
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D,id);
+	glBindTexture(GL_TEXTURE_2D,ID);
 	return 0;
 }
 
@@ -337,6 +337,81 @@ float* Light::getData(){
 	float* temp=new float[8];
 	memcpy(temp,data,sizeof(float)*8);
 	return temp;
+}
+
+
+/*********************************************************************************/
+//CubeMap
+
+
+//constructors
+CubeMap::CubeMap(const char* name){
+	//naming
+	NAME=(char*)malloc(strlen(name));
+	memcpy(NAME,name,strlen(name));
+
+	//texture generation opengl
+	glGenTextures(1,&ID);
+}
+
+
+//destructor
+CubeMap::~CubeMap(){
+
+}
+
+
+//loaders
+int CubeMap::loadSideXP(const char* filename){
+
+	return 0;
+}
+
+int CubeMap::loadSideXN(const char* filename){
+
+	return 0;
+}
+
+int CubeMap::loadSideYP(const char* filename){
+
+	return 0;
+}
+
+int CubeMap::loadSideYN(const char* filename){
+
+	return 0;
+}
+
+int CubeMap::loadSideZP(const char* filename){
+
+	return 0;
+}
+
+int CubeMap::loadSideZN(const char* filename){
+
+	return 0;
+}
+
+
+//utility
+int CubeMap::bind(){
+	glBindTexture(GL_TEXTURE_CUBE_MAP,ID);
+	return 0;
+}
+
+int CubeMap::unbind(){
+	glBindTexture(GL_TEXTURE_CUBE_MAP,0);
+	return 0;
+}
+
+
+/*********************************************************************************/
+//SkyBox
+
+
+//constructors
+SkyBox::SkyBox(const char* name){
+
 }
 
 

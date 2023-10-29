@@ -38,7 +38,7 @@ public:
 
 class Texture{
 protected:
-	uint32_t id;
+	uint32_t ID;
 	uint8_t* data;
 	int iHeight,iWidth,iChannel;
 
@@ -128,6 +128,63 @@ public:
 //future idea use position.w as identity
 //as an example point light can be 0 and directional can be 1
 //and use the class as light not specifically just one type
+
+
+class CubeMap{
+protected:
+	char* NAME;
+	uint32_t ID;
+
+	//cubemap side textures data holders
+	uint8_t* data_XP;//X+
+	int iWidth_XP,iHeight_XP;
+	uint8_t* data_XN;//X-
+	int iWidth_XN,iHeight_XN;
+	uint8_t* data_YP;//Y+
+	int iWidth_YP,iHeight_YP;
+	uint8_t* data_YN;//Y-
+	int iWidth_YN,iHeight_YN;
+	uint8_t* data_ZP;//Z+
+	int iWidth_ZP,iHeight_ZP;
+	uint8_t* data_ZN;//Z-
+	int iWidth_ZN,iHeight_ZN;
+
+public:
+	//constructor
+	CubeMap(const char* name="default");
+
+	//destructor
+	~CubeMap();
+	
+	//loaders
+	int loadSideXP(const char* filename);//X+ side
+	int loadSideXN(const char* filename);//X- side
+	int loadSideYP(const char* filename);//Y+ side
+	int loadSideYN(const char* filename);//Y- side
+	int loadSideZP(const char* filename);//Z+ side
+	int loadSideZN(const char* filename);//Z- side
+
+	//utility
+	int bind();//binding ID as GL_TEXTURE_CUBE_MAP
+	int unbind();//binding 0 as GL_TEXTURE_CUBE_MAP
+
+};
+
+
+class SkyBox : public CubeMap{
+protected:
+	char* NAME;
+
+public:
+	//constructors
+	SkyBox(const char* name="default");
+
+	//destructors
+	~SkyBox();
+
+	//friend classes
+	friend class SceneManager;
+};
 
 #endif
 
