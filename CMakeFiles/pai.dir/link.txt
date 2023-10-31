@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/pai.dir/main.cpp.o CMakeFiles/pai.dir/tools/B0.cpp.o CMakeFiles/pai.dir/tools/B1.cpp.o CMakeFiles/pai.dir/tools/B2.cpp.o CMakeFiles/pai.dir/tools/R0.cpp.o CMakeFiles/pai.dir/tools/T0.cpp.o CMakeFiles/pai.dir/tools/U0.cpp.o -o pai  -lGL -lGLEW -lglfw 

@@ -1,3 +1,0 @@
-/home/cm/codes/c++/glpai/CMakeFiles/pai.dir
-/home/cm/codes/c++/glpai/CMakeFiles/edit_cache.dir
-/home/cm/codes/c++/glpai/CMakeFiles/rebuild_cache.dir
