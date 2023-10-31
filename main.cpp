@@ -11,6 +11,8 @@
 #include "tools/B2.h"
 #include "tools/R0.h"
 #include "tools/U0.h"
+//#define STB_IMAGE_IMPLEMENTATION
+#include <stb/stb_image.h>
 
 using namespace std;
 
@@ -121,8 +123,19 @@ int main(){
 	fS.load("shaders/perspective(L)/texture/frag.sha",GL_FRAGMENT_SHADER);
 	pL[1].load(&vS, &fS);
 
+	vS.load("shaders/perspective(FB)/skybox/vert.sha",GL_VERTEX_SHADER);
+	fS.load("shaders/perspective(FB)/skybox/frag.sha",GL_FRAGMENT_SHADER);
+	program pSky(&vS, &fS);
+
 	if(debug)logInfo("shaders loaded\n");
 
+	//texture usage (samplers)
+	pSky.use();
+	glUniform1i(glGetUniformLocation(pSky.getid(),"tex0"),0);
+	pFB[1].use();
+	glUniform1i(glGetUniformLocation(pFB[1].getid(),"tex0"),0);
+	pL[1].use();
+	glUniform1i(glGetUniformLocation(pL[1].getid(),"tex0"),0);
 
 	//Deleting shaders
 	vS.Delete();
@@ -161,6 +174,9 @@ int main(){
 	//ui elements
 	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);
 
+	//skyboxes
+	SkyBox testSky("images/skybox/starryCSky/px.png","images/skybox/starryCSky/nx.png","images/skybox/starryCSky/py.png","images/skybox/starryCSky/ny.png","images/skybox/starryCSky/pz.png","images/skybox/starryCSky/nz.png");
+	
 
 	/******************************************************************************************/
 	//lights
@@ -288,10 +304,21 @@ int main(){
 			glUniform1i(glGetUniformLocation(pL[i].getid(),"count"),lC);
 			glUniform4fv(glGetUniformLocation(pL[i].getid(),"lights"),lC*2,lightsData);
 		}
-
-
+		pSky.use();
+		glUniform2f(glGetUniformLocation(pSky.getid(),"rot"),cam0.rotation.x,cam0.rotation.y);
+		glUniform1i(glGetUniformLocation(pSky.getid(),"w"),resolution.x);
+		glUniform1i(glGetUniformLocation(pSky.getid(),"h"),resolution.y);
+		
 		//drawing to back buffer
-			mainManager.draw();
+		//mainManager.setFullbright(true);
+			//mainManager.draw();
+			//test skybox
+			pSky.use();
+			glActiveTexture(GL_TEXTURE0);
+			testSky.bind();
+			glDrawArrays(GL_TRIANGLES,0,36);
+			testSky.unbind();
+			
 
 
 		//polling events and displaying back buffer

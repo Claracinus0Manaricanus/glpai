@@ -181,6 +181,7 @@ CMakeFiles/pai.dir/main.cpp.o: main.cpp \
   /usr/include/c++/13.2.1/pstl/pstl_config.h \
   /usr/include/c++/13.2.1/ratio \
   /usr/include/c++/13.2.1/stdexcept \
+  /usr/include/c++/13.2.1/stdlib.h \
   /usr/include/c++/13.2.1/streambuf \
   /usr/include/c++/13.2.1/string \
   /usr/include/c++/13.2.1/string_view \
@@ -226,6 +227,7 @@ CMakeFiles/pai.dir/main.cpp.o: main.cpp \
   /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/stb/stb_image.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \

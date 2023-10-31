@@ -270,6 +270,7 @@ int GameObject::update(){
 	glVertexAttribPointer(3,2,GL_FLOAT,GL_FALSE,sizeof(float)*2,(void*)0);
 	glEnableVertexAttribArray(3);
 	
+	unbind();
 	return 0;
 }
 
