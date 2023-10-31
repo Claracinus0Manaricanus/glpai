@@ -86,6 +86,8 @@ UI_Element* SceneManager::getUI_Element(int index){
 
 //drawing utility
 int SceneManager::draw(){
+	glActiveTexture(GL_TEXTURE0);
+
 	for(int i=0;i<L_objects;i++){
 		if(S_FULLBRIGHT){
 			if(objects[i]->usingTexture())

@@ -1,13 +1,13 @@
 #version 450 core
 
-layout(location=0) in vec3 pos;
-layout(location=2) in vec4 col;
-layout(location=3) in vec2 inTexCoord;
+layout(location=0) in vec3 pos;//vertex positions
+layout(location=2) in vec4 col;//vertex colors
+layout(location=3) in vec2 inTexCoord;//vertex uv coordinates
 
-uniform vec2 rot;
-uniform vec3 mov;
-uniform int w;
-uniform int h;
+uniform vec2 rot;//camera rotation
+uniform vec3 mov;//camera movement (from origin)
+uniform int w;//screen width (pixels)
+uniform int h;//screen height (pixels)
 
 out vec2 texCoord;
 out vec4 fragCol;

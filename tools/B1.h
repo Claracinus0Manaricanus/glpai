@@ -22,7 +22,6 @@ public:
 
 class GameObject : public Transform, public VertexData{
 protected:
-	char* NAME;
 	uint32_t vArr;//vertexArray
 	uint32_t posBuff,norBuff,colBuff,texBuff;//buffers
 	Texture mainTex;
@@ -32,7 +31,6 @@ protected:
 protected:
 	//initializers
 	void initBuffers();
-	void initName(const char* name);
 
 public:
 	//constructors
