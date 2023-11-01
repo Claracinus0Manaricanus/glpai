@@ -128,7 +128,6 @@ int GameObject::unbind(){
 int GameObject::update(){
 	//vertexArray
 	glBindVertexArray(vArr);
-	float tempx,tempy,tempz;//for use in both normal and position
 
 
 	//position

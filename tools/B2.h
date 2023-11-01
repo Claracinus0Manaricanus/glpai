@@ -55,9 +55,6 @@ public:
 	int setFullbright(bool state);
 	int setSkyBox(int index);
 	int setSkyBox(const char* name);
-
-	//debugging
-	GameObject** getObjects();
 };
 
 //freetype library

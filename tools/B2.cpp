@@ -198,10 +198,4 @@ int SceneManager::setSkyBox(const char* name){
 }
 
 
-//debugging
-GameObject** SceneManager::getObjects(){
-	return objects;
-}
-
-
 /*********************************************************************************/
