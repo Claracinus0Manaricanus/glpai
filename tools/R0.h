@@ -10,7 +10,7 @@
 
 class shader{
 public:
-	uint32_t id=0;
+	uint32_t ID=0;
 
 public:
 	//constructor
@@ -31,7 +31,7 @@ public:
 
 class program{
 protected://make protected
-	uint32_t id=0;
+	uint32_t ID=0;
 	bool loaded;
 
 public:
@@ -41,6 +41,13 @@ public:
 
 	//loaders
 	int load(shader* vertex, shader* fragment);
+	
+	//uniform utilities
+	int setInt(const char* u_name, int data);
+	int setVec2i(const char* u_name, vec2int data);
+	int setVec2(const char* u_name, vec2 data);
+	int setVec3(const char* u_name, vec3 data);
+	int setVec4Array(const char* u_name, int dataLength,const float* data);
 
 	//extractors
 	uint32_t getid();
@@ -50,12 +57,12 @@ public:
 
 	//binder
 	int use();
-};//if id=0 then error
+};//if ID=0 then error
 
 
 class window{
 private:
-	GLFWwindow *id;
+	GLFWwindow *ID;
 
 public:
 	//constructor
@@ -66,7 +73,7 @@ public:
 
 	//utility
 	int changeAttrib(int attrib, int value);
-	int setResolution(int x, int y);//not implemented do not use
+	//int setResolution(int x, int y);//not implemented do not use
 	vec2int getResolution();
 };
 

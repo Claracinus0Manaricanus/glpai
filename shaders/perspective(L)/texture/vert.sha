@@ -6,11 +6,14 @@ layout(location=1) in vec3 nor;
 layout(location=2) in vec4 col;
 layout(location=3) in vec2 inTexCoord;
 
-//camera and screen
-uniform vec2 rot;
-uniform vec3 mov;
-uniform int w;
-uniform int h;
+//camera
+uniform vec2 camRot;
+uniform vec3 camMov;
+//screen
+uniform ivec2 resolution;
+//object
+uniform vec3 objRot;
+uniform vec3 objMov;
 
 //to fragment shader
 out vec2 texCoord;
@@ -18,40 +21,72 @@ out vec3 fragPos;
 out vec3 fragNor;
 out vec4 fragCol;
 
-//transformations
-mat4 rotYM4={
-	vec4(cos(rot.y), 0,sin(rot.y),  0),
-	vec4(0,         1,        0,  0),
-	vec4(-sin(rot.y),0,cos(rot.y),  0),
-	vec4(0,         0,        0,  1)
+//camera transformations
+mat4 camRotYM4={
+	vec4(cos(camRot.y), 0,sin(camRot.y),  0),
+	vec4(0,           1,              0,  0),
+	vec4(-sin(camRot.y),0,cos(camRot.y),  0),
+	vec4(0,           0,              0,  1)
 };
 
-mat4 rotXM4={
-	vec4(1,        0,         0, 0),
-	vec4(0,cos(rot.x),-sin(rot.x), 0),
-	vec4(0,sin(rot.x), cos(rot.x), 0),
-	vec4(0,        0,         0, 1)
+mat4 camRotXM4={
+	vec4(1,            0,             0, 0),
+	vec4(0,cos(camRot.x),-sin(camRot.x), 0),
+	vec4(0,sin(camRot.x), cos(camRot.x), 0),
+	vec4(0,            0,             0, 1)
 };
 
 mat4 translate={
-	vec4(     1,     0,     0,  0),
-	vec4(     0,     1,     0,  0),
-	vec4(     0,     0,     1,  0),
-	vec4( -mov.x, -mov.y, -mov.z,  1)
+	vec4(         1,         0,         0,  0),
+	vec4(         0,         1,         0,  0),
+	vec4(         0,         0,         1,  0),
+	vec4( -camMov.x, -camMov.y, -camMov.z,  1)
+};
+
+//model transformations
+mat4 objRotXM4={
+	vec4(1,            0,             0, 0),
+	vec4(0,cos(objRot.x),-sin(objRot.x), 0),
+	vec4(0,sin(objRot.x), cos(objRot.x), 0),
+	vec4(0,            0,             0, 1)
+};
+
+mat4 objRotYM4={
+	vec4(cos(objRot.y),0,-sin(objRot.y),  0),
+	vec4(0,            1,             0,  0),
+	vec4(sin(objRot.y),0, cos(objRot.y),  0),
+	vec4(0,            0,             0,  1)
+};
+
+mat4 objRotZM4={
+	vec4(cos(objRot.z),-sin(objRot.z),0,  0),
+	vec4(sin(objRot.z), cos(objRot.z),0,  0),
+	vec4(0,            0,             1,  0),
+	vec4(0,            0,             0,  1)
+};
+
+mat4 o_translate={//object_translate
+	vec4(       1,       0,       0,  0),
+	vec4(       0,       1,       0,  0),
+	vec4(       0,       0,       1,  0),
+	vec4(objMov.x,objMov.y,objMov.z,  1)
 };
 
 //projection
 mat4 pers={
 	vec4(1/tan(1.05),    0,    0,  0),
-	vec4(0,w/(h*tan(1.05)),    0,  0),
+	vec4(0,resolution.x/(resolution.y*tan(1.05)),    0,  0),
 	vec4(0,              0,    1,  1),
 	vec4(0,              0, -0.01, 0)	
 };
 
 void main(){
-	fragPos=pos;
+	mat4 CVM=pers*camRotXM4*camRotYM4*translate;//camera view matrix
+	mat4 OVM=o_translate*objRotZM4*objRotYM4*objRotXM4;//object view matrix
+	mat4 WVM=CVM*OVM;//world view matrix
+	fragPos=vec4(OVM*vec4(pos.xyz,1.0)).xyz;
 	fragCol=col;
-	fragNor=nor;
+	fragNor=vec4(OVM*vec4(nor.xyz,0)).xyz;
 	texCoord=inTexCoord;
-	gl_Position=pers*rotXM4*rotYM4*translate*vec4(pos.xyz,1.0);
+	gl_Position=WVM*vec4(pos.xyz,1.0);
 }

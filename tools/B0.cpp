@@ -13,7 +13,7 @@ using namespace std;
 
 //constructors
 Transform::Transform(const char* name){
-	NAME=(char*)malloc(strlen(name));
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
 	position={0,0,0};
 	rotation={0,0,0};
@@ -22,7 +22,7 @@ Transform::Transform(const char* name){
 
 Transform::Transform(vec3 inPosition, vec3 inRotation, vec3 inScale, const char* name):
 position(inPosition),rotation(inRotation),scale(inScale){
-	NAME=(char*)malloc(strlen(name));
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
 }
 
@@ -189,7 +189,7 @@ VertexData::~VertexData(){
 }
 
 
-//loaders
+//loaders  functions need checking
 int VertexData::setVertexCount(int inVCount){
 	vCount=inVCount;
 	delete[] vertices;
@@ -207,9 +207,7 @@ int VertexData::setColor(vec4 inCol){
 int VertexData::loadPos(vec3* inPos){
 	//copy them to vertices[i].pos
 	for(int i=0;i<vCount;i++){
-		vertices[i].pos.x=inPos[i].x;
-		vertices[i].pos.y=inPos[i].y;
-		vertices[i].pos.z=inPos[i].z;
+		vertices[i].pos=inPos[i];
 	}
 	return 0;
 }
@@ -217,9 +215,7 @@ int VertexData::loadPos(vec3* inPos){
 int VertexData::loadNor(vec3* inNor){
 	//copy them to vertices[i].nor
 	for(int i=0;i<vCount;i++){
-		vertices[i].nor.x=inNor[i].x;
-		vertices[i].nor.y=inNor[i].y;
-		vertices[i].nor.z=inNor[i].z;
+		vertices[i].nor=inNor[i];
 	}
 	return 0;
 }
@@ -227,10 +223,7 @@ int VertexData::loadNor(vec3* inNor){
 int VertexData::loadCol(vec4* inCol){
 	//copy them to vertices[i].col
 	for(int i=0;i<vCount;i++){
-		vertices[i].col.x=inCol[i].x;
-		vertices[i].col.y=inCol[i].y;
-		vertices[i].col.z=inCol[i].z;
-		vertices[i].col.w=inCol[i].w;
+		vertices[i].col=inCol[i];
 	}
 	return 0;
 }
@@ -238,8 +231,7 @@ int VertexData::loadCol(vec4* inCol){
 int VertexData::loadTex(vec2* inTex){
 	//copy them to vertices[i].tex
 	for(int i=0;i<vCount;i++){
-		vertices[i].tex.x=inTex[i].x;
-		vertices[i].tex.y=inTex[i].y;
+		vertices[i].tex=inTex[i];
 	}
 	return 0;
 }
@@ -279,12 +271,12 @@ VertexData* VertexData::getPointer(){
 //constructors
 Light::Light(const char* name):
 color({1,1,1,1}){
-	NAME=(char*)malloc(strlen(name));
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
 }
 Light::Light(vec3 iPos, vec4 iCol, const char* name):
 Transform(iPos,{0,0,0}),color(iCol){
-	NAME=(char*)malloc(strlen(name));
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
 }
 
@@ -366,6 +358,20 @@ CubeMap::CubeMap(const char* XPFile,const char* XNFile,const char* YPFile,const 
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 	unbindCM();
 	loadAllSides(XPFile,XNFile,YPFile,YNFile,ZPFile,ZNFile);
+}
+
+CubeMap::CubeMap(const char* sides[6]){
+	//texture generation opengl
+	glGenTextures(1,&ID);
+	bindCM();
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	unbindCM();
+	if(sides!=NULL)
+		loadAllSides(sides[0],sides[1],sides[2],sides[3],sides[4],sides[5]);
 }
 
 
@@ -527,6 +533,8 @@ void SkyBox::initData(){
 
 //constructors
 SkyBox::SkyBox(const char* name){
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
+	memcpy(NAME,name,strlen(name));
 	glGenVertexArrays(1,&VAO);
 	glGenBuffers(1,&VBO);
 	initData();
@@ -534,6 +542,17 @@ SkyBox::SkyBox(const char* name){
 
 SkyBox::SkyBox(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile,const char* name):
 CubeMap(XPFile,XNFile,YPFile,YNFile,ZPFile,ZNFile){
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
+	memcpy(NAME,name,strlen(name));
+	glGenVertexArrays(1,&VAO);
+	glGenBuffers(1,&VBO);
+	initData();
+}
+
+SkyBox::SkyBox(const char* sides[6], const char* name):
+CubeMap(sides){
+	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
+	memcpy(NAME,name,strlen(name));
 	glGenVertexArrays(1,&VAO);
 	glGenBuffers(1,&VBO);
 	initData();
@@ -544,6 +563,7 @@ CubeMap(XPFile,XNFile,YPFile,YNFile,ZPFile,ZNFile){
 SkyBox::~SkyBox(){
 	glDeleteBuffers(1,&VBO);
 	glDeleteVertexArrays(1,&VAO);
+	free(NAME);
 }
 
 

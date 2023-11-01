@@ -153,6 +153,7 @@ public:
 	//constructor
 	CubeMap();
 	CubeMap(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile);
+	CubeMap(const char* sides[6]);
 
 	//destructor
 	~CubeMap();
@@ -175,7 +176,7 @@ public:
 
 class SkyBox : public CubeMap{
 protected:
-	char* NAME;
+	char* NAME=NULL;
 	//opengl
 	uint32_t VAO;//vertex array
 	uint32_t VBO;//indexes 0:position 1:texture coordinates
@@ -188,6 +189,7 @@ public:
 	//constructors
 	SkyBox(const char* name="default");
 	SkyBox(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile,const char* name="default");
+	SkyBox(const char* sides[6], const char* name="default");
 
 	//destructors
 	~SkyBox();

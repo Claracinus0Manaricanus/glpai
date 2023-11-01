@@ -135,51 +135,13 @@ int GameObject::update(){
 	//to store modified data
 	float* moddedPos=new float[vCount*3]{0};
 
-	//update according to Transform data
-	//rotation (sequence: x->y->z)  needs optimization and quaternions
-	for(int i=0;i<vCount;i++){
-		//debug
-		tempx=vertices[i].pos.x;
-		tempy=vertices[i].pos.y;
-		tempz=vertices[i].pos.z;
-
-		//x rotation
-		moddedPos[i*3]=tempx;//x
-		moddedPos[i*3+1]=tempy*cos(rotation.x)-tempz*sin(rotation.x);//y
-		moddedPos[i*3+2]=tempy*sin(rotation.x)+tempz*cos(rotation.x);//z
-
-		//update
-		tempx=moddedPos[i*3];
-		tempy=moddedPos[i*3+1];
-		tempz=moddedPos[i*3+2];
-
-		//y rotation
-		moddedPos[i*3]=tempx*cos(rotation.y)+tempz*sin(rotation.y);//x
-		moddedPos[i*3+1]=tempy;//y
-		moddedPos[i*3+2]=-tempx*sin(rotation.y)+tempz*cos(rotation.y);//z
-
-		//update
-		tempx=moddedPos[i*3];
-		tempy=moddedPos[i*3+1];
-		tempz=moddedPos[i*3+2];
-
-		//z rotation
-		moddedPos[i*3]=tempx*cos(rotation.z)+tempy*sin(rotation.z);//x
-		moddedPos[i*3+1]=-tempx*sin(rotation.z)+tempy*cos(rotation.z);//y
-		moddedPos[i*3+2]=tempz;//z
-	}
-
 
 	//position
 	for(int i=0;i<vCount;i++){
 		//scale
-		moddedPos[i*3]*=scale.x;//x
-		moddedPos[i*3+1]*=scale.y;//y
-		moddedPos[i*3+2]*=scale.z;//z
-		//position
-		moddedPos[i*3]+=position.x;//x
-		moddedPos[i*3+1]+=position.y;//y
-		moddedPos[i*3+2]+=position.z;//z
+		moddedPos[i*3]=vertices[i].pos.x*scale.x;//x
+		moddedPos[i*3+1]=vertices[i].pos.y*scale.y;//y
+		moddedPos[i*3+2]=vertices[i].pos.z*scale.z;//z
 	}
 
 
@@ -198,40 +160,10 @@ int GameObject::update(){
 	//update according to Transform data
 	//rotation (sequence: x->y->z)  needs optimization and quaternions
 	for(int i=0;i<vCount;i++){
-		//debug
-		tempx=vertices[i].nor.x;
-		tempy=vertices[i].nor.y;
-		tempz=vertices[i].nor.z;
-
-		//x rotation
-		moddedNor[i*3]=tempx;//x
-		moddedNor[i*3+1]=tempy*cos(rotation.x)-tempz*sin(rotation.x);//y
-		moddedNor[i*3+2]=tempy*sin(rotation.x)+tempz*cos(rotation.x);//z
-
-		//update
-		tempx=moddedNor[i*3];
-		tempy=moddedNor[i*3+1];
-		tempz=moddedNor[i*3+2];
-
-		//y rotation
-		moddedNor[i*3]=tempx*cos(rotation.y)+tempz*sin(rotation.y);//x
-		moddedNor[i*3+1]=tempy;//y
-		moddedNor[i*3+2]=-tempx*sin(rotation.y)+tempz*cos(rotation.y);//z
-
-		//update
-		tempx=moddedNor[i*3];
-		tempy=moddedNor[i*3+1];
-		tempz=moddedNor[i*3+2];
-
-		//z rotation
-		moddedNor[i*3]=tempx*cos(rotation.z)+tempy*sin(rotation.z);//x
-		moddedNor[i*3+1]=-tempx*sin(rotation.z)+tempy*cos(rotation.z);//y
-		moddedNor[i*3+2]=tempz;//z
-
 		//scaling
-		moddedPos[i*3]*=scale.y*scale.z;//x
-		moddedPos[i*3+1]*=scale.x*scale.z;//y
-		moddedPos[i*3+2]*=scale.x*scale.y;//z
+		moddedPos[i*3]=vertices[i].nor.x*scale.y*scale.z;//x
+		moddedPos[i*3+1]=vertices[i].nor.y*scale.x*scale.z;//y
+		moddedPos[i*3+2]=vertices[i].nor.z*scale.x*scale.y;//z
 	}
 
 	//load modded data to buffer

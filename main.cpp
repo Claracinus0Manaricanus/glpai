@@ -130,12 +130,9 @@ int main(){
 	if(debug)logInfo("shaders loaded\n");
 
 	//texture usage (samplers)
-	pSky.use();
-	glUniform1i(glGetUniformLocation(pSky.getid(),"tex0"),0);
-	pFB[1].use();
-	glUniform1i(glGetUniformLocation(pFB[1].getid(),"tex0"),0);
-	pL[1].use();
-	glUniform1i(glGetUniformLocation(pL[1].getid(),"tex0"),0);
+	pSky.setInt("tex0",0);
+	pFB[1].setInt("tex0",0);
+	pL[1].setInt("tex0",0);
 
 	//Deleting shaders
 	vS.Delete();
@@ -146,7 +143,7 @@ int main(){
 	/******************************************************************************************/
 	//sceneManager setup
 	SceneManager mainManager;
-	mainManager.setPrograms(pFB,pL,&oUI);
+	mainManager.setPrograms(pFB,pL,&oUI,&pSky);
 
 	//vertex datas
 	//ground
@@ -165,7 +162,8 @@ int main(){
 	//mComp
 	int oL=0;
 	vertex* o=importOBJ("objects/mComp.obj",oL);
-	mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
+	GameObject* mComp=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
+	GameObject* mComp2=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
 
 
 	//for texture use (single texture system)
@@ -175,7 +173,16 @@ int main(){
 	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);
 
 	//skyboxes
-	SkyBox testSky("images/skybox/starryCSky/px.png","images/skybox/starryCSky/nx.png","images/skybox/starryCSky/py.png","images/skybox/starryCSky/ny.png","images/skybox/starryCSky/pz.png","images/skybox/starryCSky/nz.png");
+	const char* sides[6]={
+		"images/skybox/starryCSky/px.png",//X+
+		"images/skybox/starryCSky/nx.png",//X-
+		"images/skybox/starryCSky/py.png",//Y+
+		"images/skybox/starryCSky/ny.png",//Y-
+		"images/skybox/starryCSky/pz.png",//Z+
+		"images/skybox/starryCSky/nz.png" //Z-
+	};
+	mainManager.addSkyBox("stars",sides);
+	mainManager.setSkyBox("stars");
 	
 
 	/******************************************************************************************/
@@ -288,37 +295,30 @@ int main(){
 
 		//updating uniforms
 		for(int i=0;i<2;i++){
-			pFB[i].use();
-			glUniform2f(glGetUniformLocation(pFB[i].getid(),"rot"),cam0.rotation.x,cam0.rotation.y);
-			glUniform3f(glGetUniformLocation(pFB[i].getid(),"mov"),cam0.position.x,cam0.position.y,cam0.position.z);
-			glUniform1i(glGetUniformLocation(pFB[i].getid(),"w"),resolution.x);
-			glUniform1i(glGetUniformLocation(pFB[i].getid(),"h"),resolution.y);
+			pFB[i].setVec2("camRot",{cam0.rotation.x,cam0.rotation.y});
+			pFB[i].setVec3("camMov",cam0.position);
+			pFB[i].setVec2i("resolution",resolution);
 		}
 
 		for(int i=0;i<2;i++){
-			pL[i].use();
-			glUniform2f(glGetUniformLocation(pL[i].getid(),"rot"),cam0.rotation.x,cam0.rotation.y);
-			glUniform3f(glGetUniformLocation(pL[i].getid(),"mov"),cam0.position.x,cam0.position.y,cam0.position.z);
-			glUniform1i(glGetUniformLocation(pL[i].getid(),"w"),resolution.x);
-			glUniform1i(glGetUniformLocation(pL[i].getid(),"h"),resolution.y);
-			glUniform1i(glGetUniformLocation(pL[i].getid(),"count"),lC);
-			glUniform4fv(glGetUniformLocation(pL[i].getid(),"lights"),lC*2,lightsData);
+			pL[i].setVec2("camRot",{cam0.rotation.x,cam0.rotation.y});
+			pL[i].setVec3("camMov",cam0.position);
+			pL[i].setVec2i("resolution",resolution);
+			pL[i].setInt("count",lC);
+			pL[i].setVec4Array("lights",lC*2,lightsData);
 		}
-		pSky.use();
-		glUniform2f(glGetUniformLocation(pSky.getid(),"rot"),cam0.rotation.x,cam0.rotation.y);
-		glUniform1i(glGetUniformLocation(pSky.getid(),"w"),resolution.x);
-		glUniform1i(glGetUniformLocation(pSky.getid(),"h"),resolution.y);
+		pSky.setVec2("rot",{cam0.rotation.x,cam0.rotation.y});
+		pSky.setVec2i("resolution",resolution);
 		
+		//mComp tests
+		mComp->move({0,0,1*deltaTime});
+		mComp->rotate({0,1*deltaTime,0});
+		mComp2->move({1*deltaTime,0,0});
+		mComp2->rotate({0,1*deltaTime,0});
+
 		//drawing to back buffer
-		//mainManager.setFullbright(true);
-			//mainManager.draw();
-			//test skybox
-			pSky.use();
-			glActiveTexture(GL_TEXTURE0);
-			testSky.bind();
-			glDrawArrays(GL_TRIANGLES,0,36);
-			testSky.unbind();
-			
+		//mainManager.setFullbright(1);
+		mainManager.draw();
 
 
 		//polling events and displaying back buffer

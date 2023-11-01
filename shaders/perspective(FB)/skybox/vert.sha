@@ -3,8 +3,7 @@
 layout(location=0) in vec3 pos;//vertex positions
 
 uniform vec2 rot;
-uniform int w;
-uniform int h;
+uniform ivec2 resolution;//width, height of framebuffer
 
 out vec3 fragTex;
 out vec3 col;
@@ -25,7 +24,7 @@ mat4 rotXM4={//for cameras X axis rotation
 
 mat4 pers={
 	vec4(1/tan(1.05),    0,    0,  0),
-	vec4(0,w/(h*tan(1.05)),    0,  0),
+	vec4(0,resolution.x/(resolution.y*tan(1.05)),    0,  0),
 	vec4(0,              0,    1,  1),
 	vec4(0,              0, -0.01, 0)	
 };
