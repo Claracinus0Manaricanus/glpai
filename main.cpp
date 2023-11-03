@@ -163,8 +163,7 @@ int main(){
 	int oL=0;
 	vertex* o=importOBJ("objects/mComp.obj",oL);
 	GameObject* mComp=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
-	GameObject* mComp2=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
-
+	GameObject* mComp2=mainManager.addObject("mComp2",{0,10,0},{0,0,0},{1,1,1},oL,o);
 
 	//for texture use (single texture system)
 	glUniform1i(glGetUniformLocation(pFB[0].getid(),"tex0"),0);

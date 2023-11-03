@@ -50,8 +50,15 @@ public:
 	SkyBox* getSkyBox(const char* name, int* index=NULL);//get SkyBox from name
 	SkyBox* getSkyBox(int index);//get SkyBox from index
 
-	//element deletors
-
+	//element deletors WIP
+	int deleteObject(const char* name);
+	int deleteObject(uint32_t index);
+	int deleteLight(const char* name);
+	int deleteLight(int index);
+	int deleteUI_Element(const char* name);
+	int deleteUI_Element(int index);
+	int deleteSkyBox(const char* name);
+	int deleteSkyBox(int index);
 
 	//drawing utility
 	int draw();//draws scene to screen

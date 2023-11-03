@@ -86,9 +86,12 @@ SkyBox* SceneManager::addSkyBox(const char* name, const char* sides[6]){
 //element selector
 GameObject* SceneManager::getObject(const char* name, int* index){
 	for(int i=0;i<L_objects;i++){
-		if(strcmp(objects[i]->NAME,name)==0)
+		if(strcmp(objects[i]->NAME,name)==0){
+			if(index!=NULL)(*index)=i;
 			return objects[i];
+		}
 	}
+	(*index)=-1;
 	return NULL;
 }
 
@@ -100,9 +103,12 @@ GameObject* SceneManager::getObject(int index){
 
 Light* SceneManager::getLight(const char* name, int* index){
 	for(int i=0;i<L_lights;i++){
-		if(strcmp(lights[i]->NAME,name)==0)
+		if(strcmp(lights[i]->NAME,name)==0){
+			if(index!=NULL)(*index)=i;
 			return lights[i];
+		}
 	}
+	(*index)=-1;
 	return NULL;
 }
 
@@ -114,9 +120,12 @@ Light* SceneManager::getLight(int index){
 
 UI_Element* SceneManager::getUI_Element(const char* name, int* index){
 	for(int i=0;i<L_UIElements;i++){
-		if(strcmp(UIElements[i]->NAME,name)==0)
+		if(strcmp(UIElements[i]->NAME,name)==0){
+			if(index!=NULL)(*index)=i;
 			return UIElements[i];
+		}
 	}
+	(*index)=-1;
 	return NULL;
 }
 
@@ -128,9 +137,12 @@ UI_Element* SceneManager::getUI_Element(int index){
 
 SkyBox* SceneManager::getSkyBox(const char* name, int* index){
 	for(int i=0;i<L_skyboxes;i++){
-		if(strcmp(skyboxes[i]->NAME,name)==0)
+		if(strcmp(skyboxes[i]->NAME,name)==0){
+			if(index!=NULL)(*index)=i;
 			return skyboxes[i];
+		}
 	}
+	(*index)=-1;
 	return NULL;
 }
 
@@ -138,6 +150,85 @@ SkyBox* SceneManager::getSkyBox(int index){
 	if(index<L_skyboxes)
 		return skyboxes[index];
 	return NULL;
+}
+
+
+//element deletors WIP
+int SceneManager::deleteObject(const char* name){
+	int index;
+	getObject(name,&index);
+	return deleteObject((uint32_t)index);
+}
+
+int SceneManager::deleteObject(uint32_t index){
+	if(index<L_objects){
+		free(objects[index]);
+		L_objects--;
+		for(int i=index;i<L_objects;i++){
+			objects[i]=objects[i+1];
+		}
+		objects=(GameObject**)realloc(objects,sizeof(GameObject*)*L_objects);
+		return index;
+	}
+	return -1;
+}
+
+int SceneManager::deleteLight(const char* name){
+	int index;
+	getLight(name,&index);
+	return deleteLight((uint32_t)index);
+}
+
+int SceneManager::deleteLight(int index){
+	if(index<L_lights){
+		free(lights[index]);
+		L_lights--;
+		for(int i=index;i<L_lights;i++){
+			lights[i]=lights[i+1];
+		}
+		lights=(Light**)realloc(lights,sizeof(Light*)*L_lights);
+		return index;
+	}
+	return -1;
+}
+
+int SceneManager::deleteUI_Element(const char* name){
+	int index;
+	getUI_Element(name,&index);
+	return deleteUI_Element((uint32_t)index);
+}
+
+int SceneManager::deleteUI_Element(int index){
+	if(index<L_UIElements){
+		free(UIElements[index]);
+		L_UIElements--;
+		for(int i=index;i<L_UIElements;i++){
+			UIElements[i]=UIElements[i+1];
+		}
+		UIElements=(UI_Element**)realloc(UIElements,sizeof(UI_Element*)*L_UIElements);
+		return index;
+	}
+	return -1;
+}
+
+int SceneManager::deleteSkyBox(const char* name){
+	int index;
+	getSkyBox(name,&index);
+	return deleteSkyBox((uint32_t)index);
+}
+
+int SceneManager::deleteSkyBox(int index){
+	if(index<L_skyboxes){
+		free(skyboxes[index]);
+		L_skyboxes--;
+		for(int i=index;i<L_skyboxes;i++){
+			skyboxes[i]=skyboxes[i+1];
+		}
+		C_SKYBOX--;
+		skyboxes=(SkyBox**)realloc(skyboxes,sizeof(SkyBox*)*L_skyboxes);
+		return index;
+	}
+	return -1;
 }
 
 
