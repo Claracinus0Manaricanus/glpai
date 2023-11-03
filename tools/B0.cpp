@@ -278,7 +278,7 @@ color({1,1,1,1}){
 Light::Light(int iType, vec3 iPos, vec4 iCol, const char* name){
 	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
-	loadData(iPos,iCol,iType);
+	loadData(iType,iPos,iCol);
 }
 
 

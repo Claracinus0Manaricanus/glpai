@@ -98,15 +98,15 @@ GameObject* SceneManager::getObject(int index){
 	return NULL;
 }
 
-Light* getLight(const char* name, int* index){
+Light* SceneManager::getLight(const char* name, int* index){
 	for(int i=0;i<L_lights;i++){
-		if(strcmp(lights[i],name)==0)
+		if(strcmp(lights[i]->NAME,name)==0)
 			return lights[i];
 	}
 	return NULL;
 }
 
-Light* getLight(int index){
+Light* SceneManager::getLight(int index){
 	if(index<L_lights)
 		return lights[index];
 	return NULL;
@@ -144,6 +144,16 @@ SkyBox* SceneManager::getSkyBox(int index){
 //drawing utility
 int SceneManager::draw(){
 	glActiveTexture(GL_TEXTURE0);
+
+	//light calculations will change (this is a placeholder)
+	float lightData[L_lights*8];
+	for(int i=0;i<L_lights;i++){
+		memcpy(&lightData[i*8],lights[i]->data,sizeof(float)*8);
+	}
+	pL[0].setVec4Array("lights",L_lights*2,lightData);
+	pL[0].setInt("count",L_lights);
+	pL[1].setVec4Array("lights",L_lights*2,lightData);
+	pL[1].setInt("count",L_lights);
 
 	//GameObject
 	for(int i=0;i<L_objects;i++){

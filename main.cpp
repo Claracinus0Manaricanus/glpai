@@ -188,11 +188,7 @@ int main(){
 	/******************************************************************************************/
 	//lights
 
-	int lC=1;
-	float lightsData[8]={
-		10,5,10,1,
-		1,1,1,10
-	};
+	mainManager.addLight("light1",1,{10,5,10},{1,1,1,10});
 
 
 	/******************************************************************************************/
@@ -304,8 +300,6 @@ int main(){
 			pL[i].setVec2("camRot",{cam0.rotation.x,cam0.rotation.y});
 			pL[i].setVec3("camMov",cam0.position);
 			pL[i].setVec2i("resolution",resolution);
-			pL[i].setInt("count",lC);
-			pL[i].setVec4Array("lights",lC*2,lightsData);
 		}
 		pSky.setVec2("rot",{cam0.rotation.x,cam0.rotation.y});
 		pSky.setVec2i("resolution",resolution);
