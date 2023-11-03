@@ -35,18 +35,23 @@ public:
 	int setPrograms(program* in_pFB, program* in_pL, program* in_pUI,  program* in_pSky);
 
 	//array control
-	Light* addLight(const char* name);
 	GameObject* addObject(const char* name, vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* imageFileName=NULL, bool useMipmap=false);
+	Light* addLight(const char* name, int iType, vec3 iPos, vec4 iCol);
 	UI_Element* addUI_Element(const char* name, vec2 iPos, vec2 iScale, const char* filename);
 	SkyBox* addSkyBox(const char* name, const char* sides[6]);
 
 	//element selector
-	GameObject* getObject(const char* name);//get GameObject from name
+	GameObject* getObject(const char* name, int* index=NULL);//get GameObject from name
 	GameObject* getObject(int index);//get GameObject from index
-	UI_Element* getUI_Element(const char* name);//get UI_Element from name
+	Light* getLight(const char* name, int* index=NULL);//get Light from name
+	Light* getLight(int index);//get Light from index
+	UI_Element* getUI_Element(const char* name, int* index=NULL);//get UI_Element from name
 	UI_Element* getUI_Element(int index);//get UI_Element from index
-	SkyBox* getSkyBox(const char* name);//get SkyBox from name
+	SkyBox* getSkyBox(const char* name, int* index=NULL);//get SkyBox from name
 	SkyBox* getSkyBox(int index);//get SkyBox from index
+
+	//element deletors
+
 
 	//drawing utility
 	int draw();//draws scene to screen

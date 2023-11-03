@@ -7,8 +7,8 @@
 
 //constructors
 SceneManager::SceneManager(){
-	lights=(Light**)malloc(sizeof(Light*));
 	objects=(GameObject**)malloc(sizeof(GameObject*));
+	lights=(Light**)malloc(sizeof(Light*));
 	UIElements=(UI_Element**)malloc(sizeof(UI_Element*));
 	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
 }
@@ -50,6 +50,16 @@ GameObject* SceneManager::addObject(const char* name, vec3 inPos, vec3 inRot, ve
 	return objects[L_objects-1];
 }
 
+Light* SceneManager::addLight(const char* name, int iType, vec3 iPos, vec4 iCol){
+	//resize array
+	L_lights++;
+	//element creation
+	lights=(Light**)realloc(lights,sizeof(Light*)*L_objects);
+	lights[L_lights-1]=new Light(iType,iPos,iCol,name);
+	//return newly created element
+	return lights[L_lights-1];
+}
+
 UI_Element* SceneManager::addUI_Element(const char* name, vec2 iPos, vec2 iScale, const char* filename){
 	//resize array
 	L_UIElements++;
@@ -74,7 +84,7 @@ SkyBox* SceneManager::addSkyBox(const char* name, const char* sides[6]){
 
 
 //element selector
-GameObject* SceneManager::getObject(const char* name){
+GameObject* SceneManager::getObject(const char* name, int* index){
 	for(int i=0;i<L_objects;i++){
 		if(strcmp(objects[i]->NAME,name)==0)
 			return objects[i];
@@ -88,7 +98,21 @@ GameObject* SceneManager::getObject(int index){
 	return NULL;
 }
 
-UI_Element* SceneManager::getUI_Element(const char* name){
+Light* getLight(const char* name, int* index){
+	for(int i=0;i<L_lights;i++){
+		if(strcmp(lights[i],name)==0)
+			return lights[i];
+	}
+	return NULL;
+}
+
+Light* getLight(int index){
+	if(index<L_lights)
+		return lights[index];
+	return NULL;
+}
+
+UI_Element* SceneManager::getUI_Element(const char* name, int* index){
 	for(int i=0;i<L_UIElements;i++){
 		if(strcmp(UIElements[i]->NAME,name)==0)
 			return UIElements[i];
@@ -102,7 +126,7 @@ UI_Element* SceneManager::getUI_Element(int index){
 	return NULL;
 }
 
-SkyBox* SceneManager::getSkyBox(const char* name){
+SkyBox* SceneManager::getSkyBox(const char* name, int* index){
 	for(int i=0;i<L_skyboxes;i++){
 		if(strcmp(skyboxes[i]->NAME,name)==0)
 			return skyboxes[i];

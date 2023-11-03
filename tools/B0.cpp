@@ -274,10 +274,17 @@ color({1,1,1,1}){
 	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
 }
-Light::Light(vec3 iPos, vec4 iCol, const char* name):
-Transform(iPos,{0,0,0}),color(iCol){
+
+Light::Light(int iType, vec3 iPos, vec4 iCol, const char* name){
 	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
+	loadData(iPos,iCol,iType);
+}
+
+
+//destructors
+Light::~Light(){
+	free(NAME);
 }
 
 
@@ -302,20 +309,21 @@ int Light::move(vec3 movement){
 
 
 //loaders
-int Light::loadData(vec3 iPos, vec4 iCol){
+int Light::loadData(int iType, vec3 iPos, vec4 iCol){
 	position=iPos;
 	color=iCol;
+	type=iType;
 	update();
 	return 0;
 }
 
-int Light::Color(vec4 iColor){
+int Light::setColor(vec4 iColor){
 	color=iColor;
 	update();
 	return 0;
 }
 
-int Light::Position(vec3 iPos){
+int Light::setPosition(vec3 iPos){
 	position=iPos;
 	update();
 	return 0;
@@ -347,19 +355,6 @@ CubeMap::CubeMap(){
 	unbindCM();
 }
 
-CubeMap::CubeMap(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile){
-	//texture generation opengl
-	glGenTextures(1,&ID);
-	bindCM();
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	unbindCM();
-	loadAllSides(XPFile,XNFile,YPFile,YNFile,ZPFile,ZNFile);
-}
-
 CubeMap::CubeMap(const char* sides[6]){
 	//texture generation opengl
 	glGenTextures(1,&ID);
@@ -371,18 +366,13 @@ CubeMap::CubeMap(const char* sides[6]){
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 	unbindCM();
 	if(sides!=NULL)
-		loadAllSides(sides[0],sides[1],sides[2],sides[3],sides[4],sides[5]);
+		loadAllSides(sides);
 }
 
 
 //destructor
 CubeMap::~CubeMap(){
-	stbi_image_free(data_XP);
-	stbi_image_free(data_XN);
-	stbi_image_free(data_YP);
-	stbi_image_free(data_YN);
-	stbi_image_free(data_ZP);
-	stbi_image_free(data_ZN);
+	stbi_image_free(iData);
 	glDeleteTextures(1,&ID);
 }
 
@@ -390,12 +380,12 @@ CubeMap::~CubeMap(){
 //loaders
 int CubeMap::loadSideXP(const char* filename){
 	//loading file
-	stbi_image_free(data_XP);
-	data_XP=stbi_load(filename,&iWidth_XP,&iHeight_XP,&chan,3);
-	if(data_XP!=NULL){
+	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
+	if(iData!=NULL){
 		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X,0,GL_RGB,iWidth_XP,iHeight_XP,0,GL_RGB,GL_UNSIGNED_BYTE,data_XP);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
 		unbindCM();
+		stbi_image_free(iData);
 		return 0;
 	}else{
 		return -1;
@@ -404,12 +394,12 @@ int CubeMap::loadSideXP(const char* filename){
 
 int CubeMap::loadSideXN(const char* filename){
 	//loading file
-	stbi_image_free(data_XN);
-	data_XN=stbi_load(filename,&iWidth_XN,&iHeight_XN,&chan,3);
-	if(data_XN!=NULL){
+	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
+	if(iData!=NULL){
 		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X,0,GL_RGB,iWidth_XN,iHeight_XN,0,GL_RGB,GL_UNSIGNED_BYTE,data_XN);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
 		unbindCM();
+		stbi_image_free(iData);
 		return 0;
 	}else{
 		return -1;
@@ -418,12 +408,12 @@ int CubeMap::loadSideXN(const char* filename){
 
 int CubeMap::loadSideYP(const char* filename){
 	//loading file
-	stbi_image_free(data_YP);
-	data_YP=stbi_load(filename,&iWidth_YP,&iHeight_YP,&chan,3);
-	if(data_YP!=NULL){
+	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
+	if(iData!=NULL){
 		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y,0,GL_RGB,iWidth_YP,iHeight_YP,0,GL_RGB,GL_UNSIGNED_BYTE,data_YP);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
 		unbindCM();
+		stbi_image_free(iData);
 		return 0;
 	}else{
 		return -1;
@@ -432,12 +422,12 @@ int CubeMap::loadSideYP(const char* filename){
 
 int CubeMap::loadSideYN(const char* filename){
 	//loading file
-	stbi_image_free(data_YN);
-	data_YN=stbi_load(filename,&iWidth_YN,&iHeight_YN,&chan,3);
-	if(data_YN!=NULL){
+	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
+	if(iData!=NULL){
 		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,0,GL_RGB,iWidth_YN,iHeight_YN,0,GL_RGB,GL_UNSIGNED_BYTE,data_YN);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
 		unbindCM();
+		stbi_image_free(iData);
 		return 0;
 	}else{
 		return -1;
@@ -446,12 +436,12 @@ int CubeMap::loadSideYN(const char* filename){
 
 int CubeMap::loadSideZP(const char* filename){
 	//loading file
-	stbi_image_free(data_ZP);
-	data_ZP=stbi_load(filename,&iWidth_ZP,&iHeight_ZP,&chan,3);
-	if(data_ZP!=NULL){
+	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
+	if(iData!=NULL){
 		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z,0,GL_RGB,iWidth_ZP,iHeight_ZP,0,GL_RGB,GL_UNSIGNED_BYTE,data_ZP);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
 		unbindCM();
+		stbi_image_free(iData);
 		return 0;
 	}else{
 		return -1;
@@ -460,25 +450,28 @@ int CubeMap::loadSideZP(const char* filename){
 
 int CubeMap::loadSideZN(const char* filename){
 	//loading file
-	stbi_image_free(data_ZN);
-	data_ZN=stbi_load(filename,&iWidth_ZN,&iHeight_ZN,&chan,3);
-	if(data_ZN!=NULL){
+	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
+	if(iData!=NULL){
 		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,0,GL_RGB,iWidth_ZN,iHeight_ZN,0,GL_RGB,GL_UNSIGNED_BYTE,data_ZN);
+		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
 		unbindCM();
+		stbi_image_free(iData);
 		return 0;
 	}else{
 		return -1;
 	}
 }
 
-int CubeMap::loadAllSides(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile){
-	loadSideXP(XPFile);
-	loadSideXN(XNFile);
-	loadSideYP(YPFile);
-	loadSideYN(YNFile);
-	loadSideZP(ZPFile);
-	loadSideZN(ZNFile);
+int CubeMap::loadAllSides(const char* sides[6]){
+	bindCM();
+	for(int i=0;i<6;i++){
+		iData=stbi_load(sides[i],&iWidth,&iHeight,&chan,3);
+		if(iData!=NULL){
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
+			stbi_image_free(iData);
+		}
+	}
+	unbindCM();
 	return 0;
 }
 
@@ -491,92 +484,6 @@ int CubeMap::bindCM(){
 
 int CubeMap::unbindCM(){
 	glBindTexture(GL_TEXTURE_CUBE_MAP,0);
-	return 0;
-}
-
-
-/*********************************************************************************/
-//SkyBox
-
-
-//initializers
-void SkyBox::initData(){
-	float posses[108]={
-		//Z+
-		-1,-1, 1, -1, 1, 1, 1,-1, 1,//1 face
-		 1,-1, 1, -1, 1, 1, 1, 1, 1,
-		//Z-
-		 1,-1,-1, 1, 1,-1, -1,-1,-1,
-		-1,-1,-1, 1, 1,-1, -1, 1,-1,
-		//Y+
-		-1,	1, 1, -1, 1,-1, 1, 1,-1,
-		 1, 1,-1, 1, 1, 1, -1, 1, 1,
-		//Y-
-		-1,-1,-1, -1,-1, 1, 1,-1,-1,
-		 1,-1,-1, -1,-1, 1, 1,-1, 1,
-		//X+
-		 1,-1, 1, 1, 1, 1, 1,-1,-1,
-		 1,-1,-1, 1, 1, 1, 1, 1,-1,
-		//X-
-		-1,-1,-1, -1, 1,-1, -1,-1, 1,
-		-1,-1, 1, -1, 1,-1, -1, 1, 1
-	};
-
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER,VBO);
-	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*108,posses,GL_STATIC_DRAW);
-	glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(float)*3,(void*)0);
-	glEnableVertexAttribArray(0);
-	glBindVertexArray(0);
-}
-
-
-//constructors
-SkyBox::SkyBox(const char* name){
-	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
-	memcpy(NAME,name,strlen(name));
-	glGenVertexArrays(1,&VAO);
-	glGenBuffers(1,&VBO);
-	initData();
-}
-
-SkyBox::SkyBox(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile,const char* name):
-CubeMap(XPFile,XNFile,YPFile,YNFile,ZPFile,ZNFile){
-	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
-	memcpy(NAME,name,strlen(name));
-	glGenVertexArrays(1,&VAO);
-	glGenBuffers(1,&VBO);
-	initData();
-}
-
-SkyBox::SkyBox(const char* sides[6], const char* name):
-CubeMap(sides){
-	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
-	memcpy(NAME,name,strlen(name));
-	glGenVertexArrays(1,&VAO);
-	glGenBuffers(1,&VBO);
-	initData();
-}
-
-
-//destructors
-SkyBox::~SkyBox(){
-	glDeleteBuffers(1,&VBO);
-	glDeleteVertexArrays(1,&VAO);
-	free(NAME);
-}
-
-
-//uility
-int SkyBox::bind(){
-	glBindVertexArray(VAO);
-	bindCM();
-	return 0;
-}
-
-int SkyBox::unbind(){
-	glBindVertexArray(0);
-	unbindCM();
 	return 0;
 }
 

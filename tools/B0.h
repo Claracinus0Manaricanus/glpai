@@ -100,30 +100,36 @@ public:
 };//unsafe
 
 
-class Light : public Transform{
+class Light{
 protected:
 	char* NAME=NULL;
 	vec3 position;
 	vec4 color;//w used as strength
 	float data[8];
-	int type=1;
+	int type;//usage for now 1=point light
 
 public:
 	//constructors
 	Light(const char* name="default\0");
-	Light(vec3 iPos, vec4 iCol, const char* name="default\0");
+	Light(int iType, vec3 iPos, vec4 iCol, const char* name="default\0");
+
+	//destructors
+	~Light();
 
 	//utility
 	int update();
 	int move(vec3 movement);
 
 	//loaders
-	int loadData(vec3 iPos, vec4 iCol);
-	int Color(vec4 iCol);
-	int Position(vec3 iPos);
+	int loadData(int iType, vec3 iPos, vec4 iCol);
+	int setColor(vec4 iCol);
+	int setPosition(vec3 iPos);
 
 	//extractors
 	float* getData();
+
+	//friend classes
+	friend class SceneManager;
 };
 //future idea use position.w as identity
 //as an example point light can be 0 and directional can be 1
@@ -136,23 +142,12 @@ protected:
 	int chan;
 
 	//cubemap side textures data holders
-	uint8_t* data_XP=NULL;//X+
-	int iWidth_XP,iHeight_XP;
-	uint8_t* data_XN=NULL;//X-
-	int iWidth_XN,iHeight_XN;
-	uint8_t* data_YP=NULL;//Y+
-	int iWidth_YP,iHeight_YP;
-	uint8_t* data_YN=NULL;//Y-
-	int iWidth_YN,iHeight_YN;
-	uint8_t* data_ZP=NULL;//Z+
-	int iWidth_ZP,iHeight_ZP;
-	uint8_t* data_ZN=NULL;//Z-
-	int iWidth_ZN,iHeight_ZN;
+	int iWidth,iHeight;//general purpose temporary
+	uint8_t* iData=NULL;//general purpose temporary
 
 public:
 	//constructor
 	CubeMap();
-	CubeMap(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile);
 	CubeMap(const char* sides[6]);
 
 	//destructor
@@ -165,7 +160,7 @@ public:
 	int loadSideYN(const char* filename);//Y- side
 	int loadSideZP(const char* filename);//Z+ side
 	int loadSideZN(const char* filename);//Z- side
-	int loadAllSides(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile);
+	int loadAllSides(const char* sides[6]);
 
 	//utility
 	int bindCM();//binding ID as GL_TEXTURE_CUBE_MAP
@@ -173,34 +168,6 @@ public:
 
 };
 
-
-class SkyBox : public CubeMap{
-protected:
-	char* NAME=NULL;
-	//opengl
-	uint32_t VAO;//vertex array
-	uint32_t VBO;//indexes 0:position 1:texture coordinates
-	
-private:
-	//initializers
-	void initData();
-
-public:
-	//constructors
-	SkyBox(const char* name="default");
-	SkyBox(const char* XPFile,const char* XNFile,const char* YPFile,const char* YNFile,const char* ZPFile,const char* ZNFile,const char* name="default");
-	SkyBox(const char* sides[6], const char* name="default");
-
-	//destructors
-	~SkyBox();
-
-	//uility
-	int bind();
-	int unbind();
-
-	//friend classes
-	friend class SceneManager;
-};
 
 #endif
 
