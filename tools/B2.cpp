@@ -11,6 +11,15 @@ SceneManager::SceneManager(){
 	lights=(Light**)malloc(sizeof(Light*));
 	UIElements=(UI_Element**)malloc(sizeof(UI_Element*));
 	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
+	//for shadowmapping
+	glGenTextures(1,&cubeDepthMap);
+	glBindTexture(GL_TEXTURE_CUBE_MAP,cubeDepthMap);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_CUBE_MAP,0);
 }
 
 
@@ -25,12 +34,16 @@ SceneManager::~SceneManager(){
 
 //program control
 int SceneManager::setPrograms(program* in_pFB, program* in_pL, program* in_pUI,  program* in_pSky){
-	pFB[0]=in_pFB[0];
-	pFB[1]=in_pFB[1];
-	pL[0]=in_pL[0];
-	pL[1]=in_pL[1];
-	pUI=(*in_pUI);
-	pSky=(*in_pSky);
+	if(in_pFB!=NULL){
+		pFB[0]=in_pFB[0];
+		pFB[1]=in_pFB[1];
+	}
+	if(in_pL!=NULL){
+		pL[0]=in_pL[0];
+		pL[1]=in_pL[1];
+	}
+	if(in_pUI!=NULL)pUI=(*in_pUI);
+	if(in_pSky!=NULL)pSky=(*in_pSky);
 	return 0;
 }
 
@@ -54,7 +67,7 @@ Light* SceneManager::addLight(const char* name, int iType, vec3 iPos, vec4 iCol)
 	//resize array
 	L_lights++;
 	//element creation
-	lights=(Light**)realloc(lights,sizeof(Light*)*L_objects);
+	lights=(Light**)realloc(lights,sizeof(Light*)*L_lights);
 	lights[L_lights-1]=new Light(iType,iPos,iCol,name);
 	//return newly created element
 	return lights[L_lights-1];
@@ -236,46 +249,46 @@ int SceneManager::deleteSkyBox(int index){
 int SceneManager::draw(){
 	glActiveTexture(GL_TEXTURE0);
 
-	//light calculations will change (this is a placeholder)
-	float lightData[L_lights*8];
-	for(int i=0;i<L_lights;i++){
-		memcpy(&lightData[i*8],lights[i]->data,sizeof(float)*8);
-	}
-	pL[0].setVec4Array("lights",L_lights*2,lightData);
-	pL[0].setInt("count",L_lights);
-	pL[1].setVec4Array("lights",L_lights*2,lightData);
-	pL[1].setInt("count",L_lights);
-
 	//GameObject
-	for(int i=0;i<L_objects;i++){
-		if(S_FULLBRIGHT){
+	if(S_FULLBRIGHT){//fullbright mode
+		for(int i=0;i<L_objects;i++){
 			if(objects[i]->usingTexture()){
-				pFB[1].use();
+				//set functions already call use
 				pFB[1].setVec3("objRot",objects[i]->rotation);
 				pFB[1].setVec3("objMov",objects[i]->position);
 			}
 			else{
-				pFB[0].use();
 				pFB[0].setVec3("objRot",objects[i]->rotation);
 				pFB[0].setVec3("objMov",objects[i]->position);
 			}
-		}else{
-			if(objects[i]->usingTexture()){
-				pL[1].use();
-				pL[1].setVec3("objRot",objects[i]->rotation);
-				pL[1].setVec3("objMov",objects[i]->position);
-			}
-			else{
-				pL[0].use();
-				pL[0].setVec3("objRot",objects[i]->rotation);
-				pL[0].setVec3("objMov",objects[i]->position);
-			}
+			objects[i]->bind();
+			glDrawArrays(GL_TRIANGLES,0,objects[i]->getVCount());
+			objects[i]->unbind();
 		}
-
-		objects[i]->bind();
-		glDrawArrays(GL_TRIANGLES,0,objects[i]->getVCount());
-		objects[i]->unbind();
+	}else{
+		for(int i=0;i<L_lights;i++){//render with lights
+			//create shadow map (per light)
+			pL[0].setVec4Array("lights",2,lights[i]->data);
+			pL[1].setVec4Array("lights",2,lights[i]->data);
+			//render using shadow map (per light)
+			for(int k=0;k<L_objects;k++){
+				if(objects[k]->usingTexture()){
+					pL[1].setVec3("objRot",objects[k]->rotation);
+					pL[1].setVec3("objMov",objects[k]->position);
+				}
+				else{
+					pL[0].setVec3("objRot",objects[k]->rotation);
+					pL[0].setVec3("objMov",objects[k]->position);
+				}
+				objects[k]->bind();
+				glDrawArrays(GL_TRIANGLES,0,objects[k]->getVCount());
+				objects[k]->unbind();
+			}
+			glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
+		}
+		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	}
+
 
 	//UI_Element
 	pUI.use();

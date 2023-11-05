@@ -11,8 +11,7 @@ in vec4 fragCol;
 
 //uniforms
 uniform sampler2D tex0;
-uniform int count;
-uniform vec4 lights[1000];
+uniform vec4 lights[2];
 
 //for use in main
 vec4 lCol;
@@ -22,12 +21,10 @@ float intensity,l_length;
 void main(){
 	vec4 texCol=texture(tex0,texCoord);
 	color=vec4(0,0,0,texCol.w);
-	for(int i=0;i<count;i++){
-		lVec=lights[i*2].xyz-fragPos;
-		lCol=lights[i*2+1];
-		intensity=dot(normalize(lVec),normalize(fragNor));
-		if(intensity<0)intensity=0;
-		l_length=length(lVec);
-		color+=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*lCol.w*intensity/l_length,0);
-	}
+	lVec=lights[0].xyz-fragPos;
+	lCol=lights[1];
+	intensity=dot(normalize(lVec),normalize(fragNor));
+	if(intensity<0)intensity=0;
+	l_length=length(lVec);
+	color+=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*lCol.w*intensity/l_length,0);
 }

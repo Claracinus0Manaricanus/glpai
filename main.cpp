@@ -89,10 +89,12 @@ int main(){
 	glEnable(GL_DEBUG_OUTPUT);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
+	//glEnable(GL_COLOR_LOGIC_OP);
 
 	glFrontFace(GL_CW);//clockwise winding
 	glDepthFunc(GL_LEQUAL);//depth test pass condition (LEQUAL=less or equal)
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);//search
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);//blend coefficients
+	glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
 
 	
 	/******************************************************************************************/
@@ -163,7 +165,6 @@ int main(){
 	int oL=0;
 	vertex* o=importOBJ("objects/mComp.obj",oL);
 	GameObject* mComp=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
-	GameObject* mComp2=mainManager.addObject("mComp2",{0,10,0},{0,0,0},{1,1,1},oL,o);
 
 	//for texture use (single texture system)
 	glUniform1i(glGetUniformLocation(pFB[0].getid(),"tex0"),0);
@@ -187,7 +188,8 @@ int main(){
 	/******************************************************************************************/
 	//lights
 
-	mainManager.addLight("light1",1,{10,5,10},{1,1,1,10});
+
+	mainManager.addLight("mainL",1,{0,20,0},{1,1,1,50});
 
 
 	/******************************************************************************************/
@@ -302,12 +304,7 @@ int main(){
 		}
 		pSky.setVec2("rot",{cam0.rotation.x,cam0.rotation.y});
 		pSky.setVec2i("resolution",resolution);
-		
-		//mComp tests
-		mComp->move({0,0,1*deltaTime});
-		mComp->rotate({0,1*deltaTime,0});
-		mComp2->move({1*deltaTime,0,0});
-		mComp2->rotate({0,1*deltaTime,0});
+
 
 		//drawing to back buffer
 		//mainManager.setFullbright(1);
