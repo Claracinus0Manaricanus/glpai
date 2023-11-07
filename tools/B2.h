@@ -24,9 +24,9 @@ protected:
 	//programs
 	program pFB[1];//perspective fullbright
 	program pL[2];//perspective light //point 0, directional 1
+	program ShadMap[2];//shadowMap calculator //point 0, directional 1
 	program pSky;//skybox renderer
 	program pUI;//UI_Element renderer
-	program shadowMap;//shadowMap calculator (point light)
 
 public:
 	//constructors

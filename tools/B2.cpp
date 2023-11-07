@@ -17,10 +17,6 @@ SceneManager::SceneManager(){
 	"shaders/perspective(FB)/texture/vert.sha",
 	"shaders/perspective(FB)/texture/frag.sha");
 
-	pUI.load(
-	"shaders/orthographic/UItex/vert.sha",
-	"shaders/orthographic/UItex/frag.sha");
-
 	pL[0].load(
 	"shaders/perspective(L)/point/vert.sha",
 	"shaders/perspective(L)/point/frag.sha");
@@ -28,9 +24,17 @@ SceneManager::SceneManager(){
 	"shaders/perspective(L)/directional/vert.sha",
 	"shaders/perspective(L)/directional/frag.sha");
 
+	ShadMap[1].load(
+	"shaders/perspective(L)/ShadMapD/vert.sha",
+	"shaders/perspective(L)/ShadMapD/frag.sha");
+
 	pSky.load(
 	"shaders/perspective(FB)/skybox/vert.sha",
 	"shaders/perspective(FB)/skybox/frag.sha");
+
+	pUI.load(
+	"shaders/orthographic/UItex/vert.sha",
+	"shaders/orthographic/UItex/frag.sha");
 	//texture units
 	pUI.setInt("textureTU",0);
 	pSky.setInt("tex0",0);
