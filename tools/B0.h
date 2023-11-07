@@ -101,7 +101,8 @@ protected:
 	vec3 position;
 	vec4 color;//w used as strength
 	float data[8];
-	int type;//usage for now 1=point light
+	int type;
+	//usage for now 0=point 1=directional
 
 public:
 	//constructors

@@ -6,9 +6,10 @@
 
 class SceneManager{
 protected:
-	//state identifiers
+	//state identifiers and contants
 	bool S_FULLBRIGHT=false;
 	int C_SKYBOX=-1;//-1 means no skybox otherwise index of skybox to use
+	int C_LightTypes=2;
 	//data holders L_ means array length of
 	int L_objects=0;
 	GameObject** objects=NULL;
@@ -21,8 +22,8 @@ protected:
 	//depth buffers (for lights)
 	uint32_t cubeDepthMap;
 	//programs
-	program pFB[1];//perspective fullbright //col 0, tex 1
-	program pL[1];//perspective light //col 0, tex 1
+	program pFB[1];//perspective fullbright
+	program pL[2];//perspective light //point 0, directional 1
 	program pSky;//skybox renderer
 	program pUI;//UI_Element renderer
 	program shadowMap;//shadowMap calculator (point light)

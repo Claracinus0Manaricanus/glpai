@@ -14,8 +14,8 @@ SceneManager::SceneManager(){
 	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
 	//shader programs WIP needs uniform control
 	pFB[0].load(
-	"shaders/perspective(FB)/point/vert.sha",
-	"shaders/perspective(FB)/point/frag.sha");
+	"shaders/perspective(FB)/texture/vert.sha",
+	"shaders/perspective(FB)/texture/frag.sha");
 
 	pUI.load(
 	"shaders/orthographic/UItex/vert.sha",
@@ -24,6 +24,9 @@ SceneManager::SceneManager(){
 	pL[0].load(
 	"shaders/perspective(L)/point/vert.sha",
 	"shaders/perspective(L)/point/frag.sha");
+	pL[1].load(
+	"shaders/perspective(L)/directional/vert.sha",
+	"shaders/perspective(L)/directional/frag.sha");
 
 	pSky.load(
 	"shaders/perspective(FB)/skybox/vert.sha",
@@ -275,11 +278,9 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 	//GameObject
 	if(S_FULLBRIGHT){
 		//update camera and screen related uniforms
-		for(int i=0;i<1;i++){
-			pFB[i].setVec2("camRot",{camRot.x,camRot.y});
-			pFB[i].setVec3("camMov",camPos);
-			pFB[i].setVec2i("resolution",resolution);
-		}
+		pFB[0].setVec2("camRot",{camRot.x,camRot.y});
+		pFB[0].setVec3("camMov",camPos);
+		pFB[0].setVec2i("resolution",resolution);
 		//ObjectCount X LightCount calls
 		for(int i=0;i<L_objects;i++){
 			//set functions already call use
@@ -291,7 +292,7 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 		}
 	}else{
 		//update camera and screen related uniforms
-		for(int i=0;i<1;i++){
+		for(int i=0;i<C_LightTypes;i++){
 			pL[i].setVec2("camRot",{camRot.x,camRot.y});
 			pL[i].setVec3("camMov",camPos);
 			pL[i].setVec2i("resolution",resolution);
@@ -299,11 +300,11 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 		//ObjectCount X LightCount calls
 		for(int i=0;i<L_lights;i++){//render with lights
 			//create shadow map (per light)
-			pL[0].setVec4Array("lights",2,lights[i]->data);
+			pL[lights[i]->type].setVec4Array("lights",2,lights[i]->data);
 			//render using shadow map (per light)
 			for(int k=0;k<L_objects;k++){
-				pL[0].setVec3("objRot",objects[k]->rotation);
-				pL[0].setVec3("objMov",objects[k]->position);
+				pL[lights[i]->type].setVec3("objRot",objects[k]->rotation);
+				pL[lights[i]->type].setVec3("objMov",objects[k]->position);
 				objects[k]->bind();
 				glDrawArrays(GL_TRIANGLES,0,objects[k]->getVCount());
 				objects[k]->unbind();
