@@ -101,13 +101,12 @@ protected:
 	vec3 position;
 	vec4 color;//w used as strength
 	float data[8];
-	int type;
+	int type=0;
 	//usage for now 0=point 1=directional
 
 public:
 	//constructors
-	Light(const char* name="default\0");
-	Light(int iType, vec3 iPos, vec4 iCol, const char* name="default\0");
+	Light(int iType=0, vec3 iPos={0}, vec4 iCol={1}, const char* name="default\0");
 
 	//destructors
 	~Light();
@@ -143,20 +142,13 @@ protected:
 
 public:
 	//constructor
-	CubeMap();
-	CubeMap(const char* sides[6]);
+	CubeMap(const char* sides[6]=NULL);
 
 	//destructor
 	~CubeMap();
 	
 	//loaders
-	int loadSideXP(const char* filename);//X+ side
-	int loadSideXN(const char* filename);//X- side
-	int loadSideYP(const char* filename);//Y+ side
-	int loadSideYN(const char* filename);//Y- side
-	int loadSideZP(const char* filename);//Z+ side
-	int loadSideZN(const char* filename);//Z- side
-	int loadAllSides(const char* sides[6]);
+	int loadAllSides(const char* sides[6]);//starts from X+
 
 	//utility
 	int bindCM();//binding ID as GL_TEXTURE_CUBE_MAP

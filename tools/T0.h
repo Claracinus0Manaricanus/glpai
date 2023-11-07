@@ -111,6 +111,16 @@ struct vec3{
 		return temp;
 	}
 
+	vec3 operator=(int a){
+		vec3 temp;
+
+		temp.x=a;
+		temp.y=a;
+		temp.z=a;
+
+		return temp;
+	}
+
 	vec3 operator+=(vec3 n){//the problem child
 		return (*this)+n;
 	}

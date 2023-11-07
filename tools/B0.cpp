@@ -258,12 +258,6 @@ VertexData* VertexData::getPointer(){
 
 
 //constructors
-Light::Light(const char* name):
-color({1,1,1,1}){
-	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
-	memcpy(NAME,name,strlen(name));
-}
-
 Light::Light(int iType, vec3 iPos, vec4 iCol, const char* name){
 	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
@@ -332,18 +326,6 @@ float* Light::getData(){
 
 
 //constructors
-CubeMap::CubeMap(){
-	//texture generation opengl
-	glGenTextures(1,&ID);
-	bindCM();
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	unbindCM();
-}
-
 CubeMap::CubeMap(const char* sides[6]){
 	//texture generation opengl
 	glGenTextures(1,&ID);
@@ -366,97 +348,15 @@ CubeMap::~CubeMap(){
 
 
 //loaders
-int CubeMap::loadSideXP(const char* filename){
-	//loading file
-	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
-	if(iData!=NULL){
-		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-		unbindCM();
-		stbi_image_free(iData);
-		return 0;
-	}else{
-		return -1;
-	}
-}
-
-int CubeMap::loadSideXN(const char* filename){
-	//loading file
-	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
-	if(iData!=NULL){
-		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-		unbindCM();
-		stbi_image_free(iData);
-		return 0;
-	}else{
-		return -1;
-	}
-}
-
-int CubeMap::loadSideYP(const char* filename){
-	//loading file
-	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
-	if(iData!=NULL){
-		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-		unbindCM();
-		stbi_image_free(iData);
-		return 0;
-	}else{
-		return -1;
-	}
-}
-
-int CubeMap::loadSideYN(const char* filename){
-	//loading file
-	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
-	if(iData!=NULL){
-		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-		unbindCM();
-		stbi_image_free(iData);
-		return 0;
-	}else{
-		return -1;
-	}
-}
-
-int CubeMap::loadSideZP(const char* filename){
-	//loading file
-	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
-	if(iData!=NULL){
-		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-		unbindCM();
-		stbi_image_free(iData);
-		return 0;
-	}else{
-		return -1;
-	}
-}
-
-int CubeMap::loadSideZN(const char* filename){
-	//loading file
-	iData=stbi_load(filename,&iWidth,&iHeight,&chan,3);
-	if(iData!=NULL){
-		bindCM();
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-		unbindCM();
-		stbi_image_free(iData);
-		return 0;
-	}else{
-		return -1;
-	}
-}
-
 int CubeMap::loadAllSides(const char* sides[6]){
 	bindCM();
 	for(int i=0;i<6;i++){
-		iData=stbi_load(sides[i],&iWidth,&iHeight,&chan,3);
-		if(iData!=NULL){
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
-			stbi_image_free(iData);
+		if(sides[i]!=NULL){
+			iData=stbi_load(sides[i],&iWidth,&iHeight,&chan,3);
+			if(iData!=NULL){
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,GL_RGB,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,iData);
+				stbi_image_free(iData);
+			}
 		}
 	}
 	unbindCM();
