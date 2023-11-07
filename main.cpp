@@ -288,3 +288,18 @@ general debug colors:
 ==9191==    still reachable: 87,083 bytes in 913 blocks
 ==9191==         suppressed: 0 bytes in 0 blocks
 */
+
+/*
+2023-11-07 / 06:38
+==38370== HEAP SUMMARY:
+==38370==     in use at exit: 56,306 bytes in 639 blocks
+==38370==   total heap usage: 3,275 allocs, 2,636 frees, 228,022 bytes allocated
+==38370== 
+==38370== LEAK SUMMARY:
+==38370==    definitely lost: 0 bytes in 0 blocks
+==38370==    indirectly lost: 0 bytes in 0 blocks
+==38370==      possibly lost: 0 bytes in 0 blocks
+==38370==    still reachable: 56,306 bytes in 639 blocks
+==38370==         suppressed: 0 bytes in 0 blocks
+==38370== Rerun with --leak-check=full to see details of leaked memory
+*/
