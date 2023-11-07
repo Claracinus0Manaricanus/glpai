@@ -102,15 +102,48 @@ program::program(shader* vertex, shader* fragment){
 	loaded=true;
 }
 
+program::program(const char* vName, const char* fName){
+	//create program
+	ID=glCreateProgram();
+	//load shaders
+	shader vertex(vName,GL_VERTEX_SHADER);
+	shader fragment(fName,GL_FRAGMENT_SHADER);
+	//attaching
+	glAttachShader(ID,vertex.ID);
+	glAttachShader(ID,fragment.ID);
+	glLinkProgram(ID);
+	loaded=true;
+	//cleaning
+	vertex.Delete();
+	fragment.Delete();
+}
+
 
 //loaders
 int program::load(shader* vertex, shader* fragment){
-	if(loaded)
+	if(loaded)//change this
 		return -1;
 	glAttachShader(ID,vertex->ID);
 	glAttachShader(ID,fragment->ID);
 	glLinkProgram(ID);
 	loaded=true;
+	return 0;
+}
+
+int program::load(const char* vName, const char* fName){
+	if(loaded)//change this
+		return -1;
+	//load shaders
+	shader vertex(vName,GL_VERTEX_SHADER);
+	shader fragment(fName,GL_FRAGMENT_SHADER);
+	//attaching
+	glAttachShader(ID,vertex.ID);
+	glAttachShader(ID,fragment.ID);
+	glLinkProgram(ID);
+	loaded=true;
+	//cleaning
+	vertex.Delete();
+	fragment.Delete();
 	return 0;
 }
 

@@ -60,16 +60,6 @@ int main(){
 
 
 	/******************************************************************************************/
-	//glfw settings
-
-
-	glfwSwapInterval(1);//synchronizing framerate
-
-	//initalizing mouse
-	glfwSetInputMode(w0.getid(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	
-
-	/******************************************************************************************/
 	//opengl context
 
 
@@ -98,54 +88,23 @@ int main(){
 
 	
 	/******************************************************************************************/
+	//glfw settings
+
+
+	glfwSwapInterval(0);//synchronizing framerate
+
+	//initalizing mouse
+	glfwSetInputMode(w0.getid(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	
+
+	/******************************************************************************************/
 	//shaders
-
-	program pFB[2];//perspective fullbright //col 0, tex 1
-	program pL[2];//perspective light //col 0, tex 1
-
-	//creating shaders
-	
-	shader vS("shaders/perspective(FB)/color/vert.sha",GL_VERTEX_SHADER);
-	shader fS("shaders/perspective(FB)/color/frag.sha",GL_FRAGMENT_SHADER);
-	pFB[0].load(&vS,&fS);
-	
-	vS.load("shaders/perspective(FB)/texture/vert.sha",GL_VERTEX_SHADER);
-	fS.load("shaders/perspective(FB)/texture/frag.sha",GL_FRAGMENT_SHADER);
-	pFB[1].load(&vS,&fS);
-
-	vS.load("shaders/orthographic/UItex/vert.sha",GL_VERTEX_SHADER);
-	fS.load("shaders/orthographic/UItex/frag.sha",GL_FRAGMENT_SHADER);
-	program oUI(&vS, &fS);
-
-	vS.load("shaders/perspective(L)/color/vert.sha",GL_VERTEX_SHADER);
-	fS.load("shaders/perspective(L)/color/frag.sha",GL_FRAGMENT_SHADER);
-	pL[0].load(&vS, &fS);
-
-	vS.load("shaders/perspective(L)/texture/vert.sha",GL_VERTEX_SHADER);
-	fS.load("shaders/perspective(L)/texture/frag.sha",GL_FRAGMENT_SHADER);
-	pL[1].load(&vS, &fS);
-
-	vS.load("shaders/perspective(FB)/skybox/vert.sha",GL_VERTEX_SHADER);
-	fS.load("shaders/perspective(FB)/skybox/frag.sha",GL_FRAGMENT_SHADER);
-	program pSky(&vS, &fS);
-
-	if(debug)logInfo("shaders loaded\n");
-
-	//texture usage (samplers)
-	pSky.setInt("tex0",0);
-	pFB[1].setInt("tex0",0);
-	pL[1].setInt("tex0",0);
-
-	//Deleting shaders
-	vS.Delete();
-	fS.Delete();
-	//look for a delete check
-
+	//this part has been carried to SceneManager
 	
 	/******************************************************************************************/
 	//sceneManager setup and objects
 	SceneManager mainManager;
-	mainManager.setPrograms(pFB,pL,&oUI,&pSky);
+	//mainManager.setPrograms(pFB,pL,&oUI,&pSky);
 
 	//vertex datas
 	//ground
@@ -165,9 +124,6 @@ int main(){
 	int oL=0;
 	vertex* o=importOBJ("objects/mComp.obj",oL);
 	GameObject* mComp=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
-
-	//for texture use (single texture system)
-	glUniform1i(glGetUniformLocation(pFB[0].getid(),"tex0"),0);
 
 	//ui elements
 	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);
@@ -290,25 +246,9 @@ int main(){
 		}
 
 
-		//updating uniforms
-		for(int i=0;i<2;i++){
-			pFB[i].setVec2("camRot",{cam0.rotation.x,cam0.rotation.y});
-			pFB[i].setVec3("camMov",cam0.position);
-			pFB[i].setVec2i("resolution",resolution);
-		}
-
-		for(int i=0;i<2;i++){
-			pL[i].setVec2("camRot",{cam0.rotation.x,cam0.rotation.y});
-			pL[i].setVec3("camMov",cam0.position);
-			pL[i].setVec2i("resolution",resolution);
-		}
-		pSky.setVec2("rot",{cam0.rotation.x,cam0.rotation.y});
-		pSky.setVec2i("resolution",resolution);
-
-
 		//drawing to back buffer
 		//mainManager.setFullbright(1);
-		mainManager.draw();
+		mainManager.draw(cam0.position, cam0.rotation, resolution);
 
 
 		//polling events and displaying back buffer

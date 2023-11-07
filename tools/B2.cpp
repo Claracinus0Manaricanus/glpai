@@ -7,10 +7,38 @@
 
 //constructors
 SceneManager::SceneManager(){
+	//data holders
 	objects=(GameObject**)malloc(sizeof(GameObject*));
 	lights=(Light**)malloc(sizeof(Light*));
 	UIElements=(UI_Element**)malloc(sizeof(UI_Element*));
 	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
+	//shader programs WIP needs uniform control
+	pFB[0].load(
+	"shaders/perspective(FB)/color/vert.sha",
+	"shaders/perspective(FB)/color/frag.sha");
+	pFB[1].load(
+	"shaders/perspective(FB)/texture/vert.sha",
+	"shaders/perspective(FB)/texture/frag.sha");
+
+	pUI.load(
+	"shaders/orthographic/UItex/vert.sha",
+	"shaders/orthographic/UItex/frag.sha");
+
+	pL[0].load(
+	"shaders/perspective(L)/color/vert.sha",
+	"shaders/perspective(L)/color/frag.sha");
+	pL[1].load(
+	"shaders/perspective(L)/texture/vert.sha",
+	"shaders/perspective(L)/texture/frag.sha");
+
+	pSky.load(
+	"shaders/perspective(FB)/skybox/vert.sha",
+	"shaders/perspective(FB)/skybox/frag.sha");
+	//texture units
+	pUI.setInt("textureTU",0);
+	pSky.setInt("tex0",0);
+	pFB[1].setInt("tex0",0);
+	pL[1].setInt("tex0",0);
 	//for shadowmapping
 	glGenTextures(1,&cubeDepthMap);
 	glBindTexture(GL_TEXTURE_CUBE_MAP,cubeDepthMap);
@@ -246,8 +274,23 @@ int SceneManager::deleteSkyBox(int index){
 
 
 //drawing utility
-int SceneManager::draw(){
+int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
+	//textures dont bind to a sepcific unit so we specify it
 	glActiveTexture(GL_TEXTURE0);
+
+	//static uniforms (for within a draw sequence)
+	for(int i=0;i<2;i++){
+		pFB[i].setVec2("camRot",{camRot.x,camRot.y});
+		pFB[i].setVec3("camMov",camPos);
+		pFB[i].setVec2i("resolution",resolution);
+	}	
+	for(int i=0;i<2;i++){
+		pL[i].setVec2("camRot",{camRot.x,camRot.y});
+		pL[i].setVec3("camMov",camPos);
+		pL[i].setVec2i("resolution",resolution);
+	}
+	pSky.setVec2("rot",{camRot.x,camRot.y});
+	pSky.setVec2i("resolution",resolution);
 
 	//GameObject
 	if(S_FULLBRIGHT){//fullbright mode
@@ -289,6 +332,13 @@ int SceneManager::draw(){
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+	//SkyBox
+	if(C_SKYBOX>=0&&C_SKYBOX<L_skyboxes){//can optimize
+		pSky.use();
+		skyboxes[C_SKYBOX]->bind();
+		glDrawArrays(GL_TRIANGLES,0,36);
+		skyboxes[C_SKYBOX]->unbind();
+	}
 
 	//UI_Element
 	pUI.use();
@@ -298,14 +348,6 @@ int SceneManager::draw(){
 			glDrawArrays(GL_TRIANGLES,0,6);
 			UIElements[i]->unbind();
 		}
-	}
-
-	//SkyBox
-	if(C_SKYBOX>=0&&C_SKYBOX<L_skyboxes){//can optimize
-		pSky.use();
-		skyboxes[C_SKYBOX]->bind();
-		glDrawArrays(GL_TRIANGLES,0,36);
-		skyboxes[C_SKYBOX]->unbind();
 	}
 
 	return 0;

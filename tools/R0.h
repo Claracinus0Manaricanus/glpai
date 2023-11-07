@@ -38,9 +38,11 @@ public:
 	//constructor
 	program();
 	program(shader* vertex, shader* fragment);
+	program(const char* vName, const char* fName);
 
 	//loaders
 	int load(shader* vertex, shader* fragment);
+	int load(const char* vName, const char* fName);
 	
 	//uniform utilities
 	int setInt(const char* u_name, int data);
