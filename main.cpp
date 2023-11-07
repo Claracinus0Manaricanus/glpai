@@ -124,6 +124,8 @@ int main(){
 	int oL=0;
 	vertex* o=importOBJ("objects/mComp.obj",oL);
 	GameObject* mComp=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
+	mainManager.addObject("ground",{0,0,0},{0,0,0},{50,1,50},6,verts,"images/Dark/texture_13.png",false);
+	mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
 
 	//ui elements
 	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);

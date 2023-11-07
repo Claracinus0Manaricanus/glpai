@@ -77,27 +77,34 @@ void Transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
 
 //constructors
 Texture::Texture(){
-	data=NULL;
 	glGenTextures(1,&ID);
+	bind();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	unbind();
+	loadDefault();
 }
 
 Texture::Texture(const char* filename){
 	glGenTextures(1,&ID);
-	data=NULL;
+	bind();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	unbind();
 	load(filename,false);
 }
 
 
 //destructors
 Texture::~Texture(){
-	stbi_image_free(data);
 	glDeleteTextures(1,&ID);
 }
 
 
 //loaders
 int Texture::load(const char* filename,bool mipmap){
-	stbi_image_free(data);
 	data=stbi_load(filename,&iWidth,&iHeight,&iChannel,0);
 
 	if(iChannel<3)
@@ -114,24 +121,28 @@ int Texture::load(const char* filename,bool mipmap){
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	else
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	if(mipmap)
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 	unbind();
+	stbi_image_free(data);
+	return 0;
+}
+
+int Texture::loadDefault(){
+	bind();
+	data=(uint8_t*)malloc(32);
+	data[0]=255;data[1]=255;data[2]=255;data[3]=255;
+	glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	unbind();
+	free(data);
 	return 0;
 }
 
 
 //extractors
-uint8_t* Texture::getData(){
-	return data;
-}
-
 int Texture::width(){
 	return iWidth;
 }
@@ -142,19 +153,6 @@ int Texture::height(){
 
 int Texture::spectrum(){
 	return iChannel;
-}
-
-
-int Texture::unload(){
-	stbi_image_free(data);
-	data=nullptr;
-	return 0;
-}
-
-
-//checkers
-bool Texture::loaded(){
-	return data!=nullptr;
 }
 
 
@@ -175,28 +173,20 @@ int Texture::unbind(){
 
 
 //constructors
-VertexData::VertexData():vCount(0),vertices(nullptr){}
+VertexData::VertexData(){}
 
-VertexData::VertexData(int inVCount, vertex* iVertices):vCount(inVCount){
-	vertices=new vertex[vCount]{0};
-	memcpy(vertices,iVertices,sizeof(vertex)*vCount);
+VertexData::VertexData(int inVCount, vertex* iVertices){
+	loadAll(inVCount,iVertices);
 }
 
 
 //destructors
 VertexData::~VertexData(){
-	delete[] vertices;
+	free(vertices);
 }
 
 
 //loaders  functions need checking
-int VertexData::setVertexCount(int inVCount){
-	vCount=inVCount;
-	delete[] vertices;
-	vertices=nullptr;
-	return 0;
-}
-
 int VertexData::setColor(vec4 inCol){
 	for(int i=0;i<vCount;i++){
 		vertices[i].col=inCol;
@@ -238,8 +228,7 @@ int VertexData::loadTex(vec2* inTex){
 
 int VertexData::loadAll(int inVCount, vertex* iVertices){
 	vCount=inVCount;
-	delete[] vertices;
-	vertices=new vertex[vCount]{0};
+	vertices=(vertex*)realloc(vertices,sizeof(vertex)*inVCount);
 	memcpy(vertices,iVertices,sizeof(vertex)*vCount);
 	return 0;
 }
@@ -254,7 +243,7 @@ int VertexData::getVCount(){
 //utility //WIP
 int VertexData::reset(){
 	vCount=0;
-	delete[] vertices;
+	free(vertices);
 	vertices=nullptr;
 	return 0;
 }
@@ -372,7 +361,6 @@ CubeMap::CubeMap(const char* sides[6]){
 
 //destructor
 CubeMap::~CubeMap(){
-	stbi_image_free(iData);
 	glDeleteTextures(1,&ID);
 }
 

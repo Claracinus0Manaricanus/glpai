@@ -39,7 +39,7 @@ public:
 class Texture{
 protected:
 	uint32_t ID;
-	uint8_t* data;
+	uint8_t* data=NULL;
 	int iHeight,iWidth,iChannel;
 
 public:
@@ -52,16 +52,12 @@ public:
 
 	//loaders
 	int load(const char* filename, bool mipmap);
-	int unload();
+	int loadDefault();
 
 	//extractors
-	uint8_t* getData();
 	int width();
 	int height();
 	int spectrum();
-
-	//checkers
-	bool loaded();
 
 	//utility
 	int bind();
@@ -71,8 +67,8 @@ public:
 
 class VertexData{
 protected:
-	int vCount;//total vertices
-	vertex* vertices;
+	int vCount=0;//total vertices
+	vertex* vertices=nullptr;
 
 public:
 	//constructrors
@@ -83,7 +79,6 @@ public:
 	~VertexData();
 
 	//loaders
-	int setVertexCount(int inVCount);
 	int setColor(vec4 inCol);
 	int loadPos(vec3* inPos);
 	int loadNor(vec3* inNor);

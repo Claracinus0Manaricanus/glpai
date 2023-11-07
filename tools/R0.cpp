@@ -121,7 +121,7 @@ program::program(const char* vName, const char* fName){
 
 //loaders
 int program::load(shader* vertex, shader* fragment){
-	if(loaded)//change this
+	if(loaded)
 		return -1;
 	glAttachShader(ID,vertex->ID);
 	glAttachShader(ID,fragment->ID);
@@ -131,7 +131,7 @@ int program::load(shader* vertex, shader* fragment){
 }
 
 int program::load(const char* vName, const char* fName){
-	if(loaded)//change this
+	if(loaded)
 		return -1;
 	//load shaders
 	shader vertex(vName,GL_VERTEX_SHADER);

@@ -14,22 +14,16 @@ SceneManager::SceneManager(){
 	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
 	//shader programs WIP needs uniform control
 	pFB[0].load(
-	"shaders/perspective(FB)/color/vert.sha",
-	"shaders/perspective(FB)/color/frag.sha");
-	pFB[1].load(
-	"shaders/perspective(FB)/texture/vert.sha",
-	"shaders/perspective(FB)/texture/frag.sha");
+	"shaders/perspective(FB)/point/vert.sha",
+	"shaders/perspective(FB)/point/frag.sha");
 
 	pUI.load(
 	"shaders/orthographic/UItex/vert.sha",
 	"shaders/orthographic/UItex/frag.sha");
 
 	pL[0].load(
-	"shaders/perspective(L)/color/vert.sha",
-	"shaders/perspective(L)/color/frag.sha");
-	pL[1].load(
-	"shaders/perspective(L)/texture/vert.sha",
-	"shaders/perspective(L)/texture/frag.sha");
+	"shaders/perspective(L)/point/vert.sha",
+	"shaders/perspective(L)/point/frag.sha");
 
 	pSky.load(
 	"shaders/perspective(FB)/skybox/vert.sha",
@@ -278,51 +272,38 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 	//textures dont bind to a sepcific unit so we specify it
 	glActiveTexture(GL_TEXTURE0);
 
-	//static uniforms (for within a draw sequence)
-	for(int i=0;i<2;i++){
-		pFB[i].setVec2("camRot",{camRot.x,camRot.y});
-		pFB[i].setVec3("camMov",camPos);
-		pFB[i].setVec2i("resolution",resolution);
-	}	
-	for(int i=0;i<2;i++){
-		pL[i].setVec2("camRot",{camRot.x,camRot.y});
-		pL[i].setVec3("camMov",camPos);
-		pL[i].setVec2i("resolution",resolution);
-	}
-	pSky.setVec2("rot",{camRot.x,camRot.y});
-	pSky.setVec2i("resolution",resolution);
-
 	//GameObject
-	if(S_FULLBRIGHT){//fullbright mode
+	if(S_FULLBRIGHT){
+		//update camera and screen related uniforms
+		for(int i=0;i<1;i++){
+			pFB[i].setVec2("camRot",{camRot.x,camRot.y});
+			pFB[i].setVec3("camMov",camPos);
+			pFB[i].setVec2i("resolution",resolution);
+		}
+		//ObjectCount X LightCount calls
 		for(int i=0;i<L_objects;i++){
-			if(objects[i]->usingTexture()){
-				//set functions already call use
-				pFB[1].setVec3("objRot",objects[i]->rotation);
-				pFB[1].setVec3("objMov",objects[i]->position);
-			}
-			else{
-				pFB[0].setVec3("objRot",objects[i]->rotation);
-				pFB[0].setVec3("objMov",objects[i]->position);
-			}
+			//set functions already call use
+			pFB[0].setVec3("objRot",objects[i]->rotation);
+			pFB[0].setVec3("objMov",objects[i]->position);
 			objects[i]->bind();
 			glDrawArrays(GL_TRIANGLES,0,objects[i]->getVCount());
 			objects[i]->unbind();
 		}
 	}else{
+		//update camera and screen related uniforms
+		for(int i=0;i<1;i++){
+			pL[i].setVec2("camRot",{camRot.x,camRot.y});
+			pL[i].setVec3("camMov",camPos);
+			pL[i].setVec2i("resolution",resolution);
+		}
+		//ObjectCount X LightCount calls
 		for(int i=0;i<L_lights;i++){//render with lights
 			//create shadow map (per light)
 			pL[0].setVec4Array("lights",2,lights[i]->data);
-			pL[1].setVec4Array("lights",2,lights[i]->data);
 			//render using shadow map (per light)
 			for(int k=0;k<L_objects;k++){
-				if(objects[k]->usingTexture()){
-					pL[1].setVec3("objRot",objects[k]->rotation);
-					pL[1].setVec3("objMov",objects[k]->position);
-				}
-				else{
-					pL[0].setVec3("objRot",objects[k]->rotation);
-					pL[0].setVec3("objMov",objects[k]->position);
-				}
+				pL[0].setVec3("objRot",objects[k]->rotation);
+				pL[0].setVec3("objMov",objects[k]->position);
 				objects[k]->bind();
 				glDrawArrays(GL_TRIANGLES,0,objects[k]->getVCount());
 				objects[k]->unbind();
@@ -333,8 +314,9 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 	}
 
 	//SkyBox
+	pSky.setVec2("rot",{camRot.x,camRot.y});
+	pSky.setVec2i("resolution",resolution);
 	if(C_SKYBOX>=0&&C_SKYBOX<L_skyboxes){//can optimize
-		pSky.use();
 		skyboxes[C_SKYBOX]->bind();
 		glDrawArrays(GL_TRIANGLES,0,36);
 		skyboxes[C_SKYBOX]->unbind();

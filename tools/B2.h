@@ -21,8 +21,8 @@ protected:
 	//depth buffers (for lights)
 	uint32_t cubeDepthMap;
 	//programs
-	program pFB[2];//perspective fullbright //col 0, tex 1
-	program pL[2];//perspective light //col 0, tex 1
+	program pFB[1];//perspective fullbright //col 0, tex 1
+	program pL[1];//perspective light //col 0, tex 1
 	program pSky;//skybox renderer
 	program pUI;//UI_Element renderer
 	program shadowMap;//shadowMap calculator (point light)

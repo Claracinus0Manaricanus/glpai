@@ -64,7 +64,7 @@ public:
 };
 
 
-class UI_Element{
+class UI_Element{//has 6 vertices
 protected:
 	bool Active=true;
 	char* NAME;
@@ -77,8 +77,7 @@ protected:
 
 public:
 	//constructor
-	UI_Element(const char* name="default");
-	UI_Element(vec2 iPos, vec2 iScale, const char* name="default");
+	UI_Element(vec2 iPos={0,0}, vec2 iScale={1,1}, const char* name="default");
 
 	//destructor
 	~UI_Element();
@@ -91,7 +90,6 @@ public:
 	int setActive(bool state);
 
 	//extractors
-	int getVCount();
 	bool isActive();
 
 	//utility
