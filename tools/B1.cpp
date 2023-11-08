@@ -43,7 +43,7 @@ Transform(name){
 }
 
 GameObject::GameObject(vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* name):
-Transform(inPos,inRot,inSca,name),VertexData(inVCount,iVertices){
+Transform(name,inPos,inRot,inSca),VertexData(inVCount,iVertices){
 	initBuffers();
 	update();
 }

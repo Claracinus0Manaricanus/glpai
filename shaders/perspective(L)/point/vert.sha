@@ -12,8 +12,7 @@ uniform vec3 camMov;
 //screen
 uniform ivec2 resolution;
 //object
-uniform vec3 objRot;
-uniform vec3 objMov;
+uniform mat4 OVM;//object view matrix
 
 //to fragment shader
 out vec2 texCoord;
@@ -43,35 +42,6 @@ mat4 translate={
 	vec4( -camMov.x, -camMov.y, -camMov.z,  1)
 };
 
-//model transformations
-mat4 objRotXM4={
-	vec4(1,            0,             0, 0),
-	vec4(0,cos(objRot.x),-sin(objRot.x), 0),
-	vec4(0,sin(objRot.x), cos(objRot.x), 0),
-	vec4(0,            0,             0, 1)
-};
-
-mat4 objRotYM4={
-	vec4(cos(objRot.y),0,-sin(objRot.y),  0),
-	vec4(0,            1,             0,  0),
-	vec4(sin(objRot.y),0, cos(objRot.y),  0),
-	vec4(0,            0,             0,  1)
-};
-
-mat4 objRotZM4={
-	vec4(cos(objRot.z),-sin(objRot.z),0,  0),
-	vec4(sin(objRot.z), cos(objRot.z),0,  0),
-	vec4(0,            0,             1,  0),
-	vec4(0,            0,             0,  1)
-};
-
-mat4 o_translate={//object_translate
-	vec4(       1,       0,       0,  0),
-	vec4(       0,       1,       0,  0),
-	vec4(       0,       0,       1,  0),
-	vec4(objMov.x,objMov.y,objMov.z,  1)
-};
-
 //projection
 mat4 pers={
 	vec4(1/tan(1.05),    0,    0,  0),
@@ -82,7 +52,6 @@ mat4 pers={
 
 void main(){
 	mat4 CVM=pers*camRotXM4*camRotYM4*translate;//camera view matrix
-	mat4 OVM=o_translate*objRotZM4*objRotYM4*objRotXM4;//object view matrix
 	mat4 WVM=CVM*OVM;//world view matrix
 	fragPos=vec4(OVM*vec4(pos.xyz,1.0)).xyz;
 	fragCol=col;

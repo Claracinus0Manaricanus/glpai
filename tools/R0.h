@@ -50,6 +50,7 @@ public:
 	int setVec2(const char* u_name, vec2 data);
 	int setVec3(const char* u_name, vec3 data);
 	int setVec4Array(const char* u_name, int dataLength,const float* data);
+	int setMat4(const char* u_name, const float* data);
 
 	//extractors
 	uint32_t getid();

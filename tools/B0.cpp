@@ -1,4 +1,5 @@
 #include "B0.h"
+#include "cmMath/matrix4.h"
 #include <math.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -12,43 +13,40 @@ using namespace std;
 
 
 //constructors
-Transform::Transform(const char* name){
+Transform::Transform(const char* name, vec3 inPos, vec3 inRot, vec3 inSca):
+position(inPos),rotation(inRot),scale(inSca){
 	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
 	memcpy(NAME,name,strlen(name));
-	position={0,0,0};
-	rotation={0,0,0};
-	scale={1,1,1};
-}
-
-Transform::Transform(vec3 inPosition, vec3 inRotation, vec3 inScale, const char* name):
-position(inPosition),rotation(inRotation),scale(inScale){
-	NAME=(char*)calloc(strlen(name)+1,sizeof(char));
-	memcpy(NAME,name,strlen(name));
+	calculateMatrix();
 }
 
 
 //destructor
 Transform::~Transform(){
 	free(NAME);
+	free(OVM);
 }
 
 
 //loaders
 void Transform::setPosition(vec3 inPos){
 	position=inPos;
+	calculateMatrix();
 }
 
 void Transform::move(vec3 movement){
 	position=position+movement;
+	calculateMatrix();
 }
 
 
 void Transform::setRotation(vec3 inRot){
 	rotation=inRot;
+	calculateMatrix();
 }
 
-void Transform::rotate(vec3 inRotation){//if rotation problems occur look here
-	rotation=rotation+inRotation;
+void Transform::rotate(vec3 inRot){//if rotation problems occur look here
+	rotation=rotation+inRot;
 
 	int result=(int)(rotation.x/PI2);
 	rotation.x-=(result*PI2);
@@ -58,6 +56,8 @@ void Transform::rotate(vec3 inRotation){//if rotation problems occur look here
 
 	result=(int)(rotation.z/PI2);
 	rotation.z-=(result*PI2);
+	
+	calculateMatrix();
 }
 
 void Transform::setScale(vec3 inSca){
@@ -68,6 +68,49 @@ void Transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
 	position=inPos;
 	rotation=inRot;
 	scale=inSca;
+	calculateMatrix();
+}
+
+
+//calculators
+void Transform::calculateMatrix(){
+	//setting up matrices to multiply
+	float tmpC=cos(rotation.x),tmpS=sin(rotation.x);//temporary cos and sin
+	float rotXM4[16]={
+		1,   0,    0,0,
+		0,tmpC, tmpS,0,
+		0,-tmpS,tmpC,0,
+		0,   0,    0,1
+	};
+	tmpC=cos(rotation.y);tmpS=sin(rotation.y);
+	float rotYM4[16]={
+		tmpC,0,-tmpS,0,
+		0,   1,    0,0,
+		tmpS,0, tmpC,0,
+		0,   0,    0,1
+	};
+	tmpC=cos(rotation.z);tmpS=sin(rotation.z);
+	float rotZM4[16]={
+		tmpC, tmpS,0,0,
+		-tmpS,tmpC,0,0,
+		0,       0,1,0,
+		0,       0,0,1
+	};
+	float transM4[16]={
+		1,0,0,position.x,
+		0,1,0,position.y,
+		0,0,1,position.z,
+		0,0,0,1
+	};
+	//pre-final multiplication
+	float* temp1=m4_multiply(rotYM4,rotXM4);
+	float* temp2=m4_multiply(rotZM4,temp1);
+	//final multiplication
+	free(OVM);
+	OVM=m4_multiply(transM4,temp2);
+	//cleanup
+	free(temp1);
+	free(temp2);
 }
 
 

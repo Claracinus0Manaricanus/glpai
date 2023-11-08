@@ -248,6 +248,7 @@ CMakeFiles/pai.dir/main.cpp.o: main.cpp \
 CMakeFiles/pai.dir/tools/B0.cpp.o: tools/B0.cpp \
   tools/B0.h \
   tools/T0.h \
+  tools/cmMath/matrix4.h \
   /usr/include/GL/gl.h \
   /usr/include/GL/glew.h \
   /usr/include/GL/glu.h \
@@ -1355,6 +1356,62 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp \
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h
 
+CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: tools/cmMath/matrix4.cpp \
+  tools/cmMath/matrix4.h \
+  /usr/include/alloca.h \
+  /usr/include/bits/atomic_wide_counter.h \
+  /usr/include/bits/byteswap.h \
+  /usr/include/bits/endian.h \
+  /usr/include/bits/endianness.h \
+  /usr/include/bits/floatn-common.h \
+  /usr/include/bits/floatn.h \
+  /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/long-double.h \
+  /usr/include/bits/pthreadtypes-arch.h \
+  /usr/include/bits/pthreadtypes.h \
+  /usr/include/bits/select.h \
+  /usr/include/bits/stdint-intn.h \
+  /usr/include/bits/stdlib-float.h \
+  /usr/include/bits/struct_mutex.h \
+  /usr/include/bits/struct_rwlock.h \
+  /usr/include/bits/thread-shared-types.h \
+  /usr/include/bits/time64.h \
+  /usr/include/bits/timesize.h \
+  /usr/include/bits/types.h \
+  /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__sigset_t.h \
+  /usr/include/bits/types/clock_t.h \
+  /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/locale_t.h \
+  /usr/include/bits/types/sigset_t.h \
+  /usr/include/bits/types/struct_timespec.h \
+  /usr/include/bits/types/struct_timeval.h \
+  /usr/include/bits/types/time_t.h \
+  /usr/include/bits/types/timer_t.h \
+  /usr/include/bits/typesizes.h \
+  /usr/include/bits/uintn-identity.h \
+  /usr/include/bits/waitflags.h \
+  /usr/include/bits/waitstatus.h \
+  /usr/include/bits/wordsize.h \
+  /usr/include/c++/13.2.1/bits/std_abs.h \
+  /usr/include/c++/13.2.1/cstdlib \
+  /usr/include/c++/13.2.1/pstl/pstl_config.h \
+  /usr/include/c++/13.2.1/stdlib.h \
+  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
+  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
+  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
+  /usr/include/endian.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/gnu/stubs-64.h \
+  /usr/include/gnu/stubs.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdlib.h \
+  /usr/include/sys/cdefs.h \
+  /usr/include/sys/select.h \
+  /usr/include/sys/types.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h
+
 
 tools/U0.cpp:
 
@@ -1363,6 +1420,8 @@ tools/R0.cpp:
 tools/B2.cpp:
 
 tools/B1.cpp:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h:
 
 /usr/include/c++/13.2.1/bits/predefined_ops.h:
 
@@ -1478,6 +1537,8 @@ tools/B1.cpp:
 
 /usr/include/c++/13.2.1/cerrno:
 
+tools/cmMath/matrix4.cpp:
+
 /usr/include/c++/13.2.1/math.h:
 
 /usr/include/bits/libc-header-start.h:
@@ -1531,6 +1592,8 @@ tools/B0.h:
 /usr/include/bits/endianness.h:
 
 /usr/include/c++/13.2.1/tuple:
+
+tools/cmMath/matrix4.h:
 
 /usr/include/GL/glu.h:
 
@@ -1881,5 +1944,3 @@ tools/T0.cpp:
 /usr/include/bits/xopen_lim.h:
 
 /usr/include/limits.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h:

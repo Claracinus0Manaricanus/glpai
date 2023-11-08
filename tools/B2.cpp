@@ -294,6 +294,7 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 			glDrawArrays(GL_TRIANGLES,0,objects[i]->getVCount());
 			objects[i]->unbind();
 		}
+
 	}else{
 		//update camera and screen related uniforms
 		for(int i=0;i<C_LightTypes;i++){
@@ -301,14 +302,15 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 			pL[i].setVec3("camMov",camPos);
 			pL[i].setVec2i("resolution",resolution);
 		}
+
 		//ObjectCount X LightCount calls
 		for(int i=0;i<L_lights;i++){//render with lights
 			//create shadow map (per light)
 			pL[lights[i]->type].setVec4Array("lights",2,lights[i]->data);
+			
 			//render using shadow map (per light)
 			for(int k=0;k<L_objects;k++){
-				pL[lights[i]->type].setVec3("objRot",objects[k]->rotation);
-				pL[lights[i]->type].setVec3("objMov",objects[k]->position);
+				pL[lights[i]->type].setMat4("OVM",objects[k]->OVM);
 				objects[k]->bind();
 				glDrawArrays(GL_TRIANGLES,0,objects[k]->getVCount());
 				objects[k]->unbind();
@@ -316,6 +318,7 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 			glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);
 		}
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
 	}
 
 	//SkyBox

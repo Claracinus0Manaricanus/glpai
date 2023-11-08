@@ -179,6 +179,11 @@ int program::setVec4Array(const char* u_name, int dataLength, const float* data)
 	return 0;
 }
 
+int program::setMat4(const char* u_name, const float* data){
+	use();
+	glUniformMatrix4fv(glGetUniformLocation(ID,u_name),1,GL_TRUE,data);
+	return 0;
+}
 
 
 //extractors

@@ -245,7 +245,7 @@ int main(){
 			//pause screen (unoptimized)
 			mainManager.getUI_Element("pauseScreen")->setActive(true);
 		}
-
+		
 
 		//drawing to back buffer
 		//mainManager.setFullbright(1);

@@ -297,6 +297,30 @@ tools/U0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/U0.cpp.s
 .PHONY : tools/U0.cpp.s
 
+tools/cmMath/matrix4.o: tools/cmMath/matrix4.cpp.o
+.PHONY : tools/cmMath/matrix4.o
+
+# target to build an object file
+tools/cmMath/matrix4.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o
+.PHONY : tools/cmMath/matrix4.cpp.o
+
+tools/cmMath/matrix4.i: tools/cmMath/matrix4.cpp.i
+.PHONY : tools/cmMath/matrix4.i
+
+# target to preprocess a source file
+tools/cmMath/matrix4.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.i
+.PHONY : tools/cmMath/matrix4.cpp.i
+
+tools/cmMath/matrix4.s: tools/cmMath/matrix4.cpp.s
+.PHONY : tools/cmMath/matrix4.s
+
+# target to generate assembly for a file
+tools/cmMath/matrix4.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.s
+.PHONY : tools/cmMath/matrix4.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -327,6 +351,9 @@ help:
 	@echo "... tools/U0.o"
 	@echo "... tools/U0.i"
 	@echo "... tools/U0.s"
+	@echo "... tools/cmMath/matrix4.o"
+	@echo "... tools/cmMath/matrix4.i"
+	@echo "... tools/cmMath/matrix4.s"
 .PHONY : help
 
 
