@@ -38,7 +38,8 @@ SceneManager::SceneManager(){
 	//texture units
 	pUI.setInt("textureTU",0);
 	pSky.setInt("tex0",0);
-	pFB[1].setInt("tex0",0);
+	pFB[0].setInt("tex0",0);
+	pL[0].setInt("tex0",0);
 	pL[1].setInt("tex0",0);
 	//for shadowmapping
 	glGenTextures(1,&cubeDepthMap);
@@ -275,42 +276,38 @@ int SceneManager::deleteSkyBox(int index){
 
 
 //drawing utility
-int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
+int SceneManager::draw(Camera* cam, vec2int resolution){
 	//textures dont bind to a sepcific unit so we specify it
 	glActiveTexture(GL_TEXTURE0);
 
 	//GameObject
 	if(S_FULLBRIGHT){
-		//update camera and screen related uniforms
-		pFB[0].setVec2("camRot",{camRot.x,camRot.y});
-		pFB[0].setVec3("camMov",camPos);
-		pFB[0].setVec2i("resolution",resolution);
+		//update camerauniforms
+		pFB[0].setMat4("CVM",cam->OVM);
+
 		//ObjectCount X LightCount calls
 		for(int i=0;i<L_objects;i++){
 			//set functions already call use
-			pFB[0].setVec3("objRot",objects[i]->rotation);
-			pFB[0].setVec3("objMov",objects[i]->position);
+			pFB[0].setMat4("OVM",objects[i]->OVM);//object view matrix
 			objects[i]->bind();
 			glDrawArrays(GL_TRIANGLES,0,objects[i]->getVCount());
 			objects[i]->unbind();
 		}
 
 	}else{
-		//update camera and screen related uniforms
+		//update camera uniforms
 		for(int i=0;i<C_LightTypes;i++){
-			pL[i].setVec2("camRot",{camRot.x,camRot.y});
-			pL[i].setVec3("camMov",camPos);
-			pL[i].setVec2i("resolution",resolution);
+			pL[i].setMat4("CVM",cam->OVM);//camera view matrix
 		}
 
 		//ObjectCount X LightCount calls
 		for(int i=0;i<L_lights;i++){//render with lights
 			//create shadow map (per light)
-			pL[lights[i]->type].setVec4Array("lights",2,lights[i]->data);
+			pL[lights[i]->type].setVec4Array("light",2,lights[i]->data);
 			
 			//render using shadow map (per light)
 			for(int k=0;k<L_objects;k++){
-				pL[lights[i]->type].setMat4("OVM",objects[k]->OVM);
+				pL[lights[i]->type].setMat4("OVM",objects[k]->OVM);//object view matrix
 				objects[k]->bind();
 				glDrawArrays(GL_TRIANGLES,0,objects[k]->getVCount());
 				objects[k]->unbind();
@@ -322,7 +319,7 @@ int SceneManager::draw(vec3 camPos, vec3 camRot, vec2int resolution){
 	}
 
 	//SkyBox
-	pSky.setVec2("rot",{camRot.x,camRot.y});
+	pSky.setVec2("rot",{cam->rotation.x,cam->rotation.y});
 	pSky.setVec2i("resolution",resolution);
 	if(C_SKYBOX>=0&&C_SKYBOX<L_skyboxes){//can optimize
 		skyboxes[C_SKYBOX]->bind();

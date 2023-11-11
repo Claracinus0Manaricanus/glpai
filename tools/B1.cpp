@@ -1,13 +1,15 @@
 #include "B1.h"
 #include <math.h>
 #include <GL/glew.h>
+#include "cmMath/matrix4.h"
 
 
 /*********************************************************************************/
 //Camera
 
 
-Camera::Camera(float Ifov):fov(Ifov){}
+Camera::Camera(float Ifov, float inAspectRatio):
+fov(Ifov*PI/180.0f),aspectRatio(inAspectRatio){}
 
 void Camera::moveForward(float forward){
 	move({sin(rotation.y)*forward,0,cos(rotation.y)*forward});
@@ -19,6 +21,47 @@ void Camera::moveRight(float right){
 
 void Camera::moveUp(float up){
 	move({0,up,0});
+}
+	
+void Camera::setAspectRatio(float inAspectRatio){
+	aspectRatio=inAspectRatio;
+}
+
+void Camera::calculateMatrix(){
+	float tmpC=cos(rotation.x),tmpS=sin(rotation.x);//temporary cos and sin
+	float rotXM4[16]={
+		1,   0,    0,0,
+		0, tmpC,tmpS,0,
+		0,-tmpS,tmpC,0,
+		0,   0,    0,1
+	};
+	tmpC=cos(rotation.y);tmpS=sin(rotation.y);
+	float rotYM4[16]={
+		tmpC,0,-tmpS,0,
+		0,   1,    0,0,
+		tmpS,0, tmpC,0,
+		0,   0,    0,1
+	};
+	float transM4[16]={
+		1,0,0,-position.x,
+		0,1,0,-position.y,
+		0,0,1,-position.z,
+		0,0,0, 1
+	};
+	float proj[16]={
+		1.0f/tan(fov),            0,  0,  0,
+		0,(1.0f*aspectRatio)/tan(fov),  0,  0,
+		0,                        0,  1, -0.01f,
+		0,                        0,  1,  0
+	};
+	//multiplications
+	float* temp1=m4_multiply(rotYM4,transM4);
+	float* temp2=m4_multiply(rotXM4,temp1);
+	free(OVM);
+	OVM=m4_multiply(proj,temp2);
+	//cleanup
+	free(temp1);
+	free(temp2);
 }
 
 

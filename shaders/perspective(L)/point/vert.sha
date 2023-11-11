@@ -4,58 +4,25 @@
 layout(location=0) in vec3 pos;
 layout(location=1) in vec3 nor;
 layout(location=2) in vec4 col;
-layout(location=3) in vec2 inTexCoord;
+layout(location=3) in vec2 tex;
 
 //camera
-uniform vec2 camRot;
-uniform vec3 camMov;
-//screen
-uniform ivec2 resolution;
+uniform mat4 CVM;
 //object
 uniform mat4 OVM;//object view matrix
 
 //to fragment shader
-out vec2 texCoord;
+out vec2 fragTex;
 out vec3 fragPos;
 out vec3 fragNor;
 out vec4 fragCol;
 
-//camera transformations
-mat4 camRotYM4={
-	vec4(cos(camRot.y), 0,sin(camRot.y),  0),
-	vec4(0,           1,              0,  0),
-	vec4(-sin(camRot.y),0,cos(camRot.y),  0),
-	vec4(0,           0,              0,  1)
-};
-
-mat4 camRotXM4={
-	vec4(1,            0,             0, 0),
-	vec4(0,cos(camRot.x),-sin(camRot.x), 0),
-	vec4(0,sin(camRot.x), cos(camRot.x), 0),
-	vec4(0,            0,             0, 1)
-};
-
-mat4 translate={
-	vec4(         1,         0,         0,  0),
-	vec4(         0,         1,         0,  0),
-	vec4(         0,         0,         1,  0),
-	vec4( -camMov.x, -camMov.y, -camMov.z,  1)
-};
-
-//projection
-mat4 pers={
-	vec4(1/tan(1.05),    0,    0,  0),
-	vec4(0,resolution.x/(resolution.y*tan(1.05)),    0,  0),
-	vec4(0,              0,    1,  1),
-	vec4(0,              0, -0.01, 0)	
-};
 
 void main(){
-	mat4 CVM=pers*camRotXM4*camRotYM4*translate;//camera view matrix
 	mat4 WVM=CVM*OVM;//world view matrix
 	fragPos=vec4(OVM*vec4(pos.xyz,1.0)).xyz;
-	fragCol=col;
 	fragNor=vec4(OVM*vec4(nor.xyz,0)).xyz;
-	texCoord=inTexCoord;
+	fragCol=col;
+	fragTex=tex;
 	gl_Position=WVM*vec4(pos.xyz,1.0);
 }

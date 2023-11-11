@@ -146,7 +146,8 @@ int main(){
 	//lights
 
 
-	mainManager.addLight("mainL",0,{0,20,0},{1,1,1,50});
+	//mainManager.addLight("mainL",0,{0,20,0},{1,1,1,50});
+	mainManager.addLight("direct",1,{1,1,1},{1,1,1,1});
 
 
 	/******************************************************************************************/
@@ -179,6 +180,7 @@ int main(){
 		//updating resolution
 		resolution=w0.getResolution();
 		glViewport(0,0,resolution.x,resolution.y);
+		cam0.setAspectRatio((float)resolution.x/resolution.y);
 
 
 		//getting framerate
@@ -249,7 +251,7 @@ int main(){
 
 		//drawing to back buffer
 		//mainManager.setFullbright(1);
-		mainManager.draw(cam0.position, cam0.rotation, resolution);
+		mainManager.draw(&cam0, resolution);
 
 
 		//polling events and displaying back buffer

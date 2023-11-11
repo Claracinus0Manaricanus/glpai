@@ -65,7 +65,7 @@ public:
 	int deleteSkyBox(int index);
 
 	//drawing utility
-	int draw(vec3 camPos, vec3 camRot, vec2int resolution);//draws scene to screen
+	int draw(Camera* cam, vec2int resolution);//draws scene to screen
 
 	//state controllers
 	int setFullbright(bool state);

@@ -2,6 +2,7 @@
 #define B1_H
 
 #include "B0.h"
+#include "T0.h"
 #include <cstdint>
 #include <string>
 #include <cstring>
@@ -10,13 +11,18 @@
 class Camera : public Transform{
 protected:
 	float fov;//field of view (60=default) //add changeFov
+	float aspectRatio;
 
 public:
-	Camera(float Ifov=60);
-	
+//constructors
+	Camera(float Ifov=60, float inAspectRatio=1);
+
+//control
 	void moveForward(float forward);
 	void moveRight(float right);
 	void moveUp(float up);
+	void setAspectRatio(float inAspectRatio);
+	void calculateMatrix();
 };
 
 
