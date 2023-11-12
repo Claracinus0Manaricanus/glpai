@@ -12,22 +12,18 @@
 struct vec2int{
 	int x,y;
 
-	vec2int operator*(int a){
-		vec2int temp;
+	vec2int& operator*(int a){
+		x*=a;
+		y*=a;
 
-		temp.x=x*a;
-		temp.y=y*a;
-
-		return temp;
+		return *this;
 	}
 
-	vec2int operator=(int a){
-		vec2int temp;
+	vec2int& operator=(int a){
+		x=a;
+		y=a;
 
-		temp.x=a;
-		temp.y=a;
-
-		return temp;
+		return *this;
 	}
 };
 
@@ -35,31 +31,25 @@ struct vec2int{
 struct vec2{
 	float x,y;
 
-	vec2 operator*(int a){
-		vec2 temp;
+	vec2& operator*(int a){
+		x*=a;
+		y*=a;
 
-		temp.x=x*a;
-		temp.y=y*a;
-
-		return temp;
+		return *this;
 	}
 
-	vec2 operator*(vec2 a){
-		vec2 temp;
+	vec2& operator*(vec2 a){
+		x*=a.x;
+		y*=a.y;
 
-		temp.x=x*a.x;
-		temp.y=y*a.y;
-
-		return temp;
+		return *this;
 	}
 
-	vec2 operator=(int a){
-		vec2 temp;
+	vec2& operator=(int a){
+		x=a;
+		y=a;
 
-		temp.x=a;
-		temp.y=a;
-
-		return temp;
+		return *this;
 	}
 };
 
@@ -136,37 +126,31 @@ struct vec3{
 struct vec4{
 	float x=0,y=0,z=0,w=0;
 
-	vec4 operator+(vec4 n){
-		vec4 temp;
+	vec4& operator+(vec4 n){
+		x+=n.x;
+		y+=n.y;
+		z+=n.z;
+		w+=n.w;
 
-		temp.x=x+n.x;
-		temp.y=y+n.y;
-		temp.z=z+n.z;
-		temp.w=w+n.w;
-
-		return temp;
+		return *this;
 	}
 
-	vec4 operator*(int a){
-		vec4 temp;
-
-		temp.x=x*a;
-		temp.y=y*a;
-		temp.z=z*a;
-		temp.w=w*a;
+	vec4& operator*(int a){
+		x*=a;
+		y*=a;
+		z*=a;
+		w*=a;
 		
-		return temp;
+		return *this;
 	}
 
-	vec4 operator=(int a){
-		vec4 temp;
+	vec4& operator=(int a){
+		x=a;
+		y=a;
+		z=a;
+		w=a;
 
-		temp.x=a;
-		temp.y=a;
-		temp.z=a;
-		temp.w=a;
-
-		return temp;
+		return *this;
 	}
 };
 

@@ -14,5 +14,9 @@ vec3 Normalize(vec3 a){
 
 //rotation related
 float* lookAt(vec3 start, vec3 end, vec3 up){
+    float* rotMat=(float*)malloc(sizeof(float)*16);//rotation matrix
+
+    
+
     return NULL;
 }
