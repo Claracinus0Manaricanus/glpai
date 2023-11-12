@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pai.dir/tools/U0.cpp.o.d"
   "CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o"
   "CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o.d"
+  "CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
+  "CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o.d"
   "pai"
   "pai.pdb"
 )

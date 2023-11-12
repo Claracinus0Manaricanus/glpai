@@ -35,7 +35,7 @@ void Transform::setPosition(vec3 inPos){
 }
 
 void Transform::move(vec3 movement){
-	position=position+movement;
+	position+=movement;
 	calculateMatrix();
 }
 
@@ -46,7 +46,7 @@ void Transform::setRotation(vec3 inRot){
 }
 
 void Transform::rotate(vec3 inRot){//if rotation problems occur look here
-	rotation=rotation+inRot;
+	rotation+=inRot;
 
 	int result=(int)(rotation.x/PI2);
 	rotation.x-=(result*PI2);
@@ -328,8 +328,16 @@ int Light::update(){
 }
 
 int Light::move(vec3 movement){
-	position=position+movement;
+	position+=movement;
 	update();
+	return 0;
+}
+
+
+int Light::calculateMatrix(){
+
+
+	
 	return 0;
 }
 

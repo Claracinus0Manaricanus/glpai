@@ -67,62 +67,68 @@ struct vec2{
 struct vec3{
 	float x,y,z;
 	
-	vec3 operator+(vec3 n){
-		vec3 temp;
+	vec3& operator+(vec3 n){
+		x+=n.x;
+		y+=n.y;
+		z+=n.z;
 
-		temp.x=x+n.x;
-		temp.y=y+n.y;
-		temp.z=z+n.z;
-
-		return temp;
+		return *this;
 	}
 
-	vec3 operator-(vec3 n){
-		return {x-n.x,y-n.y,z-n.z};
+	vec3& operator-(vec3 n){
+		x-=n.x;
+		y-=n.y;
+		z-=n.z;
+
+		return *this;
 	}
 
-	vec3 operator*(vec3 n){
-		vec3 temp;
+	vec3& operator*(vec3 n){
+		x*=n.x;
+		y*=n.y;
+		z*=n.z;
 
-		temp.x=x*n.x;
-		temp.y=y*n.y;
-		temp.z=z*n.z;
-
-		return temp;
+		return *this;
 	}
 
-	vec3 operator*(float a){
-		vec3 temp;
+	vec3& operator*(float a){
+		x*=a;
+		y*=a;
+		z*=a;
 
-		temp.x=x*a;
-		temp.y=y*a;
-		temp.z=z*a;
-
-		return temp;
+		return *this;
 	}
 
-	vec3 operator=(float a){
-		vec3 temp;
+	vec3& operator=(float a){
+		x=a;
+		y=a;
+		z=a;
 
-		temp.x=a;
-		temp.y=a;
-		temp.z=a;
-
-		return temp;
+		return *this;
 	}
 
-	vec3 operator=(int a){
-		vec3 temp;
+	vec3& operator=(int a){
+		x=a;
+		y=a;
+		z=a;
 
-		temp.x=a;
-		temp.y=a;
-		temp.z=a;
-
-		return temp;
+		return *this;
 	}
 
-	vec3 operator+=(vec3 n){//the problem child
-		return (*this)+n;
+	vec3& operator/(float a){
+		x/=a;
+		y/=a;
+		z/=a;
+		
+		return *this;
+	}
+
+	vec3& operator+=(vec3 n){//the problem child
+		x+=n.x;
+		y+=n.y;
+		z+=n.z;
+
+		return *this;
 	}
 };
 

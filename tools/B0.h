@@ -104,8 +104,8 @@ protected:
 	vec3 position;
 	vec4 color;//w used as strength
 	float data[8];
-	int type=0;
-	//usage for now 0=point 1=directional
+	int type=0;//usage for now 0=point 1=directional
+	float* LVM=NULL;//light view matrix
 
 public:
 	//constructors
@@ -117,6 +117,7 @@ public:
 	//utility
 	int update();
 	int move(vec3 movement);
+	int calculateMatrix();
 
 	//loaders
 	int loadData(int iType, vec3 iPos, vec4 iCol);
