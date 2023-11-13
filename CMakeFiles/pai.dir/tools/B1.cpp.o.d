@@ -69,6 +69,13 @@ CMakeFiles/pai.dir/tools/B1.cpp.o: /home/cm/codes/c++/glpai/tools/B1.cpp \
  /usr/include/c++/13.2.1/tr1/poly_hermite.tcc \
  /usr/include/c++/13.2.1/tr1/poly_laguerre.tcc \
  /usr/include/c++/13.2.1/tr1/riemann_zeta.tcc \
+ /usr/include/c++/13.2.1/stdexcept /usr/include/c++/13.2.1/exception \
+ /usr/include/c++/13.2.1/bits/exception.h \
+ /usr/include/c++/13.2.1/bits/exception_ptr.h \
+ /usr/include/c++/13.2.1/bits/cxxabi_init_exception.h \
+ /usr/include/c++/13.2.1/typeinfo \
+ /usr/include/c++/13.2.1/bits/hash_bytes.h /usr/include/c++/13.2.1/new \
+ /usr/include/c++/13.2.1/bits/nested_exception.h \
  /usr/include/c++/13.2.1/string /usr/include/c++/13.2.1/bits/stringfwd.h \
  /usr/include/c++/13.2.1/bits/memoryfwd.h \
  /usr/include/c++/13.2.1/bits/char_traits.h \
@@ -80,8 +87,7 @@ CMakeFiles/pai.dir/tools/B1.cpp.o: /home/cm/codes/c++/glpai/tools/B1.cpp \
  /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
  /usr/include/bits/types/FILE.h /usr/include/c++/13.2.1/bits/allocator.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
- /usr/include/c++/13.2.1/bits/new_allocator.h /usr/include/c++/13.2.1/new \
- /usr/include/c++/13.2.1/bits/exception.h \
+ /usr/include/c++/13.2.1/bits/new_allocator.h \
  /usr/include/c++/13.2.1/bits/localefwd.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
  /usr/include/c++/13.2.1/clocale /usr/include/locale.h \
@@ -101,7 +107,6 @@ CMakeFiles/pai.dir/tools/B1.cpp.o: /home/cm/codes/c++/glpai/tools/B1.cpp \
  /usr/include/c++/13.2.1/bits/stl_construct.h \
  /usr/include/c++/13.2.1/string_view \
  /usr/include/c++/13.2.1/bits/functional_hash.h \
- /usr/include/c++/13.2.1/bits/hash_bytes.h \
  /usr/include/c++/13.2.1/bits/string_view.tcc \
  /usr/include/c++/13.2.1/ext/string_conversions.h \
  /usr/include/c++/13.2.1/cstdlib /usr/include/c++/13.2.1/cstdio \

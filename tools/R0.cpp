@@ -155,7 +155,7 @@ int program::setInt(const char* u_name, int data){
 	return 0;//todo: return if any opengl errors (for all)
 }
 
-int program::setVec2i(const char* u_name, vec2int data){
+int program::setVec2i(const char* u_name, ivec2 data){
 	use();
 	glUniform2i(glGetUniformLocation(ID,u_name),data.x,data.y);
 	return 0;
@@ -210,7 +210,7 @@ int program::use(){
 
 
 //constructor
-window::window(vec2int resolution,std::string name){
+window::window(ivec2 resolution,std::string name){
 	ID=glfwCreateWindow(resolution.x,resolution.y,name.c_str(),NULL,NULL);
 }
 
@@ -227,8 +227,8 @@ int window::changeAttrib(int attrib, int value){
 	return 0;
 }//error check needed
 
-vec2int window::getResolution(){
-	vec2int temp;
+ivec2 window::getResolution(){
+	ivec2 temp;
 	glfwGetFramebufferSize(ID,&temp.x,&temp.y);
 	return temp;
 }

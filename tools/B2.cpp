@@ -276,7 +276,7 @@ int SceneManager::deleteSkyBox(int index){
 
 
 //drawing utility
-int SceneManager::draw(Camera* cam, vec2int resolution){
+int SceneManager::draw(Camera* cam, ivec2 resolution){
 	//textures dont bind to a sepcific unit so we specify it
 	glActiveTexture(GL_TEXTURE0);
 

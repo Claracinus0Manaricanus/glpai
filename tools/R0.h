@@ -46,7 +46,7 @@ public:
 	
 	//uniform utilities
 	int setInt(const char* u_name, int data);
-	int setVec2i(const char* u_name, vec2int data);
+	int setVec2i(const char* u_name, ivec2 data);
 	int setVec2(const char* u_name, vec2 data);
 	int setVec3(const char* u_name, vec3 data);
 	int setVec4Array(const char* u_name, int dataLength,const float* data);
@@ -69,7 +69,7 @@ private:
 
 public:
 	//constructor
-	window(vec2int resolution,std::string);
+	window(ivec2 resolution,std::string);
 
 	//extractor
 	GLFWwindow* getid();
@@ -77,7 +77,7 @@ public:
 	//utility
 	int changeAttrib(int attrib, int value);
 	//int setResolution(int x, int y);//not implemented do not use
-	vec2int getResolution();
+	ivec2 getResolution();
 };
 
 

@@ -2,6 +2,8 @@
 #include <math.h>
 
 //vector utilities
+float Dot(vec3 a, vec3 b);
+vec3 Cross(vec3 a, vec3 b);
 float Length(vec3 a);
 vec3 Normalize(vec3 a);
 

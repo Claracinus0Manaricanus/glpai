@@ -174,5 +174,6 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/string.h /usr/include/strings.h \
  /home/cm/codes/c++/glpai/tools/B2.h /home/cm/codes/c++/glpai/tools/B1.h \
  /home/cm/codes/c++/glpai/tools/R0.h /home/cm/codes/c++/glpai/tools/R0.h \
- /home/cm/codes/c++/glpai/tools/U0.h /usr/include/stb/stb_image.h \
- /usr/include/c++/13.2.1/stdlib.h
+ /home/cm/codes/c++/glpai/tools/U0.h \
+ /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
+ /home/cm/codes/c++/glpai/tools/cmMath/../T0.h

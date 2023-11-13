@@ -11,8 +11,7 @@
 #include "tools/B2.h"
 #include "tools/R0.h"
 #include "tools/U0.h"
-//#define STB_IMAGE_IMPLEMENTATION
-#include <stb/stb_image.h>
+#include "tools/cmMath/vectors.h"
 
 using namespace std;
 
@@ -46,7 +45,7 @@ int main(){
 
 
 	/*window vars*/
-	vec2int resolution={800,600};
+	ivec2 resolution={800,600};
 	/*window vars*/
 
 	//creating window
