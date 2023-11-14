@@ -139,24 +139,10 @@ CMakeFiles/pai.dir/tools/R0.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/R0.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/R0.cpp -o CMakeFiles/pai.dir/tools/R0.cpp.s
 
-CMakeFiles/pai.dir/tools/T0.cpp.o: CMakeFiles/pai.dir/flags.make
-CMakeFiles/pai.dir/tools/T0.cpp.o: tools/T0.cpp
-CMakeFiles/pai.dir/tools/T0.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/tools/T0.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/T0.cpp.o -MF CMakeFiles/pai.dir/tools/T0.cpp.o.d -o CMakeFiles/pai.dir/tools/T0.cpp.o -c /home/cm/codes/c++/glpai/tools/T0.cpp
-
-CMakeFiles/pai.dir/tools/T0.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/T0.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/T0.cpp > CMakeFiles/pai.dir/tools/T0.cpp.i
-
-CMakeFiles/pai.dir/tools/T0.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/T0.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/T0.cpp -o CMakeFiles/pai.dir/tools/T0.cpp.s
-
 CMakeFiles/pai.dir/tools/U0.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp
 CMakeFiles/pai.dir/tools/U0.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/tools/U0.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/tools/U0.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/U0.cpp.o -MF CMakeFiles/pai.dir/tools/U0.cpp.o.d -o CMakeFiles/pai.dir/tools/U0.cpp.o -c /home/cm/codes/c++/glpai/tools/U0.cpp
 
 CMakeFiles/pai.dir/tools/U0.cpp.i: cmake_force
@@ -170,7 +156,7 @@ CMakeFiles/pai.dir/tools/U0.cpp.s: cmake_force
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: tools/cmMath/matrix4.cpp
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o -MF CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o.d -o CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o -c /home/cm/codes/c++/glpai/tools/cmMath/matrix4.cpp
 
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.i: cmake_force
@@ -184,7 +170,7 @@ CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.s: cmake_force
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: tools/cmMath/vectors.cpp
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o -MF CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o.d -o CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o -c /home/cm/codes/c++/glpai/tools/cmMath/vectors.cpp
 
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.i: cmake_force
@@ -202,7 +188,6 @@ pai_OBJECTS = \
 "CMakeFiles/pai.dir/tools/B1.cpp.o" \
 "CMakeFiles/pai.dir/tools/B2.cpp.o" \
 "CMakeFiles/pai.dir/tools/R0.cpp.o" \
-"CMakeFiles/pai.dir/tools/T0.cpp.o" \
 "CMakeFiles/pai.dir/tools/U0.cpp.o" \
 "CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o" \
 "CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
@@ -215,13 +200,12 @@ pai: CMakeFiles/pai.dir/tools/B0.cpp.o
 pai: CMakeFiles/pai.dir/tools/B1.cpp.o
 pai: CMakeFiles/pai.dir/tools/B2.cpp.o
 pai: CMakeFiles/pai.dir/tools/R0.cpp.o
-pai: CMakeFiles/pai.dir/tools/T0.cpp.o
 pai: CMakeFiles/pai.dir/tools/U0.cpp.o
 pai: CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o
 pai: CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o
 pai: CMakeFiles/pai.dir/build.make
 pai: CMakeFiles/pai.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable pai"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable pai"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pai.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

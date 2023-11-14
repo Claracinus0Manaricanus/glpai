@@ -249,30 +249,6 @@ tools/R0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/R0.cpp.s
 .PHONY : tools/R0.cpp.s
 
-tools/T0.o: tools/T0.cpp.o
-.PHONY : tools/T0.o
-
-# target to build an object file
-tools/T0.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/T0.cpp.o
-.PHONY : tools/T0.cpp.o
-
-tools/T0.i: tools/T0.cpp.i
-.PHONY : tools/T0.i
-
-# target to preprocess a source file
-tools/T0.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/T0.cpp.i
-.PHONY : tools/T0.cpp.i
-
-tools/T0.s: tools/T0.cpp.s
-.PHONY : tools/T0.s
-
-# target to generate assembly for a file
-tools/T0.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/T0.cpp.s
-.PHONY : tools/T0.cpp.s
-
 tools/U0.o: tools/U0.cpp.o
 .PHONY : tools/U0.o
 
@@ -369,9 +345,6 @@ help:
 	@echo "... tools/R0.o"
 	@echo "... tools/R0.i"
 	@echo "... tools/R0.s"
-	@echo "... tools/T0.o"
-	@echo "... tools/T0.i"
-	@echo "... tools/T0.s"
 	@echo "... tools/U0.o"
 	@echo "... tools/U0.i"
 	@echo "... tools/U0.s"

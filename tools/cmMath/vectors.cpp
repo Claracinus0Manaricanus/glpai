@@ -12,7 +12,11 @@ float Dot(vec3 a, vec3 b){
 }
 
 vec3 Cross(vec3 a, vec3 b){
-    return {0};
+    return {
+        (a.y*b.z)-(a.z*b.y),
+        (a.z*b.x)-(a.x*b.z),
+        (a.x*b.y)-(a.y*b.x)
+    };
 }
 
 float Length(vec3 a){
@@ -27,18 +31,18 @@ vec3 Normalize(vec3 a){
 
 
 //rotation related
-float* lookAt(vec3 start, vec3 end, vec3 up){//needs optimization
+float* LookAt(vec3 start, vec3 end, vec3 up){//needs optimization
     float* rotMat=(float*)malloc(sizeof(float)*16);//rotation matrix
 
     vec3 Z=Normalize(end-start);
-    vec3 X={0};
-    vec3 Y=Normalize(Cross(Z,X));
+    vec3 X=Normalize(Cross(Z,up));//to find X direction and unit that bitch
+    vec3 Y=Cross(Z,X);
 
     for(int i=0;i<3;i++){
-        rotMat[i*4]=X[i];
-        rotMat[i*4+1]=Y[i];
-        rotMat[i*4+2]=Z[i];
-        rotMat[i*4+3]=0;
+        rotMat[i]=X[i];
+        rotMat[i+4]=Y[i];
+        rotMat[i+8]=Z[i];
+        rotMat[i+12]=0;
     }
     rotMat[12]=0;
     rotMat[13]=0;

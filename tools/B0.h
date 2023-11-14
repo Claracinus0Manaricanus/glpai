@@ -7,15 +7,17 @@
 #include <GL/glew.h>
 
 
-class Transform{//add scale
+class Transform{//add scale //needs better lookAt compatability
 protected:
-	char* NAME;
+	char* NAME=NULL;
+	vec3* LookingAt=NULL;
 
 public:
 	vec3 position;
 	vec3 rotation;
 	vec3 scale;
 	float* OVM=NULL;//view matrix for the transform
+	float* rotM4=NULL;//rotation matrix (for lookAt compatability)
 
 public:
 	//constructor
@@ -34,7 +36,13 @@ public:
 	void move(vec3 movement);
 	void rotate(vec3 inRot);
 
+	//state info
+	void useLookAt(bool state);
+
 	//calculators
+	virtual void lookAt(vec3 lookey);
+protected:
+	virtual void calculateRotation();
 	virtual void calculateMatrix();
 };
 

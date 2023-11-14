@@ -1,5 +1,6 @@
 #include "B0.h"
 #include "cmMath/matrix4.h"
+#include "cmMath/vectors.h"
 #include <math.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -25,6 +26,8 @@ position(inPos),rotation(inRot),scale(inSca){
 Transform::~Transform(){
 	free(NAME);
 	free(OVM);
+	free(rotM4);
+	free(LookingAt);
 }
 
 
@@ -45,7 +48,7 @@ void Transform::setRotation(vec3 inRot){
 	calculateMatrix();
 }
 
-void Transform::rotate(vec3 inRot){//if rotation problems occur look here
+void Transform::rotate(vec3 inRot){
 	rotation+=inRot;
 
 	int result=(int)(rotation.x/PI2);
@@ -72,9 +75,29 @@ void Transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
 }
 
 
+//state info
+void Transform::useLookAt(bool state){
+	if(state){
+		if(LookingAt==NULL){
+			LookingAt=new vec3{0,0,0};
+		}
+	}else{
+		free(LookingAt);
+		LookingAt=NULL;
+	}
+}
+
+
 //calculators
-void Transform::calculateMatrix(){
-	//setting up matrices to multiply
+void Transform::lookAt(vec3 lookey){
+	if(LookingAt==NULL){
+		LookingAt=new vec3{lookey};
+	}
+	free(rotM4);
+	rotM4=LookAt(position,lookey);
+}
+
+void Transform::calculateRotation(){
 	float tmpC=cos(rotation.x),tmpS=sin(rotation.x);//temporary cos and sin
 	float rotXM4[16]={
 		1,   0,    0,0,
@@ -96,21 +119,31 @@ void Transform::calculateMatrix(){
 		0,       0,1,0,
 		0,       0,0,1
 	};
+
+	float* temp1=m4_multiply(rotYM4,rotXM4);
+	free(rotM4);
+	rotM4=m4_multiply(rotZM4,temp1);
+	//cleanup
+	free(temp1);
+}
+
+void Transform::calculateMatrix(){
+	//setting up matrices to multiply
+	if(LookingAt==NULL){
+		calculateRotation();
+	}else{
+		lookAt(*LookingAt);
+	}
 	float transM4[16]={
 		1,0,0,position.x,
 		0,1,0,position.y,
 		0,0,1,position.z,
 		0,0,0,1
 	};
-	//pre-final multiplication
-	float* temp1=m4_multiply(rotYM4,rotXM4);
-	float* temp2=m4_multiply(rotZM4,temp1);
+
 	//final multiplication
 	free(OVM);
-	OVM=m4_multiply(transM4,temp2);
-	//cleanup
-	free(temp1);
-	free(temp2);
+	OVM=m4_multiply(transM4,rotM4);
 }
 
 
@@ -311,6 +344,7 @@ Light::Light(int iType, vec3 iPos, vec4 iCol, const char* name){
 //destructors
 Light::~Light(){
 	free(NAME);
+	free(LVM);
 }
 
 

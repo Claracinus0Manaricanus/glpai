@@ -229,7 +229,7 @@ int main(){
 
 			//update rot
 			cam0.rotate({(float)cursorY*deltaTime,(float)cursorX*deltaTime,0});
-		
+
 			//movement variable updates (add the trig functions)
 			cam0.moveForward(CgetAxis(w0.getid(),GLFW_KEY_W,GLFW_KEY_S)*deltaTime*2);
 			cam0.moveRight(CgetAxis(w0.getid(),GLFW_KEY_D,GLFW_KEY_A)*deltaTime*2);

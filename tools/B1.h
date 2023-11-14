@@ -22,6 +22,10 @@ public:
 	void moveRight(float right);
 	void moveUp(float up);
 	void setAspectRatio(float inAspectRatio);
+
+protected:
+//overrides
+	void calculateRotation();
 	void calculateMatrix();
 };
 

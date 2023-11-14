@@ -194,12 +194,4 @@ struct vertex{
 	}
 };
 
-namespace vectors{
-	//vector calculations
-	float dot(vec3 a, vec3 b);	
-	float dot(vec2 a, vec2 b);	
-	vec3 normalize(vec3 a);	
-	vec2 normalize(vec2 a);
-}
-
 #endif
