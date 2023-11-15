@@ -83,66 +83,192 @@ CMakeFiles/pai.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/main.cpp -o CMakeFiles/pai.dir/main.cpp.s
 
-CMakeFiles/pai.dir/tools/B0.cpp.o: CMakeFiles/pai.dir/flags.make
-CMakeFiles/pai.dir/tools/B0.cpp.o: tools/B0.cpp
-CMakeFiles/pai.dir/tools/B0.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pai.dir/tools/B0.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/B0.cpp.o -MF CMakeFiles/pai.dir/tools/B0.cpp.o.d -o CMakeFiles/pai.dir/tools/B0.cpp.o -c /home/cm/codes/c++/glpai/tools/B0.cpp
+CMakeFiles/pai.dir/tools/Camera.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Camera.cpp.o: tools/Camera.cpp
+CMakeFiles/pai.dir/tools/Camera.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pai.dir/tools/Camera.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Camera.cpp.o -MF CMakeFiles/pai.dir/tools/Camera.cpp.o.d -o CMakeFiles/pai.dir/tools/Camera.cpp.o -c /home/cm/codes/c++/glpai/tools/Camera.cpp
 
-CMakeFiles/pai.dir/tools/B0.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/B0.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/B0.cpp > CMakeFiles/pai.dir/tools/B0.cpp.i
+CMakeFiles/pai.dir/tools/Camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Camera.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Camera.cpp > CMakeFiles/pai.dir/tools/Camera.cpp.i
 
-CMakeFiles/pai.dir/tools/B0.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/B0.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/B0.cpp -o CMakeFiles/pai.dir/tools/B0.cpp.s
+CMakeFiles/pai.dir/tools/Camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Camera.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Camera.cpp -o CMakeFiles/pai.dir/tools/Camera.cpp.s
 
-CMakeFiles/pai.dir/tools/B1.cpp.o: CMakeFiles/pai.dir/flags.make
-CMakeFiles/pai.dir/tools/B1.cpp.o: tools/B1.cpp
-CMakeFiles/pai.dir/tools/B1.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pai.dir/tools/B1.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/B1.cpp.o -MF CMakeFiles/pai.dir/tools/B1.cpp.o.d -o CMakeFiles/pai.dir/tools/B1.cpp.o -c /home/cm/codes/c++/glpai/tools/B1.cpp
+CMakeFiles/pai.dir/tools/CubeMap.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/CubeMap.cpp.o: tools/CubeMap.cpp
+CMakeFiles/pai.dir/tools/CubeMap.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pai.dir/tools/CubeMap.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/CubeMap.cpp.o -MF CMakeFiles/pai.dir/tools/CubeMap.cpp.o.d -o CMakeFiles/pai.dir/tools/CubeMap.cpp.o -c /home/cm/codes/c++/glpai/tools/CubeMap.cpp
 
-CMakeFiles/pai.dir/tools/B1.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/B1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/B1.cpp > CMakeFiles/pai.dir/tools/B1.cpp.i
+CMakeFiles/pai.dir/tools/CubeMap.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/CubeMap.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/CubeMap.cpp > CMakeFiles/pai.dir/tools/CubeMap.cpp.i
 
-CMakeFiles/pai.dir/tools/B1.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/B1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/B1.cpp -o CMakeFiles/pai.dir/tools/B1.cpp.s
+CMakeFiles/pai.dir/tools/CubeMap.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/CubeMap.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/CubeMap.cpp -o CMakeFiles/pai.dir/tools/CubeMap.cpp.s
 
-CMakeFiles/pai.dir/tools/B2.cpp.o: CMakeFiles/pai.dir/flags.make
-CMakeFiles/pai.dir/tools/B2.cpp.o: tools/B2.cpp
-CMakeFiles/pai.dir/tools/B2.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pai.dir/tools/B2.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/B2.cpp.o -MF CMakeFiles/pai.dir/tools/B2.cpp.o.d -o CMakeFiles/pai.dir/tools/B2.cpp.o -c /home/cm/codes/c++/glpai/tools/B2.cpp
+CMakeFiles/pai.dir/tools/GameObject.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/GameObject.cpp.o: tools/GameObject.cpp
+CMakeFiles/pai.dir/tools/GameObject.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pai.dir/tools/GameObject.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/GameObject.cpp.o -MF CMakeFiles/pai.dir/tools/GameObject.cpp.o.d -o CMakeFiles/pai.dir/tools/GameObject.cpp.o -c /home/cm/codes/c++/glpai/tools/GameObject.cpp
 
-CMakeFiles/pai.dir/tools/B2.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/B2.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/B2.cpp > CMakeFiles/pai.dir/tools/B2.cpp.i
+CMakeFiles/pai.dir/tools/GameObject.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/GameObject.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/GameObject.cpp > CMakeFiles/pai.dir/tools/GameObject.cpp.i
 
-CMakeFiles/pai.dir/tools/B2.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/B2.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/B2.cpp -o CMakeFiles/pai.dir/tools/B2.cpp.s
+CMakeFiles/pai.dir/tools/GameObject.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/GameObject.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/GameObject.cpp -o CMakeFiles/pai.dir/tools/GameObject.cpp.s
 
-CMakeFiles/pai.dir/tools/R0.cpp.o: CMakeFiles/pai.dir/flags.make
-CMakeFiles/pai.dir/tools/R0.cpp.o: tools/R0.cpp
-CMakeFiles/pai.dir/tools/R0.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pai.dir/tools/R0.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/R0.cpp.o -MF CMakeFiles/pai.dir/tools/R0.cpp.o.d -o CMakeFiles/pai.dir/tools/R0.cpp.o -c /home/cm/codes/c++/glpai/tools/R0.cpp
+CMakeFiles/pai.dir/tools/Light.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Light.cpp.o: tools/Light.cpp
+CMakeFiles/pai.dir/tools/Light.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pai.dir/tools/Light.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Light.cpp.o -MF CMakeFiles/pai.dir/tools/Light.cpp.o.d -o CMakeFiles/pai.dir/tools/Light.cpp.o -c /home/cm/codes/c++/glpai/tools/Light.cpp
 
-CMakeFiles/pai.dir/tools/R0.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/R0.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/R0.cpp > CMakeFiles/pai.dir/tools/R0.cpp.i
+CMakeFiles/pai.dir/tools/Light.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Light.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Light.cpp > CMakeFiles/pai.dir/tools/Light.cpp.i
 
-CMakeFiles/pai.dir/tools/R0.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/R0.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/R0.cpp -o CMakeFiles/pai.dir/tools/R0.cpp.s
+CMakeFiles/pai.dir/tools/Light.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Light.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Light.cpp -o CMakeFiles/pai.dir/tools/Light.cpp.s
+
+CMakeFiles/pai.dir/tools/Program.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Program.cpp.o: tools/Program.cpp
+CMakeFiles/pai.dir/tools/Program.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/tools/Program.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Program.cpp.o -MF CMakeFiles/pai.dir/tools/Program.cpp.o.d -o CMakeFiles/pai.dir/tools/Program.cpp.o -c /home/cm/codes/c++/glpai/tools/Program.cpp
+
+CMakeFiles/pai.dir/tools/Program.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Program.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Program.cpp > CMakeFiles/pai.dir/tools/Program.cpp.i
+
+CMakeFiles/pai.dir/tools/Program.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Program.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Program.cpp -o CMakeFiles/pai.dir/tools/Program.cpp.s
+
+CMakeFiles/pai.dir/tools/SceneManager.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/SceneManager.cpp.o: tools/SceneManager.cpp
+CMakeFiles/pai.dir/tools/SceneManager.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/tools/SceneManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/SceneManager.cpp.o -MF CMakeFiles/pai.dir/tools/SceneManager.cpp.o.d -o CMakeFiles/pai.dir/tools/SceneManager.cpp.o -c /home/cm/codes/c++/glpai/tools/SceneManager.cpp
+
+CMakeFiles/pai.dir/tools/SceneManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/SceneManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/SceneManager.cpp > CMakeFiles/pai.dir/tools/SceneManager.cpp.i
+
+CMakeFiles/pai.dir/tools/SceneManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/SceneManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/SceneManager.cpp -o CMakeFiles/pai.dir/tools/SceneManager.cpp.s
+
+CMakeFiles/pai.dir/tools/Shader.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Shader.cpp.o: tools/Shader.cpp
+CMakeFiles/pai.dir/tools/Shader.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pai.dir/tools/Shader.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Shader.cpp.o -MF CMakeFiles/pai.dir/tools/Shader.cpp.o.d -o CMakeFiles/pai.dir/tools/Shader.cpp.o -c /home/cm/codes/c++/glpai/tools/Shader.cpp
+
+CMakeFiles/pai.dir/tools/Shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Shader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Shader.cpp > CMakeFiles/pai.dir/tools/Shader.cpp.i
+
+CMakeFiles/pai.dir/tools/Shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Shader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Shader.cpp -o CMakeFiles/pai.dir/tools/Shader.cpp.s
+
+CMakeFiles/pai.dir/tools/SkyBox.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/SkyBox.cpp.o: tools/SkyBox.cpp
+CMakeFiles/pai.dir/tools/SkyBox.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pai.dir/tools/SkyBox.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/SkyBox.cpp.o -MF CMakeFiles/pai.dir/tools/SkyBox.cpp.o.d -o CMakeFiles/pai.dir/tools/SkyBox.cpp.o -c /home/cm/codes/c++/glpai/tools/SkyBox.cpp
+
+CMakeFiles/pai.dir/tools/SkyBox.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/SkyBox.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/SkyBox.cpp > CMakeFiles/pai.dir/tools/SkyBox.cpp.i
+
+CMakeFiles/pai.dir/tools/SkyBox.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/SkyBox.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/SkyBox.cpp -o CMakeFiles/pai.dir/tools/SkyBox.cpp.s
+
+CMakeFiles/pai.dir/tools/Texture.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Texture.cpp.o: tools/Texture.cpp
+CMakeFiles/pai.dir/tools/Texture.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/pai.dir/tools/Texture.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Texture.cpp.o -MF CMakeFiles/pai.dir/tools/Texture.cpp.o.d -o CMakeFiles/pai.dir/tools/Texture.cpp.o -c /home/cm/codes/c++/glpai/tools/Texture.cpp
+
+CMakeFiles/pai.dir/tools/Texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Texture.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Texture.cpp > CMakeFiles/pai.dir/tools/Texture.cpp.i
+
+CMakeFiles/pai.dir/tools/Texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Texture.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Texture.cpp -o CMakeFiles/pai.dir/tools/Texture.cpp.s
+
+CMakeFiles/pai.dir/tools/Transform.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Transform.cpp.o: tools/Transform.cpp
+CMakeFiles/pai.dir/tools/Transform.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/pai.dir/tools/Transform.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Transform.cpp.o -MF CMakeFiles/pai.dir/tools/Transform.cpp.o.d -o CMakeFiles/pai.dir/tools/Transform.cpp.o -c /home/cm/codes/c++/glpai/tools/Transform.cpp
+
+CMakeFiles/pai.dir/tools/Transform.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Transform.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Transform.cpp > CMakeFiles/pai.dir/tools/Transform.cpp.i
+
+CMakeFiles/pai.dir/tools/Transform.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Transform.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Transform.cpp -o CMakeFiles/pai.dir/tools/Transform.cpp.s
+
+CMakeFiles/pai.dir/tools/UI_Element.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/UI_Element.cpp.o: tools/UI_Element.cpp
+CMakeFiles/pai.dir/tools/UI_Element.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/pai.dir/tools/UI_Element.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/UI_Element.cpp.o -MF CMakeFiles/pai.dir/tools/UI_Element.cpp.o.d -o CMakeFiles/pai.dir/tools/UI_Element.cpp.o -c /home/cm/codes/c++/glpai/tools/UI_Element.cpp
+
+CMakeFiles/pai.dir/tools/UI_Element.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/UI_Element.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/UI_Element.cpp > CMakeFiles/pai.dir/tools/UI_Element.cpp.i
+
+CMakeFiles/pai.dir/tools/UI_Element.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/UI_Element.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/UI_Element.cpp -o CMakeFiles/pai.dir/tools/UI_Element.cpp.s
+
+CMakeFiles/pai.dir/tools/VertexData.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/VertexData.cpp.o: tools/VertexData.cpp
+CMakeFiles/pai.dir/tools/VertexData.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/pai.dir/tools/VertexData.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/VertexData.cpp.o -MF CMakeFiles/pai.dir/tools/VertexData.cpp.o.d -o CMakeFiles/pai.dir/tools/VertexData.cpp.o -c /home/cm/codes/c++/glpai/tools/VertexData.cpp
+
+CMakeFiles/pai.dir/tools/VertexData.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/VertexData.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/VertexData.cpp > CMakeFiles/pai.dir/tools/VertexData.cpp.i
+
+CMakeFiles/pai.dir/tools/VertexData.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/VertexData.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/VertexData.cpp -o CMakeFiles/pai.dir/tools/VertexData.cpp.s
+
+CMakeFiles/pai.dir/tools/Window.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/tools/Window.cpp.o: tools/Window.cpp
+CMakeFiles/pai.dir/tools/Window.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/pai.dir/tools/Window.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/Window.cpp.o -MF CMakeFiles/pai.dir/tools/Window.cpp.o.d -o CMakeFiles/pai.dir/tools/Window.cpp.o -c /home/cm/codes/c++/glpai/tools/Window.cpp
+
+CMakeFiles/pai.dir/tools/Window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/tools/Window.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/tools/Window.cpp > CMakeFiles/pai.dir/tools/Window.cpp.i
+
+CMakeFiles/pai.dir/tools/Window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/tools/Window.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/tools/Window.cpp -o CMakeFiles/pai.dir/tools/Window.cpp.s
 
 CMakeFiles/pai.dir/tools/U0.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp
 CMakeFiles/pai.dir/tools/U0.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/tools/U0.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/pai.dir/tools/U0.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/U0.cpp.o -MF CMakeFiles/pai.dir/tools/U0.cpp.o.d -o CMakeFiles/pai.dir/tools/U0.cpp.o -c /home/cm/codes/c++/glpai/tools/U0.cpp
 
 CMakeFiles/pai.dir/tools/U0.cpp.i: cmake_force
@@ -156,7 +282,7 @@ CMakeFiles/pai.dir/tools/U0.cpp.s: cmake_force
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: tools/cmMath/matrix4.cpp
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o -MF CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o.d -o CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o -c /home/cm/codes/c++/glpai/tools/cmMath/matrix4.cpp
 
 CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.i: cmake_force
@@ -170,7 +296,7 @@ CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.s: cmake_force
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: tools/cmMath/vectors.cpp
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o -MF CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o.d -o CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o -c /home/cm/codes/c++/glpai/tools/cmMath/vectors.cpp
 
 CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.i: cmake_force
@@ -184,10 +310,19 @@ CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.s: cmake_force
 # Object files for target pai
 pai_OBJECTS = \
 "CMakeFiles/pai.dir/main.cpp.o" \
-"CMakeFiles/pai.dir/tools/B0.cpp.o" \
-"CMakeFiles/pai.dir/tools/B1.cpp.o" \
-"CMakeFiles/pai.dir/tools/B2.cpp.o" \
-"CMakeFiles/pai.dir/tools/R0.cpp.o" \
+"CMakeFiles/pai.dir/tools/Camera.cpp.o" \
+"CMakeFiles/pai.dir/tools/CubeMap.cpp.o" \
+"CMakeFiles/pai.dir/tools/GameObject.cpp.o" \
+"CMakeFiles/pai.dir/tools/Light.cpp.o" \
+"CMakeFiles/pai.dir/tools/Program.cpp.o" \
+"CMakeFiles/pai.dir/tools/SceneManager.cpp.o" \
+"CMakeFiles/pai.dir/tools/Shader.cpp.o" \
+"CMakeFiles/pai.dir/tools/SkyBox.cpp.o" \
+"CMakeFiles/pai.dir/tools/Texture.cpp.o" \
+"CMakeFiles/pai.dir/tools/Transform.cpp.o" \
+"CMakeFiles/pai.dir/tools/UI_Element.cpp.o" \
+"CMakeFiles/pai.dir/tools/VertexData.cpp.o" \
+"CMakeFiles/pai.dir/tools/Window.cpp.o" \
 "CMakeFiles/pai.dir/tools/U0.cpp.o" \
 "CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o" \
 "CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o"
@@ -196,16 +331,25 @@ pai_OBJECTS = \
 pai_EXTERNAL_OBJECTS =
 
 pai: CMakeFiles/pai.dir/main.cpp.o
-pai: CMakeFiles/pai.dir/tools/B0.cpp.o
-pai: CMakeFiles/pai.dir/tools/B1.cpp.o
-pai: CMakeFiles/pai.dir/tools/B2.cpp.o
-pai: CMakeFiles/pai.dir/tools/R0.cpp.o
+pai: CMakeFiles/pai.dir/tools/Camera.cpp.o
+pai: CMakeFiles/pai.dir/tools/CubeMap.cpp.o
+pai: CMakeFiles/pai.dir/tools/GameObject.cpp.o
+pai: CMakeFiles/pai.dir/tools/Light.cpp.o
+pai: CMakeFiles/pai.dir/tools/Program.cpp.o
+pai: CMakeFiles/pai.dir/tools/SceneManager.cpp.o
+pai: CMakeFiles/pai.dir/tools/Shader.cpp.o
+pai: CMakeFiles/pai.dir/tools/SkyBox.cpp.o
+pai: CMakeFiles/pai.dir/tools/Texture.cpp.o
+pai: CMakeFiles/pai.dir/tools/Transform.cpp.o
+pai: CMakeFiles/pai.dir/tools/UI_Element.cpp.o
+pai: CMakeFiles/pai.dir/tools/VertexData.cpp.o
+pai: CMakeFiles/pai.dir/tools/Window.cpp.o
 pai: CMakeFiles/pai.dir/tools/U0.cpp.o
 pai: CMakeFiles/pai.dir/tools/cmMath/matrix4.cpp.o
 pai: CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o
 pai: CMakeFiles/pai.dir/build.make
 pai: CMakeFiles/pai.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable pai"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable pai"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pai.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

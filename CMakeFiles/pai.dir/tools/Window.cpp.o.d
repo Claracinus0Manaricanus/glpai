@@ -1,22 +1,26 @@
-CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: \
- /home/cm/codes/c++/glpai/tools/cmMath/vectors.cpp \
- /usr/include/stdc-predef.h \
- /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
- /home/cm/codes/c++/glpai/tools/cmMath/../T0.h \
- /usr/include/c++/13.2.1/math.h /usr/include/c++/13.2.1/cmath \
- /usr/include/c++/13.2.1/bits/requires_hosted.h \
- /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
- /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
+CMakeFiles/pai.dir/tools/Window.cpp.o: \
+ /home/cm/codes/c++/glpai/tools/Window.cpp /usr/include/stdc-predef.h \
+ /home/cm/codes/c++/glpai/tools/Window.h /usr/include/GLFW/glfw3.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
  /usr/include/sys/cdefs.h /usr/include/bits/long-double.h \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/time64.h /usr/include/bits/wchar.h \
+ /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/GL/gl.h /usr/include/GL/glext.h \
+ /usr/include/KHR/khrplatform.h /home/cm/codes/c++/glpai/tools/T0.h \
+ /usr/include/c++/13.2.1/math.h /usr/include/c++/13.2.1/cmath \
+ /usr/include/c++/13.2.1/bits/requires_hosted.h \
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
  /usr/include/c++/13.2.1/pstl/pstl_config.h \
  /usr/include/c++/13.2.1/bits/cpp_type_traits.h \
  /usr/include/c++/13.2.1/ext/type_traits.h /usr/include/math.h \
- /usr/include/bits/libc-header-start.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/floatn.h /usr/include/bits/floatn-common.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
@@ -24,13 +28,11 @@ CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/13.2.1/bits/std_abs.h \
- /usr/include/stdlib.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h \
- /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
- /usr/include/sys/types.h /usr/include/bits/types/clock_t.h \
- /usr/include/bits/types/clockid_t.h /usr/include/bits/types/time_t.h \
- /usr/include/bits/types/timer_t.h /usr/include/bits/stdint-intn.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/bits/types/locale_t.h \
+ /usr/include/bits/types/__locale_t.h /usr/include/sys/types.h \
+ /usr/include/bits/types/clock_t.h /usr/include/bits/types/clockid_t.h \
+ /usr/include/bits/types/time_t.h /usr/include/bits/types/timer_t.h \
  /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/endianness.h /usr/include/bits/byteswap.h \
  /usr/include/bits/uintn-identity.h /usr/include/sys/select.h \
@@ -84,8 +86,7 @@ CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: \
  /usr/include/c++/13.2.1/bits/postypes.h /usr/include/c++/13.2.1/cwchar \
  /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdarg.h \
- /usr/include/bits/wchar.h /usr/include/bits/types/wint_t.h \
- /usr/include/bits/types/mbstate_t.h \
+ /usr/include/bits/types/wint_t.h /usr/include/bits/types/mbstate_t.h \
  /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
  /usr/include/bits/types/FILE.h /usr/include/c++/13.2.1/bits/allocator.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
@@ -127,6 +128,4 @@ CMakeFiles/pai.dir/tools/cmMath/vectors.cpp.o: \
  /usr/include/c++/13.2.1/cstddef \
  /usr/include/c++/13.2.1/bits/uses_allocator.h \
  /usr/include/c++/13.2.1/bits/uses_allocator_args.h \
- /usr/include/c++/13.2.1/tuple /usr/include/c++/13.2.1/cstdint \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h
+ /usr/include/c++/13.2.1/tuple /usr/include/c++/13.2.1/cstdint

@@ -8,6 +8,7 @@
 
 #include <math.h>
 #include <stdexcept>
+#include <cstdint>
 
 
 struct ivec2{

@@ -6,12 +6,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "tools/T0.h"
-#include "tools/B0.h"
-#include "tools/B1.h"
-#include "tools/B2.h"
-#include "tools/R0.h"
+#include "tools/SceneManager.h"
+#include "tools/Window.h"
+#include "tools/Camera.h"
 #include "tools/U0.h"
-#include "tools/cmMath/vectors.h"
 
 using namespace std;
 

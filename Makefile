@@ -153,101 +153,245 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-tools/B0.o: tools/B0.cpp.o
-.PHONY : tools/B0.o
+tools/Camera.o: tools/Camera.cpp.o
+.PHONY : tools/Camera.o
 
 # target to build an object file
-tools/B0.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B0.cpp.o
-.PHONY : tools/B0.cpp.o
+tools/Camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Camera.cpp.o
+.PHONY : tools/Camera.cpp.o
 
-tools/B0.i: tools/B0.cpp.i
-.PHONY : tools/B0.i
+tools/Camera.i: tools/Camera.cpp.i
+.PHONY : tools/Camera.i
 
 # target to preprocess a source file
-tools/B0.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B0.cpp.i
-.PHONY : tools/B0.cpp.i
+tools/Camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Camera.cpp.i
+.PHONY : tools/Camera.cpp.i
 
-tools/B0.s: tools/B0.cpp.s
-.PHONY : tools/B0.s
+tools/Camera.s: tools/Camera.cpp.s
+.PHONY : tools/Camera.s
 
 # target to generate assembly for a file
-tools/B0.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B0.cpp.s
-.PHONY : tools/B0.cpp.s
+tools/Camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Camera.cpp.s
+.PHONY : tools/Camera.cpp.s
 
-tools/B1.o: tools/B1.cpp.o
-.PHONY : tools/B1.o
+tools/CubeMap.o: tools/CubeMap.cpp.o
+.PHONY : tools/CubeMap.o
 
 # target to build an object file
-tools/B1.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B1.cpp.o
-.PHONY : tools/B1.cpp.o
+tools/CubeMap.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/CubeMap.cpp.o
+.PHONY : tools/CubeMap.cpp.o
 
-tools/B1.i: tools/B1.cpp.i
-.PHONY : tools/B1.i
+tools/CubeMap.i: tools/CubeMap.cpp.i
+.PHONY : tools/CubeMap.i
 
 # target to preprocess a source file
-tools/B1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B1.cpp.i
-.PHONY : tools/B1.cpp.i
+tools/CubeMap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/CubeMap.cpp.i
+.PHONY : tools/CubeMap.cpp.i
 
-tools/B1.s: tools/B1.cpp.s
-.PHONY : tools/B1.s
+tools/CubeMap.s: tools/CubeMap.cpp.s
+.PHONY : tools/CubeMap.s
 
 # target to generate assembly for a file
-tools/B1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B1.cpp.s
-.PHONY : tools/B1.cpp.s
+tools/CubeMap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/CubeMap.cpp.s
+.PHONY : tools/CubeMap.cpp.s
 
-tools/B2.o: tools/B2.cpp.o
-.PHONY : tools/B2.o
+tools/GameObject.o: tools/GameObject.cpp.o
+.PHONY : tools/GameObject.o
 
 # target to build an object file
-tools/B2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B2.cpp.o
-.PHONY : tools/B2.cpp.o
+tools/GameObject.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/GameObject.cpp.o
+.PHONY : tools/GameObject.cpp.o
 
-tools/B2.i: tools/B2.cpp.i
-.PHONY : tools/B2.i
+tools/GameObject.i: tools/GameObject.cpp.i
+.PHONY : tools/GameObject.i
 
 # target to preprocess a source file
-tools/B2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B2.cpp.i
-.PHONY : tools/B2.cpp.i
+tools/GameObject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/GameObject.cpp.i
+.PHONY : tools/GameObject.cpp.i
 
-tools/B2.s: tools/B2.cpp.s
-.PHONY : tools/B2.s
+tools/GameObject.s: tools/GameObject.cpp.s
+.PHONY : tools/GameObject.s
 
 # target to generate assembly for a file
-tools/B2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/B2.cpp.s
-.PHONY : tools/B2.cpp.s
+tools/GameObject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/GameObject.cpp.s
+.PHONY : tools/GameObject.cpp.s
 
-tools/R0.o: tools/R0.cpp.o
-.PHONY : tools/R0.o
+tools/Light.o: tools/Light.cpp.o
+.PHONY : tools/Light.o
 
 # target to build an object file
-tools/R0.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/R0.cpp.o
-.PHONY : tools/R0.cpp.o
+tools/Light.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Light.cpp.o
+.PHONY : tools/Light.cpp.o
 
-tools/R0.i: tools/R0.cpp.i
-.PHONY : tools/R0.i
+tools/Light.i: tools/Light.cpp.i
+.PHONY : tools/Light.i
 
 # target to preprocess a source file
-tools/R0.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/R0.cpp.i
-.PHONY : tools/R0.cpp.i
+tools/Light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Light.cpp.i
+.PHONY : tools/Light.cpp.i
 
-tools/R0.s: tools/R0.cpp.s
-.PHONY : tools/R0.s
+tools/Light.s: tools/Light.cpp.s
+.PHONY : tools/Light.s
 
 # target to generate assembly for a file
-tools/R0.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/R0.cpp.s
-.PHONY : tools/R0.cpp.s
+tools/Light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Light.cpp.s
+.PHONY : tools/Light.cpp.s
+
+tools/Program.o: tools/Program.cpp.o
+.PHONY : tools/Program.o
+
+# target to build an object file
+tools/Program.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Program.cpp.o
+.PHONY : tools/Program.cpp.o
+
+tools/Program.i: tools/Program.cpp.i
+.PHONY : tools/Program.i
+
+# target to preprocess a source file
+tools/Program.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Program.cpp.i
+.PHONY : tools/Program.cpp.i
+
+tools/Program.s: tools/Program.cpp.s
+.PHONY : tools/Program.s
+
+# target to generate assembly for a file
+tools/Program.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Program.cpp.s
+.PHONY : tools/Program.cpp.s
+
+tools/SceneManager.o: tools/SceneManager.cpp.o
+.PHONY : tools/SceneManager.o
+
+# target to build an object file
+tools/SceneManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/SceneManager.cpp.o
+.PHONY : tools/SceneManager.cpp.o
+
+tools/SceneManager.i: tools/SceneManager.cpp.i
+.PHONY : tools/SceneManager.i
+
+# target to preprocess a source file
+tools/SceneManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/SceneManager.cpp.i
+.PHONY : tools/SceneManager.cpp.i
+
+tools/SceneManager.s: tools/SceneManager.cpp.s
+.PHONY : tools/SceneManager.s
+
+# target to generate assembly for a file
+tools/SceneManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/SceneManager.cpp.s
+.PHONY : tools/SceneManager.cpp.s
+
+tools/Shader.o: tools/Shader.cpp.o
+.PHONY : tools/Shader.o
+
+# target to build an object file
+tools/Shader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Shader.cpp.o
+.PHONY : tools/Shader.cpp.o
+
+tools/Shader.i: tools/Shader.cpp.i
+.PHONY : tools/Shader.i
+
+# target to preprocess a source file
+tools/Shader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Shader.cpp.i
+.PHONY : tools/Shader.cpp.i
+
+tools/Shader.s: tools/Shader.cpp.s
+.PHONY : tools/Shader.s
+
+# target to generate assembly for a file
+tools/Shader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Shader.cpp.s
+.PHONY : tools/Shader.cpp.s
+
+tools/SkyBox.o: tools/SkyBox.cpp.o
+.PHONY : tools/SkyBox.o
+
+# target to build an object file
+tools/SkyBox.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/SkyBox.cpp.o
+.PHONY : tools/SkyBox.cpp.o
+
+tools/SkyBox.i: tools/SkyBox.cpp.i
+.PHONY : tools/SkyBox.i
+
+# target to preprocess a source file
+tools/SkyBox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/SkyBox.cpp.i
+.PHONY : tools/SkyBox.cpp.i
+
+tools/SkyBox.s: tools/SkyBox.cpp.s
+.PHONY : tools/SkyBox.s
+
+# target to generate assembly for a file
+tools/SkyBox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/SkyBox.cpp.s
+.PHONY : tools/SkyBox.cpp.s
+
+tools/Texture.o: tools/Texture.cpp.o
+.PHONY : tools/Texture.o
+
+# target to build an object file
+tools/Texture.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Texture.cpp.o
+.PHONY : tools/Texture.cpp.o
+
+tools/Texture.i: tools/Texture.cpp.i
+.PHONY : tools/Texture.i
+
+# target to preprocess a source file
+tools/Texture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Texture.cpp.i
+.PHONY : tools/Texture.cpp.i
+
+tools/Texture.s: tools/Texture.cpp.s
+.PHONY : tools/Texture.s
+
+# target to generate assembly for a file
+tools/Texture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Texture.cpp.s
+.PHONY : tools/Texture.cpp.s
+
+tools/Transform.o: tools/Transform.cpp.o
+.PHONY : tools/Transform.o
+
+# target to build an object file
+tools/Transform.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Transform.cpp.o
+.PHONY : tools/Transform.cpp.o
+
+tools/Transform.i: tools/Transform.cpp.i
+.PHONY : tools/Transform.i
+
+# target to preprocess a source file
+tools/Transform.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Transform.cpp.i
+.PHONY : tools/Transform.cpp.i
+
+tools/Transform.s: tools/Transform.cpp.s
+.PHONY : tools/Transform.s
+
+# target to generate assembly for a file
+tools/Transform.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Transform.cpp.s
+.PHONY : tools/Transform.cpp.s
 
 tools/U0.o: tools/U0.cpp.o
 .PHONY : tools/U0.o
@@ -272,6 +416,78 @@ tools/U0.s: tools/U0.cpp.s
 tools/U0.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/U0.cpp.s
 .PHONY : tools/U0.cpp.s
+
+tools/UI_Element.o: tools/UI_Element.cpp.o
+.PHONY : tools/UI_Element.o
+
+# target to build an object file
+tools/UI_Element.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/UI_Element.cpp.o
+.PHONY : tools/UI_Element.cpp.o
+
+tools/UI_Element.i: tools/UI_Element.cpp.i
+.PHONY : tools/UI_Element.i
+
+# target to preprocess a source file
+tools/UI_Element.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/UI_Element.cpp.i
+.PHONY : tools/UI_Element.cpp.i
+
+tools/UI_Element.s: tools/UI_Element.cpp.s
+.PHONY : tools/UI_Element.s
+
+# target to generate assembly for a file
+tools/UI_Element.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/UI_Element.cpp.s
+.PHONY : tools/UI_Element.cpp.s
+
+tools/VertexData.o: tools/VertexData.cpp.o
+.PHONY : tools/VertexData.o
+
+# target to build an object file
+tools/VertexData.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/VertexData.cpp.o
+.PHONY : tools/VertexData.cpp.o
+
+tools/VertexData.i: tools/VertexData.cpp.i
+.PHONY : tools/VertexData.i
+
+# target to preprocess a source file
+tools/VertexData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/VertexData.cpp.i
+.PHONY : tools/VertexData.cpp.i
+
+tools/VertexData.s: tools/VertexData.cpp.s
+.PHONY : tools/VertexData.s
+
+# target to generate assembly for a file
+tools/VertexData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/VertexData.cpp.s
+.PHONY : tools/VertexData.cpp.s
+
+tools/Window.o: tools/Window.cpp.o
+.PHONY : tools/Window.o
+
+# target to build an object file
+tools/Window.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Window.cpp.o
+.PHONY : tools/Window.cpp.o
+
+tools/Window.i: tools/Window.cpp.i
+.PHONY : tools/Window.i
+
+# target to preprocess a source file
+tools/Window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Window.cpp.i
+.PHONY : tools/Window.cpp.i
+
+tools/Window.s: tools/Window.cpp.s
+.PHONY : tools/Window.s
+
+# target to generate assembly for a file
+tools/Window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/tools/Window.cpp.s
+.PHONY : tools/Window.cpp.s
 
 tools/cmMath/matrix4.o: tools/cmMath/matrix4.cpp.o
 .PHONY : tools/cmMath/matrix4.o
@@ -333,21 +549,48 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... tools/B0.o"
-	@echo "... tools/B0.i"
-	@echo "... tools/B0.s"
-	@echo "... tools/B1.o"
-	@echo "... tools/B1.i"
-	@echo "... tools/B1.s"
-	@echo "... tools/B2.o"
-	@echo "... tools/B2.i"
-	@echo "... tools/B2.s"
-	@echo "... tools/R0.o"
-	@echo "... tools/R0.i"
-	@echo "... tools/R0.s"
+	@echo "... tools/Camera.o"
+	@echo "... tools/Camera.i"
+	@echo "... tools/Camera.s"
+	@echo "... tools/CubeMap.o"
+	@echo "... tools/CubeMap.i"
+	@echo "... tools/CubeMap.s"
+	@echo "... tools/GameObject.o"
+	@echo "... tools/GameObject.i"
+	@echo "... tools/GameObject.s"
+	@echo "... tools/Light.o"
+	@echo "... tools/Light.i"
+	@echo "... tools/Light.s"
+	@echo "... tools/Program.o"
+	@echo "... tools/Program.i"
+	@echo "... tools/Program.s"
+	@echo "... tools/SceneManager.o"
+	@echo "... tools/SceneManager.i"
+	@echo "... tools/SceneManager.s"
+	@echo "... tools/Shader.o"
+	@echo "... tools/Shader.i"
+	@echo "... tools/Shader.s"
+	@echo "... tools/SkyBox.o"
+	@echo "... tools/SkyBox.i"
+	@echo "... tools/SkyBox.s"
+	@echo "... tools/Texture.o"
+	@echo "... tools/Texture.i"
+	@echo "... tools/Texture.s"
+	@echo "... tools/Transform.o"
+	@echo "... tools/Transform.i"
+	@echo "... tools/Transform.s"
 	@echo "... tools/U0.o"
 	@echo "... tools/U0.i"
 	@echo "... tools/U0.s"
+	@echo "... tools/UI_Element.o"
+	@echo "... tools/UI_Element.i"
+	@echo "... tools/UI_Element.s"
+	@echo "... tools/VertexData.o"
+	@echo "... tools/VertexData.i"
+	@echo "... tools/VertexData.s"
+	@echo "... tools/Window.o"
+	@echo "... tools/Window.i"
+	@echo "... tools/Window.s"
 	@echo "... tools/cmMath/matrix4.o"
 	@echo "... tools/cmMath/matrix4.i"
 	@echo "... tools/cmMath/matrix4.s"

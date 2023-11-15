@@ -1,8 +1,12 @@
-#ifndef B2_H
-#define B2_H
+#ifndef SCENEMANAGER
+#define SCENEMANAGER
 
-#include "B1.h"
-#include "R0.h"
+#include "Program.h"
+#include "SkyBox.h"
+#include "GameObject.h"
+#include "UI_Element.h"
+#include "Light.h"
+#include "Camera.h"
 
 class SceneManager{
 protected:

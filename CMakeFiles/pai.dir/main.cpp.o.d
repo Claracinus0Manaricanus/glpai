@@ -168,12 +168,24 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/c++/13.2.1/ctime \
  /usr/include/c++/13.2.1/bits/parse_numbers.h /usr/include/GL/glew.h \
  /usr/include/GL/glu.h /usr/include/GL/gl.h /usr/include/GLFW/glfw3.h \
- /home/cm/codes/c++/glpai/tools/T0.h /home/cm/codes/c++/glpai/tools/B0.h \
- /home/cm/codes/c++/glpai/tools/T0.h /home/cm/codes/c++/glpai/tools/B1.h \
- /home/cm/codes/c++/glpai/tools/B0.h /usr/include/c++/13.2.1/cstring \
+ /home/cm/codes/c++/glpai/tools/T0.h \
+ /home/cm/codes/c++/glpai/tools/SceneManager.h \
+ /home/cm/codes/c++/glpai/tools/Program.h \
+ /home/cm/codes/c++/glpai/tools/Shader.h /usr/include/c++/13.2.1/iostream \
+ /home/cm/codes/c++/glpai/tools/T0.h \
+ /home/cm/codes/c++/glpai/tools/SkyBox.h /usr/include/c++/13.2.1/cstring \
  /usr/include/string.h /usr/include/strings.h \
- /home/cm/codes/c++/glpai/tools/B2.h /home/cm/codes/c++/glpai/tools/B1.h \
- /home/cm/codes/c++/glpai/tools/R0.h /home/cm/codes/c++/glpai/tools/R0.h \
- /home/cm/codes/c++/glpai/tools/U0.h \
+ /home/cm/codes/c++/glpai/tools/CubeMap.h \
+ /home/cm/codes/c++/glpai/tools/GameObject.h \
+ /home/cm/codes/c++/glpai/tools/Transform.h \
+ /home/cm/codes/c++/glpai/tools/cmMath/matrix4.h \
  /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
- /home/cm/codes/c++/glpai/tools/cmMath/../T0.h
+ /home/cm/codes/c++/glpai/tools/cmMath/../T0.h \
+ /home/cm/codes/c++/glpai/tools/VertexData.h \
+ /home/cm/codes/c++/glpai/tools/Texture.h \
+ /home/cm/codes/c++/glpai/tools/UI_Element.h \
+ /home/cm/codes/c++/glpai/tools/Light.h \
+ /home/cm/codes/c++/glpai/tools/Camera.h \
+ /home/cm/codes/c++/glpai/tools/Window.h \
+ /home/cm/codes/c++/glpai/tools/Camera.h \
+ /home/cm/codes/c++/glpai/tools/U0.h

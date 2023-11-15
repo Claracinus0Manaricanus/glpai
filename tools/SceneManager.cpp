@@ -1,4 +1,4 @@
-#include "B2.h"
+#include "SceneManager.h"
 
 
 /*********************************************************************************/
@@ -134,7 +134,7 @@ GameObject* SceneManager::getObject(const char* name, int* index){
 			return objects[i];
 		}
 	}
-	(*index)=-1;
+	if(index!=NULL)(*index)=-1;
 	return NULL;
 }
 
@@ -151,7 +151,7 @@ Light* SceneManager::getLight(const char* name, int* index){
 			return lights[i];
 		}
 	}
-	(*index)=-1;
+	if(index!=NULL)(*index)=-1;
 	return NULL;
 }
 
@@ -168,7 +168,7 @@ UI_Element* SceneManager::getUI_Element(const char* name, int* index){
 			return UIElements[i];
 		}
 	}
-	(*index)=-1;
+	if(index!=NULL)(*index)=-1;
 	return NULL;
 }
 
@@ -185,7 +185,7 @@ SkyBox* SceneManager::getSkyBox(const char* name, int* index){
 			return skyboxes[i];
 		}
 	}
-	(*index)=-1;
+	if(index!=NULL)(*index)=-1;
 	return NULL;
 }
 
