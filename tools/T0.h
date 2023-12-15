@@ -186,13 +186,38 @@ struct vec4{
 };
 
 struct vertex{
-	vec2 tex={0,0};//x,y
-	vec3 pos={0,0,0},nor={0,0,0};//x,y,z
+	vec3 pos={0,0,0};//x,y,z
+	vec3 nor={0,0,0};//x,y,z
 	vec4 col={1,1,1,1};//x,y,z,w
+	vec2 tex={0,0};//x,y
 
 	vertex operator=(vertex a){//not tested
-		return {a.tex,a.pos,a.nor,a.col};
+		return {a.pos,a.nor,a.col,a.tex};
 	}
+};
+
+struct MeshData{
+	uint32_t vCount=0;
+	vertex* vertices=NULL;
+	uint32_t fCount=0;
+	vertex* faces=NULL;
+};
+
+struct TransformData{
+	vec3 position={0,0,0};
+	vec3 rotation={0,0,0};
+	vec3 scale={1,1,1};
+};
+
+struct TextureData{
+	char* imageFile=NULL;
+	bool useMipmap=true;
+};
+
+struct objectData{
+	MeshData mData;
+	TransformData trData;
+	TextureData texData;
 };
 
 #endif

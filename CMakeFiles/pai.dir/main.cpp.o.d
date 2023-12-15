@@ -181,7 +181,7 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/tools/cmMath/matrix4.h \
  /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
  /home/cm/codes/c++/glpai/tools/cmMath/../T0.h \
- /home/cm/codes/c++/glpai/tools/VertexData.h \
+ /home/cm/codes/c++/glpai/tools/Mesh.h \
  /home/cm/codes/c++/glpai/tools/Texture.h \
  /home/cm/codes/c++/glpai/tools/UI_Element.h \
  /home/cm/codes/c++/glpai/tools/Light.h \

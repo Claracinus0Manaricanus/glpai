@@ -22,7 +22,7 @@ void main(){
 	vec4 texCol=texture(tex0,fragTex);
 	lVec=light[0].xyz-fragPos;
 	lCol=light[1];
-	intensity=dot(normalize(lVec),normalize(fragNor))*lCol.w;
+	intensity=dot(normalize(lVec),fragNor)*lCol.w;
 	clamp(intensity,0,1);
 	l_length=length(lVec);
 	color=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*intensity/l_length,texCol.w);

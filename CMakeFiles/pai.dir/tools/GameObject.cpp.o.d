@@ -134,5 +134,5 @@ CMakeFiles/pai.dir/tools/GameObject.cpp.o: \
  /home/cm/codes/c++/glpai/tools/cmMath/matrix4.h \
  /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
  /home/cm/codes/c++/glpai/tools/cmMath/../T0.h \
- /home/cm/codes/c++/glpai/tools/VertexData.h \
+ /home/cm/codes/c++/glpai/tools/Mesh.h \
  /home/cm/codes/c++/glpai/tools/Texture.h

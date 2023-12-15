@@ -52,12 +52,15 @@ void Transform::rotate(vec3 inRot){
 
 void Transform::setScale(vec3 inSca){
 	scale=inSca;
+	updateNormals=true;
+	calculateMatrix();
 }
 
-void Transform::setTransform(vec3 inPos, vec3 inRot, vec3 inSca){
-	position=inPos;
-	rotation=inRot;
-	scale=inSca;
+void Transform::setTransform(TransformData* Data){
+	position=Data->position;
+	rotation=Data->rotation;
+	scale=Data->scale;
+	updateNormals=true;
 	calculateMatrix();
 }
 
@@ -121,6 +124,14 @@ void Transform::calculateMatrix(){
 	}else{
 		lookAt(*LookingAt);
 	}
+
+	float scaleM4[16]{
+		scale.x, 0, 0, 0,
+		0, scale.y, 0, 0,
+		0, 0, scale.z, 0,
+		0, 0, 0, 1
+	};
+
 	float transM4[16]={
 		1,0,0,position.x,
 		0,1,0,position.y,
@@ -130,5 +141,7 @@ void Transform::calculateMatrix(){
 
 	//final multiplication
 	free(OVM);
-	OVM=m4_multiply(transM4,rotM4);
+	float* tmp4=m4_multiply(rotM4,scaleM4);
+	OVM=m4_multiply(transM4,tmp4);
+	free(tmp4);
 }

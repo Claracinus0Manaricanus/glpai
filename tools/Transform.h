@@ -11,6 +11,7 @@ class Transform{//add scale //needs better lookAt compatability
 protected:
 	char* NAME=NULL;
 	vec3* LookingAt=NULL;
+	bool updateNormals=true;
 
 public:
 	vec3 position;
@@ -30,7 +31,7 @@ public:
 	void setPosition(vec3 inPos);
 	void setRotation(vec3 inRot);
 	void setScale(vec3 inSca);
-	void setTransform(vec3 inPos, vec3 inRot, vec3 inSca);
+	void setTransform(TransformData* Data);
 	
 	//transformations
 	void move(vec3 movement);

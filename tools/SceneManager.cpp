@@ -9,7 +9,7 @@
 SceneManager::SceneManager(){
 	//data holders
 	objects=(GameObject**)malloc(sizeof(GameObject*));
-	lights=(Light**)malloc(sizeof(Light*));
+	lights=(baseLight**)malloc(sizeof(baseLight*));
 	UIElements=(UI_Element**)malloc(sizeof(UI_Element*));
 	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
 	//shader programs WIP needs uniform control
@@ -79,26 +79,37 @@ int SceneManager::setPrograms(program* in_pFB, program* in_pL, program* in_pUI, 
 
 
 //array control
-GameObject* SceneManager::addObject(const char* name, vec3 inPos, vec3 inRot, vec3 inSca, int inVCount, vertex* iVertices, const char* imageFileName, bool useMipmap){
+GameObject* SceneManager::addObject(const char* name, objectData* Data){
 	//resize array
 	L_objects++;
 	objects=(GameObject**)realloc(objects,sizeof(GameObject*)*L_objects);
 	//element creation
-	objects[L_objects-1]=new GameObject(inPos,inRot,inSca,inVCount,iVertices,name);
-	if(imageFileName!=NULL){
-		objects[L_objects-1]->loadTexture(imageFileName,useMipmap);
-		objects[L_objects-1]->useColor(false);
+	objects[L_objects-1]=new GameObject(name);
+	objects[L_objects-1]->loadMesh(&(Data->mData));
+	objects[L_objects-1]->setTransform(&(Data->trData));
+	if(Data->texData.imageFile!=NULL){
+		objects[L_objects-1]->loadTexture(Data->texData.imageFile,Data->texData.useMipmap);
 	}
 	//return newly created element
 	return objects[L_objects-1];
 }
 
-Light* SceneManager::addLight(const char* name, int iType, vec3 iPos, vec4 iCol){
+baseLight* SceneManager::addLight(const char* name, int iType, vec4 iCol, vec3* lData){
 	//resize array
 	L_lights++;
 	//element creation
-	lights=(Light**)realloc(lights,sizeof(Light*)*L_lights);
-	lights[L_lights-1]=new Light(iType,iPos,iCol,name);
+	lights=(baseLight**)realloc(lights,sizeof(baseLight*)*L_lights);
+	
+	switch(iType){
+		case 0://pointLight
+			lights[L_lights-1]=new pointLight(iCol,lData,name);
+		break;
+
+		case 1://directionalLight
+			lights[L_lights-1]=new directionalLight(iCol,lData,name);
+		break;
+	}
+
 	//return newly created element
 	return lights[L_lights-1];
 }
@@ -144,7 +155,7 @@ GameObject* SceneManager::getObject(int index){
 	return NULL;
 }
 
-Light* SceneManager::getLight(const char* name, int* index){
+baseLight* SceneManager::getLight(const char* name, int* index){
 	for(int i=0;i<L_lights;i++){
 		if(strcmp(lights[i]->NAME,name)==0){
 			if(index!=NULL)(*index)=i;
@@ -155,7 +166,7 @@ Light* SceneManager::getLight(const char* name, int* index){
 	return NULL;
 }
 
-Light* SceneManager::getLight(int index){
+baseLight* SceneManager::getLight(int index){
 	if(index<L_lights)
 		return lights[index];
 	return NULL;
@@ -229,7 +240,7 @@ int SceneManager::deleteLight(int index){
 		for(int i=index;i<L_lights;i++){
 			lights[i]=lights[i+1];
 		}
-		lights=(Light**)realloc(lights,sizeof(Light*)*L_lights);
+		lights=(baseLight**)realloc(lights,sizeof(baseLight*)*L_lights);
 		return index;
 	}
 	return -1;
@@ -281,7 +292,7 @@ int SceneManager::draw(Camera* cam, ivec2 resolution){
 	glActiveTexture(GL_TEXTURE0);
 
 	//GameObject
-	if(S_FULLBRIGHT){
+	if(S_FULLBRIGHT || L_lights==0){
 		//update camerauniforms
 		pFB[0].setMat4("CVM",cam->OVM);
 
@@ -303,7 +314,7 @@ int SceneManager::draw(Camera* cam, ivec2 resolution){
 		//ObjectCount X LightCount calls
 		for(int i=0;i<L_lights;i++){//render with lights
 			//create shadow map (per light)
-			pL[lights[i]->type].setVec4Array("light",2,lights[i]->data);
+			pL[lights[i]->type].setVec4Array("light",2,lights[i]->rawData);//WIP
 			
 			//render using shadow map (per light)
 			for(int k=0;k<L_objects;k++){

@@ -18,7 +18,7 @@ void main(){
     vec4 texCol=texture(tex0,fragTex);
     vec3 lVec=light[0].xyz;
     vec4 lCol=light[1];
-    float intensity=dot(normalize(lVec),normalize(fragNor))*lCol.w;
+    float intensity=dot(normalize(lVec),fragNor)*lCol.w;
     clamp(intensity,0,1);
     color=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*intensity,texCol.w);
 }

@@ -19,7 +19,7 @@ out vec2 fragTex;
 void main(){
     mat4 WVM=CVM*OVM;
     fragPos=vec4(OVM*vec4(pos.xyz,1)).xyz;
-    fragNor=vec4(OVM*vec4(nor.xyz,0)).xyz;
+    fragNor=normalize(vec4(OVM*vec4(nor.xyz,0)).xyz);
     fragCol=col;
     fragTex=tex;
     gl_Position=WVM*vec4(pos.xyz,1);

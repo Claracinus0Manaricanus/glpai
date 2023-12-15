@@ -103,25 +103,46 @@ int main(){
 	SceneManager mainManager;
 	//mainManager.setPrograms(pFB,pL,&oUI,&pSky);
 
-	//vertex datas
 	//ground
-	vertex verts[6]={
-	//	  tex   position    normal  color
-		{{0,1},{-1,0,-1},{0,1,0},{1,1,1,1}},
-		{{0,0},{-1,0, 1},{0,1,0},{1,1,1,1}},
-		{{1,0},{ 1,0, 1},{0,1,0},{1,1,1,1}},
-		{{1,0},{ 1,0, 1},{0,1,0},{1,1,1,1}},
-		{{1,1},{ 1,0,-1},{0,1,0},{1,1,1,1}},
-		{{0,1},{-1,0,-1},{0,1,0},{1,1,1,1}}
+	vertex verts[6]={//ground vertex data
+	//	 position   normal   color    UV
+		{{-1,0,-1},{0,1,0},{1,1,1,1},{0,1}},
+		{{-1,0, 1},{0,1,0},{1,1,1,1},{0,0}},
+		{{ 1,0, 1},{0,1,0},{1,1,1,1},{1,0}},
+		{{ 1,0, 1},{0,1,0},{1,1,1,1},{1,0}},
+		{{ 1,0,-1},{0,1,0},{1,1,1,1},{1,1}},
+		{{-1,0,-1},{0,1,0},{1,1,1,1},{0,1}}
 	};
-	//giving datas to objects
-	//ground
-	mainManager.addObject("ground",{0,0,0},{0,0,0},{50,1,50},6,verts,"images/Dark/texture_13.png",false);
+	//constructing data structure for gound
+	objectData tmpData;
+	tmpData.mData.vCount=6;
+	tmpData.mData.vertices=verts;
+	tmpData.trData={{0,0,0},{0,0,0},{50,1,50}};
+	tmpData.texData.imageFile="images/Dark/texture_13.png";//forbidden needs fix
+	tmpData.texData.useMipmap=false;
+
+	mainManager.addObject("ground",&tmpData);
 	//mComp
 	int oL=0;
 	vertex* o=importOBJ("objects/mComp.obj",oL);
-	GameObject* mComp=mainManager.addObject("mComp",{0,10,0},{0,0,0},{1,1,1},oL,o);
-	mainManager.addObject("mComp",{10,10,10},{0,0,0},{1,1,1},oL,o);
+	
+	//constructing data structure for mComp
+	tmpData.mData.vCount=oL;
+	tmpData.mData.vertices=o;
+	tmpData.trData={{0,1,0},{0,0,0},{0.1f,0.1f,0.1f}};//position, rotation, scale
+	tmpData.texData.imageFile=NULL;
+	tmpData.texData.useMipmap=false;
+
+	mainManager.addObject("mComp",&tmpData);
+
+	tmpData.trData={{0,3.5f,0},{0,0,0},{0.5f,0.5f,0.5f}};
+	mainManager.addObject("mComp",&tmpData);
+
+	tmpData.trData={{0,10,0},{0,0,0},{1.0f,1.0f,1.0f}};
+	mainManager.addObject("mComp",&tmpData);
+
+	//free vertex data
+	free(o);
 
 	//ui elements
 	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);
@@ -144,7 +165,10 @@ int main(){
 
 
 	//mainManager.addLight("mainL",0,{0,20,0},{1,1,1,50});
-	mainManager.addLight("direct",1,{1,1,1},{1,1,1,1});
+	vec3 lData[1]={1,1,1};
+	vec3 lData2[1]={-0.4f,1,-1};
+	mainManager.addLight("direct",1,{1,1,1,1},lData);
+	//mainManager.addLight("point",0,{0.3f,0.1f,1,1},lData2);
 
 
 	/******************************************************************************************/
