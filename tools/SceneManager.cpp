@@ -8,10 +8,11 @@
 //constructors
 SceneManager::SceneManager(){
 	//data holders
-	objects=(GameObject**)malloc(sizeof(GameObject*));
-	lights=(baseLight**)malloc(sizeof(baseLight*));
-	UIElements=(UI_Element**)malloc(sizeof(UI_Element*));
-	skyboxes=(SkyBox**)malloc(sizeof(SkyBox*));
+	objects = (GameObject**)malloc(sizeof(GameObject*));
+	lights = (baseLight**)malloc(sizeof(baseLight*));
+	UIElements = (UI_Element**)malloc(sizeof(UI_Element*));
+	skyboxes = (SkyBox**)malloc(sizeof(SkyBox*));
+	
 	//shader programs WIP needs uniform control
 	pFB[0].load(
 	"shaders/perspective(FB)/texture/vert.sha",
@@ -35,21 +36,13 @@ SceneManager::SceneManager(){
 	pUI.load(
 	"shaders/orthographic/UItex/vert.sha",
 	"shaders/orthographic/UItex/frag.sha");
+	
 	//texture units
 	pUI.setInt("textureTU",0);
 	pSky.setInt("tex0",0);
 	pFB[0].setInt("tex0",0);
 	pL[0].setInt("tex0",0);
 	pL[1].setInt("tex0",0);
-	//for shadowmapping
-	glGenTextures(1,&cubeDepthMap);
-	glBindTexture(GL_TEXTURE_CUBE_MAP,cubeDepthMap);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glBindTexture(GL_TEXTURE_CUBE_MAP,0);
 }
 
 
@@ -65,30 +58,30 @@ SceneManager::~SceneManager(){
 //program control
 int SceneManager::setPrograms(program* in_pFB, program* in_pL, program* in_pUI,  program* in_pSky){
 	if(in_pFB!=NULL){
-		pFB[0]=in_pFB[0];
-		pFB[1]=in_pFB[1];
+		pFB[0] = in_pFB[0];
+		pFB[1] = in_pFB[1];
 	}
-	if(in_pL!=NULL){
-		pL[0]=in_pL[0];
-		pL[1]=in_pL[1];
+	if(in_pL != NULL){
+		pL[0] = in_pL[0];
+		pL[1] = in_pL[1];
 	}
-	if(in_pUI!=NULL)pUI=(*in_pUI);
-	if(in_pSky!=NULL)pSky=(*in_pSky);
+	if(in_pUI!=NULL)pUI = (*in_pUI);
+	if(in_pSky!=NULL)pSky = (*in_pSky);
 	return 0;
 }
 
 
 //array control
-GameObject* SceneManager::addObject(const char* name, objectData* Data){
+GameObject* SceneManager::addObject(const char* name, objectData* data){
 	//resize array
 	L_objects++;
-	objects=(GameObject**)realloc(objects,sizeof(GameObject*)*L_objects);
+	objects = (GameObject**)realloc(objects,sizeof(GameObject*)*L_objects);
 	//element creation
-	objects[L_objects-1]=new GameObject(name);
-	objects[L_objects-1]->loadMesh(&(Data->mData));
-	objects[L_objects-1]->setTransform(&(Data->trData));
-	if(Data->texData.imageFile!=NULL){
-		objects[L_objects-1]->loadTexture(Data->texData.imageFile,Data->texData.useMipmap);
+	objects[L_objects-1] = new GameObject(name);
+	objects[L_objects-1]->setMesh(&(data->mData));
+	objects[L_objects-1]->setTransform(&(data->trData));
+	if(data->texData.imageFile != NULL){
+		objects[L_objects-1]->loadTexture(&(data->texData));
 	}
 	//return newly created element
 	return objects[L_objects-1];
@@ -98,15 +91,15 @@ baseLight* SceneManager::addLight(const char* name, int iType, vec4 iCol, vec3* 
 	//resize array
 	L_lights++;
 	//element creation
-	lights=(baseLight**)realloc(lights,sizeof(baseLight*)*L_lights);
+	lights = (baseLight**)realloc(lights,sizeof(baseLight*)*L_lights);
 	
 	switch(iType){
 		case 0://pointLight
-			lights[L_lights-1]=new pointLight(iCol,lData,name);
+			lights[L_lights-1] = new pointLight(iCol,lData,name);
 		break;
 
 		case 1://directionalLight
-			lights[L_lights-1]=new directionalLight(iCol,lData,name);
+			lights[L_lights-1] = new directionalLight(iCol,lData,name);
 		break;
 	}
 
@@ -114,14 +107,14 @@ baseLight* SceneManager::addLight(const char* name, int iType, vec4 iCol, vec3* 
 	return lights[L_lights-1];
 }
 
-UI_Element* SceneManager::addUI_Element(const char* name, vec2 iPos, vec2 iScale, const char* filename){
+UI_Element* SceneManager::addUI_Element(const char* name, vec2 iPos, vec2 iScale, TextureData* data){
 	//resize array
 	L_UIElements++;
-	UIElements=(UI_Element**)realloc(UIElements,sizeof(UI_Element*)*L_UIElements);
+	UIElements = (UI_Element**)realloc(UIElements,sizeof(UI_Element*)*L_UIElements);
 	//element creation
-	UIElements[L_UIElements-1]=new UI_Element(iPos,iScale,name);
-	if(filename!=NULL)
-		UIElements[L_UIElements-1]->loadTexture(filename);
+	UIElements[L_UIElements-1] = new UI_Element(iPos,iScale,name);
+	if(data->imageFile != NULL)
+		UIElements[L_UIElements-1]->loadTexture(data);
 	//return newly created element
 	return UIElements[L_UIElements-1];
 }
@@ -129,9 +122,9 @@ UI_Element* SceneManager::addUI_Element(const char* name, vec2 iPos, vec2 iScale
 SkyBox* SceneManager::addSkyBox(const char* name, const char* sides[6]){
 	//resize array
 	L_skyboxes++;
-	skyboxes=(SkyBox**)realloc(skyboxes,sizeof(SkyBox*)*L_skyboxes);
+	skyboxes = (SkyBox**)realloc(skyboxes,sizeof(SkyBox*)*L_skyboxes);
 	//element creation
-	skyboxes[L_skyboxes-1]=new SkyBox(sides,name);
+	skyboxes[L_skyboxes-1] = new SkyBox(sides,name);
 	//return newly created element
 	return skyboxes[L_skyboxes-1];
 }
@@ -140,12 +133,12 @@ SkyBox* SceneManager::addSkyBox(const char* name, const char* sides[6]){
 //element selector
 GameObject* SceneManager::getObject(const char* name, int* index){
 	for(int i=0;i<L_objects;i++){
-		if(strcmp(objects[i]->NAME,name)==0){
-			if(index!=NULL)(*index)=i;
+		if(strcmp(objects[i]->NAME,name) == 0){
+			if(index!=NULL)(*index) = i;
 			return objects[i];
 		}
 	}
-	if(index!=NULL)(*index)=-1;
+	if(index!=NULL)(*index) = -1;
 	return NULL;
 }
 
@@ -301,7 +294,11 @@ int SceneManager::draw(Camera* cam, ivec2 resolution){
 			//set functions already call use
 			pFB[0].setMat4("OVM",objects[i]->OVM);//object view matrix
 			objects[i]->bind();
-			glDrawArrays(GL_TRIANGLES,0,objects[i]->getVCount());
+			if(objects[k]->fCount == 0){//without index buffer
+				glDrawArrays(GL_TRIANGLES, 0, objects[k]->vCount);
+			}else{//with index buffer
+				glDrawElements(GL_TRIANGLES, objects[k]->fCount, GL_UNSIGNED_INT, (void*)0);
+			}
 			objects[i]->unbind();
 		}
 
@@ -320,7 +317,11 @@ int SceneManager::draw(Camera* cam, ivec2 resolution){
 			for(int k=0;k<L_objects;k++){
 				pL[lights[i]->type].setMat4("OVM",objects[k]->OVM);//object view matrix
 				objects[k]->bind();
-				glDrawArrays(GL_TRIANGLES,0,objects[k]->getVCount());
+				if(objects[k]->fCount == 0){//without index buffer
+					glDrawArrays(GL_TRIANGLES, 0, objects[k]->vCount);
+				}else{//with index buffer
+					glDrawElements(GL_TRIANGLES, objects[k]->fCount, GL_UNSIGNED_INT, (void*)0);
+				}
 				objects[k]->unbind();
 			}
 			glBlendFunc(GL_SRC_ALPHA,GL_DST_ALPHA);

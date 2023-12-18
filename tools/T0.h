@@ -11,6 +11,7 @@
 #include <cstdint>
 
 
+//vectors
 struct ivec2{
 	int x,y;
 
@@ -185,6 +186,7 @@ struct vec4{
 	}
 };
 
+//vertex
 struct vertex{
 	vec3 pos={0,0,0};//x,y,z
 	vec3 nor={0,0,0};//x,y,z
@@ -196,11 +198,12 @@ struct vertex{
 	}
 };
 
+//class Datas
 struct MeshData{
 	uint32_t vCount=0;
 	vertex* vertices=NULL;
 	uint32_t fCount=0;
-	vertex* faces=NULL;
+	unsigned int* faces=NULL;
 };
 
 struct TransformData{

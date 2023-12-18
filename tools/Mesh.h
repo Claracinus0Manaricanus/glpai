@@ -10,7 +10,7 @@ protected:
 	bool updated=false;//if there is a change
 	int vCount=0;//total vertices
 	vertex* vertices=NULL;
-	unsigned int fCount=0;//face count
+	unsigned int fCount=0;//face count (total face times 3, array length)
 	unsigned int* faces=NULL;//face data (in triangles)
 	vec3* normals=NULL;//for scaling calculations (workaround)
 
@@ -24,7 +24,7 @@ public:
 
 	//loaders
 	int setColor(vec4 inCol);
-	int loadMesh(MeshData* Data);
+	int setMesh(MeshData* Data);
 
 	//extractors
 	int getVCount();

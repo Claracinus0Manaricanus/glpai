@@ -2,24 +2,19 @@
 #include "stb_image.h"
 
 //constructors
-Texture::Texture(){
+Texture::Texture(TextureData* data){
 	glGenTextures(1,&ID);
+	
 	bind();
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	unbind();
-	loadDefault();
-}
-
-Texture::Texture(const char* filename){
-	glGenTextures(1,&ID);
-	bind();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	unbind();
-	load(filename,false);
+	
+	if(data == NULL)
+		loadDefault();
+	else
+		load(data);
 }
 
 
@@ -30,40 +25,53 @@ Texture::~Texture(){
 
 
 //loaders
-int Texture::load(const char* filename,bool mipmap){
-	data=stbi_load(filename,&iWidth,&iHeight,&iChannel,0);
+int Texture::load(TextureData* data){
+	if(data == NULL){
+		printf("can't load image, data is NULL!\n");
+		return -1;
+	}
+	
+	texData = stbi_load(data->imageFile,&iWidth,&iHeight,&iChannel,0);
 
-	if(iChannel<3)
+	if(texData == NULL){
+		printf("Failed to load image: %s\n",data->imageFile);
+		return -1;
+	}
+
+	if(iChannel < 3)
 		return -1;
 
 	bind();
 
-	if(iChannel==3)
-		glTexImage2D(GL_TEXTURE_2D,0,GL_RGB8,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,data);
-	if(iChannel==4)
-		glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,iWidth,iHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+	if(iChannel == 3)
+		glTexImage2D(GL_TEXTURE_2D,0,GL_RGB8,iWidth,iHeight,0,GL_RGB,GL_UNSIGNED_BYTE,texData);
+	if(iChannel == 4)
+		glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,iWidth,iHeight,0,GL_RGBA,GL_UNSIGNED_BYTE,texData);
 
-	if(mipmap)
+	if(data->useMipmap){
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-	else
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	if(mipmap)
 		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	}
 
 	unbind();
-	stbi_image_free(data);
+	stbi_image_free(texData);
 	return 0;
 }
 
 int Texture::loadDefault(){
 	bind();
-	data=(uint8_t*)malloc(32);
-	data[0]=255;data[1]=255;data[2]=255;data[3]=255;
-	glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+	texData = (uint8_t*)malloc(32);
+	texData[0] = 255;
+	texData[1] = 255;
+	texData[2] = 255;
+	texData[3] = 255;
+	glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA8,1,1,0,GL_RGBA,GL_UNSIGNED_BYTE,texData);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	unbind();
-	free(data);
+	free(texData);
 	return 0;
 }
 

@@ -4,7 +4,7 @@
 Mesh::Mesh(){}
 
 Mesh::Mesh(MeshData* data){
-	loadMesh(data);
+	setMesh(data);
 }
 
 
@@ -26,7 +26,7 @@ int Mesh::setColor(vec4 inCol){
 	return 0;
 }
 
-int Mesh::loadMesh(MeshData* data){
+int Mesh::setMesh(MeshData* data){
 	//vertices
 	vCount=data->vCount;
 	vertices=(vertex*)realloc(vertices,sizeof(vertex)*vCount);
@@ -39,9 +39,11 @@ int Mesh::loadMesh(MeshData* data){
 	}
 	
 	//faces
-	fCount=data->fCount;
-	faces=(unsigned int*)realloc(faces,sizeof(int)*fCount);
-	memcpy(faces,data->faces,sizeof(int)*fCount);
+	fCount = data->fCount;
+	if(fCount != 0){
+		faces = (unsigned int*)realloc(faces, sizeof(int)*fCount);
+		memcpy(faces, data->faces, sizeof(int)*fCount);
+	}
 
 	updated=true;
 	return 0;

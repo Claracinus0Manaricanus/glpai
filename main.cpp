@@ -104,48 +104,63 @@ int main(){
 	//mainManager.setPrograms(pFB,pL,&oUI,&pSky);
 
 	//ground
-	vertex verts[6]={//ground vertex data
+	vertex verts[4]={//ground vertex data
 	//	 position   normal   color    UV
 		{{-1,0,-1},{0,1,0},{1,1,1,1},{0,1}},
 		{{-1,0, 1},{0,1,0},{1,1,1,1},{0,0}},
 		{{ 1,0, 1},{0,1,0},{1,1,1,1},{1,0}},
-		{{ 1,0, 1},{0,1,0},{1,1,1,1},{1,0}},
-		{{ 1,0,-1},{0,1,0},{1,1,1,1},{1,1}},
-		{{-1,0,-1},{0,1,0},{1,1,1,1},{0,1}}
+		{{ 1,0,-1},{0,1,0},{1,1,1,1},{1,1}}
 	};
+
+	unsigned int indexes[6]={
+		0,1,2,2,3,0
+	};
+
 	//constructing data structure for gound
 	objectData tmpData;
-	tmpData.mData.vCount=6;
+	tmpData.mData.vCount=4;
 	tmpData.mData.vertices=verts;
+	tmpData.mData.fCount=6;
+	tmpData.mData.faces=indexes;
+
 	tmpData.trData={{0,0,0},{0,0,0},{50,1,50}};
+	
 	tmpData.texData.imageFile="images/Dark/texture_13.png";//forbidden needs fix
 	tmpData.texData.useMipmap=false;
 
-	mainManager.addObject("ground",&tmpData);
+	mainManager.addObject("ground", &tmpData);
+
 	//mComp
 	int oL=0;
-	vertex* o=importOBJ("objects/mComp.obj",oL);
+	vertex* o=importOBJ("objects/mComp.obj", oL);
 	
 	//constructing data structure for mComp
 	tmpData.mData.vCount=oL;
 	tmpData.mData.vertices=o;
+	tmpData.mData.fCount=0;
+	tmpData.mData.faces=NULL;
+
 	tmpData.trData={{0,1,0},{0,0,0},{0.1f,0.1f,0.1f}};//position, rotation, scale
+	
 	tmpData.texData.imageFile=NULL;
 	tmpData.texData.useMipmap=false;
 
-	mainManager.addObject("mComp",&tmpData);
+	mainManager.addObject("mComp", &tmpData);
 
 	tmpData.trData={{0,3.5f,0},{0,0,0},{0.5f,0.5f,0.5f}};
-	mainManager.addObject("mComp",&tmpData);
+	mainManager.addObject("mComp", &tmpData);
 
 	tmpData.trData={{0,10,0},{0,0,0},{1.0f,1.0f,1.0f}};
-	mainManager.addObject("mComp",&tmpData);
+	mainManager.addObject("mComp", &tmpData);
 
 	//free vertex data
 	free(o);
 
 	//ui elements
-	mainManager.addUI_Element("pauseScreen",{0,0},{1,1},"images/utility/paused.png")->setActive(false);
+	TextureData tmpTexData;
+	tmpTexData.imageFile="images/utility/paused.png";
+	tmpTexData.useMipmap=false;
+	UI_Element* pauseMenu=mainManager.addUI_Element("pauseScreen",{0,0},{1,1},&tmpTexData);
 
 	//skyboxes
 	const char* sides[6]={
@@ -262,11 +277,13 @@ int main(){
 
 			//pause screen (unoptimized)
 			mainManager.getUI_Element("pauseScreen")->setActive(false);
+			//pauseMenu->setActive(false);
 		}else{
 			//make cursor visible
 			glfwSetInputMode(w0.getid(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);
 			//pause screen (unoptimized)
 			mainManager.getUI_Element("pauseScreen")->setActive(true);
+			//pauseMenu->setActive(true);
 		}
 		
 

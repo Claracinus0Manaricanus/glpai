@@ -23,8 +23,6 @@ protected:
 	UI_Element** UIElements=NULL;
 	int L_skyboxes=0;
 	SkyBox** skyboxes=NULL;
-	//depth buffers (for lights)
-	uint32_t cubeDepthMap;
 	//programs
 	program pFB[1];//perspective fullbright
 	program pL[2];//perspective light //point 0, directional 1
@@ -45,7 +43,7 @@ public:
 	//array control
 	GameObject* addObject(const char* name, objectData* Data);
 	baseLight* addLight(const char* name, int iType, vec4 iCol, vec3* lData);
-	UI_Element* addUI_Element(const char* name, vec2 iPos, vec2 iScale, const char* filename);
+	UI_Element* addUI_Element(const char* name, vec2 iPos, vec2 iScale, TextureData* data);
 	SkyBox* addSkyBox(const char* name, const char* sides[6]);
 
 	//element selector

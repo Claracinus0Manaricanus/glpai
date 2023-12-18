@@ -8,19 +8,18 @@
 class Texture{
 protected:
 	uint32_t ID;
-	uint8_t* data=NULL;
+	uint8_t* texData=NULL;
 	int iHeight,iWidth,iChannel;
 
 public:
 	//constructors
-	Texture();
-	Texture(const char* filename);
+	Texture(TextureData* data=NULL);
 
 	//destructors
 	~Texture();
 
 	//loaders
-	int load(const char* filename, bool mipmap);
+	int load(TextureData* data);
 	int loadDefault();
 
 	//extractors

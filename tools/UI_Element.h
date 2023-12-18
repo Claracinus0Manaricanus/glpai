@@ -28,7 +28,7 @@ public:
 	//loaders
 	int changePos(vec2 iPos);
 	int changeScale(vec2 iScale);
-	int loadTexture(const char* filename, bool mipmap=true);
+	int loadTexture(TextureData* data);
 	int unloadTexture();
 	int setActive(bool state);
 

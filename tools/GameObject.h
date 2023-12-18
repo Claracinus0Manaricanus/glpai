@@ -11,6 +11,7 @@ class GameObject : public Transform, public Mesh{
 protected:
 	uint32_t VAO;//vertexArray
 	uint32_t VBO;//buffers
+	uint32_t EAB;//element array buffer
 	Texture mainTex;
 
 protected:
@@ -26,7 +27,7 @@ public:
 
 	//loaders
 	int setColor(vec4 inCol);
-	int loadTexture(const char* filename, bool mipmap=true);
+	int loadTexture(TextureData* data);
 	int unloadTexture();
 
 	//utility

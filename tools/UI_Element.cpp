@@ -4,17 +4,19 @@
 UI_Element::UI_Element(vec2 iPos, vec2 iScale, const char* name):
 pos(iPos),scale(iScale){
 	//initialization
-	NAME=(char*)malloc(strlen(name));
+	NAME = (char*)calloc(strlen(name),sizeof(char));
 	memcpy(NAME,name,strlen(name));
 	glGenVertexArrays(1,&vArr);
 	glGenBuffers(1,&posBuff);
 	glGenBuffers(1,&texBuff);
+	
 	//tex coordinates (static)
 	glBindVertexArray(vArr);
 	glBindBuffer(GL_ARRAY_BUFFER,texBuff);
 	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*12,vTex,GL_STATIC_DRAW);
 	glVertexAttribPointer(3,2,GL_FLOAT,GL_FALSE,sizeof(float)*2,(void*)0);
 	glEnableVertexAttribArray(3);
+	
 	//vertex positions
 	updateArrays();
 }
@@ -43,8 +45,8 @@ int UI_Element::changeScale(vec2 iScale){
 	return 0;
 }
 
-int UI_Element::loadTexture(const char* filename, bool mipmap){
-	return mainTex.load(filename,mipmap);
+int UI_Element::loadTexture(TextureData* data){
+	return mainTex.load(data);
 }
 
 int UI_Element::unloadTexture(){
