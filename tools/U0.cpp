@@ -47,7 +47,7 @@ void setWindowVars(bool floating, bool resizable){
 }
 
 
-//file inport
+//file import
 vertex* importOBJ(std::string filename, int& size){//size = element number of array
 	int vPosInd=0,vNorInd=0,vTexInd=0,vArrInd=0,tmpPos=0;
 	//finding out array lengths
@@ -229,3 +229,40 @@ vertex* importOBJ(std::string filename, int& size){//size = element number of ar
 	return vArr;
 }
 //importOBJ needs checks at loading to vArr part
+
+
+//calculation
+MeshData calculateNormals(MeshData* buffer){
+	//allocations
+	vertex* vBuff=(vertex*)calloc(buffer->fCount, sizeof(vertex));
+	
+	//temporary variables
+	vec3 V1 = {0}, V2 = {0}, Nor = {0};
+
+	//calculations
+	for(int i = 0; i < buffer->fCount; i+=3){
+		//creates vectors from first vertex of a face to third and second vertices
+		V1 = buffer->vertices[buffer->faces[i+2]].pos - buffer->vertices[buffer->faces[i]].pos;
+		V2 = buffer->vertices[buffer->faces[i+1]].pos - buffer->vertices[buffer->faces[i]].pos;
+
+		Nor = Normalize(Cross(V2, V1));
+
+		//trasnferring to vBuff vertex array with new normals
+		memcpy(&vBuff[i], &buffer->vertices[buffer->faces[i]], sizeof(vertex));
+		vBuff[i].nor = Nor;
+		memcpy(&vBuff[i+1], &buffer->vertices[buffer->faces[i+1]], sizeof(vertex));
+		vBuff[i+1].nor = Nor;
+		memcpy(&vBuff[i+2], &buffer->vertices[buffer->faces[i+2]], sizeof(vertex));
+		vBuff[i+2].nor = Nor;
+
+	}
+
+	//constructing return data
+	MeshData toRet;
+	toRet.vCount = buffer->fCount;
+	toRet.vertices = vBuff;
+	toRet.fCount = 0;
+	toRet.faces = NULL;
+
+	return toRet;
+}

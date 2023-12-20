@@ -143,7 +143,8 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: /home/cm/codes/c++/glpai/tools/U0.cpp \
  /usr/include/c++/13.2.1/bits/codecvt.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/13.2.1/bits/fstream.tcc \
+ /usr/include/c++/13.2.1/bits/fstream.tcc /usr/include/c++/13.2.1/cstring \
+ /usr/include/string.h /usr/include/strings.h \
  /home/cm/codes/c++/glpai/tools/T0.h /usr/include/c++/13.2.1/math.h \
  /usr/include/c++/13.2.1/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
@@ -163,4 +164,6 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: /home/cm/codes/c++/glpai/tools/U0.cpp \
  /usr/include/c++/13.2.1/tr1/modified_bessel_func.tcc \
  /usr/include/c++/13.2.1/tr1/poly_hermite.tcc \
  /usr/include/c++/13.2.1/tr1/poly_laguerre.tcc \
- /usr/include/c++/13.2.1/tr1/riemann_zeta.tcc
+ /usr/include/c++/13.2.1/tr1/riemann_zeta.tcc \
+ /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
+ /home/cm/codes/c++/glpai/tools/cmMath/../T0.h

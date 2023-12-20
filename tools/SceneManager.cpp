@@ -294,10 +294,10 @@ int SceneManager::draw(Camera* cam, ivec2 resolution){
 			//set functions already call use
 			pFB[0].setMat4("OVM",objects[i]->OVM);//object view matrix
 			objects[i]->bind();
-			if(objects[k]->fCount == 0){//without index buffer
-				glDrawArrays(GL_TRIANGLES, 0, objects[k]->vCount);
+			if(objects[i]->fCount == 0){//without index buffer
+				glDrawArrays(GL_TRIANGLES, 0, objects[i]->vCount);
 			}else{//with index buffer
-				glDrawElements(GL_TRIANGLES, objects[k]->fCount, GL_UNSIGNED_INT, (void*)0);
+				glDrawElements(GL_TRIANGLES, objects[i]->fCount, GL_UNSIGNED_INT, (void*)0);
 			}
 			objects[i]->unbind();
 		}

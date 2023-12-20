@@ -2420,6 +2420,8 @@ CMakeFiles/pai.dir/tools/Transform.cpp.o: tools/Transform.cpp \
 CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp \
   tools/T0.h \
   tools/U0.h \
+  tools/T0.h \
+  tools/cmMath/vectors.h \
   /usr/include/GL/gl.h \
   /usr/include/GL/glew.h \
   /usr/include/GL/glu.h \
@@ -2564,6 +2566,7 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp \
   /usr/include/c++/13.2.1/cstdint \
   /usr/include/c++/13.2.1/cstdio \
   /usr/include/c++/13.2.1/cstdlib \
+  /usr/include/c++/13.2.1/cstring \
   /usr/include/c++/13.2.1/cwchar \
   /usr/include/c++/13.2.1/cwctype \
   /usr/include/c++/13.2.1/debug/assertions.h \
@@ -2633,6 +2636,8 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/sys/cdefs.h \
   /usr/include/sys/select.h \
   /usr/include/sys/single_threaded.h \

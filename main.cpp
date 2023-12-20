@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <math.h>
 #include <string>
 #include <fstream>
@@ -10,6 +10,8 @@
 #include "tools/Window.h"
 #include "tools/Camera.h"
 #include "tools/U0.h"
+
+#include <time.h>
 
 using namespace std;
 
@@ -101,60 +103,58 @@ int main(){
 	/******************************************************************************************/
 	//sceneManager setup and objects
 	SceneManager mainManager;
-	//mainManager.setPrograms(pFB,pL,&oUI,&pSky);
 
-	//ground
-	vertex verts[4]={//ground vertex data
-	//	 position   normal   color    UV
-		{{-1,0,-1},{0,1,0},{1,1,1,1},{0,1}},
-		{{-1,0, 1},{0,1,0},{1,1,1,1},{0,0}},
-		{{ 1,0, 1},{0,1,0},{1,1,1,1},{1,0}},
-		{{ 1,0,-1},{0,1,0},{1,1,1,1},{1,1}}
-	};
-
-	unsigned int indexes[6]={
-		0,1,2,2,3,0
-	};
-
-	//constructing data structure for gound
+	//constructing data structure for ground
 	objectData tmpData;
-	tmpData.mData.vCount=4;
-	tmpData.mData.vertices=verts;
-	tmpData.mData.fCount=6;
-	tmpData.mData.faces=indexes;
 
-	tmpData.trData={{0,0,0},{0,0,0},{50,1,50}};
-	
-	tmpData.texData.imageFile="images/Dark/texture_13.png";//forbidden needs fix
-	tmpData.texData.useMipmap=false;
+	tmpData.trData={{0,0,0},{0,0,0},{0.1f,0.1f,0.1f}};//position, rotation, scale
 
-	mainManager.addObject("ground", &tmpData);
+	int length = 100, width = 100;
+	vertex terrainVerts[width*length];
+	unsigned int terrainIndexes[(width-1)*(length-1)*6];
 
-	//mComp
-	int oL=0;
-	vertex* o=importOBJ("objects/mComp.obj", oL);
-	
-	//constructing data structure for mComp
-	tmpData.mData.vCount=oL;
-	tmpData.mData.vertices=o;
-	tmpData.mData.fCount=0;
-	tmpData.mData.faces=NULL;
+	srand(time(0));
 
-	tmpData.trData={{0,1,0},{0,0,0},{0.1f,0.1f,0.1f}};//position, rotation, scale
-	
+	//terrain vertex data
+	for(int k = 0; k < length; k++){
+		for(int i = 0; i < width; i++){
+			terrainVerts[k*width+i].pos.x=i/1.0f;
+			terrainVerts[k*width+i].pos.y=rand()%101/100.0f;
+			terrainVerts[k*width+i].pos.z=k/1.0f;
+
+			terrainVerts[k*width+i].nor.y=1;
+		}
+	}
+
+	int tInd = 0;
+
+	//terrain index buffer
+	for(int k = 0; k < (length-1); k++){
+		for(int i = 0; i < (width-1); i++){
+			terrainIndexes[tInd]=k*width+i;
+			terrainIndexes[tInd+1]=(k+1)*width+i;
+			terrainIndexes[tInd+2]=(k+1)*width+i+1;
+			terrainIndexes[tInd+3]=(k+1)*width+i+1;
+			terrainIndexes[tInd+4]=k*width+i+1;
+			terrainIndexes[tInd+5]=k*width+i;
+			
+			tInd+=6;
+		}
+	}
+
+	//terrain object data
+	tmpData.mData.vCount=width*length;
+	tmpData.mData.vertices=terrainVerts;
+	tmpData.mData.fCount=(width-1)*(length-1)*6;
+	tmpData.mData.faces=terrainIndexes;
+
+	tmpData.mData = calculateNormals(&tmpData.mData);
+
 	tmpData.texData.imageFile=NULL;
 	tmpData.texData.useMipmap=false;
 
-	mainManager.addObject("mComp", &tmpData);
+	mainManager.addObject("terrain",&tmpData);
 
-	tmpData.trData={{0,3.5f,0},{0,0,0},{0.5f,0.5f,0.5f}};
-	mainManager.addObject("mComp", &tmpData);
-
-	tmpData.trData={{0,10,0},{0,0,0},{1.0f,1.0f,1.0f}};
-	mainManager.addObject("mComp", &tmpData);
-
-	//free vertex data
-	free(o);
 
 	//ui elements
 	TextureData tmpTexData;
@@ -180,7 +180,7 @@ int main(){
 
 
 	//mainManager.addLight("mainL",0,{0,20,0},{1,1,1,50});
-	vec3 lData[1]={1,1,1};
+	vec3 lData[1]={0,1,0};
 	vec3 lData2[1]={-0.4f,1,-1};
 	mainManager.addLight("direct",1,{1,1,1,1},lData);
 	//mainManager.addLight("point",0,{0.3f,0.1f,1,1},lData2);
@@ -198,7 +198,7 @@ int main(){
 	Camera cam0(60);//main camera
 	
 	/*while loop variables*/
-	cam0.move({1,5,1});
+	cam0.move({0,0,0});
 
 
 	/******************************************************************************************/

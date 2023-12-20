@@ -1,10 +1,14 @@
 CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
- /usr/include/stdc-predef.h /usr/include/stdio.h \
- /usr/include/bits/libc-header-start.h /usr/include/features.h \
- /usr/include/features-time64.h /usr/include/bits/wordsize.h \
- /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
- /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-64.h \
+ /usr/include/stdc-predef.h /usr/include/c++/13.2.1/cstdio \
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
+ /usr/include/features.h /usr/include/features-time64.h \
+ /usr/include/bits/wordsize.h /usr/include/bits/timesize.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/long-double.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
+ /usr/include/c++/13.2.1/pstl/pstl_config.h /usr/include/stdio.h \
+ /usr/include/bits/libc-header-start.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdarg.h \
  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
@@ -17,10 +21,6 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/bits/floatn-common.h /usr/include/c++/13.2.1/math.h \
  /usr/include/c++/13.2.1/cmath \
  /usr/include/c++/13.2.1/bits/requires_hosted.h \
- /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
- /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
- /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
- /usr/include/c++/13.2.1/pstl/pstl_config.h \
  /usr/include/c++/13.2.1/bits/cpp_type_traits.h \
  /usr/include/c++/13.2.1/ext/type_traits.h /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
@@ -106,11 +106,11 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/c++/13.2.1/bits/hash_bytes.h \
  /usr/include/c++/13.2.1/bits/string_view.tcc \
  /usr/include/c++/13.2.1/ext/string_conversions.h \
- /usr/include/c++/13.2.1/cstdlib /usr/include/c++/13.2.1/cstdio \
- /usr/include/c++/13.2.1/cerrno /usr/include/errno.h \
- /usr/include/bits/errno.h /usr/include/linux/errno.h \
- /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
- /usr/include/asm-generic/errno-base.h /usr/include/bits/types/error_t.h \
+ /usr/include/c++/13.2.1/cstdlib /usr/include/c++/13.2.1/cerrno \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/bits/types/error_t.h \
  /usr/include/c++/13.2.1/bits/charconv.h \
  /usr/include/c++/13.2.1/bits/basic_string.tcc \
  /usr/include/c++/13.2.1/bits/memory_resource.h \

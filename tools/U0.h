@@ -7,7 +7,9 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include "T0.h"
+#include "cmMath/vectors.h"
 
 
 //input utility
@@ -30,9 +32,12 @@ void setOpenglVersion(int major, int minor, int profile);
 void setWindowVars(bool floating, bool resizable);
 
 
-//file inport
+//file import
 vertex* importOBJ(std::string filename, int& size);//size = element number of array
 //importOBJ needs checks at loading to vArr part
+
+//calculation
+MeshData calculateNormals(MeshData* buffer);//expects a valid index buffer
 
 
 #endif
