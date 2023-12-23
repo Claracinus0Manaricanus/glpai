@@ -35,6 +35,8 @@ void setWindowVars(bool floating, bool resizable);
 //file import
 vertex* importOBJ(std::string filename, int& size);//size = element number of array
 //importOBJ needs checks at loading to vArr part
+MeshData* importHeightMap(const char* filename, float division_constant = 1.0f, int* WIDTH = NULL, int* LENGTH = NULL);
+//accepts 16-bit/color RGB, non-interlaced WIP
 
 //calculation
 MeshData calculateNormals(MeshData* buffer);//expects a valid index buffer

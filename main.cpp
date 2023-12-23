@@ -107,46 +107,9 @@ int main(){
 	//constructing data structure for ground
 	objectData tmpData;
 
-	tmpData.trData={{0,0,0},{0,0,0},{0.1f,0.1f,0.1f}};//position, rotation, scale
+	tmpData.trData={{0,0,0},{0,0,0},{0.1f,0.03f,0.1f}};//position, rotation, scale
 
-	int length = 100, width = 100;
-	vertex terrainVerts[width*length];
-	unsigned int terrainIndexes[(width-1)*(length-1)*6];
-
-	srand(time(0));
-
-	//terrain vertex data
-	for(int k = 0; k < length; k++){
-		for(int i = 0; i < width; i++){
-			terrainVerts[k*width+i].pos.x=i/1.0f;
-			terrainVerts[k*width+i].pos.y=rand()%101/100.0f;
-			terrainVerts[k*width+i].pos.z=k/1.0f;
-
-			terrainVerts[k*width+i].nor.y=1;
-		}
-	}
-
-	int tInd = 0;
-
-	//terrain index buffer
-	for(int k = 0; k < (length-1); k++){
-		for(int i = 0; i < (width-1); i++){
-			terrainIndexes[tInd]=k*width+i;
-			terrainIndexes[tInd+1]=(k+1)*width+i;
-			terrainIndexes[tInd+2]=(k+1)*width+i+1;
-			terrainIndexes[tInd+3]=(k+1)*width+i+1;
-			terrainIndexes[tInd+4]=k*width+i+1;
-			terrainIndexes[tInd+5]=k*width+i;
-			
-			tInd+=6;
-		}
-	}
-
-	//terrain object data
-	tmpData.mData.vCount=width*length;
-	tmpData.mData.vertices=terrainVerts;
-	tmpData.mData.fCount=(width-1)*(length-1)*6;
-	tmpData.mData.faces=terrainIndexes;
+	tmpData.mData = *importHeightMap("images/heightmaps/heighmap.png", 1.0f);
 
 	tmpData.mData = calculateNormals(&tmpData.mData);
 
@@ -198,7 +161,7 @@ int main(){
 	Camera cam0(60);//main camera
 	
 	/*while loop variables*/
-	cam0.move({0,0,0});
+	cam0.move({0,5,0});
 
 
 	/******************************************************************************************/

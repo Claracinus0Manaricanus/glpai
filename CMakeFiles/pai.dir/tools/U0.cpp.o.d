@@ -166,4 +166,6 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: /home/cm/codes/c++/glpai/tools/U0.cpp \
  /usr/include/c++/13.2.1/tr1/poly_laguerre.tcc \
  /usr/include/c++/13.2.1/tr1/riemann_zeta.tcc \
  /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
- /home/cm/codes/c++/glpai/tools/cmMath/../T0.h
+ /home/cm/codes/c++/glpai/tools/cmMath/../T0.h \
+ /home/cm/codes/c++/glpai/tools/stb_image.h \
+ /usr/include/c++/13.2.1/stdlib.h

@@ -2422,6 +2422,7 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp \
   tools/U0.h \
   tools/T0.h \
   tools/cmMath/vectors.h \
+  tools/stb_image.h \
   /usr/include/GL/gl.h \
   /usr/include/GL/glew.h \
   /usr/include/GL/glu.h \
@@ -2588,6 +2589,7 @@ CMakeFiles/pai.dir/tools/U0.cpp.o: tools/U0.cpp \
   /usr/include/c++/13.2.1/ostream \
   /usr/include/c++/13.2.1/pstl/pstl_config.h \
   /usr/include/c++/13.2.1/stdexcept \
+  /usr/include/c++/13.2.1/stdlib.h \
   /usr/include/c++/13.2.1/streambuf \
   /usr/include/c++/13.2.1/string \
   /usr/include/c++/13.2.1/string_view \

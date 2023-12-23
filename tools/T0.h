@@ -203,7 +203,7 @@ struct MeshData{
 	uint32_t vCount=0;
 	vertex* vertices=NULL;
 	uint32_t fCount=0;
-	unsigned int* faces=NULL;
+	uint32_t* faces=NULL;
 };
 
 struct TransformData{

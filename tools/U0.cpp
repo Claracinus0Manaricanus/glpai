@@ -1,4 +1,5 @@
 #include "U0.h"
+#include "stb_image.h"
 
 //input utility
 int CgetAxis(GLFWwindow* win, int key1, int key2){//custom get axis first key is positive second is negative
@@ -229,6 +230,80 @@ vertex* importOBJ(std::string filename, int& size){//size = element number of ar
 	return vArr;
 }
 //importOBJ needs checks at loading to vArr part
+
+
+MeshData* importHeightMap(const char* filename, float division_constant, int* WIDTH, int* LENGTH){
+	int width = 0, length = 0, channels = 0;
+
+	//reading file
+	uint8_t* data = stbi_load(filename, &width, &length, &channels, 1);
+
+	if(data == NULL)
+		return NULL;
+
+	//creating mesh
+	MeshData* m_data = (MeshData*)calloc(1, sizeof(MeshData));
+	m_data->vCount = width*length;
+	m_data->vertices = (vertex*)calloc(m_data->vCount, sizeof(vertex));
+	m_data->fCount = (width-1)*(length-1)*6;
+	m_data->faces = (uint32_t*)calloc(m_data->fCount, sizeof(int));
+
+	//vertex data
+	for(int k = 0; k < length; k++){//X
+		for(int i = 0; i < width; i++){//Y
+			//positions
+			m_data->vertices[k*width+i].pos.x = i / division_constant;
+			m_data->vertices[k*width+i].pos.y = (float)data[k*width+i] / 1;
+			m_data->vertices[k*width+i].pos.z = k / division_constant;
+
+			//colors
+			m_data->vertices[k*width+i].col = {1,1,1,1};
+
+			//UV coordinates
+			m_data->vertices[k*width+i].tex.x = (float)i / width;
+			m_data->vertices[k*width+i].tex.y = 1.0f - (float)k / length;
+		}
+	}
+
+	//index buffer data (faces)
+	for(int k = 0; k < (length - 1); k++){
+		for(int i = 0; i < (width - 1); i++){
+			m_data->faces[(k*(width-1)+i)*6] = (k*width+i);
+			m_data->faces[(k*(width-1)+i)*6+1] = ((k+1)*width+i);
+			m_data->faces[(k*(width-1)+i)*6+2] = ((k+1)*width+i+1);
+			m_data->faces[(k*(width-1)+i)*6+3] = ((k+1)*width+i+1);
+			m_data->faces[(k*(width-1)+i)*6+4] = (k*width+i+1);
+			m_data->faces[(k*(width-1)+i)*6+5] = (k*width+i);
+		}
+	}
+
+	//color test
+	float mid = 0, totalDiff = 0, threshold = 0.3f;
+	for(int k = 1; k < length - 1; k++){
+		for(int i = 1; i < width - 1; i++){
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k+1)*width+i].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k+1)*width+i+1].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k)*width+i+1].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k-1)*width+i+1].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k-1)*width+i].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k-1)*width+i-1].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k)*width+i-1].pos.y);
+			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k+1)*width+i-1].pos.y);
+			mid = totalDiff / 8.0f;
+			if(mid == 0) mid = threshold;
+			totalDiff = 0;
+			m_data->vertices[k*width+i].col = {0,threshold/mid,0,1};
+		}
+	}
+
+	//pass length and width
+	if(WIDTH != NULL) (*WIDTH) = width;
+	if(LENGTH != NULL) (*LENGTH) = length;
+
+	//free memory
+	stbi_image_free(data);
+	return m_data;
+}
 
 
 //calculation
