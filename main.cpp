@@ -15,7 +15,7 @@
 
 using namespace std;
 
-int main(){
+int main(int argc, char** argv){
 	printf("\033[0;36mHello, please wait while i start!\n\n");
 
 	//enable debug
@@ -106,24 +106,31 @@ int main(){
 
 	//constructing data structure for ground
 	objectData tmpData;
+	MeshData tmpMesh;//for cleanup since calculateNormals() doesnt
 
 	tmpData.trData={{0,0,0},{0,0,0},{0.1f,0.03f,0.1f}};//position, rotation, scale
 
-	tmpData.mData = *importHeightMap("images/heightmaps/heighmap.png", 1.0f);
-
+	tmpMesh = importHeightMap("BadAppleFrames/001.png", 1.0f);
+	tmpData.mData = tmpMesh;
 	tmpData.mData = calculateNormals(&tmpData.mData);
+		
+	free(tmpMesh.vertices);
+	tmpMesh.vertices = NULL;
+	free(tmpMesh.faces);
+	tmpMesh.faces = NULL;
 
 	tmpData.texData.imageFile=NULL;
 	tmpData.texData.useMipmap=false;
 
-	mainManager.addObject("terrain",&tmpData);
+	GameObject* terrainOBJ = mainManager.addObject("terrain",&tmpData);
 
 
 	//ui elements
-	TextureData tmpTexData;
+	/*TextureData tmpTexData;
 	tmpTexData.imageFile="images/utility/paused.png";
 	tmpTexData.useMipmap=false;
 	UI_Element* pauseMenu=mainManager.addUI_Element("pauseScreen",{0,0},{1,1},&tmpTexData);
+	pauseMenu->setActive(false);*/
 
 	//skyboxes
 	const char* sides[6]={
@@ -144,9 +151,7 @@ int main(){
 
 	//mainManager.addLight("mainL",0,{0,20,0},{1,1,1,50});
 	vec3 lData[1]={0,1,0};
-	vec3 lData2[1]={-0.4f,1,-1};
 	mainManager.addLight("direct",1,{1,1,1,1},lData);
-	//mainManager.addLight("point",0,{0.3f,0.1f,1,1},lData2);
 
 
 	/******************************************************************************************/
@@ -155,25 +160,28 @@ int main(){
 
 	/*while loop variables*/
 	bool cursor=false,escAllow=true;
-	int frame=0;//frame counter (resets per second)
-	float totalTime=0,deltaTime=0,printCheck=0;//time related
+	int frame=0, BAFrameCount = 1, BAInit = 0;//frame counter (resets per second)
+	string BAFrameName = "";
+	bool BAPaused = true;
+	float totalTime=0,deltaTime=0,printCheck=0,BACheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
 	Camera cam0(60);//main camera
 	
 	/*while loop variables*/
-	cam0.move({0,5,0});
+	cam0.move({20,25,-1});
 
 
 	/******************************************************************************************/
 	//main loop
 
-
+	glfwSetTime(0);
 	while(!glfwWindowShouldClose(w0.getid())){
 		//getting time between frames and increasing total time
 		deltaTime=glfwGetTime();
 		glfwSetTime(0);
 		totalTime+=deltaTime;
 		printCheck+=deltaTime;
+		BACheck+=deltaTime;
 
 
 		//updating resolution
@@ -198,6 +206,56 @@ int main(){
 		}
 		//change debugging system to optional
 		
+		//update BadAppleFrame 24fps
+		if(BACheck >= 1.0f/20.0f && !BAPaused){
+			if(BAInit == 0){
+				system("screen -dmS exec ffplay -nodisp BadApple.mp4");
+				totalTime = 0;
+				glfwSetTime(0);
+			}
+
+			//free memory
+			free(tmpMesh.vertices);
+			tmpMesh.vertices = NULL;
+			free(tmpMesh.faces);
+			tmpMesh.faces = NULL;
+			free(tmpData.mData.vertices);
+			tmpData.mData.vertices = NULL;
+
+			//setting frameCount
+			BAFrameCount = totalTime * 24.0f;
+			if(BAFrameCount > 5260)BAFrameCount=5259;
+
+			//importing
+			BAFrameName.clear();
+			BAFrameName += "BadAppleFrames/";
+			if(BAFrameCount < 10)BAFrameName += "00";
+			else if(BAFrameCount < 100)BAFrameName += "0";
+			BAFrameName += to_string(BAFrameCount);
+			BAFrameName += ".png";
+			
+			tmpMesh = importHeightMap(BAFrameName.c_str(), 1.0f, 2);
+			tmpData.mData = tmpMesh;
+			tmpData.mData = calculateNormals(&tmpData.mData);
+
+			terrainOBJ->setMesh(&tmpData.mData);
+
+			printf(
+			"BAFrameCount = %d\n"
+			"BAFrameName = %s\n"
+			,BAFrameCount,BAFrameName.c_str());
+
+			BACheck = 0;
+			BAInit = 1;
+		}else if(BAPaused){
+			BACheck = 0;
+		}
+
+		if(glfwGetKey(w0.getid(),GLFW_KEY_SPACE)==GLFW_PRESS){
+			BAPaused = true;
+		}else if(glfwGetKey(w0.getid(),GLFW_KEY_X)==GLFW_PRESS){
+			BAPaused = false;
+		}
 
 		//clearing screen
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -237,16 +295,9 @@ int main(){
 
 			//reset cursor position
 			glfwSetCursorPos(w0.getid(),0,0);
-
-			//pause screen (unoptimized)
-			mainManager.getUI_Element("pauseScreen")->setActive(false);
-			//pauseMenu->setActive(false);
 		}else{
 			//make cursor visible
 			glfwSetInputMode(w0.getid(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);
-			//pause screen (unoptimized)
-			mainManager.getUI_Element("pauseScreen")->setActive(true);
-			//pauseMenu->setActive(true);
 		}
 		
 

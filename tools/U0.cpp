@@ -232,69 +232,80 @@ vertex* importOBJ(std::string filename, int& size){//size = element number of ar
 //importOBJ needs checks at loading to vArr part
 
 
-MeshData* importHeightMap(const char* filename, float division_constant, int* WIDTH, int* LENGTH){
+MeshData importHeightMap(const char* filename, float division_constant, int terrainResolution, int* WIDTH, int* LENGTH){
 	int width = 0, length = 0, channels = 0;
 
 	//reading file
+	stbi_set_flip_vertically_on_load(1);
 	uint8_t* data = stbi_load(filename, &width, &length, &channels, 1);
+	stbi_set_flip_vertically_on_load(0);
+	width/=terrainResolution;
+	length/=terrainResolution;
+
+	MeshData m_data;
 
 	if(data == NULL)
-		return NULL;
+		return m_data;
 
 	//creating mesh
-	MeshData* m_data = (MeshData*)calloc(1, sizeof(MeshData));
-	m_data->vCount = width*length;
-	m_data->vertices = (vertex*)calloc(m_data->vCount, sizeof(vertex));
-	m_data->fCount = (width-1)*(length-1)*6;
-	m_data->faces = (uint32_t*)calloc(m_data->fCount, sizeof(int));
+	m_data.vCount = width*length;
+	m_data.vertices = (vertex*)calloc(m_data.vCount, sizeof(vertex));
+	m_data.fCount = (width-1)*(length-1)*6;
+	m_data.faces = (uint32_t*)calloc(m_data.fCount, sizeof(int));
 
 	//vertex data
 	for(int k = 0; k < length; k++){//X
 		for(int i = 0; i < width; i++){//Y
 			//positions
-			m_data->vertices[k*width+i].pos.x = i / division_constant;
-			m_data->vertices[k*width+i].pos.y = (float)data[k*width+i] / 1;
-			m_data->vertices[k*width+i].pos.z = k / division_constant;
+			m_data.vertices[k*width+i].pos.x = i * terrainResolution / division_constant;
+			m_data.vertices[k*width+i].pos.y = (float)data[(k*width*terrainResolution+i)*terrainResolution] / 1;
+			m_data.vertices[k*width+i].pos.z = k * terrainResolution / division_constant;
 
-			//colors
-			m_data->vertices[k*width+i].col = {1,1,1,1};
+			//m_data.vertices[k*width+i].nor = {1,1,1};
+
+			//colors (BadAppleFormat currently)
+			if(m_data.vertices[k*width+i].pos.y < 100){
+				m_data.vertices[k*width+i].col = {0,0,0,1};
+			}else{
+				m_data.vertices[k*width+i].col = {1,1,1,1};
+			}
 
 			//UV coordinates
-			m_data->vertices[k*width+i].tex.x = (float)i / width;
-			m_data->vertices[k*width+i].tex.y = 1.0f - (float)k / length;
+			m_data.vertices[k*width+i].tex.x = (float)i / width;
+			m_data.vertices[k*width+i].tex.y = 1.0f - (float)k / length;
 		}
 	}
 
 	//index buffer data (faces)
 	for(int k = 0; k < (length - 1); k++){
 		for(int i = 0; i < (width - 1); i++){
-			m_data->faces[(k*(width-1)+i)*6] = (k*width+i);
-			m_data->faces[(k*(width-1)+i)*6+1] = ((k+1)*width+i);
-			m_data->faces[(k*(width-1)+i)*6+2] = ((k+1)*width+i+1);
-			m_data->faces[(k*(width-1)+i)*6+3] = ((k+1)*width+i+1);
-			m_data->faces[(k*(width-1)+i)*6+4] = (k*width+i+1);
-			m_data->faces[(k*(width-1)+i)*6+5] = (k*width+i);
+			m_data.faces[(k*(width-1)+i)*6] = (k*width+i);
+			m_data.faces[(k*(width-1)+i)*6+1] = ((k+1)*width+i);
+			m_data.faces[(k*(width-1)+i)*6+2] = ((k+1)*width+i+1);
+			m_data.faces[(k*(width-1)+i)*6+3] = ((k+1)*width+i+1);
+			m_data.faces[(k*(width-1)+i)*6+4] = (k*width+i+1);
+			m_data.faces[(k*(width-1)+i)*6+5] = (k*width+i);
 		}
 	}
 
 	//color test
-	float mid = 0, totalDiff = 0, threshold = 0.3f;
+	/*float mid = 0, totalDiff = 0, threshold = 0.3f;
 	for(int k = 1; k < length - 1; k++){
 		for(int i = 1; i < width - 1; i++){
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k+1)*width+i].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k+1)*width+i+1].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k)*width+i+1].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k-1)*width+i+1].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k-1)*width+i].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k-1)*width+i-1].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k)*width+i-1].pos.y);
-			totalDiff += abs(m_data->vertices[k*width+i].pos.y - m_data->vertices[(k+1)*width+i-1].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k+1)*width+i].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k+1)*width+i+1].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k)*width+i+1].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k-1)*width+i+1].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k-1)*width+i].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k-1)*width+i-1].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k)*width+i-1].pos.y);
+			totalDiff += abs(m_data.vertices[k*width+i].pos.y - m_data.vertices[(k+1)*width+i-1].pos.y);
 			mid = totalDiff / 8.0f;
 			if(mid == 0) mid = threshold;
 			totalDiff = 0;
-			m_data->vertices[k*width+i].col = {0,threshold/mid,0,1};
+			m_data.vertices[k*width+i].col = {0,threshold/mid,0,1};
 		}
-	}
+	}*/
 
 	//pass length and width
 	if(WIDTH != NULL) (*WIDTH) = width;

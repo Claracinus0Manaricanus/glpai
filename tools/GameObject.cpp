@@ -38,7 +38,7 @@ int GameObject::unloadTexture(){
 
 //utility
 int GameObject::bind(){
-	if(updateNormals)update();
+	if(updateNormals||updated)update();
 	glBindVertexArray(VAO);
 	mainTex.bind();
 	return 0;
@@ -58,6 +58,7 @@ int GameObject::update(){
 		vertices[i].nor.z = normals[i].z * scale.x * scale.y / scale.z;//with the scaling matrix
 	}
 	updateNormals=false;//from transform class
+	updated=false;//from Mesh class
 
 	//vertex array
 	glBindVertexArray(VAO);
