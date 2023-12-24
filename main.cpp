@@ -15,7 +15,12 @@
 
 using namespace std;
 
+const char* LICENSE="GLPAI  Copyright (C) 2023-2024  Sarp Akkaya\n"
+"This program comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under certain conditions.\n";
+
 int main(int argc, char** argv){
+	printf("%s\n",LICENSE);
 	printf("\033[0;36mHello, please wait while i start!\n\n");
 
 	//enable debug
