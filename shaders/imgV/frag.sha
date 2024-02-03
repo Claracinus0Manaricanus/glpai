@@ -1,0 +1,9 @@
+#version 450 core
+
+out vec4 outC;
+in vec2 texC;
+uniform sampler2D T0;
+
+void main(){
+	outC=texture(T0,texC);
+}

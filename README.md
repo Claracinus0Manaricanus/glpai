@@ -1,3 +1,19 @@
+# LICENSE
+GLPAI  Copyright (C) 2023-2023  Sarp Akkaya  
+  
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.  
+  
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.  
+  
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.  
+
 # To Build
 <p>This program has been written for GNU/Linux systems. It needs libglfw3, libgl, libglew and stb_image to compile.</p>
 <p>When compiled it will output an executable called pai.</p>

@@ -157,35 +157,42 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/c++/13.2.1/bits/codecvt.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/13.2.1/bits/fstream.tcc /usr/include/c++/13.2.1/thread \
- /usr/include/c++/13.2.1/bits/std_thread.h \
- /usr/include/c++/13.2.1/bits/unique_ptr.h \
- /usr/include/c++/13.2.1/bits/this_thread_sleep.h \
- /usr/include/c++/13.2.1/bits/chrono.h /usr/include/c++/13.2.1/ratio \
+ /usr/include/c++/13.2.1/bits/fstream.tcc /usr/include/GL/glew.h \
  /usr/include/c++/13.2.1/cstdint \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/c++/13.2.1/ctime \
- /usr/include/c++/13.2.1/bits/parse_numbers.h /usr/include/GL/glew.h \
  /usr/include/GL/glu.h /usr/include/GL/gl.h /usr/include/GLFW/glfw3.h \
- /home/cm/codes/c++/glpai/tools/T0.h \
- /home/cm/codes/c++/glpai/tools/SceneManager.h \
- /home/cm/codes/c++/glpai/tools/Program.h \
- /home/cm/codes/c++/glpai/tools/Shader.h /usr/include/c++/13.2.1/iostream \
- /home/cm/codes/c++/glpai/tools/T0.h \
- /home/cm/codes/c++/glpai/tools/SkyBox.h /usr/include/c++/13.2.1/cstring \
- /usr/include/string.h /usr/include/strings.h \
- /home/cm/codes/c++/glpai/tools/CubeMap.h \
- /home/cm/codes/c++/glpai/tools/GameObject.h \
- /home/cm/codes/c++/glpai/tools/Transform.h \
- /home/cm/codes/c++/glpai/tools/cmMath/matrix4.h \
- /home/cm/codes/c++/glpai/tools/cmMath/vectors.h \
- /home/cm/codes/c++/glpai/tools/cmMath/../T0.h \
- /home/cm/codes/c++/glpai/tools/Mesh.h \
- /home/cm/codes/c++/glpai/tools/Texture.h \
- /home/cm/codes/c++/glpai/tools/UI_Element.h \
- /home/cm/codes/c++/glpai/tools/Light.h \
- /home/cm/codes/c++/glpai/tools/Camera.h \
- /home/cm/codes/c++/glpai/tools/Window.h \
- /home/cm/codes/c++/glpai/tools/Camera.h \
- /home/cm/codes/c++/glpai/tools/U0.h
+ /home/cm/codes/c++/glpai/classes/system/Window.hpp \
+ /home/cm/codes/c++/glpai/classes/system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/system/Image.hpp \
+ /home/cm/codes/c++/glpai/classes/system/U0.hpp \
+ /usr/include/c++/13.2.1/cstring /usr/include/string.h \
+ /usr/include/strings.h /home/cm/codes/c++/glpai/classes/system/Image.hpp \
+ /home/cm/codes/c++/glpai/classes/system/../cmMath/vectors.hpp \
+ /home/cm/codes/c++/glpai/classes/system/../cmMath/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/graphics/CMGL_Program.h \
+ /home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.h \
+ /usr/include/unistd.h /usr/include/bits/posix_opt.h \
+ /usr/include/bits/environments.h /usr/include/bits/confname.h \
+ /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
+ /usr/include/bits/unistd_ext.h /usr/include/linux/close_range.h \
+ /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+ /usr/include/bits/fcntl-linux.h /usr/include/bits/types/struct_iovec.h \
+ /usr/include/linux/falloc.h /usr/include/bits/stat.h \
+ /usr/include/bits/struct_stat.h /usr/include/sys/stat.h \
+ /usr/include/bits/statx.h /usr/include/linux/stat.h \
+ /usr/include/linux/types.h /usr/include/asm/types.h \
+ /usr/include/asm-generic/types.h /usr/include/asm-generic/int-ll64.h \
+ /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/linux/posix_types.h /usr/include/linux/stddef.h \
+ /usr/include/asm/posix_types.h /usr/include/asm/posix_types_64.h \
+ /usr/include/asm-generic/posix_types.h /usr/include/bits/statx-generic.h \
+ /usr/include/bits/types/struct_statx_timestamp.h \
+ /usr/include/bits/types/struct_statx.h \
+ /home/cm/codes/c++/glpai/classes/graphics/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/Mesh.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp
