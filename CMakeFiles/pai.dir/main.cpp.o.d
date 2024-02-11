@@ -161,7 +161,8 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/c++/13.2.1/cstdint \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/GL/glu.h /usr/include/GL/gl.h /usr/include/GLFW/glfw3.h \
+ /usr/include/bits/stdint-least.h /usr/include/GL/glu.h \
+ /usr/include/GL/gl.h /usr/include/GLFW/glfw3.h \
  /home/cm/codes/c++/glpai/classes/system/Window.hpp \
  /home/cm/codes/c++/glpai/classes/system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/system/Image.hpp \
@@ -170,8 +171,8 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/strings.h /home/cm/codes/c++/glpai/classes/system/Image.hpp \
  /home/cm/codes/c++/glpai/classes/system/../cmMath/vectors.hpp \
  /home/cm/codes/c++/glpai/classes/system/../cmMath/../system/T0.hpp \
- /home/cm/codes/c++/glpai/classes/graphics/CMGL_Program.h \
- /home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.h \
+ /home/cm/codes/c++/glpai/classes/graphics/CMGL_Program.hpp \
+ /home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.hpp \
  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
  /usr/include/bits/environments.h /usr/include/bits/confname.h \
  /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
@@ -195,4 +196,8 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp
+ /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Program.hpp

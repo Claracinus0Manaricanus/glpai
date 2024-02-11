@@ -131,10 +131,11 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: \
  /usr/include/c++/13.2.1/tuple /usr/include/c++/13.2.1/cstdint \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/c++/13.2.1/cstring /usr/include/string.h \
- /usr/include/strings.h \
+ /usr/include/bits/stdint-least.h /usr/include/c++/13.2.1/cstring \
+ /usr/include/string.h /usr/include/strings.h \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
- /usr/include/GL/glew.h /usr/include/GL/glu.h /usr/include/GL/gl.h
+ /usr/include/GL/glew.h /usr/include/GL/glu.h /usr/include/GL/gl.h \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp

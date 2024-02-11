@@ -1,4 +1,4 @@
-#include "CMGL_Shader.h"
+#include "CMGL_Shader.hpp"
 
 //constructor
 CMGL_Shader::CMGL_Shader(const char* sourceFile, unsigned int type, bool debug){

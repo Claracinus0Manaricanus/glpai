@@ -8,8 +8,9 @@
 #include "classes/system/Window.hpp"
 #include "classes/system/Image.hpp"
 #include "classes/system/U0.hpp"
-#include "classes/graphics/CMGL_Program.h"
+#include "classes/graphics/CMGL_Program.hpp"
 #include "classes/opengl/CMGL_GameObject.hpp"
+#include "classes/opengl/CMGL_Renderer.hpp"
 
 using namespace std;
 
@@ -112,6 +113,9 @@ int main(int argc, char** argv){
 	denOBJ.loadTexture(texDen);
 	
 	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
+	sprg.setInt("T0", 0);//also calls sprg.use()
+
+	CMGL_Renderer mainRenderer;
 	
 
 	/*while loop variables*/
@@ -149,9 +153,7 @@ int main(int argc, char** argv){
 
 		//clearing screen
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		denOBJ.bind();
-		sprg.setInt("T0", 0);//also calls sprg.use()
-		glDrawElements(GL_TRIANGLES,denOBJ.getFCount()*3,GL_UNSIGNED_INT,(void*)0);
+		mainRenderer.renderGenericElement(&denOBJ, 1, denOBJ.getFCount(), sprg);
 
 
 		//toggle cursor

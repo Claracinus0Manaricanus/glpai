@@ -1,4 +1,4 @@
-#include "CMGL_Program.h"
+#include "CMGL_Program.hpp"
 
 //constructor
 CMGL_Program::CMGL_Program(){

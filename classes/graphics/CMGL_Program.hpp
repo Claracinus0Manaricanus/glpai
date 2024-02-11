@@ -2,7 +2,7 @@
 #define CMGL_PROGRAM
 
 #include <GL/glew.h>
-#include "CMGL_Shader.h"
+#include "CMGL_Shader.hpp"
 #include "../system/T0.hpp"
 
 class CMGL_Program{

@@ -4,10 +4,11 @@
 #include "../base/Mesh.hpp"
 #include "../base/Transform.hpp"
 #include "CMGL_Texture.hpp"
+#include "CMGL_Base.hpp"
 
 #include <GL/glew.h>//needs change, used for opengl functions
 
-class CMGL_GameObject : public Mesh, public Transform, public CMGL_Texture{
+class CMGL_GameObject : public Mesh, public Transform, public CMGL_Texture, public CMGL_Base{
 protected:
     uint32_t VAO,VBO,EAB;//vertex array object, vertex buffer object, element array buffer
 
@@ -33,6 +34,9 @@ public:
 
     //binder
     void bind();
+
+    ///friends
+    friend class CMGL_Renderer;
 };
 
 #endif
