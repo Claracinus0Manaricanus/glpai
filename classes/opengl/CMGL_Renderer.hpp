@@ -17,8 +17,8 @@ public:
     CMGL_Renderer();
 
     //rendering functions
-    int renderGenericArray(CMGL_Base* toRender, int length, int vCount, CMGL_Program &renderPrg);
-    int renderGenericElement(CMGL_Base* toRender, int length, int fCount, CMGL_Program &renderPrg);
+    int renderGenericArray(CMGL_Base* toRender, int vCount, CMGL_Program &renderPrg);
+    int renderGenericElement(CMGL_Base* toRender, int fCount, CMGL_Program &renderPrg);
 
 };
 

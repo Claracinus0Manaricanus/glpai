@@ -4,11 +4,15 @@ layout(location=0) in vec3 pos;
 layout(location=3) in vec2 tex;
 out vec2 texC;
 
-layout(std430, binding=4) buffer MD{
+layout(std430, binding=4) buffer OMD{
 	mat4 OVM;
+};
+
+layout(std430, binding=5) buffer CMD{
+	mat4 CVM;
 };
 
 void main(){
 	texC = tex;
-	gl_Position = transpose(OVM) * vec4(pos.xy,0,1);
+	gl_Position = transpose(CVM) * transpose(OVM) * vec4(pos.xy,0,1);
 }

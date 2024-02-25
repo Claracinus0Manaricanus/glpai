@@ -11,7 +11,7 @@
 #include "classes/graphics/CMGL_Program.hpp"
 #include "classes/opengl/CMGL_GameObject.hpp"
 #include "classes/opengl/CMGL_Renderer.hpp"
-#include "classes/base/Camera.hpp"
+#include "classes/opengl/CMGL_Camera.hpp"
 
 using namespace std;
 
@@ -125,7 +125,7 @@ int main(int argc, char** argv){
 	int frame=0;//frame counter (resets per second)
 	float totalTime=0,deltaTime=0,printCheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
-	Camera mainCam(120, 0);
+	CMGL_Camera mainCam(120, 0);
 	/*while loop variables*/
 	
 
@@ -156,7 +156,8 @@ int main(int argc, char** argv){
 
 		//clearing screen and rendering
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		mainRenderer.renderGenericElement(&denOBJ, 1, denOBJ.getFCount(), sprg);
+		mainCam.bind();
+		mainRenderer.renderGenericElement(&denOBJ, denOBJ.getFCount(), sprg);
 
 		//input from keyboard (canera movement)
 

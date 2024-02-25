@@ -5,7 +5,7 @@
 #include "../cmMath/matrix4.hpp"
 
 class Camera : public Transform{
-private:
+protected:
     int fov=120;
     int type=0;
 
@@ -13,6 +13,7 @@ public:
     //constructors
     Camera();
     Camera(int iFov, int iType);
+    
     //setters
     void setFov(int iFov);
     void setType(int iType);
