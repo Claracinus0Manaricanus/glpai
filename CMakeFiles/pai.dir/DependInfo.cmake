@@ -8,13 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/cm/codes/c++/glpai/classes/base/Camera.cpp" "CMakeFiles/pai.dir/classes/base/Camera.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Camera.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/base/Mesh.cpp" "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/base/Transform.cpp" "CMakeFiles/pai.dir/classes/base/Transform.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Transform.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/cmMath/matrix4.cpp" "CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/cmMath/vectors.cpp" "CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/graphics/CMGL_Program.cpp" "CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.cpp" "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o.d"
-  "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o.d"

@@ -129,6 +129,30 @@ pai/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/build
 .PHONY : pai/fast
 
+classes/base/Camera.o: classes/base/Camera.cpp.o
+.PHONY : classes/base/Camera.o
+
+# target to build an object file
+classes/base/Camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Camera.cpp.o
+.PHONY : classes/base/Camera.cpp.o
+
+classes/base/Camera.i: classes/base/Camera.cpp.i
+.PHONY : classes/base/Camera.i
+
+# target to preprocess a source file
+classes/base/Camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Camera.cpp.i
+.PHONY : classes/base/Camera.cpp.i
+
+classes/base/Camera.s: classes/base/Camera.cpp.s
+.PHONY : classes/base/Camera.s
+
+# target to generate assembly for a file
+classes/base/Camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Camera.cpp.s
+.PHONY : classes/base/Camera.cpp.s
+
 classes/base/Mesh.o: classes/base/Mesh.cpp.o
 .PHONY : classes/base/Mesh.o
 
@@ -272,30 +296,6 @@ classes/graphics/CMGL_Shader.s: classes/graphics/CMGL_Shader.cpp.s
 classes/graphics/CMGL_Shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.s
 .PHONY : classes/graphics/CMGL_Shader.cpp.s
-
-classes/opengl/CMGL_Base.o: classes/opengl/CMGL_Base.cpp.o
-.PHONY : classes/opengl/CMGL_Base.o
-
-# target to build an object file
-classes/opengl/CMGL_Base.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o
-.PHONY : classes/opengl/CMGL_Base.cpp.o
-
-classes/opengl/CMGL_Base.i: classes/opengl/CMGL_Base.cpp.i
-.PHONY : classes/opengl/CMGL_Base.i
-
-# target to preprocess a source file
-classes/opengl/CMGL_Base.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.i
-.PHONY : classes/opengl/CMGL_Base.cpp.i
-
-classes/opengl/CMGL_Base.s: classes/opengl/CMGL_Base.cpp.s
-.PHONY : classes/opengl/CMGL_Base.s
-
-# target to generate assembly for a file
-classes/opengl/CMGL_Base.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.s
-.PHONY : classes/opengl/CMGL_Base.cpp.s
 
 classes/opengl/CMGL_GameObject.o: classes/opengl/CMGL_GameObject.cpp.o
 .PHONY : classes/opengl/CMGL_GameObject.o
@@ -474,6 +474,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... pai"
+	@echo "... classes/base/Camera.o"
+	@echo "... classes/base/Camera.i"
+	@echo "... classes/base/Camera.s"
 	@echo "... classes/base/Mesh.o"
 	@echo "... classes/base/Mesh.i"
 	@echo "... classes/base/Mesh.s"
@@ -492,9 +495,6 @@ help:
 	@echo "... classes/graphics/CMGL_Shader.o"
 	@echo "... classes/graphics/CMGL_Shader.i"
 	@echo "... classes/graphics/CMGL_Shader.s"
-	@echo "... classes/opengl/CMGL_Base.o"
-	@echo "... classes/opengl/CMGL_Base.i"
-	@echo "... classes/opengl/CMGL_Base.s"
 	@echo "... classes/opengl/CMGL_GameObject.o"
 	@echo "... classes/opengl/CMGL_GameObject.i"
 	@echo "... classes/opengl/CMGL_GameObject.s"

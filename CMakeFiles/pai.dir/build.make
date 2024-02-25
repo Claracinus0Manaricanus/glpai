@@ -111,10 +111,24 @@ CMakeFiles/pai.dir/classes/base/Transform.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/classes/base/Transform.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/classes/base/Transform.cpp -o CMakeFiles/pai.dir/classes/base/Transform.cpp.s
 
+CMakeFiles/pai.dir/classes/base/Camera.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/classes/base/Camera.cpp.o: classes/base/Camera.cpp
+CMakeFiles/pai.dir/classes/base/Camera.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pai.dir/classes/base/Camera.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/base/Camera.cpp.o -MF CMakeFiles/pai.dir/classes/base/Camera.cpp.o.d -o CMakeFiles/pai.dir/classes/base/Camera.cpp.o -c /home/cm/codes/c++/glpai/classes/base/Camera.cpp
+
+CMakeFiles/pai.dir/classes/base/Camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/classes/base/Camera.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/classes/base/Camera.cpp > CMakeFiles/pai.dir/classes/base/Camera.cpp.i
+
+CMakeFiles/pai.dir/classes/base/Camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/classes/base/Camera.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/classes/base/Camera.cpp -o CMakeFiles/pai.dir/classes/base/Camera.cpp.s
+
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: classes/opengl/CMGL_GameObject.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o: classes/opengl/CMGL_Texture.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o: classes/opengl/CMGL_Renderer.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.i: cmake_force
@@ -152,20 +166,6 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.i: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.cpp -o CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.s
-
-CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o: CMakeFiles/pai.dir/flags.make
-CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o: classes/opengl/CMGL_Base.cpp
-CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.cpp
-
-CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.cpp > CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.i
-
-CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.cpp -o CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.s
 
 CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o: classes/graphics/CMGL_Shader.cpp
@@ -270,10 +270,10 @@ pai_OBJECTS = \
 "CMakeFiles/pai.dir/main.cpp.o" \
 "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o" \
 "CMakeFiles/pai.dir/classes/base/Transform.cpp.o" \
+"CMakeFiles/pai.dir/classes/base/Camera.cpp.o" \
 "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o" \
 "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o" \
 "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o" \
-"CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o" \
 "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o" \
 "CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o" \
 "CMakeFiles/pai.dir/classes/system/Window.cpp.o" \
@@ -288,10 +288,10 @@ pai_EXTERNAL_OBJECTS =
 pai: CMakeFiles/pai.dir/main.cpp.o
 pai: CMakeFiles/pai.dir/classes/base/Mesh.cpp.o
 pai: CMakeFiles/pai.dir/classes/base/Transform.cpp.o
+pai: CMakeFiles/pai.dir/classes/base/Camera.cpp.o
 pai: CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o
 pai: CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o
 pai: CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o
-pai: CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o
 pai: CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o
 pai: CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o
 pai: CMakeFiles/pai.dir/classes/system/Window.cpp.o

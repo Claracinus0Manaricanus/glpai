@@ -9,7 +9,7 @@
 #include "../graphics/CMGL_Program.hpp"
 
 class CMGL_Renderer{
-private:
+protected:
 
 
 public:

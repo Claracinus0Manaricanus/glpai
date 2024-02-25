@@ -1,18 +1,21 @@
+# Location
+classes/system/
+
 # Purpose
 To create and manager window objects using glfw. Abstraction for window management.
 
-# private data
-- GLFWwindow* ID<br>
+# Protected Data
+- GLFWwindow* ID  
 Handler for window.
 
-# public functions
+# Public Functions
 - Window(WindowData inputData)  
-Constructor for Window class. Sets opengl version, opengl profile, window initials.<hr>
+Constructor for Window class. Sets opengl version, opengl profile, window initials.
 - GLFWwindow* getid()  
-Used to access handler.<hr>
+Used to access handler.
 - ivec2 getResolution()  
-Used to access current resolution.<hr>
+Used to access current resolution.
 - int changeAttrib(int attrib, int value)  
-Used to change a specific attrbitue about window.<hr>
+Used to change a specific attrbitue about window.
 - int makeContext()  
 sets this window as opengl context.

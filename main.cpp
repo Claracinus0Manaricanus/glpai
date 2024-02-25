@@ -11,6 +11,7 @@
 #include "classes/graphics/CMGL_Program.hpp"
 #include "classes/opengl/CMGL_GameObject.hpp"
 #include "classes/opengl/CMGL_Renderer.hpp"
+#include "classes/base/Camera.hpp"
 
 using namespace std;
 
@@ -111,6 +112,7 @@ int main(int argc, char** argv){
 
 	CMGL_GameObject denOBJ({4,vData,2,faces}, {{0,0,0},{0,0,0},{1,1,1}});
 	denOBJ.loadTexture(texDen);
+	denOBJ.rotate({0,0,3.14159265f/4.0f});
 	
 	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
@@ -123,6 +125,7 @@ int main(int argc, char** argv){
 	int frame=0;//frame counter (resets per second)
 	float totalTime=0,deltaTime=0,printCheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
+	Camera mainCam(120, 0);
 	/*while loop variables*/
 	
 
@@ -151,9 +154,11 @@ int main(int argc, char** argv){
 		}
 		//change debugging system to optional
 
-		//clearing screen
+		//clearing screen and rendering
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainRenderer.renderGenericElement(&denOBJ, 1, denOBJ.getFCount(), sprg);
+
+		//input from keyboard (canera movement)
 
 
 		//toggle cursor

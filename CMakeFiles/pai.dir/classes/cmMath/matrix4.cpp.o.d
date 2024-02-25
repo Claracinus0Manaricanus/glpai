@@ -1,7 +1,7 @@
 CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o: \
  /home/cm/codes/c++/glpai/classes/cmMath/matrix4.cpp \
  /usr/include/stdc-predef.h \
- /home/cm/codes/c++/glpai/classes/cmMath/matrix4.h \
+ /home/cm/codes/c++/glpai/classes/cmMath/matrix4.hpp \
  /usr/include/c++/13.2.1/stdlib.h /usr/include/c++/13.2.1/cstdlib \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \

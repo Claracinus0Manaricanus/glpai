@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/pai.dir/classes/base/Camera.cpp.o"
+  "CMakeFiles/pai.dir/classes/base/Camera.cpp.o.d"
   "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o"
   "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o.d"
   "CMakeFiles/pai.dir/classes/base/Transform.cpp.o"
@@ -11,8 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o.d"
   "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o"
   "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o.d"
-  "CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o"
-  "CMakeFiles/pai.dir/classes/opengl/CMGL_Base.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"
