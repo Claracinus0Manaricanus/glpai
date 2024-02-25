@@ -1,9 +1,3 @@
-# important
-
-# less important
-- audio support
-- mipmaps for textures
-
 # docs
 - CMGL_Texture
 - Mesh
@@ -16,6 +10,8 @@
 # when I feel like it
 - seperating opengl from glew and glfw to support custom libraries
 - adding (optional) auto support for glfw and glew
+- audio support
+- mipmaps for textures
 
 # 2024-02-26
 - camera movement in main.cpp
