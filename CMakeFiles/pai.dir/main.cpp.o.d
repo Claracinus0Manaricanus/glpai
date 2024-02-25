@@ -203,4 +203,5 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Program.hpp \
  /home/cm/codes/c++/glpai/classes/base/Camera.hpp \
- /home/cm/codes/c++/glpai/classes/base/Transform.hpp
+ /home/cm/codes/c++/glpai/classes/base/Transform.hpp \
+ /home/cm/codes/c++/glpai/classes/base/../cmMath/matrix4.hpp

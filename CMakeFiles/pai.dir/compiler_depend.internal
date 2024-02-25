@@ -3,6 +3,7 @@
 
 CMakeFiles/pai.dir/classes/base/Camera.cpp.o
  /home/cm/codes/c++/glpai/classes/base/Camera.cpp
+ /home/cm/codes/c++/glpai/classes/cmMath/matrix4.hpp
  /home/cm/codes/c++/glpai/classes/system/T0.hpp
  /home/cm/codes/c++/glpai/classes/base/Camera.hpp
  /home/cm/codes/c++/glpai/classes/base/Transform.hpp
@@ -2335,6 +2336,7 @@ CMakeFiles/pai.dir/classes/system/Window.cpp.o
 
 CMakeFiles/pai.dir/main.cpp.o
  /home/cm/codes/c++/glpai/main.cpp
+ /home/cm/codes/c++/glpai/classes/cmMath/matrix4.hpp
  /home/cm/codes/c++/glpai/classes/base/Camera.hpp
  /home/cm/codes/c++/glpai/classes/base/Transform.hpp
  /home/cm/codes/c++/glpai/classes/system/T0.hpp

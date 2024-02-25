@@ -16,11 +16,12 @@
 - adding (optional) auto support for glfw and glew
 
 # 2024-02-26
-- Camera class generateCVM() function
-
-# 2024-02-27
+- Camera class generateCVM() function projection matrix
 - CMGL_Camera class
 
+# 2024-02-27
+
 # done (gets cleared once in a while)
+- Camera class generateCVM() function
 - CMGL_GameObject generateOVM() function
 - Camera class

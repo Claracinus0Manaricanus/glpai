@@ -2,6 +2,7 @@
 #define CM_CAMERA
 
 #include "Transform.hpp"
+#include "../cmMath/matrix4.hpp"
 
 class Camera : public Transform{
 private:
