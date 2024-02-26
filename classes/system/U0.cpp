@@ -35,8 +35,8 @@ int cm_rand(int seed){//not tested
 
 
 //file import
-Vertex* importOBJ(std::string filename, int& size){//size = element number of array
-	int vPosInd=0,vNorInd=0,vTexInd=0,vArrInd=0,tmpPos=0;
+MeshData importOBJ(std::string filename){//size = element number of array
+	int vPosInd=0,vNorInd=0,vTexInd=0,vArrInd=0,tmpPos=0,size=0;
 	//finding out array lengths
 	std::string line,tmp;
 	std::ifstream file(filename);
@@ -212,8 +212,11 @@ Vertex* importOBJ(std::string filename, int& size){//size = element number of ar
 	}
 	fileT.close();
 
-	//returning Vertex*
-	return vArr;
+	//returning MeshData
+	MeshData tmpMeshData;
+	tmpMeshData.vertices=vArr;
+	tmpMeshData.vCount=size;
+	return tmpMeshData;
 }
 //importOBJ needs checks at loading to vArr part
 

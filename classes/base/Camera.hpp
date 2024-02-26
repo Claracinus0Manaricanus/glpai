@@ -24,6 +24,7 @@ public:
 
     //utility
     float* generateCVM();
+    void moveForward(float step, float offset=0);
 
 };
 

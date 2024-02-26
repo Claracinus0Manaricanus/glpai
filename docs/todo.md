@@ -1,5 +1,4 @@
 # docs
-- Transform
 - CMGL_Texture
 - Mesh
 - Image
@@ -13,14 +12,16 @@
 - adding (optional) auto support for glfw and glew
 - audio support
 - mipmaps for textures
+- perspective projection matrix that keeps Z data
 
-# 2024-02-26
-- camera movement in main.cpp
-- perspective projection matrix
+# 2024-02-27
+- CubeMap class
+- Skybox class
+
+# 2024-02-28
+- Light class
 
 # done (gets cleared once in a while)
-- Camera class generateCVM() function projection matrix
-- Camera class generateCVM() function
-- CMGL_GameObject generateOVM() function
-- Camera class
-- CMGL_Camera class
+- Camera rotations
+- camera movement in main.cpp
+- perspective projection matrix

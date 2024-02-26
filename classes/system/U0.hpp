@@ -28,7 +28,7 @@ int cm_rand(int seed);//not tested
 
 
 //file import
-Vertex* importOBJ(std::string filename, int& size);//size = element number of array
+MeshData importOBJ(std::string filename);//size = element number of array
 //importOBJ needs checks at loading to vArr part
 MeshData importHeightMap(const char* filename, float division_constant = 1.0f, int terrainResolution = 1, int* WIDTH = NULL, int* LENGTH = NULL);
 //accepts 16-bit/color RGB, non-interlaced WIP

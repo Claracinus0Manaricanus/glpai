@@ -14,5 +14,5 @@ layout(std430, binding=5) buffer CMD{
 
 void main(){
 	texC = tex;
-	gl_Position = transpose(CVM) * transpose(OVM) * vec4(pos.xy,0,1);
+	gl_Position = transpose(CVM) * transpose(OVM) * vec4(pos.xyz,1);
 }

@@ -68,7 +68,7 @@ int main(int argc, char** argv){
 	if(debug)logInfo("glew initialized\n");
 
 
-	//Setting up opengl
+	//Setting up opengl (should be carried to GL related scene manager)
 	glClearColor(0.0f,0.0f,0.0f,1.0f);
 	glViewport(0, 0, winData.resolution.x, winData.resolution.y);
 	glEnable(GL_DEPTH_TEST);
@@ -97,22 +97,10 @@ int main(int argc, char** argv){
 
 	TextureData texDen;
 	texDen.imageFile="BadAppleFrames/245.png";
+	MeshData impOBJData=importOBJ("objects/torus.obj");
 
-	Vertex vData[4]={
-//		position    normal   color     UV
-		{{-1,-1, 0},{0,0,0},{1,1,1,1},{0,1}},
-		{{-1, 1, 0},{0,0,0},{1,1,1,1},{0,0}},
-		{{ 1, 1, 0},{0,0,0},{1,1,1,1},{1,0}},
-		{{ 1,-1, 0},{0,0,0},{1,1,1,1},{1,1}},
-	};
-
-	uint32_t faces[6]={
-		0,1,2,2,3,0
-	};
-
-	CMGL_GameObject denOBJ({4,vData,2,faces}, {{0,0,0},{0,0,0},{1,1,1}});
-	denOBJ.loadTexture(texDen);
-	denOBJ.rotate({0,0,3.14159265f/4.0f});
+	CMGL_GameObject impOBJ(impOBJData, {{0,0,0},{0,0,0},{1,1,1}});
+	impOBJ.loadTexture(texDen);
 	
 	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
@@ -125,7 +113,7 @@ int main(int argc, char** argv){
 	int frame=0;//frame counter (resets per second)
 	float totalTime=0,deltaTime=0,printCheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
-	CMGL_Camera mainCam(120, 0);
+	CMGL_Camera mainCam(120, 1);
 	/*while loop variables*/
 	
 
@@ -157,10 +145,24 @@ int main(int argc, char** argv){
 		//clearing screen and rendering
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
-		mainRenderer.renderGenericElement(&denOBJ, denOBJ.getFCount(), sprg);
+		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
 
-		//input from keyboard (canera movement)
-
+		//input from keyboard (camera movement)
+		if(glfwGetKey(mainWin.getid(), GLFW_KEY_W) == GLFW_PRESS){
+			mainCam.moveForward(1*deltaTime);
+		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_S) == GLFW_PRESS){
+			mainCam.moveForward(-1*deltaTime);
+		}
+		if(glfwGetKey(mainWin.getid(), GLFW_KEY_D) == GLFW_PRESS){
+			mainCam.moveForward(1*deltaTime, 3.14159265f/2.0f);
+		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_A) == GLFW_PRESS){
+			mainCam.moveForward(-1*deltaTime, 3.14159265f/2.0f);
+		}
+		if(glfwGetKey(mainWin.getid(), GLFW_KEY_E) == GLFW_PRESS){
+			mainCam.move({0, 1*deltaTime, 0});
+		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_Q) == GLFW_PRESS){
+			mainCam.move({0, -1*deltaTime, 0});
+		}
 
 		//toggle cursor
 		if(glfwGetKey(mainWin.getid(),GLFW_KEY_ESCAPE)==GLFW_PRESS&&escAllow){
@@ -182,6 +184,10 @@ int main(int argc, char** argv){
 			glfwSetInputMode(mainWin.getid(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
 			if(!escAllow)
 				glfwSetCursorPos(mainWin.getid(),0,0);
+
+			//use cursor input for camera rotation
+			glfwGetCursorPos(mainWin.getid(), &cursorX, &cursorY);
+			mainCam.rotate({(float)cursorY * 0.001f, (float)cursorX * 0.001f, 0});
 
 			//reset cursor position
 			glfwSetCursorPos(mainWin.getid(),0,0);
@@ -219,27 +225,20 @@ general debug colors:
 - purple: number
 */
 
-/*
-2023-06-22 / 00:32
-==9191== 				LEAK SUMMARY:
-==9191==    definitely lost: 1,080 bytes in 23 blocks
-==9191==    indirectly lost: 16,412 bytes in 97 blocks
-==9191==      possibly lost: 0 bytes in 0 blocks
-==9191==    still reachable: 87,083 bytes in 913 blocks
-==9191==         suppressed: 0 bytes in 0 blocks
-*/
-
-/*
-2023-11-07 / 06:38
-==38370== HEAP SUMMARY:
-==38370==     in use at exit: 56,306 bytes in 639 blocks
-==38370==   total heap usage: 3,275 allocs, 2,636 frees, 228,022 bytes allocated
-==38370== 
-==38370== LEAK SUMMARY:
-==38370==    definitely lost: 0 bytes in 0 blocks
-==38370==    indirectly lost: 0 bytes in 0 blocks
-==38370==      possibly lost: 0 bytes in 0 blocks
-==38370==    still reachable: 56,306 bytes in 639 blocks
-==38370==         suppressed: 0 bytes in 0 blocks
-==38370== Rerun with --leak-check=full to see details of leaked memory
+/* 2024-02-26 / 20:33:40
+==48968== 
+==48968== HEAP SUMMARY:
+==48968==     in use at exit: 807,188 bytes in 3,007 blocks
+==48968==   total heap usage: 153,869 allocs, 150,862 frees, 22,299,294 bytes allocated
+==48968== 
+==48968== LEAK SUMMARY:
+==48968==    definitely lost: 41,300 bytes in 4 blocks
+==48968==    indirectly lost: 0 bytes in 0 blocks
+==48968==      possibly lost: 497,664 bytes in 1 blocks
+==48968==    still reachable: 268,224 bytes in 3,002 blocks
+==48968==         suppressed: 0 bytes in 0 blocks
+==48968== Rerun with --leak-check=full to see details of leaked memory
+==48968== 
+==48968== For lists of detected and suppressed errors, rerun with: -s
+==48968== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 */
