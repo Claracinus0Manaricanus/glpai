@@ -25,7 +25,7 @@ Image::~Image(){
 
 //loaders
 int Image::load(ImageData data){	
-	reset();//to free previous image
+	stbi_image_free(imgData);//to free previous image
 	
 	stbi_set_flip_vertically_on_load(data.flipImage);
 	imgData = stbi_load(data.imageFile,&iWidth,&iHeight,&iChannel,data.desiredChannels);

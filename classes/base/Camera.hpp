@@ -8,15 +8,17 @@ class Camera : public Transform{
 protected:
     int fov=120;
     int type=0;
+    float aspectRatio=0;
 
 public:
     //constructors
     Camera();
-    Camera(int iFov, int iType);
+    Camera(int iFov, int iType, float inAspectRatio=1);
     
     //setters
     void setFov(int iFov);
     void setType(int iType);
+    void setAspectRatio(float inAspectRatio);
 
     //getters
     int getFov();

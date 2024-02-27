@@ -1,8 +1,8 @@
-CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o: \
- /home/cm/codes/c++/glpai/classes/cmMath/vectors.cpp \
+CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o: \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.cpp \
  /usr/include/stdc-predef.h \
- /home/cm/codes/c++/glpai/classes/cmMath/vectors.hpp \
- /home/cm/codes/c++/glpai/classes/cmMath/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
  /usr/include/c++/13.2.1/math.h /usr/include/c++/13.2.1/cmath \
  /usr/include/c++/13.2.1/bits/requires_hosted.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -130,4 +130,7 @@ CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o: \
  /usr/include/c++/13.2.1/tuple /usr/include/c++/13.2.1/cstdint \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h
+ /usr/include/bits/stdint-least.h \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
+ /usr/include/GL/glew.h /usr/include/GL/glu.h /usr/include/GL/gl.h

@@ -38,9 +38,6 @@ public:
 
     //binder
     void bind();
-
-    ///friends
-    friend class CMGL_Renderer;
 };
 
 #endif

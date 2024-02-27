@@ -321,6 +321,30 @@ classes/opengl/CMGL_Camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.s
 .PHONY : classes/opengl/CMGL_Camera.cpp.s
 
+classes/opengl/CMGL_CubeMap.o: classes/opengl/CMGL_CubeMap.cpp.o
+.PHONY : classes/opengl/CMGL_CubeMap.o
+
+# target to build an object file
+classes/opengl/CMGL_CubeMap.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o
+.PHONY : classes/opengl/CMGL_CubeMap.cpp.o
+
+classes/opengl/CMGL_CubeMap.i: classes/opengl/CMGL_CubeMap.cpp.i
+.PHONY : classes/opengl/CMGL_CubeMap.i
+
+# target to preprocess a source file
+classes/opengl/CMGL_CubeMap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.i
+.PHONY : classes/opengl/CMGL_CubeMap.cpp.i
+
+classes/opengl/CMGL_CubeMap.s: classes/opengl/CMGL_CubeMap.cpp.s
+.PHONY : classes/opengl/CMGL_CubeMap.s
+
+# target to generate assembly for a file
+classes/opengl/CMGL_CubeMap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.s
+.PHONY : classes/opengl/CMGL_CubeMap.cpp.s
+
 classes/opengl/CMGL_GameObject.o: classes/opengl/CMGL_GameObject.cpp.o
 .PHONY : classes/opengl/CMGL_GameObject.o
 
@@ -522,6 +546,9 @@ help:
 	@echo "... classes/opengl/CMGL_Camera.o"
 	@echo "... classes/opengl/CMGL_Camera.i"
 	@echo "... classes/opengl/CMGL_Camera.s"
+	@echo "... classes/opengl/CMGL_CubeMap.o"
+	@echo "... classes/opengl/CMGL_CubeMap.i"
+	@echo "... classes/opengl/CMGL_CubeMap.s"
 	@echo "... classes/opengl/CMGL_GameObject.o"
 	@echo "... classes/opengl/CMGL_GameObject.i"
 	@echo "... classes/opengl/CMGL_GameObject.s"

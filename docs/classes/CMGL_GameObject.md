@@ -39,7 +39,4 @@ Loades new TextureData.
 Generates object view matrix.
 -
 - void bind();  
-Binds gameObject for use with renderer.
-
-# Friend Classes
-- CMGL_Renderer
+Binds gameObject for use with renderer. Binds its OVM (Object View Matrix) to buffer index 4.

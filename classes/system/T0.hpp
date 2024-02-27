@@ -277,6 +277,11 @@ struct ImageData{
 	int flipImage=0;
 };
 
+struct CubeMapData{
+	char* sides[6];// +X, -X, +Y, -Y, +Z, -Z
+	//maybe change to vectors
+};
+
 struct ObjectData{
 	MeshData mData;
 	TransformData trData;

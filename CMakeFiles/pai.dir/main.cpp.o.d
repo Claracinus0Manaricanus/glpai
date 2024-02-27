@@ -165,14 +165,22 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/GL/gl.h /usr/include/GLFW/glfw3.h \
  /home/cm/codes/c++/glpai/classes/system/Window.hpp \
  /home/cm/codes/c++/glpai/classes/system/T0.hpp \
- /home/cm/codes/c++/glpai/classes/system/Image.hpp \
  /home/cm/codes/c++/glpai/classes/system/U0.hpp \
  /usr/include/c++/13.2.1/cstring /usr/include/string.h \
  /usr/include/strings.h /home/cm/codes/c++/glpai/classes/system/Image.hpp \
  /home/cm/codes/c++/glpai/classes/system/../cmMath/vectors.hpp \
  /home/cm/codes/c++/glpai/classes/system/../cmMath/../system/T0.hpp \
- /home/cm/codes/c++/glpai/classes/graphics/CMGL_Program.hpp \
- /home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/Mesh.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../cmMath/matrix4.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Program.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Shader.hpp \
  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
  /usr/include/bits/environments.h /usr/include/bits/confname.h \
  /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
@@ -190,19 +198,10 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /usr/include/asm-generic/posix_types.h /usr/include/bits/statx-generic.h \
  /usr/include/bits/types/struct_statx_timestamp.h \
  /usr/include/bits/types/struct_statx.h \
- /home/cm/codes/c++/glpai/classes/graphics/../system/T0.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../base/Mesh.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../base/../system/T0.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../cmMath/matrix4.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Program.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../graphics/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Camera.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Camera.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/matrix4.hpp
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/matrix4.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp

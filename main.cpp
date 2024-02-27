@@ -6,12 +6,10 @@
 #include <GLFW/glfw3.h>
 
 #include "classes/system/Window.hpp"
-#include "classes/system/Image.hpp"
 #include "classes/system/U0.hpp"
-#include "classes/graphics/CMGL_Program.hpp"
-#include "classes/opengl/CMGL_GameObject.hpp"
 #include "classes/opengl/CMGL_Renderer.hpp"
 #include "classes/opengl/CMGL_Camera.hpp"
+#include "classes/opengl/CMGL_CubeMap.hpp"
 
 using namespace std;
 
@@ -105,7 +103,25 @@ int main(int argc, char** argv){
 	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
 
+	CMGL_Program skyBoxPrg("shaders/perspective(FB)/skybox/vert.sha","shaders/perspective(FB)/skybox/frag.sha");
+	sprg.setInt("tex0", 0);
+
 	CMGL_Renderer mainRenderer;
+
+
+	//cubeMap
+	CubeMapData cbDat;
+	cbDat.sides[0]="images/skybox/starryCSky/px.png";
+	cbDat.sides[1]="images/skybox/starryCSky/nx.png";
+	cbDat.sides[2]="images/skybox/starryCSky/py.png";
+	cbDat.sides[3]="images/skybox/starryCSky/ny.png";
+	cbDat.sides[4]="images/skybox/starryCSky/pz.png";
+	cbDat.sides[5]="images/skybox/starryCSky/nz.png";
+
+	CMGL_CubeMap cubeMap(cbDat);
+
+	MeshData importCube=importOBJ("objects/cube.obj");
+	CMGL_GameObject cubeMapsCube(importCube, {{0,0,0},{0,0,0},{1,1,1}});
 	
 
 	/*while loop variables*/
@@ -145,7 +161,14 @@ int main(int argc, char** argv){
 		//clearing screen and rendering
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
+		mainCam.setAspectRatio((float)winData.resolution.x/winData.resolution.y);
+		glFrontFace(GL_CW);
 		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
+		impOBJ.rotate({0,1*deltaTime,0});
+		
+		//skybox
+		glFrontFace(GL_CCW);
+		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);
 
 		//input from keyboard (camera movement)
 		if(glfwGetKey(mainWin.getid(), GLFW_KEY_W) == GLFW_PRESS){

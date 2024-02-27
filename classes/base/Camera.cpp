@@ -3,9 +3,10 @@
 //cosntructors
 Camera::Camera(){}
 
-Camera::Camera(int iFov, int iType){
+Camera::Camera(int iFov, int iType, float inAspectRatio){
     fov=iFov;
     type=iType;
+    aspectRatio=inAspectRatio;
 }
 
 
@@ -16,6 +17,10 @@ void Camera::setFov(int iFov){
 
 void Camera::setType(int iType){
     type=iType;
+}
+
+void Camera::setAspectRatio(float inAspectRatio){
+    aspectRatio=inAspectRatio;
 }
 
 
@@ -75,7 +80,7 @@ float* Camera::generateCVM(){
     if(type == 1){//perspective
         float projection[16]{
             1/tan((3.14159265f/180.0f)*fov/2.0f),0,0,0,
-            0,1/tan((3.14159265f/180.0f)*fov/2.0f),0,0,
+            0,aspectRatio/tan((3.14159265f/180.0f)*fov/2.0f),0,0,
             0,0,1,-0.01f,
             0,0,1,0
         };
