@@ -288,6 +288,12 @@ struct ObjectData{
 	TextureData texData;
 };
 
+struct LightData{
+	int type=0;
+	vec4 color={0,0,0,0};//R G B Strength
+	TransformData trData;
+};
+
 struct WindowData{
 	ivec2 resolution={800, 600};
 	char* name="default";

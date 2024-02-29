@@ -6,10 +6,13 @@ layout(location=1) in vec3 nor;
 layout(location=2) in vec4 col;
 layout(location=3) in vec2 tex;
 
-//camera
-uniform mat4 CVM;
-//object
-uniform mat4 OVM;//object view matrix
+layout(std430, binding=4) buffer OVMBUFF{
+	mat4 OVM;
+};
+
+layout(std430, binding=5) buffer CVMBUFF{
+	mat4 CVM;
+};
 
 //to fragment shader
 out vec2 fragTex;
@@ -19,10 +22,10 @@ out vec4 fragCol;
 
 
 void main(){
-	mat4 WVM=CVM*OVM;//world view matrix
-	fragPos=vec4(OVM*vec4(pos.xyz,1.0)).xyz;
-	fragNor=normalize(vec4(OVM*vec4(nor.xyz,0)).xyz);
+	mat4 t_OVM = transpose(OVM);
+	fragPos=(t_OVM*vec4(pos.xyz,1.0)).xyz;
+	fragNor=normalize((t_OVM*vec4(nor.xyz,0)).xyz);
 	fragCol=col;
 	fragTex=tex;
-	gl_Position=WVM*vec4(pos.xyz,1.0);
+	gl_Position=transpose(CVM)*t_OVM*vec4(pos.xyz,1.0);
 }

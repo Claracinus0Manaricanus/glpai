@@ -153,6 +153,30 @@ classes/base/Camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Camera.cpp.s
 .PHONY : classes/base/Camera.cpp.s
 
+classes/base/Light.o: classes/base/Light.cpp.o
+.PHONY : classes/base/Light.o
+
+# target to build an object file
+classes/base/Light.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Light.cpp.o
+.PHONY : classes/base/Light.cpp.o
+
+classes/base/Light.i: classes/base/Light.cpp.i
+.PHONY : classes/base/Light.i
+
+# target to preprocess a source file
+classes/base/Light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Light.cpp.i
+.PHONY : classes/base/Light.cpp.i
+
+classes/base/Light.s: classes/base/Light.cpp.s
+.PHONY : classes/base/Light.s
+
+# target to generate assembly for a file
+classes/base/Light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/base/Light.cpp.s
+.PHONY : classes/base/Light.cpp.s
+
 classes/base/Mesh.o: classes/base/Mesh.cpp.o
 .PHONY : classes/base/Mesh.o
 
@@ -525,6 +549,9 @@ help:
 	@echo "... classes/base/Camera.o"
 	@echo "... classes/base/Camera.i"
 	@echo "... classes/base/Camera.s"
+	@echo "... classes/base/Light.o"
+	@echo "... classes/base/Light.i"
+	@echo "... classes/base/Light.s"
 	@echo "... classes/base/Mesh.o"
 	@echo "... classes/base/Mesh.i"
 	@echo "... classes/base/Mesh.s"

@@ -125,10 +125,24 @@ CMakeFiles/pai.dir/classes/base/Camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/classes/base/Camera.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/classes/base/Camera.cpp -o CMakeFiles/pai.dir/classes/base/Camera.cpp.s
 
+CMakeFiles/pai.dir/classes/base/Light.cpp.o: CMakeFiles/pai.dir/flags.make
+CMakeFiles/pai.dir/classes/base/Light.cpp.o: classes/base/Light.cpp
+CMakeFiles/pai.dir/classes/base/Light.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pai.dir/classes/base/Light.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/base/Light.cpp.o -MF CMakeFiles/pai.dir/classes/base/Light.cpp.o.d -o CMakeFiles/pai.dir/classes/base/Light.cpp.o -c /home/cm/codes/c++/glpai/classes/base/Light.cpp
+
+CMakeFiles/pai.dir/classes/base/Light.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pai.dir/classes/base/Light.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cm/codes/c++/glpai/classes/base/Light.cpp > CMakeFiles/pai.dir/classes/base/Light.cpp.i
+
+CMakeFiles/pai.dir/classes/base/Light.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pai.dir/classes/base/Light.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cm/codes/c++/glpai/classes/base/Light.cpp -o CMakeFiles/pai.dir/classes/base/Light.cpp.s
+
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: classes/opengl/CMGL_GameObject.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o: classes/opengl/CMGL_Texture.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o: classes/opengl/CMGL_Renderer.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o: classes/opengl/CMGL_Camera.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_Camera.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o: classes/opengl/CMGL_CubeMap.cpp
 CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o -MF CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o.d -o CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o -c /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.cpp
 
 CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o: classes/graphics/CMGL_Shader.cpp
 CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o -MF CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o.d -o CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o -c /home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.cpp
 
 CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o: classes/graphics/CMGL_Program.cpp
 CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o -MF CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o.d -o CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.o -c /home/cm/codes/c++/glpai/classes/graphics/CMGL_Program.cpp
 
 CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/pai.dir/classes/graphics/CMGL_Program.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/system/Window.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/system/Window.cpp.o: classes/system/Window.cpp
 CMakeFiles/pai.dir/classes/system/Window.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/pai.dir/classes/system/Window.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/pai.dir/classes/system/Window.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/system/Window.cpp.o -MF CMakeFiles/pai.dir/classes/system/Window.cpp.o.d -o CMakeFiles/pai.dir/classes/system/Window.cpp.o -c /home/cm/codes/c++/glpai/classes/system/Window.cpp
 
 CMakeFiles/pai.dir/classes/system/Window.cpp.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/pai.dir/classes/system/Window.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/system/U0.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/system/U0.cpp.o: classes/system/U0.cpp
 CMakeFiles/pai.dir/classes/system/U0.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/pai.dir/classes/system/U0.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/pai.dir/classes/system/U0.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/system/U0.cpp.o -MF CMakeFiles/pai.dir/classes/system/U0.cpp.o.d -o CMakeFiles/pai.dir/classes/system/U0.cpp.o -c /home/cm/codes/c++/glpai/classes/system/U0.cpp
 
 CMakeFiles/pai.dir/classes/system/U0.cpp.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/pai.dir/classes/system/U0.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/system/Image.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/system/Image.cpp.o: classes/system/Image.cpp
 CMakeFiles/pai.dir/classes/system/Image.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/pai.dir/classes/system/Image.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/pai.dir/classes/system/Image.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/system/Image.cpp.o -MF CMakeFiles/pai.dir/classes/system/Image.cpp.o.d -o CMakeFiles/pai.dir/classes/system/Image.cpp.o -c /home/cm/codes/c++/glpai/classes/system/Image.cpp
 
 CMakeFiles/pai.dir/classes/system/Image.cpp.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/pai.dir/classes/system/Image.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o: classes/cmMath/matrix4.cpp
 CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o -MF CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o.d -o CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o -c /home/cm/codes/c++/glpai/classes/cmMath/matrix4.cpp
 
 CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.s: cmake_force
 CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o: CMakeFiles/pai.dir/flags.make
 CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o: classes/cmMath/vectors.cpp
 CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o: CMakeFiles/pai.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o -MF CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o.d -o CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o -c /home/cm/codes/c++/glpai/classes/cmMath/vectors.cpp
 
 CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.i: cmake_force
@@ -299,6 +313,7 @@ pai_OBJECTS = \
 "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o" \
 "CMakeFiles/pai.dir/classes/base/Transform.cpp.o" \
 "CMakeFiles/pai.dir/classes/base/Camera.cpp.o" \
+"CMakeFiles/pai.dir/classes/base/Light.cpp.o" \
 "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o" \
 "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o" \
 "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o" \
@@ -319,6 +334,7 @@ pai: CMakeFiles/pai.dir/main.cpp.o
 pai: CMakeFiles/pai.dir/classes/base/Mesh.cpp.o
 pai: CMakeFiles/pai.dir/classes/base/Transform.cpp.o
 pai: CMakeFiles/pai.dir/classes/base/Camera.cpp.o
+pai: CMakeFiles/pai.dir/classes/base/Light.cpp.o
 pai: CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o
 pai: CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o
 pai: CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o
@@ -333,7 +349,7 @@ pai: CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o
 pai: CMakeFiles/pai.dir/classes/cmMath/vectors.cpp.o
 pai: CMakeFiles/pai.dir/build.make
 pai: CMakeFiles/pai.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable pai"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/cm/codes/c++/glpai/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable pai"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pai.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

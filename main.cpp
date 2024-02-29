@@ -10,6 +10,7 @@
 #include "classes/opengl/CMGL_Renderer.hpp"
 #include "classes/opengl/CMGL_Camera.hpp"
 #include "classes/opengl/CMGL_CubeMap.hpp"
+#include "classes/base/Light.hpp"
 
 using namespace std;
 
@@ -98,7 +99,7 @@ int main(int argc, char** argv){
 	MeshData impOBJData=importOBJ("objects/torus.obj");
 
 	CMGL_GameObject impOBJ(impOBJData, {{0,0,0},{0,0,0},{1,1,1}});
-	impOBJ.loadTexture(texDen);
+	free(impOBJData.vertices);
 	
 	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
@@ -120,8 +121,15 @@ int main(int argc, char** argv){
 
 	CMGL_CubeMap cubeMap(cbDat);
 
-	MeshData importCube=importOBJ("objects/cube.obj");
-	CMGL_GameObject cubeMapsCube(importCube, {{0,0,0},{0,0,0},{1,1,1}});
+	impOBJData=importOBJ("objects/cube.obj");
+	CMGL_GameObject cubeMapsCube(impOBJData, {{0,0,0},{0,0,0},{1,1,1}});
+	free(impOBJData.vertices);
+
+	//lights
+	LightData lightData;
+	lightData.color={1,1,1,1};
+	lightData.trData.position={0,1,0};
+	Light denLight(lightData);
 	
 
 	/*while loop variables*/
@@ -161,6 +169,7 @@ int main(int argc, char** argv){
 		//clearing screen and rendering
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
+		sprg.setVec4Array("lData",2,denLight.generateData());
 		mainCam.setAspectRatio((float)winData.resolution.x/winData.resolution.y);
 		glFrontFace(GL_CW);
 		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
@@ -186,6 +195,22 @@ int main(int argc, char** argv){
 		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_Q) == GLFW_PRESS){
 			mainCam.move({0, -1*deltaTime, 0});
 		}
+
+		//shader switching
+		if(glfwGetKey(mainWin.getid(), GLFW_KEY_F) == GLFW_PRESS){
+			sprg.load("shaders/perspective(L)/point/vert.sha", "shaders/perspective(L)/point/frag.sha");
+			sprg.setInt("T0", 0);
+			printf("loading perspective(L)/point\n");
+		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_G) == GLFW_PRESS){
+			sprg.load("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
+			sprg.setInt("T0", 0);
+			printf("loading imgV\n");
+		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_H) == GLFW_PRESS){
+			sprg.load("shaders/perspective(L)/directional/vert.sha", "shaders/perspective(L)/directional/frag.sha");
+			sprg.setInt("T0", 0);
+			printf("loading perspective(L)/directional\n");
+		}
+		
 
 		//toggle cursor
 		if(glfwGetKey(mainWin.getid(),GLFW_KEY_ESCAPE)==GLFW_PRESS&&escAllow){
@@ -232,7 +257,6 @@ int main(int argc, char** argv){
 
 	if(debug)printf("\n");
 	if(debug)logInfo("Terminating\n");
-	glfwDestroyWindow(mainWin.getid());
 	glfwTerminate();
 	if(debug)printf("\033[0;32mINFO:\033[0;36mProgram ran for \033[0;35m%f\033[0;36m seconds!\n",totalTime);//change this
 	printf("\nSee ya later!\n");
@@ -264,4 +288,42 @@ general debug colors:
 ==48968== 
 ==48968== For lists of detected and suppressed errors, rerun with: -s
 ==48968== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+*/
+
+/* 2024-03-01 01:58:55
+==50278== 
+==50278== HEAP SUMMARY:
+==50278==     in use at exit: 643,793 bytes in 1,001 blocks
+==50278==   total heap usage: 151,517 allocs, 150,516 frees, 1,178,428,421 bytes allocated
+==50278== 
+==50278== LEAK SUMMARY:
+==50278==    definitely lost: 545,920 bytes in 30 blocks
+==50278==    indirectly lost: 9,924 bytes in 59 blocks
+==50278==      possibly lost: 0 bytes in 0 blocks
+==50278==    still reachable: 87,949 bytes in 912 blocks
+==50278==         suppressed: 0 bytes in 0 blocks
+==50278== Rerun with --leak-check=full to see details of leaked memory
+==50278== 
+==50278== Use --track-origins=yes to see where uninitialised values come from
+==50278== For lists of detected and suppressed errors, rerun with: -s
+==50278== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+*/
+
+/* 2024-03-01 02:01:00
+==51309== 
+==51309== HEAP SUMMARY:
+==51309==     in use at exit: 140,945 bytes in 999 blocks
+==51309==   total heap usage: 86,842 allocs, 85,843 frees, 1,065,886,714 bytes allocated
+==51309== 
+==51309== LEAK SUMMARY:
+==51309==    definitely lost: 43,072 bytes in 28 blocks
+==51309==    indirectly lost: 9,924 bytes in 59 blocks
+==51309==      possibly lost: 0 bytes in 0 blocks
+==51309==    still reachable: 87,949 bytes in 912 blocks
+==51309==         suppressed: 0 bytes in 0 blocks
+==51309== Rerun with --leak-check=full to see details of leaked memory
+==51309== 
+==51309== Use --track-origins=yes to see where uninitialised values come from
+==51309== For lists of detected and suppressed errors, rerun with: -s
+==51309== ERROR SUMMARY: 8 errors from 8 contexts (suppressed: 0 from 0)
 */

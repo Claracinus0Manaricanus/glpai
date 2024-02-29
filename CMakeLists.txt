@@ -14,7 +14,8 @@ add_executable(
 
 #base folder
 "classes/base/Mesh.cpp" "classes/base/Transform.cpp"
-"classes/base/Camera.cpp"
+"classes/base/Camera.cpp" "classes/base/Light.cpp"
+
 
 #opengl folder
 "classes/opengl/CMGL_GameObject.cpp" "classes/opengl/CMGL_Texture.cpp"

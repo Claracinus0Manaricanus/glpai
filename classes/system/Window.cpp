@@ -13,6 +13,12 @@ Window::Window(WindowData inputData){
 }
 
 
+//destructor
+Window::~Window(){
+	glfwDestroyWindow(ID);
+}
+
+
 //getters
 GLFWwindow* Window::getid(){
 	return ID;

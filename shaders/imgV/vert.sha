@@ -1,8 +1,11 @@
 #version 450 core
 
 layout(location=0) in vec3 pos;
+layout(location=1) in vec3 nor;
 layout(location=3) in vec2 tex;
 out vec2 texC;
+out vec3 fragNor;
+out vec3 fragPos;
 
 layout(std430, binding=4) buffer OMD{
 	mat4 OVM;
@@ -13,6 +16,9 @@ layout(std430, binding=5) buffer CMD{
 };
 
 void main(){
+	mat4 t_OVM = transpose(OVM);
 	texC = tex;
-	gl_Position = transpose(CVM) * transpose(OVM) * vec4(pos.xyz,1);
+	fragNor = (OVM * vec4(nor.xyz,0)).xyz;
+	fragPos = (OVM * vec4(pos.xyz,1)).xyz;
+	gl_Position = transpose(CVM) * OVM * vec4(pos.xyz,1);
 }

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pai.dir/classes/base/Camera.cpp.o"
   "CMakeFiles/pai.dir/classes/base/Camera.cpp.o.d"
+  "CMakeFiles/pai.dir/classes/base/Light.cpp.o"
+  "CMakeFiles/pai.dir/classes/base/Light.cpp.o.d"
   "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o"
   "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o.d"
   "CMakeFiles/pai.dir/classes/base/Transform.cpp.o"

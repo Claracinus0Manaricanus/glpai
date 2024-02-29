@@ -8,33 +8,28 @@ CMGL_Program::CMGL_Program(){
 
 CMGL_Program::CMGL_Program(CMGL_Shader* vertex, CMGL_Shader* fragment){
 	ID=glCreateProgram();
-	glAttachShader(ID,vertex->ID);
-	glAttachShader(ID,fragment->ID);
-	glLinkProgram(ID);
-	loaded=true;
+	load(vertex,fragment);
 }
 
 CMGL_Program::CMGL_Program(const char* vName, const char* fName){
 	//create CMGL_Program
 	ID=glCreateProgram();
-	//load shaders
-	CMGL_Shader vertex(vName,GL_VERTEX_SHADER);
-	CMGL_Shader fragment(fName,GL_FRAGMENT_SHADER);
-	//attaching
-	glAttachShader(ID,vertex.ID);
-	glAttachShader(ID,fragment.ID);
-	glLinkProgram(ID);
-	loaded=true;
-	//cleaning
-	vertex.Delete();
-	fragment.Delete();
+	load(vName,fName);
+}
+
+
+//destructor
+CMGL_Program::~CMGL_Program(){
+	glDeleteProgram(ID);
 }
 
 
 //loaders
 int CMGL_Program::load(CMGL_Shader* vertex, CMGL_Shader* fragment){
-	if(loaded)
-		return -1;
+	if(loaded){
+		glDeleteProgram(ID);
+		ID=glCreateProgram();
+	}
 	glAttachShader(ID,vertex->ID);
 	glAttachShader(ID,fragment->ID);
 	glLinkProgram(ID);
@@ -43,8 +38,10 @@ int CMGL_Program::load(CMGL_Shader* vertex, CMGL_Shader* fragment){
 }
 
 int CMGL_Program::load(const char* vName, const char* fName){
-	if(loaded)
-		return -1;
+	if(loaded){
+		glDeleteProgram(ID);
+		ID=glCreateProgram();
+	}
 	//load shaders
 	CMGL_Shader vertex(vName,GL_VERTEX_SHADER);
 	CMGL_Shader fragment(fName,GL_FRAGMENT_SHADER);
@@ -53,9 +50,7 @@ int CMGL_Program::load(const char* vName, const char* fName){
 	glAttachShader(ID,fragment.ID);
 	glLinkProgram(ID);
 	loaded=true;
-	//cleaning
-	vertex.Delete();
-	fragment.Delete();
+	//shader classes do auto cleanup
 	return 0;
 }
 
@@ -101,12 +96,6 @@ int CMGL_Program::setMat4(const char* u_name, const float* data){
 //extractors
 uint32_t CMGL_Program::getid(){
 	return ID;
-}
-
-
-//destructor
-CMGL_Program::~CMGL_Program(){
-	glDeleteProgram(ID);
 }
 
 

@@ -12,6 +12,9 @@ public:
 	//constructor
 	Window(WindowData inputData);
 
+	//destructor
+	~Window();
+
 	//getters
 	GLFWwindow* getid();
 	ivec2 getResolution();

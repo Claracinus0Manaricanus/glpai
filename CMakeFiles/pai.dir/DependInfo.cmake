@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cm/codes/c++/glpai/classes/base/Camera.cpp" "CMakeFiles/pai.dir/classes/base/Camera.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Camera.cpp.o.d"
+  "/home/cm/codes/c++/glpai/classes/base/Light.cpp" "CMakeFiles/pai.dir/classes/base/Light.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Light.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/base/Mesh.cpp" "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Mesh.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/base/Transform.cpp" "CMakeFiles/pai.dir/classes/base/Transform.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/base/Transform.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/cmMath/matrix4.cpp" "CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/cmMath/matrix4.cpp.o.d"

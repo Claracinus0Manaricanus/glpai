@@ -1,9 +1,22 @@
 #version 450 core
 
+precision highp float;
+
 out vec4 outC;
 in vec2 texC;
+in vec3 fragNor;
+in vec3 fragPos;
+
 uniform sampler2D T0;
+uniform vec4[2] lData;
 
 void main(){
-	outC=texture(T0,texC);
+	vec3 lPos = lData[0].xyz;
+	vec4 lCol = lData[1];
+
+	vec3 lVec = lPos - fragPos;
+
+	float power = dot(normalize(lVec),normalize(fragNor)) / (length(lVec)*length(lVec));
+
+	outC = vec4(lCol.w*power*texture(T0,texC).xyz,1);
 }

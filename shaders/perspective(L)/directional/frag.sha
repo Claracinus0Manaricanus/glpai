@@ -7,17 +7,17 @@ in vec4 fragCol;
 in vec2 fragTex;
 
 //texture
-uniform sampler2D tex0;
+uniform sampler2D T0;
 
 //light data
-uniform vec4 light[2];
+uniform vec4 lData[2];
 
 out vec4 color;
 
 void main(){
-    vec4 texCol=texture(tex0,fragTex);
-    vec3 lVec=light[0].xyz;
-    vec4 lCol=light[1];
+    vec4 texCol=texture(T0,fragTex);
+    vec3 lVec=lData[0].xyz;
+    vec4 lCol=lData[1];
     float intensity=dot(normalize(lVec),fragNor)*lCol.w;
     clamp(intensity,0,1);
     color=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*intensity,texCol.w);
