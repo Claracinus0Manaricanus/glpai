@@ -8,6 +8,9 @@
 - CMGL_CubeMap
 - CMGL_Program
 - Light
+- CMGL_Renderer
+- CMGL_GameObject
+- Transform
 
 # when I feel like it
 - seperating opengl from glew and glfw to support custom libraries
@@ -15,11 +18,11 @@
 - audio support
 - mipmaps for textures
 - perspective projection matrix that keeps Z data
+- find where the memory leak is
+- optimize OVM and CVM calculations
 
-# 2024-03-01
-- find a proper way to pass light data to shaders
+# 2024-03-03
+
 
 # done (gets cleared once in a while)
-- Light class
-- rework light related shaders
-- added shader switching ability for loaded programs
+- write a mat4 transposer

@@ -10,3 +10,16 @@ float* m4_multiply(float* m1, float* m2){//m1 * m2
     }
     return temp;
 }
+
+
+float* m4_transpose(float* m1){
+    float* m2 = (float*)malloc(sizeof(float)*16);
+
+    for(int i=0; i < 4; i++){
+        for(int k=0; k<4; k++){
+            m2[i*4+k] = m1[k*4+i];
+        }
+    }
+
+    return m2;
+}

@@ -16,9 +16,8 @@ layout(std430, binding=5) buffer CMD{
 };
 
 void main(){
-	mat4 t_OVM = transpose(OVM);
 	texC = tex;
 	fragNor = (OVM * vec4(nor.xyz,0)).xyz;
 	fragPos = (OVM * vec4(pos.xyz,1)).xyz;
-	gl_Position = transpose(CVM) * OVM * vec4(pos.xyz,1);
+	gl_Position = CVM * OVM * vec4(pos.xyz,1);
 }

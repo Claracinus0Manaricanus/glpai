@@ -85,7 +85,7 @@ int main(int argc, char** argv){
 	//glfw settings
 
 
-	glfwSwapInterval(1);//synchronizing framerate
+	glfwSwapInterval(0);//synchronizing framerate
 
 	//initalizing mouse
 	glfwSetInputMode(mainWin.getid(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -169,7 +169,7 @@ int main(int argc, char** argv){
 		//clearing screen and rendering
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
-		sprg.setVec4Array("lData",2,denLight.generateData());
+		sprg.setVec4Array("lData",2,denLight.getData());
 		mainCam.setAspectRatio((float)winData.resolution.x/winData.resolution.y);
 		glFrontFace(GL_CW);
 		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
@@ -270,24 +270,6 @@ general debug colors:
 - green: task done
 - cyan: information
 - purple: number
-*/
-
-/* 2024-02-26 / 20:33:40
-==48968== 
-==48968== HEAP SUMMARY:
-==48968==     in use at exit: 807,188 bytes in 3,007 blocks
-==48968==   total heap usage: 153,869 allocs, 150,862 frees, 22,299,294 bytes allocated
-==48968== 
-==48968== LEAK SUMMARY:
-==48968==    definitely lost: 41,300 bytes in 4 blocks
-==48968==    indirectly lost: 0 bytes in 0 blocks
-==48968==      possibly lost: 497,664 bytes in 1 blocks
-==48968==    still reachable: 268,224 bytes in 3,002 blocks
-==48968==         suppressed: 0 bytes in 0 blocks
-==48968== Rerun with --leak-check=full to see details of leaked memory
-==48968== 
-==48968== For lists of detected and suppressed errors, rerun with: -s
-==48968== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 */
 
 /* 2024-03-01 01:58:55

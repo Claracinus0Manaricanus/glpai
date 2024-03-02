@@ -11,10 +11,8 @@ uniform sampler2D T0;
 uniform vec4[2] lData;
 
 void main(){
-	vec3 lPos = lData[0].xyz;
 	vec4 lCol = lData[1];
-
-	vec3 lVec = lPos - fragPos;
+	vec3 lVec = lData[0].xyz - fragPos;
 
 	float power = dot(normalize(lVec),normalize(fragNor)) / (length(lVec)*length(lVec));
 

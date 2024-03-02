@@ -44,9 +44,13 @@ int CMGL_GameObject::update(){
 
 void CMGL_GameObject::updateSSB(){
     /****Shader Storage Buffer****/
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
     float* OVM = generateOVM();
-    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, OVM, GL_DYNAMIC_DRAW);
+    float* transposeOfOVM = m4_transpose(OVM);
+    
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, transposeOfOVM, GL_DYNAMIC_DRAW);
+
+    free(transposeOfOVM);
     free(OVM);
 }
 
@@ -54,12 +58,14 @@ void CMGL_GameObject::updateSSB(){
 //constructors
 CMGL_GameObject::CMGL_GameObject(){
     initBuffers();
+    updateSSB();
 }
 
 CMGL_GameObject::CMGL_GameObject(MeshData inputMesh, TransformData inputTransform):
 Transform(inputTransform), Mesh(inputMesh){
     initBuffers();
     update();
+    updateSSB();
 }
 
 
@@ -84,6 +90,11 @@ void CMGL_GameObject::loadMesh(MeshData inputMesh){
     update();
 }
 
+void CMGL_GameObject::loadTransform(TransformData inputTransform){
+    Transform::loadData(inputTransform);
+    update();
+}
+
 int CMGL_GameObject::loadTexture(TextureData inputData){
     return CMGL_Texture::loadData(inputData);
 }
@@ -98,24 +109,30 @@ float* CMGL_GameObject::generateOVM(){
         0,0,1,Position.z,
         0,0,0,1
     };
-
+    
+    float cosine = cos(Rotation.x);
+    float sine = sin(Rotation.x);
     float rotX[16] = {
         1, 0, 0, 0,
-        0, cos(Rotation.x), -sin(Rotation.x), 0,
-        0, sin(Rotation.x),  cos(Rotation.x), 0,
+        0, cosine, -sine, 0,
+        0, sine,  cosine, 0,
         0, 0, 0, 1
     };
 
+    cosine = cos(Rotation.y);
+    sine = sin(Rotation.y);
     float rotY[16] = {
-         cos(Rotation.y), 0, sin(Rotation.y), 0,
+         cosine, 0, sine, 0,
          0, 1, 0, 0,
-        -sin(Rotation.y), 0, cos(Rotation.y), 0,
+        -sine, 0, cosine, 0,
          0, 0, 0, 1
     };
 
+    cosine = cos(Rotation.z);
+    sine = sin(Rotation.z);
     float rotZ[16] = {
-        cos(Rotation.z), -sin(Rotation.z), 0, 0,
-        sin(Rotation.z),  cos(Rotation.z), 0, 0,
+        cosine, -sine, 0, 0,
+        sine,  cosine, 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     };
@@ -134,6 +151,11 @@ float* CMGL_GameObject::generateOVM(){
 void CMGL_GameObject::bind(){
     glBindVertexArray(VAO);
     CMGL_Texture::bind();
-    updateSSB();
     glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4, SSB, 0, sizeof(float)*16);
+}
+
+
+//Trasnform overrides
+void CMGL_GameObject::updateTransform(){
+    updateSSB();
 }

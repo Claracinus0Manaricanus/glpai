@@ -31,6 +31,7 @@ public:
     //setters
     void loadData(MeshData inputMesh, TransformData inputTransform);
     void loadMesh(MeshData inputMesh);
+    void loadTransform(TransformData inputTransform);
     int loadTexture(TextureData inputData);
 
     //Matrices
@@ -38,6 +39,9 @@ public:
 
     //binder
     void bind();
+
+    //Transform overrides
+    void updateTransform() override;
 };
 
 #endif

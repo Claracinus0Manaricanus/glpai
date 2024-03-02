@@ -22,10 +22,9 @@ out vec4 fragCol;
 
 
 void main(){
-	mat4 t_OVM = transpose(OVM);
-	fragPos=(t_OVM*vec4(pos.xyz,1.0)).xyz;
-	fragNor=normalize((t_OVM*vec4(nor.xyz,0)).xyz);
+	fragPos=(OVM*vec4(pos.xyz,1.0)).xyz;
+	fragNor=normalize((OVM*vec4(nor.xyz,0)).xyz);
 	fragCol=col;
 	fragTex=tex;
-	gl_Position=transpose(CVM)*t_OVM*vec4(pos.xyz,1.0);
+	gl_Position=CVM*OVM*vec4(pos.xyz,1.0);
 }

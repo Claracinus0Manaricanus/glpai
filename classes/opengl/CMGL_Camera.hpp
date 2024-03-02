@@ -22,6 +22,9 @@ public:
 
     //utility
     void bind();
+
+    //Transform overrides
+    void updateTransform() override;
 };
 
 #endif

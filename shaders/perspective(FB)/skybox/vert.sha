@@ -16,5 +16,5 @@ layout(std430, binding=5) buffer CVMBUFF{
 void main(){
     fragTex=pos;
 	//z coordinate calculation needs check
-    gl_Position=(transpose(CVM)*transpose(OVM)*vec4(pos.xyz,0)).xyww;
+    gl_Position=(CVM*OVM*vec4(pos.xyz,0)).xyww;
 }

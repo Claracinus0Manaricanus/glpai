@@ -32,6 +32,8 @@ public:
     vec3 getRotation();
     vec3 getScale();
 
+    //updaters
+    virtual void updateTransform();
 };
 
 #endif

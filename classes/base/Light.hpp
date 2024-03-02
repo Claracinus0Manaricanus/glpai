@@ -27,7 +27,11 @@ public:
     int getType();
 
     //utility
-    float* generateData();
+    float* getData();
+    void updateData();
+
+    //Transform overrides
+    void updateTransform() override;
 };
 
 #endif
