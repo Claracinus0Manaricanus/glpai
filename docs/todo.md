@@ -25,4 +25,5 @@
 
 
 # done (gets cleared once in a while)
+- minimap server tests
 - write a mat4 transposer

@@ -16,7 +16,6 @@ add_executable(
 "classes/base/Mesh.cpp" "classes/base/Transform.cpp"
 "classes/base/Camera.cpp" "classes/base/Light.cpp"
 
-
 #opengl folder
 "classes/opengl/CMGL_GameObject.cpp" "classes/opengl/CMGL_Texture.cpp"
 "classes/opengl/CMGL_Renderer.cpp" "classes/opengl/CMGL_Camera.cpp"
@@ -31,7 +30,6 @@ add_executable(
 
 #cmMath folder
 "classes/cmMath/matrix4.cpp" "classes/cmMath/vectors.cpp"
-
 )
 
 target_link_libraries(pai PUBLIC GL GLEW glfw)
