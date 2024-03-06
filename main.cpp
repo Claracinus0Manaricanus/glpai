@@ -101,7 +101,7 @@ int main(int argc, char** argv){
 	CMGL_GameObject impOBJ(impOBJData, {{0,0,0},{0,0,0},{1,2,1}});
 	free(impOBJData.vertices);
 	
-	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
+	CMGL_Program sprg("shaders/perspective(L)/directional/vert.sha", "shaders/perspective(L)/directional/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
 
 	CMGL_Program skyBoxPrg("shaders/perspective(FB)/skybox/vert.sha","shaders/perspective(FB)/skybox/frag.sha");
