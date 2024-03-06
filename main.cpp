@@ -149,7 +149,22 @@ int main(int argc, char** argv){
 	renderFB.setColorAttachment(colorBuffer.getID());
 	renderFB.setDepthAttachment(depthBuffer.getID());
 
+
+	//school images
+	ImageData imgDat;
+	imgDat.imageFile = "images/school/FLY.png";
+	imgDat.desiredChannels = 4;
+	imgDat.flipImage = 1;
+
+	Image schoolIMG(imgDat);
+
+	CMGL_Texture schoolTex({0, schoolIMG.width(), schoolIMG.height(), GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_REPEAT, GL_LINEAR, schoolIMG.getDataP()});
+
 	planeOBJ.loadTexture(colorBuffer);
+	//planeOBJ.loadTexture(schoolTex);
+
+	//impOBJ.loadTexture(schoolTex);
+
 
 	/*while loop variables*/
 	bool cursor=false,escAllow=true;
@@ -199,9 +214,9 @@ int main(int argc, char** argv){
 		//denLight.setPosition({sin(totalTime),sin(totalTime),cos(totalTime)});
 		denLight.setPosition(mainCam.getPosition());
 		
-		//skybox
-		glFrontFace(GL_CCW);
-		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);
+		//skybox /*****************************/
+		/*glFrontFace(GL_CCW);
+		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);*/
 
 		renderFB.unbind();
 
