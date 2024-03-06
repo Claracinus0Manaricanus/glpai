@@ -139,6 +139,16 @@ struct vec3{
 		return ret;
 	}
 
+	vec3 operator-(){
+		vec3 ret;
+
+		ret.x=-x;
+		ret.y=-y;
+		ret.z=-z;
+
+		return ret;
+	}
+
 	vec3 operator*(vec3 n){
 		vec3 ret;
 
