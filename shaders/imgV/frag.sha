@@ -16,5 +16,5 @@ void main(){
 
 	float power = dot(normalize(lVec),normalize(fragNor)) / (length(lVec)*length(lVec));
 
-	outC = vec4(lCol.w*power*texture(T0,texC).xyz,1);
+	outC = vec4(lCol.xyz*lCol.w*power*texture(T0,texC).xyz,1);
 }

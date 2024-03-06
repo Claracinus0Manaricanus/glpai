@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o.d"
+  "CMakeFiles/pai.dir/classes/opengl/CMGL_Framebuffer.cpp.o"
+  "CMakeFiles/pai.dir/classes/opengl/CMGL_Framebuffer.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"

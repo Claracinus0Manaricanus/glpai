@@ -10,6 +10,7 @@
 #include "classes/opengl/CMGL_Renderer.hpp"
 #include "classes/opengl/CMGL_Camera.hpp"
 #include "classes/opengl/CMGL_CubeMap.hpp"
+#include "classes/opengl/CMGL_Framebuffer.hpp"
 #include "classes/base/Light.hpp"
 
 using namespace std;
@@ -41,7 +42,9 @@ int main(int argc, char** argv){
 	//window creation
 
 	WindowData winData;
-	winData.openglProfile=GLFW_OPENGL_CORE_PROFILE;
+	winData.openglProfile = GLFW_OPENGL_CORE_PROFILE;
+	winData.resolution.x = 1280;
+	winData.resolution.y = 720;
 
 	Window mainWin(winData);
 	if(!mainWin.getid()){
@@ -93,12 +96,9 @@ int main(int argc, char** argv){
 
 	/******************************************************************************************/
 	//main loop preparations
+	MeshData impOBJData=importOBJ("objects/sphere.obj");
 
-	TextureData texDen;
-	texDen.imageFile="BadAppleFrames/245.png";
-	MeshData impOBJData=importOBJ("objects/torus.obj");
-
-	CMGL_GameObject impOBJ(impOBJData, {{0,0,0},{0,0,0},{1,1,1}});
+	CMGL_GameObject impOBJ(impOBJData, {{0,0,0},{0,0,0},{1,2,1}});
 	free(impOBJData.vertices);
 	
 	CMGL_Program sprg("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
@@ -106,6 +106,9 @@ int main(int argc, char** argv){
 
 	CMGL_Program skyBoxPrg("shaders/perspective(FB)/skybox/vert.sha","shaders/perspective(FB)/skybox/frag.sha");
 	sprg.setInt("tex0", 0);
+
+	CMGL_Program UI_Out("shaders/orthographic/postProcess/vert.sha","shaders/orthographic/postProcess/frag.sha");
+	UI_Out.setInt("tex0", 0);
 
 	CMGL_Renderer mainRenderer;
 
@@ -125,12 +128,28 @@ int main(int argc, char** argv){
 	CMGL_GameObject cubeMapsCube(impOBJData, {{0,0,0},{0,0,0},{1,1,1}});
 	free(impOBJData.vertices);
 
+	impOBJData=importOBJ("objects/plane.obj");
+	CMGL_GameObject planeOBJ(impOBJData, {{0,0,0}, {0,0,0}, {1,1,1}});
+	free(impOBJData.vertices);
+
 	//lights
 	LightData lightData;
 	lightData.color={1,1,1,1};
 	lightData.trData.position={0,1,0};
 	Light denLight(lightData);
-	
+
+
+	//framebuffer
+	uint32_t FBWidth = winData.resolution.x;
+	uint32_t FBHeight = winData.resolution.y;
+	CMGL_Texture depthBuffer({0, FBWidth, FBHeight, GL_TEXTURE_2D, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
+	CMGL_Texture colorBuffer({0, FBWidth, FBHeight, GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
+
+	CMGL_Framebuffer renderFB({GL_FRAMEBUFFER});
+	renderFB.setColorAttachment(colorBuffer.getID());
+	renderFB.setDepthAttachment(depthBuffer.getID());
+
+	planeOBJ.loadTexture(colorBuffer);
 
 	/*while loop variables*/
 	bool cursor=false,escAllow=true;
@@ -138,6 +157,8 @@ int main(int argc, char** argv){
 	float totalTime=0,deltaTime=0,printCheck=0;//time related
 	double cursorX=0,cursorY=0;//cursor input
 	CMGL_Camera mainCam(120, 1);
+	mainCam.setAspectRatio((float)FBWidth/FBHeight);
+	mainCam.setPosition({0,4,0});
 	/*while loop variables*/
 	
 
@@ -154,7 +175,7 @@ int main(int argc, char** argv){
 
 		//updating resolution
 		winData.resolution=mainWin.getResolution();
-		glViewport(0, 0, winData.resolution.x, winData.resolution.y);
+		glViewport(0, 0, FBWidth, FBHeight);
 
 
 		//getting framerate
@@ -166,18 +187,33 @@ int main(int argc, char** argv){
 		}
 		//change debugging system to optional
 
-		//clearing screen and rendering
+		//framebuffer shinenigans
+		renderFB.bind();
+
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
 		sprg.setVec4Array("lData",2,denLight.getData());
-		mainCam.setAspectRatio((float)winData.resolution.x/winData.resolution.y);
 		glFrontFace(GL_CW);
 		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
-		impOBJ.rotate({0,1*deltaTime,0});
+		//impOBJ.rotate({0,1*deltaTime,0});
+		//denLight.setPosition({sin(totalTime),sin(totalTime),cos(totalTime)});
+		denLight.setPosition(mainCam.getPosition());
 		
 		//skybox
 		glFrontFace(GL_CCW);
 		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);
+
+		renderFB.unbind();
+
+		
+		//clearing screen and rendering
+		glViewport(0, 0, winData.resolution.x, winData.resolution.y);
+
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		glFrontFace(GL_CW);
+		mainRenderer.renderGenericArray(&planeOBJ, planeOBJ.getVCount(), UI_Out);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 
 		//input from keyboard (camera movement)
 		if(glfwGetKey(mainWin.getid(), GLFW_KEY_W) == GLFW_PRESS){
@@ -272,25 +308,6 @@ general debug colors:
 - purple: number
 */
 
-/* 2024-03-01 01:58:55
-==50278== 
-==50278== HEAP SUMMARY:
-==50278==     in use at exit: 643,793 bytes in 1,001 blocks
-==50278==   total heap usage: 151,517 allocs, 150,516 frees, 1,178,428,421 bytes allocated
-==50278== 
-==50278== LEAK SUMMARY:
-==50278==    definitely lost: 545,920 bytes in 30 blocks
-==50278==    indirectly lost: 9,924 bytes in 59 blocks
-==50278==      possibly lost: 0 bytes in 0 blocks
-==50278==    still reachable: 87,949 bytes in 912 blocks
-==50278==         suppressed: 0 bytes in 0 blocks
-==50278== Rerun with --leak-check=full to see details of leaked memory
-==50278== 
-==50278== Use --track-origins=yes to see where uninitialised values come from
-==50278== For lists of detected and suppressed errors, rerun with: -s
-==50278== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
-*/
-
 /* 2024-03-01 02:01:00
 ==51309== 
 ==51309== HEAP SUMMARY:
@@ -308,4 +325,42 @@ general debug colors:
 ==51309== Use --track-origins=yes to see where uninitialised values come from
 ==51309== For lists of detected and suppressed errors, rerun with: -s
 ==51309== ERROR SUMMARY: 8 errors from 8 contexts (suppressed: 0 from 0)
+*/
+
+/* 2024-03-06 23:58:50
+==117194== 
+==117194== HEAP SUMMARY:
+==117194==     in use at exit: 105,397 bytes in 1,002 blocks
+==117194==   total heap usage: 130,012 allocs, 129,010 frees, 1,110,211,998 bytes allocated
+==117194== 
+==117194== LEAK SUMMARY:
+==117194==    definitely lost: 7,356 bytes in 30 blocks
+==117194==    indirectly lost: 10,068 bytes in 60 blocks
+==117194==      possibly lost: 0 bytes in 0 blocks
+==117194==    still reachable: 87,973 bytes in 912 blocks
+==117194==         suppressed: 0 bytes in 0 blocks
+==117194== Rerun with --leak-check=full to see details of leaked memory
+==117194== 
+==117194== Use --track-origins=yes to see where uninitialised values come from
+==117194== For lists of detected and suppressed errors, rerun with: -s
+==117194== ERROR SUMMARY: 10 errors from 10 contexts (suppressed: 0 from 0)
+*/
+
+/* 2024-03-06 00:03:55
+==118902== 
+==118902== HEAP SUMMARY:
+==118902==     in use at exit: 105,397 bytes in 1,002 blocks
+==118902==   total heap usage: 133,633 allocs, 132,631 frees, 1,132,940,211 bytes allocated
+==118902== 
+==118902== LEAK SUMMARY:
+==118902==    definitely lost: 7,588 bytes in 31 blocks
+==118902==    indirectly lost: 9,836 bytes in 59 blocks
+==118902==      possibly lost: 0 bytes in 0 blocks
+==118902==    still reachable: 87,973 bytes in 912 blocks
+==118902==         suppressed: 0 bytes in 0 blocks
+==118902== Rerun with --leak-check=full to see details of leaked memory
+==118902== 
+==118902== Use --track-origins=yes to see where uninitialised values come from
+==118902== For lists of detected and suppressed errors, rerun with: -s
+==118902== ERROR SUMMARY: 10 errors from 10 contexts (suppressed: 0 from 0)
 */

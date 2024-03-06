@@ -205,5 +205,6 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/matrix4.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.hpp \
  /home/cm/codes/c++/glpai/classes/base/Light.hpp \
  /home/cm/codes/c++/glpai/classes/base/Transform.hpp

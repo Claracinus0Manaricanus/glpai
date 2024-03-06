@@ -33,12 +33,14 @@ public:
     void loadMesh(MeshData inputMesh);
     void loadTransform(TransformData inputTransform);
     int loadTexture(TextureData inputData);
+    int loadTexture(CMGL_Texture& inputTex);
 
     //Matrices
     float* generateOVM();
 
     //binder
     void bind();
+    void bindWT();//without texture
 
     //Transform overrides
     void updateTransform() override;

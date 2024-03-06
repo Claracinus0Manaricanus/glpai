@@ -21,9 +21,11 @@
 - find where the memory leak is
 - optimize OVM and CVM calculations
 
-# 2024-03-03
+# 2024-03-05
+- CMGL_Framebuffer class
 
+# 2024-03-07
+- rework image system (texture, imports, files, etc.)
 
 # done (gets cleared once in a while)
-- minimap server tests
-- write a mat4 transposer
+- CMGL_Texture needs an upgrade

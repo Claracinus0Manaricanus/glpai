@@ -4,15 +4,14 @@
 #include "../system/Image.hpp"//also include T0.hpp
 #include <GL/glew.h>
 
-class CMGL_Texture : public Image{
+class CMGL_Texture{
 protected:
-    uint32_t ID=0;
-    uint32_t Unit=0;
-
-protected:
-    //utility
-    int init();
-    int update();
+    uint32_t ID = 0;
+    uint32_t Unit = 0;
+    uint32_t width = 0;
+    uint32_t height = 0;
+    uint32_t textureType = 0;
+    uint32_t textureFormat = 0;
 
 public:
     //constructors
@@ -24,15 +23,21 @@ public:
 
     //setters
     int loadData(TextureData inputData);
+    int loadData(CMGL_Texture& inputTex);
     void setTextureUnit(uint32_t inUnit);
 
     //getters
-    //some getters implemented at Image
     uint32_t getTextureUnit();
+    uint32_t getID();
+    uint32_t getWidth();
+    uint32_t getHeight();
+    uint32_t getType();
+    uint32_t getFormat();
 
     //utility
     void bind();
-    int reset();
+    void unbind();
+    void loadDefault();
 
 };
 

@@ -6,6 +6,9 @@ int CMGL_GameObject::initBuffers(){
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EAB);
     glGenBuffers(1, &SSB);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*19, NULL, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
     return 0;
 }
@@ -48,7 +51,8 @@ void CMGL_GameObject::updateSSB(){
     float* transposeOfOVM = m4_transpose(OVM);
     
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
-    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, transposeOfOVM, GL_DYNAMIC_DRAW);
+    glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float)*16, transposeOfOVM);
+    glBufferSubData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, sizeof(float)*3, &Scale);
 
     free(transposeOfOVM);
     free(OVM);
@@ -97,6 +101,10 @@ void CMGL_GameObject::loadTransform(TransformData inputTransform){
 
 int CMGL_GameObject::loadTexture(TextureData inputData){
     return CMGL_Texture::loadData(inputData);
+}
+
+int CMGL_GameObject::loadTexture(CMGL_Texture& inputTex){
+    return CMGL_Texture::loadData(inputTex);
 }
 
 
@@ -151,7 +159,12 @@ float* CMGL_GameObject::generateOVM(){
 void CMGL_GameObject::bind(){
     glBindVertexArray(VAO);
     CMGL_Texture::bind();
-    glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4, SSB, 0, sizeof(float)*16);
+    glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4, SSB, 0, sizeof(float)*19);
+}
+
+void CMGL_GameObject::bindWT(){
+    glBindVertexArray(VAO);
+    glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4, SSB, 0, sizeof(float)*19);
 }
 
 

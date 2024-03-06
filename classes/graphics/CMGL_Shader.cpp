@@ -27,7 +27,7 @@ CMGL_Shader::CMGL_Shader(const char* sourceFile, unsigned int type, bool debug){
 	if(debug && (getError(inf) > 0)){
 		printf("\n%s\n",inf);
 	}
-}//needs error checking (fstream)
+}
 
 
 //destructor

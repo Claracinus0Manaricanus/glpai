@@ -265,10 +265,22 @@ struct TransformData{
 	vec3 scale={1,1,1};
 };
 
+struct FramebufferData{
+	uint32_t framebufferType = 0;
+};
+
 struct TextureData{
-	char* imageFile=NULL;
-	bool useMipmap=true;
-	uint32_t unit=0;
+	uint32_t unit = 0;
+	uint32_t width = 0;
+	uint32_t height = 0;
+
+	uint32_t textureType = 0;// example: GL_TEXTURE_2D
+	uint32_t textureFormat = 0;// example: GL_DEPTH_COMPONENT or GL_RGBA
+	uint32_t textureDataType = 0;// example: GL_UNSIGNED_BYTE
+	uint32_t textureWrap = 0;// example: GL_REPEAT
+	uint32_t textureFilter = 0;// example: GL_LINEAR
+	
+	void* data = NULL;
 };
 
 struct ImageData{
