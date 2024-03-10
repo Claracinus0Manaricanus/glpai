@@ -12,6 +12,7 @@
 #include "classes/opengl/CMGL_CubeMap.hpp"
 #include "classes/opengl/CMGL_Framebuffer.hpp"
 #include "classes/base/Light.hpp"
+#include "include/Client.hpp"
 
 using namespace std;
 
@@ -132,10 +133,14 @@ int main(int argc, char** argv){
 	CMGL_GameObject planeOBJ(impOBJData, {{0,0,0}, {0,0,0}, {1,1,1}});
 	free(impOBJData.vertices);
 
+	impOBJData=importOBJ("objects/cone.obj");
+	CMGL_GameObject coneOBJ(impOBJData, {{3,0,0}, {0,0,0}, {1,1,1}});
+	free(impOBJData.vertices);
+
 	//lights
 	LightData lightData;
 	lightData.color={1,1,1,1};
-	lightData.trData.position={0,1,0};
+	lightData.trData.position={0,2,0};
 	Light denLight(lightData);
 
 
@@ -150,7 +155,7 @@ int main(int argc, char** argv){
 	renderFB.setDepthAttachment(depthBuffer.getID());
 
 
-	//school images
+	//school images /*****************************/
 	ImageData imgDat;
 	imgDat.imageFile = "images/school/FLY.png";
 	imgDat.desiredChannels = 4;
@@ -160,10 +165,11 @@ int main(int argc, char** argv){
 
 	CMGL_Texture schoolTex({0, schoolIMG.width(), schoolIMG.height(), GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_REPEAT, GL_LINEAR, schoolIMG.getDataP()});
 
+	/********************************************/
 	planeOBJ.loadTexture(colorBuffer);
 	//planeOBJ.loadTexture(schoolTex);
 
-	//impOBJ.loadTexture(schoolTex);
+	impOBJ.loadTexture(schoolTex);
 
 
 	/*while loop variables*/
@@ -173,9 +179,9 @@ int main(int argc, char** argv){
 	double cursorX=0,cursorY=0;//cursor input
 	CMGL_Camera mainCam(120, 1);
 	mainCam.setAspectRatio((float)FBWidth/FBHeight);
-	mainCam.setPosition({0,4,0});
+	mainCam.setPosition({0,0,-3});
 	/*while loop variables*/
-	
+
 
 	/******************************************************************************************/
 	//main loop
@@ -199,8 +205,11 @@ int main(int argc, char** argv){
 			printf("FPS: %d\n", frame);
 			frame=0;
 			printCheck=0;
+
+			sendClearTo(connectTo("127.0.0.1", 8080));
+			sendCoordinateTo(connectTo("127.0.0.1", 8080), mainCam.getPosition().x, mainCam.getPosition().z, 255, 255, 0);
+			sendDrawTo(connectTo("127.0.0.1", 8080));
 		}
-		//change debugging system to optional
 
 		//framebuffer shinenigans
 		renderFB.bind();
@@ -210,13 +219,13 @@ int main(int argc, char** argv){
 		sprg.setVec4Array("lData",2,denLight.getData());
 		glFrontFace(GL_CW);
 		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
-		//impOBJ.rotate({0,1*deltaTime,0});
-		//denLight.setPosition({sin(totalTime),sin(totalTime),cos(totalTime)});
-		denLight.setPosition(mainCam.getPosition());
+		mainRenderer.renderGenericArray(&coneOBJ, coneOBJ.getVCount(), sprg);
+		coneOBJ.enableLookAt({0,0,0});
+		coneOBJ.setPosition({3*cos(totalTime), 5, 3*sin(totalTime)});
 		
 		//skybox /*****************************/
-		/*glFrontFace(GL_CCW);
-		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);*/
+		glFrontFace(GL_CCW);
+		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);
 
 		renderFB.unbind();
 
@@ -237,14 +246,14 @@ int main(int argc, char** argv){
 			mainCam.moveForward(-1*deltaTime);
 		}
 		if(glfwGetKey(mainWin.getid(), GLFW_KEY_D) == GLFW_PRESS){
-			mainCam.moveForward(1*deltaTime, 3.14159265f/2.0f);
+			mainCam.moveRight(1*deltaTime);
 		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_A) == GLFW_PRESS){
-			mainCam.moveForward(-1*deltaTime, 3.14159265f/2.0f);
+			mainCam.moveRight(-1*deltaTime);
 		}
 		if(glfwGetKey(mainWin.getid(), GLFW_KEY_E) == GLFW_PRESS){
-			mainCam.move({0, 1*deltaTime, 0});
+			mainCam.moveUp(1*deltaTime);
 		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_Q) == GLFW_PRESS){
-			mainCam.move({0, -1*deltaTime, 0});
+			mainCam.moveUp(-1*deltaTime);
 		}
 
 		//shader switching
@@ -304,7 +313,7 @@ int main(int argc, char** argv){
 
 	/******************************************************************************************/
 	//termination
-
+	sendStopTo(connectTo("127.0.0.1", 8080));
 
 	if(debug)printf("\n");
 	if(debug)logInfo("Terminating\n");

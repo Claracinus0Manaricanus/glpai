@@ -30,6 +30,9 @@ add_executable(
 
 #cmMath folder
 "classes/cmMath/matrix4.cpp" "classes/cmMath/vectors.cpp"
+
+#dataDisplay
+"include/implementations/Client.cpp"
 )
 
 target_link_libraries(pai PUBLIC GL GLEW glfw)

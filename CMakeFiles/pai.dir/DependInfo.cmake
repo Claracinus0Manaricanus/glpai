@@ -25,6 +25,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cm/codes/c++/glpai/classes/system/Image.cpp" "CMakeFiles/pai.dir/classes/system/Image.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/system/Image.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/system/U0.cpp" "CMakeFiles/pai.dir/classes/system/U0.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/system/U0.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/system/Window.cpp" "CMakeFiles/pai.dir/classes/system/Window.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/system/Window.cpp.o.d"
+  "/home/cm/codes/c++/glpai/include/implementations/Client.cpp" "CMakeFiles/pai.dir/include/implementations/Client.cpp.o" "gcc" "CMakeFiles/pai.dir/include/implementations/Client.cpp.o.d"
   "/home/cm/codes/c++/glpai/main.cpp" "CMakeFiles/pai.dir/main.cpp.o" "gcc" "CMakeFiles/pai.dir/main.cpp.o.d"
   )
 

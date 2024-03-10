@@ -537,6 +537,30 @@ classes/system/Window.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/system/Window.cpp.s
 .PHONY : classes/system/Window.cpp.s
 
+include/implementations/Client.o: include/implementations/Client.cpp.o
+.PHONY : include/implementations/Client.o
+
+# target to build an object file
+include/implementations/Client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/include/implementations/Client.cpp.o
+.PHONY : include/implementations/Client.cpp.o
+
+include/implementations/Client.i: include/implementations/Client.cpp.i
+.PHONY : include/implementations/Client.i
+
+# target to preprocess a source file
+include/implementations/Client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/include/implementations/Client.cpp.i
+.PHONY : include/implementations/Client.cpp.i
+
+include/implementations/Client.s: include/implementations/Client.cpp.s
+.PHONY : include/implementations/Client.s
+
+# target to generate assembly for a file
+include/implementations/Client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/include/implementations/Client.cpp.s
+.PHONY : include/implementations/Client.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -621,6 +645,9 @@ help:
 	@echo "... classes/system/Window.o"
 	@echo "... classes/system/Window.i"
 	@echo "... classes/system/Window.s"
+	@echo "... include/implementations/Client.o"
+	@echo "... include/implementations/Client.i"
+	@echo "... include/implementations/Client.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

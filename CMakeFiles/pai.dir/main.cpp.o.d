@@ -175,6 +175,9 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Mesh.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/matrix4.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/vectors.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp \
@@ -202,9 +205,15 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Camera.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Camera.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/matrix4.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.hpp \
  /home/cm/codes/c++/glpai/classes/base/Light.hpp \
- /home/cm/codes/c++/glpai/classes/base/Transform.hpp
+ /home/cm/codes/c++/glpai/classes/base/Transform.hpp \
+ /home/cm/codes/c++/glpai/include/Client.hpp /usr/include/sys/socket.h \
+ /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/types/struct_osockaddr.h /usr/include/netinet/in.h \
+ /usr/include/bits/in.h /usr/include/arpa/inet.h

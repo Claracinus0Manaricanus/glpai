@@ -34,11 +34,10 @@ void CMGL_Camera::bind(){
 //Transform overrides
 void CMGL_Camera::updateTransform(){
     float* CVM = generateCVM();
-    float* transposeOfCVM = m4_transpose(CVM);
+    m4_transpose(CVM);
 
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
-    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, transposeOfCVM, GL_DYNAMIC_DRAW);
-    
-    free(transposeOfCVM);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, CVM, GL_DYNAMIC_DRAW);
+
     free(CVM);
 }

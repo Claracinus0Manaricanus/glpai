@@ -12,7 +12,4 @@ float Length(vec2 a);
 vec3 Normalize(vec3 a);
 vec2 Normalize(vec2 a);
 
-//rotation related
-float* LookAt(vec3 start, vec3 end, vec3 up = {0,1,0});
-
 #endif

@@ -132,4 +132,6 @@ CMakeFiles/pai.dir/classes/base/Camera.cpp.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/stdint-least.h \
- /home/cm/codes/c++/glpai/classes/base/../cmMath/matrix4.hpp
+ /home/cm/codes/c++/glpai/classes/base/../cmMath/matrix4.hpp \
+ /home/cm/codes/c++/glpai/classes/base/../cmMath/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/base/../cmMath/vectors.hpp

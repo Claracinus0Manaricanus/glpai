@@ -48,25 +48,3 @@ vec2 Normalize(vec2 a){
     }
     return ret;
 }
-
-//rotation related
-float* LookAt(vec3 start, vec3 end, vec3 up){//needs optimization
-    float* rotMat=(float*)malloc(sizeof(float)*16);//rotation matrix
-
-    vec3 Z=Normalize(end-start);
-    vec3 X=Normalize(Cross(Z,up));//to find X direction and unit that bitch
-    vec3 Y=Cross(Z,X);
-
-    for(int i=0;i<3;i++){
-        rotMat[i]=X[i];
-        rotMat[i+4]=Y[i];
-        rotMat[i+8]=Z[i];
-        rotMat[i+12]=0;
-    }
-    rotMat[12]=0;
-    rotMat[13]=0;
-    rotMat[14]=0;
-    rotMat[15]=1;
-
-    return rotMat;
-}

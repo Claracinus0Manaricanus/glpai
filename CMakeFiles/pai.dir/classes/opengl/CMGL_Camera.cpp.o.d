@@ -134,5 +134,7 @@ CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o: \
  /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
  /usr/include/bits/stdint-least.h \
  /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/matrix4.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/../system/T0.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/../cmMath/vectors.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp \
  /usr/include/GL/glew.h /usr/include/GL/glu.h /usr/include/GL/gl.h

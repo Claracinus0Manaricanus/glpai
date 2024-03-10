@@ -48,13 +48,12 @@ int CMGL_GameObject::update(){
 void CMGL_GameObject::updateSSB(){
     /****Shader Storage Buffer****/
     float* OVM = generateOVM();
-    float* transposeOfOVM = m4_transpose(OVM);
+    m4_transpose(OVM);
     
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
-    glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float)*16, transposeOfOVM);
+    glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float)*16, OVM);
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, sizeof(float)*3, &Scale);
 
-    free(transposeOfOVM);
     free(OVM);
 }
 
@@ -107,6 +106,24 @@ int CMGL_GameObject::loadTexture(CMGL_Texture& inputTex){
     return CMGL_Texture::loadData(inputTex);
 }
 
+void CMGL_GameObject::enableLookAt(vec3 lookVec){
+    isLookingAt = true;
+    lookVector = lookVec;
+    updateTransform();
+}
+
+void CMGL_GameObject::disableLookAt(){
+    isLookingAt = false;
+    updateTransform();
+}
+
+
+
+//getters
+bool CMGL_GameObject::getLookingAt(){
+    return isLookingAt;
+}
+
 
 //Matrices
 float* CMGL_GameObject::generateOVM(){
@@ -118,40 +135,22 @@ float* CMGL_GameObject::generateOVM(){
         0,0,0,1
     };
     
-    float cosine = cos(Rotation.x);
-    float sine = sin(Rotation.x);
-    float rotX[16] = {
-        1, 0, 0, 0,
-        0, cosine, -sine, 0,
-        0, sine,  cosine, 0,
-        0, 0, 0, 1
+    if(isLookingAt){
+        Transform::lookAt(lookVector, {0,1,0});
+    }else{
+        generateVectors();
+    }
+
+    float rotMat[16]={
+        rightVector.x, upVector.x, forwardVector.x, 0,
+        rightVector.y, upVector.y, forwardVector.y, 0,
+        rightVector.z, upVector.z, forwardVector.z, 0,
+        0, 0, 0, 1,
     };
 
-    cosine = cos(Rotation.y);
-    sine = sin(Rotation.y);
-    float rotY[16] = {
-         cosine, 0, sine, 0,
-         0, 1, 0, 0,
-        -sine, 0, cosine, 0,
-         0, 0, 0, 1
-    };
+    float * ret = m4_multiplyNew(translate, rotMat);
 
-    cosine = cos(Rotation.z);
-    sine = sin(Rotation.z);
-    float rotZ[16] = {
-        cosine, -sine, 0, 0,
-        sine,  cosine, 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    };
-
-    float* tmp1M4 = m4_multiply(rotY, rotX);
-    float* tmp2M4 = m4_multiply(rotZ, tmp1M4);
-    free(tmp1M4);
-    tmp1M4 = m4_multiply(translate, tmp2M4);
-    free(tmp2M4);
-
-    return tmp1M4;
+    return ret;
 }
 
 

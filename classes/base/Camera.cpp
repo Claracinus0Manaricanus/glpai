@@ -23,6 +23,16 @@ void Camera::setAspectRatio(float inAspectRatio){
     aspectRatio=inAspectRatio;
 }
 
+void Camera::enableLookAt(vec3 lookVec){
+    isLookingAt = true;
+    lookVector = lookVec;
+}
+
+void Camera::disableLookAt(){
+    isLookingAt = false;
+}
+
+
 
 //getters
 int Camera::getFov(){
@@ -31,6 +41,10 @@ int Camera::getFov(){
 
 int Camera::getType(){
     return type;
+}
+
+bool Camera::getLookingAt(){
+    return isLookingAt;
 }
 
 
@@ -44,38 +58,20 @@ float* Camera::generateCVM(){
         0, 0, 0, 1
     };
 
-    float cosine = cos(Transform::Rotation.x);
-    float sine = sin(Transform::Rotation.x);
-    float rotX[16] = {
-        1, 0, 0, 0,
-        0, cosine, sine, 0,
-        0, -sine,  cosine, 0,
+    if(isLookingAt){
+        Transform::lookAt(lookVector, {0,1,0});
+    }else{
+        generateVectors();
+    }
+
+    float rotMat[16] = {//transpose of what would be cause camera
+        rightVector.x, rightVector.y, rightVector.z, 0,
+        upVector.x, upVector.y, upVector.z, 0,
+        forwardVector.x, forwardVector.y, forwardVector.z, 0,
         0, 0, 0, 1
     };
 
-    cosine = cos(Transform::Rotation.y);
-    sine = sin(Transform::Rotation.y);
-    float rotY[16] = {
-        cosine, 0, -sine, 0,
-        0, 1, 0, 0,
-        sine, 0,  cosine, 0,
-        0, 0, 0, 1
-    };
-
-    cosine = cos(Transform::Rotation.z);
-    sine = sin(Transform::Rotation.z);
-    float rotZ[16] = {
-         cosine,  sine, 0, 0,
-        -sine,  cosine, 0, 0,
-         0, 0, 1, 0,
-         0, 0, 0, 1
-    };
-
-    float* tmp1M4 = m4_multiply(rotY, translate);
-    float* tmp2M4 = m4_multiply(rotX, tmp1M4);
-    free(tmp1M4);
-    tmp1M4 = m4_multiply(rotZ, tmp2M4);
-    free(tmp2M4);
+    float* ret = m4_multiplyNew(rotMat, translate);
 
     if(type == 1){//perspective
         float projection[16]{
@@ -85,15 +81,48 @@ float* Camera::generateCVM(){
             0,0,1,0
         };
 
-        tmp2M4 = m4_multiply(projection, tmp1M4);
-        free(tmp1M4);
-
-        return tmp2M4;
+        float* temp = ret;
+        ret = m4_multiplyNew(projection, ret);
+        free(temp);
+        return ret;
     }
 
-    return tmp1M4;
+    return ret;
 }
 
-void Camera::moveForward(float step, float offset){
-    Transform::move({sin(Transform::Rotation.y+offset)*step, 0.0f, cos(Transform::Rotation.y+offset)*step});
+//Transform overrides
+void Camera::generateVectors(){
+    float cosine = cos(Rotation.x);
+    float sine = sin(Rotation.x);
+    float rotX[16] = {
+        1,0,0,0,
+        0,cosine,-sine,0,
+        0,sine,cosine,0,
+        0,0,0,1
+    };
+
+    cosine = cos(Rotation.y);
+    sine = sin(Rotation.y);
+    float rotY[16] = {
+        cosine,0,sine,0,
+        0,1,0,0,
+        -sine,0,cosine,0,
+        0,0,0,1
+    };
+
+    cosine = cos(Rotation.z);
+    sine = sin(Rotation.z);
+    float rotZ[16] = {
+        cosine,-sine,0,0,
+        sine,cosine,0,0,
+        0,0,1,0,
+        0,0,0,1
+    };
+
+    m4_multiply(rotY, rotX);
+    m4_multiply(rotZ, rotY);
+
+    forwardVector = {rotZ[2], rotZ[6], rotZ[10]};
+    rightVector = {rotZ[0], rotZ[4], rotZ[8]};
+    upVector = {rotZ[1], rotZ[5], rotZ[9]};
 }

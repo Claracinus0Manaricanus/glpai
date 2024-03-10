@@ -9,6 +9,8 @@ protected:
     int fov=120;
     int type=0;
     float aspectRatio=0;
+    bool isLookingAt = false;
+    vec3 lookVector;
 
 public:
     //constructors
@@ -19,14 +21,17 @@ public:
     void setFov(int iFov);
     void setType(int iType);
     void setAspectRatio(float inAspectRatio);
+    void enableLookAt(vec3 lookVec);
+    void disableLookAt();
 
     //getters
     int getFov();
     int getType();
+    bool getLookingAt();
 
     //utility
     float* generateCVM();
-    void moveForward(float step, float offset=0);
+    void generateVectors();
 
 };
 

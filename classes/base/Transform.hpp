@@ -2,12 +2,20 @@
 #define TRANFORM_HPP
 
 #include "../system/T0.hpp"
+#include "../cmMath/matrix4.hpp"
+#include <cmath>
 
 class Transform{
 protected:
-    vec3 Position={0,0,0};
-    vec3 Rotation={0,0,0};
-    vec3 Scale={1,1,1};
+    //data vectors
+    vec3 Position = {0,0,0};
+    vec3 Rotation = {0,0,0};
+    vec3 Scale = {1,1,1};
+    
+    //unit vectors
+    vec3 forwardVector = {0,0,1};
+    vec3 rightVector = {1,0,0};
+    vec3 upVector = {0,1,0};
 
 public:
     //constructors
@@ -31,6 +39,13 @@ public:
     vec3 getPosition();
     vec3 getRotation();
     vec3 getScale();
+
+    //utility
+    virtual void generateVectors();//sets unit vector according to rotation
+    void lookAt(vec3 destination, vec3 up);////sets unit vector according to look destination
+    void moveForward(float step);
+    void moveRight(float step);
+    void moveUp(float step);
 
     //updaters
     virtual void updateTransform();

@@ -33,6 +33,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pai.dir/classes/system/U0.cpp.o.d"
   "CMakeFiles/pai.dir/classes/system/Window.cpp.o"
   "CMakeFiles/pai.dir/classes/system/Window.cpp.o.d"
+  "CMakeFiles/pai.dir/include/implementations/Client.cpp.o"
+  "CMakeFiles/pai.dir/include/implementations/Client.cpp.o.d"
   "CMakeFiles/pai.dir/main.cpp.o"
   "CMakeFiles/pai.dir/main.cpp.o.d"
   "pai"

@@ -62,4 +62,7 @@ void main(){
 	}
 
 	col = vec4(col.xyz,1);
+
+	//for shadow map viewing
+	//col = vec4(texture(tex0, tex).xxx,1);
 }
