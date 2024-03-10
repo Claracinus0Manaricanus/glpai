@@ -14,6 +14,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.  
 
+# WARNING master is for development, it might not work on your computer
+in master branch i upload without cleaning and also dont delete tests so you might see links that wont work or files that are missing.
+
 # To Build
 <p>This program has been written for GNU/Linux systems. It needs libglfw3, libgl, libglew and stb_image to compile.</p>
 <p>When compiled it will output an executable called pai.</p>
