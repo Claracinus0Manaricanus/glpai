@@ -30,6 +30,32 @@ ivec2 Window::getResolution(){
 	return temp;
 }
 
+bool Window::getKey(int key){
+	if(glfwGetKey(ID, key) == GLFW_PRESS){
+		return true;
+	}
+
+	return false;
+}
+
+bool Window::getKeyR(int key){
+	if(glfwGetKey(ID, key) == GLFW_RELEASE){
+		return true;
+	}
+
+	return false;
+}
+
+int Window::getAxis(int key1, int key2){
+	if(glfwGetKey(ID, key1) == GLFW_PRESS){
+		return 1;
+	}else if(glfwGetKey(ID, key2) == GLFW_PRESS){
+		return -1;
+	}
+
+	return 0;
+}
+
 
 //setters
 int Window::changeAttrib(int attrib, int value){

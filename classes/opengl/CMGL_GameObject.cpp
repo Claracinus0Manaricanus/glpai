@@ -102,8 +102,8 @@ int CMGL_GameObject::loadTexture(TextureData inputData){
     return CMGL_Texture::loadData(inputData);
 }
 
-int CMGL_GameObject::loadTexture(CMGL_Texture& inputTex){
-    return CMGL_Texture::loadData(inputTex);
+int CMGL_GameObject::loadTexture(CMGL_Texture& inputTex, bool clean){
+    return CMGL_Texture::loadData(inputTex, clean);
 }
 
 void CMGL_GameObject::enableLookAt(vec3 lookVec){
@@ -129,9 +129,9 @@ bool CMGL_GameObject::getLookingAt(){
 float* CMGL_GameObject::generateOVM(){
 
     float translate[16]={
-        1,0,0,Position.x,
-        0,1,0,Position.y,
-        0,0,1,Position.z,
+        1,0,0, Position.x,
+        0,1,0, Position.y,
+        0,0,1, Position.z,
         0,0,0,1
     };
     

@@ -310,10 +310,9 @@ struct ObjectData{
 	TextureData texData;
 };
 
-struct LightData{
-	int type=0;
-	vec4 color={0,0,0,0};//R G B Strength
-	TransformData trData;
+struct DirectLightData{
+	vec4 color = {1,1,1,1};
+	vec3 direction = {0,0,0};
 };
 
 struct WindowData{

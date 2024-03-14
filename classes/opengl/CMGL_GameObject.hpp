@@ -11,6 +11,8 @@
 #include <cmath>
 #include <GL/glew.h>//needs change, used for opengl functions
 
+//note: binds ssb to binding 4
+
 class CMGL_GameObject : public Mesh, public Transform, public CMGL_Texture, public CMGL_Base{
 protected:
     uint32_t VAO,VBO,EAB,SSB;//vertex array object, vertex buffer object, element array buffer, shader storage buffer
@@ -35,7 +37,7 @@ public:
     void loadMesh(MeshData inputMesh);
     void loadTransform(TransformData inputTransform);
     int loadTexture(TextureData inputData);
-    int loadTexture(CMGL_Texture& inputTex);
+    int loadTexture(CMGL_Texture& inputTex, bool clean = true);
     void enableLookAt(vec3 lookVec);
     void disableLookAt();
 

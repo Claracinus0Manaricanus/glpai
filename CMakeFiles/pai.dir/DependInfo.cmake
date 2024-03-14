@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cm/codes/c++/glpai/classes/graphics/CMGL_Shader.cpp" "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/graphics/CMGL_Shader.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Camera.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Camera.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.o.d"
+  "/home/cm/codes/c++/glpai/classes/opengl/CMGL_DirectLight.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_DirectLight.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_DirectLight.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Framebuffer.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Framebuffer.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o.d"

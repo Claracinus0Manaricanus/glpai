@@ -1,7 +1,7 @@
 #version 450 core
+precision highp float;
 
 //from vertex shader
-in vec3 fragPos;
 in vec3 fragNor;
 in vec4 fragCol;
 in vec2 fragTex;
@@ -9,16 +9,27 @@ in vec2 fragTex;
 //texture
 uniform sampler2D T0;
 
+//shadow map
+uniform sampler2D shadowMap;
+
 //light data
-uniform vec4 lData[2];
+in vec3 lVec;
+in vec4 lCol;
+in vec4 lvmFragPos;
 
 out vec4 color;
 
 void main(){
-    vec4 texCol=texture(T0,fragTex);
-    vec3 lVec=lData[0].xyz;
-    vec4 lCol=lData[1];
-    float intensity=dot(normalize(lVec),fragNor)*lCol.w;
-    clamp(intensity,0,1);
-    color=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*intensity,texCol.w);
+    vec3 newLVMPos = lvmFragPos.xyz / lvmFragPos.w;
+    float newZ = (newLVMPos.z+1.0)/2.0;
+    vec2 lvmTex = vec2((newLVMPos.x + 1)/2.0,(newLVMPos.y + 1)/2.0);
+    
+    if(newZ > texture(shadowMap, lvmTex).x + 1.0/lvmFragPos.w){
+        color = vec4(0,0,0,1);
+    }else{
+        vec4 texCol=texture(T0,fragTex);
+        float intensity=dot(normalize(lVec),fragNor)*lCol.w;
+        clamp(intensity,0,1);
+        color=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*intensity,texCol.w);
+    }
 }

@@ -1,16 +1,7 @@
 #include "Light.hpp"
 
 //constructors
-Light::Light(){
-    updateData();
-}
-
-Light::Light(LightData lDat):
-Transform(lDat.trData){
-    type = lDat.type;
-    color = lDat.color;
-    updateData();
-}
+Light::Light(){}
 
 
 //destructors
@@ -20,14 +11,23 @@ Light::~Light(){
 
 
 //setters
-void Light::setType(int iType){
-    type=iType;
+void Light::setColor(vec4 inColor){
+    color = inColor;
+    updateLight();
 }
 
 
 //getters
 int Light::getType(){
     return type;
+}
+
+vec4 Light::getColor(){
+    return color;
+}
+
+int Light::getDataLength(){
+    return dataLength;
 }
 
 
@@ -37,21 +37,5 @@ float* Light::getData(){
 }
 
 
-void Light::updateData(){
-    if(data == NULL) data = (float*)malloc(sizeof(float)*8);
-
-    data[0] = Transform::Position.x;
-    data[1] = Transform::Position.y;
-    data[2] = Transform::Position.z;
-    data[3] = 0;
-    data[4] = color.x;
-    data[5] = color.y;
-    data[6] = color.z;
-    data[7] = color.w;
-}
-
-
-//Transform overrides
-void Light::updateTransform(){
-    updateData();
-}
+//overridables
+void Light::updateLight(){}

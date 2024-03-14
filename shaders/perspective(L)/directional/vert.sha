@@ -7,22 +7,41 @@ layout(location=3) in vec2 tex;
 
 layout(std430, binding=4) buffer OVMBUFF{
 	mat4 OVM;
+	vec3 SCALE;
 };
 
 layout(std430, binding=5) buffer CVMBUFF{
 	mat4 CVM;
 };
 
+layout(std430, binding=6) buffer LVMBUFF{
+	mat4 LVM;
+    vec4 lData[2];
+};
+
 //to fragment shader
-out vec3 fragPos;
 out vec3 fragNor;
 out vec4 fragCol;
 out vec2 fragTex;
 
+out vec3 lVec;
+out vec4 lCol;
+
+out vec4 lvmFragPos;
+
 void main(){
-    fragPos=vec4(OVM*vec4(pos.xyz,1)).xyz;
     fragNor=normalize(vec4(OVM*vec4(nor.xyz,0)).xyz);
+    
+    fragNor.x *= SCALE.y*SCALE.z;
+	fragNor.y *= SCALE.x*SCALE.z;
+	fragNor.z *= SCALE.y*SCALE.x;
+    fragNor=normalize(fragNor);
+    
     fragCol=col;
     fragTex=tex;
-    gl_Position=CVM*OVM*vec4(pos.xyz,1);
+    gl_Position=CVM*OVM*vec4(pos.xyz * SCALE.xyz,1);
+
+    lVec = lData[0].xyz;
+    lCol = lData[1].xyzw;
+    lvmFragPos = LVM*OVM*vec4(pos.xyz * SCALE.xyz,1);
 }

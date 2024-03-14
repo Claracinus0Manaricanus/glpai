@@ -5,6 +5,8 @@
 #include "CMGL_Base.hpp"
 #include <GL/glew.h>
 
+//note: binds ssb to binding 5
+
 class CMGL_Camera : public CMGL_Base, public Camera{
 protected:
     uint32_t SSB;

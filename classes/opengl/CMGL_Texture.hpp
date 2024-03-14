@@ -23,7 +23,7 @@ public:
 
     //setters
     int loadData(TextureData inputData);
-    int loadData(CMGL_Texture& inputTex);
+    int loadData(CMGL_Texture& inputTex, bool clean = true);
     void setTextureUnit(uint32_t inUnit);
 
     //getters

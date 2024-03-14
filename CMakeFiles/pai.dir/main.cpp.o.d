@@ -208,8 +208,8 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.hpp \
- /home/cm/codes/c++/glpai/classes/base/Light.hpp \
- /home/cm/codes/c++/glpai/classes/base/Transform.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_DirectLight.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../base/Light.hpp \
  /home/cm/codes/c++/glpai/include/Client.hpp /usr/include/sys/socket.h \
  /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
  /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \

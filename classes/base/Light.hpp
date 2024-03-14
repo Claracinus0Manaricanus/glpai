@@ -8,30 +8,31 @@
 
 class Light : public Transform{
 protected:
-    int type=0;
-    vec4 color={0,0,0,0};
+    int type = 0;
+    vec4 color={1,1,1,1};
     float* data=NULL;
+    int dataLength = 0;//in vec4 so 2 means 8 floats
 
 public:
     //constructors
     Light();
-    Light(LightData lDat);
 
     //destructors
     ~Light();
 
     //setters
-    void setType(int iType);
+    void setColor(vec4 inColor);
 
     //getters
     int getType();
+    vec4 getColor();
+    int getDataLength();
 
     //utility
     float* getData();
-    void updateData();
 
-    //Transform overrides
-    void updateTransform() override;
+    //overridables
+    virtual void updateLight();
 };
 
 #endif

@@ -1,0 +1,16 @@
+#version 450 core
+
+layout(location=0) in vec3 pos;
+
+layout(std430, binding=4) buffer OVMBUFF{
+	mat4 OVM;
+	vec3 SCALE;
+};
+
+layout(std430, binding=5) buffer CVMBUFF{
+	mat4 CVM;
+};
+
+void main(){
+    gl_Position=CVM*OVM*vec4(pos.xyz * SCALE.xyz,1);
+}

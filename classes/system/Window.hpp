@@ -18,6 +18,9 @@ public:
 	//getters
 	GLFWwindow* getid();
 	ivec2 getResolution();
+	bool getKey(int key);//GLFW_PRESS
+	bool getKeyR(int key);//GLFW_RELEASE
+	int getAxis(int key1, int key2);//key1 +, key2 -
 
 	//setters
 	int changeAttrib(int attrib, int value);

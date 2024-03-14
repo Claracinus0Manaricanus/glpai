@@ -369,6 +369,30 @@ classes/opengl/CMGL_CubeMap.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_CubeMap.cpp.s
 .PHONY : classes/opengl/CMGL_CubeMap.cpp.s
 
+classes/opengl/CMGL_DirectLight.o: classes/opengl/CMGL_DirectLight.cpp.o
+.PHONY : classes/opengl/CMGL_DirectLight.o
+
+# target to build an object file
+classes/opengl/CMGL_DirectLight.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_DirectLight.cpp.o
+.PHONY : classes/opengl/CMGL_DirectLight.cpp.o
+
+classes/opengl/CMGL_DirectLight.i: classes/opengl/CMGL_DirectLight.cpp.i
+.PHONY : classes/opengl/CMGL_DirectLight.i
+
+# target to preprocess a source file
+classes/opengl/CMGL_DirectLight.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_DirectLight.cpp.i
+.PHONY : classes/opengl/CMGL_DirectLight.cpp.i
+
+classes/opengl/CMGL_DirectLight.s: classes/opengl/CMGL_DirectLight.cpp.s
+.PHONY : classes/opengl/CMGL_DirectLight.s
+
+# target to generate assembly for a file
+classes/opengl/CMGL_DirectLight.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_DirectLight.cpp.s
+.PHONY : classes/opengl/CMGL_DirectLight.cpp.s
+
 classes/opengl/CMGL_Framebuffer.o: classes/opengl/CMGL_Framebuffer.cpp.o
 .PHONY : classes/opengl/CMGL_Framebuffer.o
 
@@ -624,6 +648,9 @@ help:
 	@echo "... classes/opengl/CMGL_CubeMap.o"
 	@echo "... classes/opengl/CMGL_CubeMap.i"
 	@echo "... classes/opengl/CMGL_CubeMap.s"
+	@echo "... classes/opengl/CMGL_DirectLight.o"
+	@echo "... classes/opengl/CMGL_DirectLight.i"
+	@echo "... classes/opengl/CMGL_DirectLight.s"
 	@echo "... classes/opengl/CMGL_Framebuffer.o"
 	@echo "... classes/opengl/CMGL_Framebuffer.i"
 	@echo "... classes/opengl/CMGL_Framebuffer.s"

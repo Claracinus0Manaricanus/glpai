@@ -42,9 +42,9 @@ int CMGL_Texture::loadData(TextureData inputData){
     return 0;
 }
 
-int CMGL_Texture::loadData(CMGL_Texture& inputTex){
+int CMGL_Texture::loadData(CMGL_Texture& inputTex, bool clean){
     if(ID != inputTex.ID){
-        glDeleteTextures(1, &ID);
+        if(clean)glDeleteTextures(1, &ID);
     }else{
         return -1;
     }

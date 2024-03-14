@@ -11,7 +11,7 @@
 #include "classes/opengl/CMGL_Camera.hpp"
 #include "classes/opengl/CMGL_CubeMap.hpp"
 #include "classes/opengl/CMGL_Framebuffer.hpp"
-#include "classes/base/Light.hpp"
+#include "classes/opengl/CMGL_DirectLight.hpp"
 #include "include/Client.hpp"
 
 using namespace std;
@@ -99,11 +99,15 @@ int main(int argc, char** argv){
 	//main loop preparations
 	MeshData impOBJData=importOBJ("objects/sphere.obj");
 
-	CMGL_GameObject impOBJ(impOBJData, {{0,0,0},{0,0,0},{1,2,1}});
+	CMGL_GameObject impOBJ(impOBJData, {{0,2,0},{0,0,0},{1,1,1}});
+	free(impOBJData.vertices);
+	impOBJData=importOBJ("objects/plane.obj");
+	CMGL_GameObject impOBJ2(impOBJData, {{0,0,0},{3*PI/2.0f,0,0},{100,100,1}});
 	free(impOBJData.vertices);
 	
 	CMGL_Program sprg("shaders/perspective(L)/directional/vert.sha", "shaders/perspective(L)/directional/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
+	sprg.setInt("shadowMap", 1);
 
 	CMGL_Program skyBoxPrg("shaders/perspective(FB)/skybox/vert.sha","shaders/perspective(FB)/skybox/frag.sha");
 	sprg.setInt("tex0", 0);
@@ -111,8 +115,9 @@ int main(int argc, char** argv){
 	CMGL_Program UI_Out("shaders/orthographic/postProcess/vert.sha","shaders/orthographic/postProcess/frag.sha");
 	UI_Out.setInt("tex0", 0);
 
-	CMGL_Renderer mainRenderer;
+	CMGL_Program shadowMapPRG("shaders/perspective(L)/ShadMapD/vert.sha","shaders/perspective(L)/ShadMapD/frag.sha");
 
+	CMGL_Renderer mainRenderer;
 
 	//cubeMap
 	CubeMapData cbDat;
@@ -136,12 +141,13 @@ int main(int argc, char** argv){
 	impOBJData=importOBJ("objects/cone.obj");
 	CMGL_GameObject coneOBJ(impOBJData, {{3,0,0}, {0,0,0}, {1,1,1}});
 	free(impOBJData.vertices);
+	coneOBJ.enableLookAt({0,0,0});
 
 	//lights
-	LightData lightData;
-	lightData.color={1,1,1,1};
-	lightData.trData.position={0,2,0};
-	Light denLight(lightData);
+	DirectLightData lightData;
+	lightData.color = {1,1,1,1};
+	lightData.direction = {0,1,0};
+	CMGL_DirectLight denLight(lightData);
 
 
 	//framebuffer
@@ -153,6 +159,12 @@ int main(int argc, char** argv){
 	CMGL_Framebuffer renderFB({GL_FRAMEBUFFER});
 	renderFB.setColorAttachment(colorBuffer.getID());
 	renderFB.setDepthAttachment(depthBuffer.getID());
+
+	//light depth framebuffer
+	CMGL_Texture lightDepthBuffer({1, 2048, 2048, GL_TEXTURE_2D, GL_DEPTH_COMPONENT, GL_FLOAT, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
+	CMGL_Framebuffer lightFB({GL_FRAMEBUFFER});
+	lightFB.setDepthAttachment(lightDepthBuffer.getID());
+
 
 
 	//school images /*****************************/
@@ -209,18 +221,31 @@ int main(int argc, char** argv){
 			sendClearTo(connectTo("127.0.0.1", 8080));
 			sendCoordinateTo(connectTo("127.0.0.1", 8080), mainCam.getPosition().x, mainCam.getPosition().z, 255, 255, 0);
 			sendDrawTo(connectTo("127.0.0.1", 8080));
+			
+			printf("camx: %f  camy: %f  camz: %f\n",mainCam.getPosition().x, mainCam.getPosition().y, mainCam.getPosition().z);
 		}
 
+		//light pass
+		glViewport(0, 0, 2048, 2048);
+		lightFB.bind();
+		glClear(GL_DEPTH_BUFFER_BIT);
+		denLight.bindAsCam();
+		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), shadowMapPRG);
+		mainRenderer.renderGenericArray(&impOBJ2, impOBJ2.getVCount(), shadowMapPRG);
+		mainRenderer.renderGenericArray(&coneOBJ, coneOBJ.getVCount(), shadowMapPRG);
+
 		//framebuffer shinenigans
+		glViewport(0, 0, FBWidth, FBHeight);
 		renderFB.bind();
+		lightDepthBuffer.bind();
 
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
-		sprg.setVec4Array("lData",2,denLight.getData());
+		denLight.bind();
 		glFrontFace(GL_CW);
 		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
+		mainRenderer.renderGenericArray(&impOBJ2, impOBJ2.getVCount(), sprg);
 		mainRenderer.renderGenericArray(&coneOBJ, coneOBJ.getVCount(), sprg);
-		coneOBJ.enableLookAt({0,0,0});
 		coneOBJ.setPosition({3*cos(totalTime), 5, 3*sin(totalTime)});
 		
 		//skybox /*****************************/
@@ -235,37 +260,25 @@ int main(int argc, char** argv){
 
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		glFrontFace(GL_CW);
+		planeOBJ.loadTexture(colorBuffer, false);
 		mainRenderer.renderGenericArray(&planeOBJ, planeOBJ.getVCount(), UI_Out);
-		glBindTexture(GL_TEXTURE_2D, 0);
 
 
 		//input from keyboard (camera movement)
-		if(glfwGetKey(mainWin.getid(), GLFW_KEY_W) == GLFW_PRESS){
-			mainCam.moveForward(1*deltaTime);
-		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_S) == GLFW_PRESS){
-			mainCam.moveForward(-1*deltaTime);
-		}
-		if(glfwGetKey(mainWin.getid(), GLFW_KEY_D) == GLFW_PRESS){
-			mainCam.moveRight(1*deltaTime);
-		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_A) == GLFW_PRESS){
-			mainCam.moveRight(-1*deltaTime);
-		}
-		if(glfwGetKey(mainWin.getid(), GLFW_KEY_E) == GLFW_PRESS){
-			mainCam.moveUp(1*deltaTime);
-		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_Q) == GLFW_PRESS){
-			mainCam.moveUp(-1*deltaTime);
-		}
+		mainCam.moveForward(mainWin.getAxis(GLFW_KEY_W, GLFW_KEY_S)*deltaTime);
+		mainCam.moveRight(mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime);
+		mainCam.moveUp(mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime);
 
 		//shader switching
-		if(glfwGetKey(mainWin.getid(), GLFW_KEY_F) == GLFW_PRESS){
+		if(mainWin.getKey(GLFW_KEY_F)){
 			sprg.load("shaders/perspective(L)/point/vert.sha", "shaders/perspective(L)/point/frag.sha");
 			sprg.setInt("T0", 0);
 			printf("loading perspective(L)/point\n");
-		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_G) == GLFW_PRESS){
+		}else if(mainWin.getKey(GLFW_KEY_G)){
 			sprg.load("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
 			sprg.setInt("T0", 0);
 			printf("loading imgV\n");
-		}else if(glfwGetKey(mainWin.getid(), GLFW_KEY_H) == GLFW_PRESS){
+		}else if(mainWin.getKey(GLFW_KEY_H)){
 			sprg.load("shaders/perspective(L)/directional/vert.sha", "shaders/perspective(L)/directional/frag.sha");
 			sprg.setInt("T0", 0);
 			printf("loading perspective(L)/directional\n");
@@ -273,14 +286,14 @@ int main(int argc, char** argv){
 		
 
 		//toggle cursor
-		if(glfwGetKey(mainWin.getid(),GLFW_KEY_ESCAPE)==GLFW_PRESS&&escAllow){
+		if(mainWin.getKey(GLFW_KEY_ESCAPE)&&escAllow){
 			//cursor variables
 			cursor=!cursor;
 			if(debug){
 				logInfo("KEY_ESCAPE detected changing cursor mode\n");
 			}
 			escAllow=false;
-		}else if(glfwGetKey(mainWin.getid(),GLFW_KEY_ESCAPE)==GLFW_RELEASE){
+		}else if(mainWin.getKeyR(GLFW_KEY_ESCAPE)){
 			//for snappier feel
 			escAllow=true;
 		}

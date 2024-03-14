@@ -42,7 +42,7 @@ public:
 
     //utility
     virtual void generateVectors();//sets unit vector according to rotation
-    void lookAt(vec3 destination, vec3 up);////sets unit vector according to look destination
+    void lookAt(vec3 destination, vec3 up);//sets unit vector according to look destination
     void moveForward(float step);
     void moveRight(float step);
     void moveUp(float step);

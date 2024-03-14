@@ -22,17 +22,13 @@
 - find where the memory leak is
 - optimize OVM and CVM calculations
 
-# 2024-03-11
-- Light depth buffer rendering
-- Window class getKey() functionality
-- seperate light classes (directional, point etc.)
+# Just Do It
+- Window class getCursorPos
+- Window class setCursorPos
 
 # done (gets cleared once in a while)
-- m4_transpose
-- m4_lookAt
-- transform forward, right and up vectors
-- transform moveForward, moveRight, moveUp
-- added switchable lookAt to camera
-- Transform lookAt
-- added switchable lookAt to CMGL_GameObject
-- I definitely didn't make a flying p**is
+- SHADOWMAPPING!!!
+- Light depth buffer rendering
+- CMGL_DirectLight
+- Window class getKey() functionality
+- Window class getAxis() functionality

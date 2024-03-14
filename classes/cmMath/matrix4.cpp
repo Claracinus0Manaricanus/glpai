@@ -54,7 +54,7 @@ float* m4_lookAt(vec3 source, vec3 destination, vec3 up){
     float* retMat = (float*)calloc(16, sizeof(float));
 
     vec3 forward = Normalize(destination - source);
-    vec3 right = -Normalize(Cross(forward, up));
+    vec3 right = Normalize(Cross(up, forward));
     up = Normalize(Cross(forward, right));
 
     for(int i = 0; i < 3; i++){

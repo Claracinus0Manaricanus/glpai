@@ -20,6 +20,7 @@ add_executable(
 "classes/opengl/CMGL_GameObject.cpp" "classes/opengl/CMGL_Texture.cpp"
 "classes/opengl/CMGL_Renderer.cpp" "classes/opengl/CMGL_Camera.cpp"
 "classes/opengl/CMGL_CubeMap.cpp" "classes/opengl/CMGL_Framebuffer.cpp"
+"classes/opengl/CMGL_DirectLight.cpp"
 
 #graphics folder
 "classes/graphics/CMGL_Shader.cpp" "classes/graphics/CMGL_Program.cpp"
