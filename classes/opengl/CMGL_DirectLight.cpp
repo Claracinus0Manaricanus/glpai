@@ -89,7 +89,7 @@ void CMGL_DirectLight::updateLight(){
         1,0,0,0,
         0,1,0,0,
         0,0,1,0,
-        0,0,0,50
+        0,0,0,25
     };
 
     free(LVM);

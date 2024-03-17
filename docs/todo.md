@@ -27,8 +27,9 @@
 - Window class setCursorPos
 
 # done (gets cleared once in a while)
-- SHADOWMAPPING!!!
-- Light depth buffer rendering
-- CMGL_DirectLight
-- Window class getKey() functionality
-- Window class getAxis() functionality
+- fixed some bind lingering
+- fixed skyboxes
+- added texture data NULL check to gameObject
+- did some import tests (it works)
+- multiple light shadowmapping tests
+- CMGL_Renderer multiple renderer (CMGL_GameObject)

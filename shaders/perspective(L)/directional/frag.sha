@@ -24,11 +24,11 @@ void main(){
     float newZ = (newLVMPos.z+1.0)/2.0;
     vec2 lvmTex = vec2((newLVMPos.x + 1)/2.0,(newLVMPos.y + 1)/2.0);
     
-    if(newZ > texture(shadowMap, lvmTex).x + 1.0/lvmFragPos.w){
+    if(newZ > texture(shadowMap, lvmTex).x + 0.1/lvmFragPos.w && newZ < 1.0){
         color = vec4(0,0,0,1);
     }else{
         vec4 texCol=texture(T0,fragTex);
-        float intensity=dot(normalize(lVec),fragNor)*lCol.w;
+        float intensity=dot(lVec,fragNor)*lCol.w;
         clamp(intensity,0,1);
         color=vec4(texCol.xyz*fragCol.xyz*lCol.xyz*intensity,texCol.w);
     }

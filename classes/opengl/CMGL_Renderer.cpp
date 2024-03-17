@@ -25,3 +25,27 @@ int CMGL_Renderer::renderGenericElement(CMGL_Base* toRender, int fCount, CMGL_Pr
 
     return 0;
 }
+
+
+//CMGL_GameObject rendering
+int CMGL_Renderer::renderGameObjectsA(CMGL_GameObject* objects, int objectsCount, CMGL_Program& renderPrg){
+    renderPrg.use();
+    
+    for(int i = 0; i < objectsCount; i++){
+        objects[i].bind();
+        glDrawArrays(GL_TRIANGLES, 0, objects[i].getVCount());
+    }
+
+    return 0;
+}
+
+int CMGL_Renderer::renderGameObjectsE(CMGL_GameObject* objects, int objectsCount, CMGL_Program& renderPrg){
+    renderPrg.use();
+    
+    for(int i = 0; i < objectsCount; i++){
+        objects[i].bind();
+        glDrawElements(GL_TRIANGLES, objects[i].getFCount()*3, GL_UNSIGNED_INT, (void*)0);
+    }
+
+    return 0;
+}

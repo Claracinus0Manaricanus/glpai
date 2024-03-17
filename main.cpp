@@ -164,9 +164,14 @@ int main(int argc, char** argv){
 
 	//lights
 	DirectLightData lightData;
-	lightData.color = {1,1,1,1};
-	lightData.direction = {0,1,0};
-	CMGL_DirectLight denLight(lightData);
+	lightData.color = {1,1,1,0.5f};
+	//lightData.direction = {0.5f,1,0.2f};
+	lightData.direction = {0.5f,1,1};
+	CMGL_DirectLight denLight0(lightData);
+
+	lightData.color = {1,1,1,0.5f};
+	lightData.direction = {-0.5f,1,1};
+	CMGL_DirectLight denLight1(lightData);
 
 
 	//framebuffer
@@ -176,13 +181,17 @@ int main(int argc, char** argv){
 	CMGL_Texture colorBuffer({0, FBWidth, FBHeight, GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
 
 	CMGL_Framebuffer renderFB({GL_FRAMEBUFFER});
-	renderFB.setColorAttachment(colorBuffer.getID());
-	renderFB.setDepthAttachment(depthBuffer.getID());
+	renderFB.setColorAttachment(colorBuffer.getid());
+	renderFB.setDepthAttachment(depthBuffer.getid());
 
 	//light depth framebuffer
 	CMGL_Texture lightDepthBuffer({1, 2048, 2048, GL_TEXTURE_2D, GL_DEPTH_COMPONENT, GL_FLOAT, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
+	float tempDepthColor[4]={1,1,1,1};
+	lightDepthBuffer.bind();
+	glTexParameterfv(GL_TEXTURE_2D,  GL_TEXTURE_BORDER_COLOR, tempDepthColor);
+	lightDepthBuffer.unbind();
 	CMGL_Framebuffer lightFB({GL_FRAMEBUFFER});
-	lightFB.setDepthAttachment(lightDepthBuffer.getID());
+	lightFB.setDepthAttachment(lightDepthBuffer.getid());
 
 
 	/********************************************/
@@ -195,7 +204,8 @@ int main(int argc, char** argv){
 	double cursorX=0,cursorY=0;//cursor input
 	CMGL_Camera mainCam(120, 1);
 	mainCam.setAspectRatio((float)FBWidth/FBHeight);
-	mainCam.setPosition({0,0,-3});
+	mainCam.setPosition({0,1,0});
+	float camSpeed = 5.0f;
 	/*while loop variables*/
 
 
@@ -233,10 +243,8 @@ int main(int argc, char** argv){
 		glViewport(0, 0, 2048, 2048);
 		lightFB.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
-		denLight.bindAsCam();
-		for(int i = 0; i < objectsCount; i++){
-			mainRenderer.renderGenericArray(&objects[i], objects[i].getVCount(), shadowMapPRG);
-		}
+		denLight0.bindAsCam();
+		mainRenderer.renderGameObjectsA(objects, objectsCount, shadowMapPRG);
 
 		//render pass
 		glViewport(0, 0, FBWidth, FBHeight);
@@ -245,12 +253,30 @@ int main(int argc, char** argv){
 
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		mainCam.bind();
-		denLight.bind();
+		denLight0.bind();
 		glFrontFace(GL_CW);
-		for(int i = 0; i < objectsCount; i++){
-			mainRenderer.renderGenericArray(&objects[i], objects[i].getVCount(), sprg);
-		}
-		
+		mainRenderer.renderGameObjectsA(objects, objectsCount, sprg);
+
+		//light pass
+		glViewport(0, 0, 2048, 2048);
+		lightFB.bind();
+		glClear(GL_DEPTH_BUFFER_BIT);
+		denLight1.bindAsCam();
+		mainRenderer.renderGameObjectsA(objects, objectsCount, shadowMapPRG);
+
+		//render pass
+		glViewport(0, 0, FBWidth, FBHeight);
+		renderFB.bind();
+		lightDepthBuffer.bind();
+
+		mainCam.bind();
+		denLight1.bind();
+		glFrontFace(GL_CW);
+		glBlendFunc(GL_ONE,GL_ONE);
+		mainRenderer.renderGameObjectsA(objects, objectsCount, sprg);
+		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+
 		//skybox /*****************************/
 		glFrontFace(GL_CCW);
 		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);
@@ -268,11 +294,9 @@ int main(int argc, char** argv){
 
 
 		//input from keyboard (camera movement)
-		mainCam.moveForward(mainWin.getAxis(GLFW_KEY_W, GLFW_KEY_S)*deltaTime);
-		mainCam.moveRight(mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime);
-		mainCam.moveUp(mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime);
-		/*mainCam.move({mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime,0,0});
-		mainCam.move({0,mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime,0});*/
+		mainCam.moveForward(mainWin.getAxis(GLFW_KEY_W, GLFW_KEY_S)*deltaTime*camSpeed);
+		mainCam.moveRight(mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime*camSpeed);
+		mainCam.moveUp(mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime*camSpeed);
 
 		//shader switching
 		if(mainWin.getKey(GLFW_KEY_F)){

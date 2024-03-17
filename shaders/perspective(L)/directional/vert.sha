@@ -41,7 +41,7 @@ void main(){
     fragTex=tex;
     gl_Position=CVM*OVM*vec4(pos.xyz * SCALE.xyz,1);
 
-    lVec = lData[0].xyz;
+    lVec = normalize(lData[0].xyz);
     lCol = lData[1].xyzw;
     lvmFragPos = LVM*OVM*vec4(pos.xyz * SCALE.xyz,1);
 }

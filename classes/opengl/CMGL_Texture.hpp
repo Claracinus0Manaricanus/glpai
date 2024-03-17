@@ -28,7 +28,7 @@ public:
 
     //getters
     uint32_t getTextureUnit();
-    uint32_t getID();
+    uint32_t getid();
     uint32_t getWidth();
     uint32_t getHeight();
     uint32_t getType();

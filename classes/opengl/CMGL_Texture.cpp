@@ -69,7 +69,7 @@ uint32_t CMGL_Texture::getTextureUnit(){
     return Unit;
 }
 
-uint32_t CMGL_Texture::getID(){
+uint32_t CMGL_Texture::getid(){
     return ID;
 }
 
