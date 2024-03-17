@@ -131,3 +131,7 @@ int CMGL_CubeMap::setNegativeZ(char* fileName){
 void CMGL_CubeMap::bind(){
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);
 }
+
+void CMGL_CubeMap::unbind(){
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}

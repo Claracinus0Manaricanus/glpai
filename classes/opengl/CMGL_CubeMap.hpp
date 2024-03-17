@@ -34,6 +34,7 @@ public:
 
     //utility
     void bind();
+    void unbind();
     //int reset();
 };
 

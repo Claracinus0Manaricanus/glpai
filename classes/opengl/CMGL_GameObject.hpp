@@ -27,13 +27,13 @@ protected:
 public:
     //constructors
     CMGL_GameObject();
-    CMGL_GameObject(MeshData inputMesh, TransformData inputTransform);
+    CMGL_GameObject(ObjectData inData);
 
     //destructors
     ~CMGL_GameObject();
 
     //setters
-    void loadData(MeshData inputMesh, TransformData inputTransform);
+    void loadData(ObjectData inData);
     void loadMesh(MeshData inputMesh);
     void loadTransform(TransformData inputTransform);
     int loadTexture(TextureData inputData);
@@ -50,6 +50,7 @@ public:
     //binder
     void bind();
     void bindWT();//without texture
+    void unbind();
 
     //Transform overrides
     void updateTransform() override;

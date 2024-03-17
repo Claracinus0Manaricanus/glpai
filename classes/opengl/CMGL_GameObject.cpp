@@ -42,6 +42,8 @@ int CMGL_GameObject::update(){
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*Mesh::fCount*3, Mesh::faces, GL_DYNAMIC_DRAW);
     }
 
+    glBindVertexArray(0);
+
     return 0;
 }
 
@@ -53,6 +55,7 @@ void CMGL_GameObject::updateSSB(){
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float)*16, OVM);
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, sizeof(float)*3, &Scale);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
     free(OVM);
 }
@@ -64,11 +67,12 @@ CMGL_GameObject::CMGL_GameObject(){
     updateSSB();
 }
 
-CMGL_GameObject::CMGL_GameObject(MeshData inputMesh, TransformData inputTransform):
-Transform(inputTransform), Mesh(inputMesh){
+CMGL_GameObject::CMGL_GameObject(ObjectData inData):
+Transform(inData.trData), Mesh(inData.mData){
     initBuffers();
     update();
     updateSSB();
+    if(inData.texData.data != NULL) CMGL_Texture::loadData(inData.texData);
 }
 
 
@@ -82,9 +86,10 @@ CMGL_GameObject::~CMGL_GameObject(){
 
 
 //setters
-void CMGL_GameObject::loadData(MeshData inputMesh, TransformData inputTransform){
-    Transform::loadData(inputTransform);
-    Mesh::loadData(inputMesh);
+void CMGL_GameObject::loadData(ObjectData inData){
+    Transform::loadData(inData.trData);
+    Mesh::loadData(inData.mData);
+    if(inData.texData.data != NULL) CMGL_Texture::loadData(inData.texData);
     update();
 }
 
@@ -164,6 +169,12 @@ void CMGL_GameObject::bind(){
 void CMGL_GameObject::bindWT(){
     glBindVertexArray(VAO);
     glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4, SSB, 0, sizeof(float)*19);
+}
+
+void CMGL_GameObject::unbind(){
+    glBindVertexArray(0);
+    CMGL_Texture::unbind();
+    glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 4, 0, 0, 0);
 }
 
 

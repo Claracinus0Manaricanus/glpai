@@ -97,20 +97,38 @@ int main(int argc, char** argv){
 
 	/******************************************************************************************/
 	//main loop preparations
-	MeshData impOBJData=importOBJ("objects/sphere.obj");
 
-	CMGL_GameObject impOBJ(impOBJData, {{0,2,0},{0,0,0},{1,1,1}});
-	free(impOBJData.vertices);
-	impOBJData=importOBJ("objects/plane.obj");
-	CMGL_GameObject impOBJ2(impOBJData, {{0,0,0},{3*PI/2.0f,0,0},{100,100,1}});
-	free(impOBJData.vertices);
+	//objects
+	int objectsCount = 3;
+	CMGL_GameObject* objects = new CMGL_GameObject[objectsCount];
+
+	//data
+	//plane
+	ObjectData OBJData;
+	OBJData.trData = {{0,0,0}, {-PI/2.0f,0,0}, {100,100,1}};
+	OBJData.mData = importOBJ("objects/plane.obj");
+	objects[0].loadData(OBJData);
+	free(OBJData.mData.vertices);
+
+	//tree
+	OBJData.trData = {{-10,0,10}, {0,0,0}, {1,1,1}};
+	OBJData.mData = importOBJ("objects/environment/Treemsi.obj");
+	Image treeImg({"images/environment/treemsi.png",3,1});
+	OBJData.texData = {0, treeImg.width(), treeImg.height(), GL_TEXTURE_2D, GL_RGB, GL_UNSIGNED_BYTE, GL_REPEAT, GL_LINEAR, treeImg.getDataP()};
+	objects[1].loadData(OBJData);
 	
+	OBJData.trData = {{10,0,10}, {0,0,0}, {1,1,1}};
+	objects[2].loadData(OBJData);
+	free(OBJData.mData.vertices);
+
+
+	//dhader programs
 	CMGL_Program sprg("shaders/perspective(L)/directional/vert.sha", "shaders/perspective(L)/directional/frag.sha");
 	sprg.setInt("T0", 0);//also calls sprg.use()
 	sprg.setInt("shadowMap", 1);
 
 	CMGL_Program skyBoxPrg("shaders/perspective(FB)/skybox/vert.sha","shaders/perspective(FB)/skybox/frag.sha");
-	sprg.setInt("tex0", 0);
+	skyBoxPrg.setInt("tex0", 0);
 
 	CMGL_Program UI_Out("shaders/orthographic/postProcess/vert.sha","shaders/orthographic/postProcess/frag.sha");
 	UI_Out.setInt("tex0", 0);
@@ -118,6 +136,12 @@ int main(int argc, char** argv){
 	CMGL_Program shadowMapPRG("shaders/perspective(L)/ShadMapD/vert.sha","shaders/perspective(L)/ShadMapD/frag.sha");
 
 	CMGL_Renderer mainRenderer;
+
+	//render plane
+	ObjectData renderPlaneOBJ;
+	renderPlaneOBJ.mData = importOBJ("objects/plane.obj");
+	CMGL_GameObject renderPlane(renderPlaneOBJ);
+	free(renderPlaneOBJ.mData.vertices);
 
 	//cubeMap
 	CubeMapData cbDat;
@@ -129,19 +153,14 @@ int main(int argc, char** argv){
 	cbDat.sides[5]="images/skybox/starryCSky/nz.png";
 
 	CMGL_CubeMap cubeMap(cbDat);
+	cubeMap.bind();
+	
+	ObjectData cubeData;
+	cubeData.trData = {{0,0,0},{0,0,0},{1,1,1}};
 
-	impOBJData=importOBJ("objects/cube.obj");
-	CMGL_GameObject cubeMapsCube(impOBJData, {{0,0,0},{0,0,0},{1,1,1}});
-	free(impOBJData.vertices);
-
-	impOBJData=importOBJ("objects/plane.obj");
-	CMGL_GameObject planeOBJ(impOBJData, {{0,0,0}, {0,0,0}, {1,1,1}});
-	free(impOBJData.vertices);
-
-	impOBJData=importOBJ("objects/cone.obj");
-	CMGL_GameObject coneOBJ(impOBJData, {{3,0,0}, {0,0,0}, {1,1,1}});
-	free(impOBJData.vertices);
-	coneOBJ.enableLookAt({0,0,0});
+	cubeData.mData=importOBJ("objects/cube.obj");
+	CMGL_GameObject cubeMapsCube(cubeData);
+	free(cubeData.mData.vertices);
 
 	//lights
 	DirectLightData lightData;
@@ -166,23 +185,8 @@ int main(int argc, char** argv){
 	lightFB.setDepthAttachment(lightDepthBuffer.getID());
 
 
-
-	//school images /*****************************/
-	ImageData imgDat;
-	imgDat.imageFile = "images/school/FLY.png";
-	imgDat.desiredChannels = 4;
-	imgDat.flipImage = 1;
-
-	Image schoolIMG(imgDat);
-
-	CMGL_Texture schoolTex({0, schoolIMG.width(), schoolIMG.height(), GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_REPEAT, GL_LINEAR, schoolIMG.getDataP()});
-
 	/********************************************/
-	planeOBJ.loadTexture(colorBuffer);
-	//planeOBJ.loadTexture(schoolTex);
-
-	impOBJ.loadTexture(schoolTex);
-
+	renderPlane.loadTexture(colorBuffer);
 
 	/*while loop variables*/
 	bool cursor=false,escAllow=true;
@@ -230,11 +234,11 @@ int main(int argc, char** argv){
 		lightFB.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 		denLight.bindAsCam();
-		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), shadowMapPRG);
-		mainRenderer.renderGenericArray(&impOBJ2, impOBJ2.getVCount(), shadowMapPRG);
-		mainRenderer.renderGenericArray(&coneOBJ, coneOBJ.getVCount(), shadowMapPRG);
+		for(int i = 0; i < objectsCount; i++){
+			mainRenderer.renderGenericArray(&objects[i], objects[i].getVCount(), shadowMapPRG);
+		}
 
-		//framebuffer shinenigans
+		//render pass
 		glViewport(0, 0, FBWidth, FBHeight);
 		renderFB.bind();
 		lightDepthBuffer.bind();
@@ -243,10 +247,9 @@ int main(int argc, char** argv){
 		mainCam.bind();
 		denLight.bind();
 		glFrontFace(GL_CW);
-		mainRenderer.renderGenericArray(&impOBJ, impOBJ.getVCount(), sprg);
-		mainRenderer.renderGenericArray(&impOBJ2, impOBJ2.getVCount(), sprg);
-		mainRenderer.renderGenericArray(&coneOBJ, coneOBJ.getVCount(), sprg);
-		coneOBJ.setPosition({3*cos(totalTime), 5, 3*sin(totalTime)});
+		for(int i = 0; i < objectsCount; i++){
+			mainRenderer.renderGenericArray(&objects[i], objects[i].getVCount(), sprg);
+		}
 		
 		//skybox /*****************************/
 		glFrontFace(GL_CCW);
@@ -260,14 +263,16 @@ int main(int argc, char** argv){
 
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		glFrontFace(GL_CW);
-		planeOBJ.loadTexture(colorBuffer, false);
-		mainRenderer.renderGenericArray(&planeOBJ, planeOBJ.getVCount(), UI_Out);
+		renderPlane.loadTexture(colorBuffer, false);
+		mainRenderer.renderGenericArray(&renderPlane, renderPlane.getVCount(), UI_Out);
 
 
 		//input from keyboard (camera movement)
 		mainCam.moveForward(mainWin.getAxis(GLFW_KEY_W, GLFW_KEY_S)*deltaTime);
 		mainCam.moveRight(mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime);
 		mainCam.moveUp(mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime);
+		/*mainCam.move({mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime,0,0});
+		mainCam.move({0,mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime,0});*/
 
 		//shader switching
 		if(mainWin.getKey(GLFW_KEY_F)){
