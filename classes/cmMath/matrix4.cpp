@@ -66,3 +66,10 @@ float* m4_lookAt(vec3 source, vec3 destination, vec3 up){
 
     return retMat;
 }
+
+
+void m4_copy(float* m1, float* m2){
+    for(int i = 0; i < 16; i++){
+        m1[i] = m2[i];
+    }
+}

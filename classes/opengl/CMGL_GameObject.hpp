@@ -16,8 +16,6 @@
 class CMGL_GameObject : public Mesh, public Transform, public CMGL_Texture, public CMGL_Base{
 protected:
     uint32_t VAO,VBO,EAB,SSB;//vertex array object, vertex buffer object, element array buffer, shader storage buffer
-    bool isLookingAt = false;
-    vec3 lookVector = {0,0,0};
 
 protected:
     int initBuffers();
@@ -38,14 +36,6 @@ public:
     void loadTransform(TransformData inputTransform);
     int loadTexture(TextureData inputData);
     int loadTexture(CMGL_Texture& inputTex, bool clean = true);
-    void enableLookAt(vec3 lookVec);
-    void disableLookAt();
-
-    //getters
-    bool getLookingAt();
-
-    //Matrices
-    float* generateOVM();
 
     //binder
     void bind();

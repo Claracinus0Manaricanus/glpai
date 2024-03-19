@@ -49,30 +49,29 @@ int CMGL_GameObject::update(){
 
 void CMGL_GameObject::updateSSB(){
     /****Shader Storage Buffer****/
-    float* OVM = generateOVM();
-    m4_transpose(OVM);
-    
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float)*16, OVM);
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, sizeof(float)*3, &Scale);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
-
-    free(OVM);
 }
 
 
 //constructors
 CMGL_GameObject::CMGL_GameObject(){
     initBuffers();
-    updateSSB();
+
+    
+    updateTransform();//fixes some issues but ?
 }
 
 CMGL_GameObject::CMGL_GameObject(ObjectData inData):
 Transform(inData.trData), Mesh(inData.mData){
     initBuffers();
     update();
-    updateSSB();
     if(inData.texData.data != NULL) CMGL_Texture::loadData(inData.texData);
+
+
+    updateTransform();//fixes some issues but ?
 }
 
 
@@ -111,53 +110,6 @@ int CMGL_GameObject::loadTexture(CMGL_Texture& inputTex, bool clean){
     return CMGL_Texture::loadData(inputTex, clean);
 }
 
-void CMGL_GameObject::enableLookAt(vec3 lookVec){
-    isLookingAt = true;
-    lookVector = lookVec;
-    updateTransform();
-}
-
-void CMGL_GameObject::disableLookAt(){
-    isLookingAt = false;
-    updateTransform();
-}
-
-
-
-//getters
-bool CMGL_GameObject::getLookingAt(){
-    return isLookingAt;
-}
-
-
-//Matrices
-float* CMGL_GameObject::generateOVM(){
-
-    float translate[16]={
-        1,0,0, Position.x,
-        0,1,0, Position.y,
-        0,0,1, Position.z,
-        0,0,0,1
-    };
-    
-    if(isLookingAt){
-        Transform::lookAt(lookVector, {0,1,0});
-    }else{
-        generateVectors();
-    }
-
-    float rotMat[16]={
-        rightVector.x, upVector.x, forwardVector.x, 0,
-        rightVector.y, upVector.y, forwardVector.y, 0,
-        rightVector.z, upVector.z, forwardVector.z, 0,
-        0, 0, 0, 1,
-    };
-
-    float * ret = m4_multiplyNew(translate, rotMat);
-
-    return ret;
-}
-
 
 //binder
 void CMGL_GameObject::bind(){
@@ -180,5 +132,6 @@ void CMGL_GameObject::unbind(){
 
 //Trasnform overrides
 void CMGL_GameObject::updateTransform(){
+    Transform::updateOVM();
     updateSSB();
 }

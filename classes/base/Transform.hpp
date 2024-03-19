@@ -17,6 +17,9 @@ protected:
     vec3 rightVector = {1,0,0};
     vec3 upVector = {0,1,0};
 
+    //Object View Matrix
+    float OVM[16] = {0};
+
 public:
     //constructors
     Transform();
@@ -49,6 +52,7 @@ public:
 
     //updaters
     virtual void updateTransform();
+    virtual void updateOVM();
 };
 
 #endif

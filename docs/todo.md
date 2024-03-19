@@ -25,11 +25,12 @@
 # Just Do It
 - Window class getCursorPos
 - Window class setCursorPos
+- SceneManager
+- fix heightmaps
 
 # done (gets cleared once in a while)
-- fixed some bind lingering
-- fixed skyboxes
-- added texture data NULL check to gameObject
-- did some import tests (it works)
-- multiple light shadowmapping tests
-- CMGL_Renderer multiple renderer (CMGL_GameObject)
+- OVM now at Transform
+- added m4_copy to copy 4D matrices
+- updated CMGL_GameObject to use OVM from transform
+- updated camera to use OVM from transform
+- added shadow precision float to CMGL_DirectLight

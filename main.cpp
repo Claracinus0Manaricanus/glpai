@@ -112,7 +112,7 @@ int main(int argc, char** argv){
 
 	//tree
 	OBJData.trData = {{-10,0,10}, {0,0,0}, {1,1,1}};
-	OBJData.mData = importOBJ("objects/environment/Treemsi.obj");
+	OBJData.mData = importOBJ("objects/environment/treemsi.obj");
 	Image treeImg({"images/environment/treemsi.png",3,1});
 	OBJData.texData = {0, treeImg.width(), treeImg.height(), GL_TEXTURE_2D, GL_RGB, GL_UNSIGNED_BYTE, GL_REPEAT, GL_LINEAR, treeImg.getDataP()};
 	objects[1].loadData(OBJData);
@@ -161,12 +161,12 @@ int main(int argc, char** argv){
 	cubeData.mData=importOBJ("objects/cube.obj");
 	CMGL_GameObject cubeMapsCube(cubeData);
 	free(cubeData.mData.vertices);
+	//cubeMapsCube.rotate({0,1,0});/*************/
 
 	//lights
 	DirectLightData lightData;
 	lightData.color = {1,1,1,0.5f};
-	//lightData.direction = {0.5f,1,0.2f};
-	lightData.direction = {0.5f,1,1};
+	lightData.direction = {0.5f,0.5f,1};
 	CMGL_DirectLight denLight0(lightData);
 
 	lightData.color = {1,1,1,0.5f};
@@ -239,6 +239,10 @@ int main(int argc, char** argv){
 			printf("camx: %f  camy: %f  camz: %f\n",mainCam.getPosition().x, mainCam.getPosition().y, mainCam.getPosition().z);
 		}
 
+		//object sheningans
+		denLight0.setPosition(mainCam.getPosition());
+		denLight1.setPosition(mainCam.getPosition());
+
 		//light pass
 		glViewport(0, 0, 2048, 2048);
 		lightFB.bind();
@@ -271,7 +275,6 @@ int main(int argc, char** argv){
 
 		mainCam.bind();
 		denLight1.bind();
-		glFrontFace(GL_CW);
 		glBlendFunc(GL_ONE,GL_ONE);
 		mainRenderer.renderGameObjectsA(objects, objectsCount, sprg);
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);

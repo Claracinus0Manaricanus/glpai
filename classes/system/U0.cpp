@@ -226,7 +226,7 @@ MeshData importHeightMap(const char* filename, float division_constant, int terr
 
 	//reading file
 	ImageData tmpImgData;
-	tmpImgData.imageFile=(char*)malloc(strlen(filename));
+	tmpImgData.imageFile=(char*)calloc(strlen(filename)+1, sizeof(char));
 	memcpy(tmpImgData.imageFile, filename, strlen(filename));
 	tmpImgData.desiredChannels=1;
 	tmpImgData.flipImage=1;

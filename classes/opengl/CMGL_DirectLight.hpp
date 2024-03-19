@@ -11,6 +11,7 @@ private:
     vec3 direction = {0,1,0};//direction from surfaces normal, so light looks at the opposite site of this vector
     uint32_t SSB;
     float* LVM = NULL;
+    float shadowPrecision = 50;
 
 public:
     //constructors
@@ -22,6 +23,7 @@ public:
 
     //setters
     void setDirection(vec3 inDir);
+    void setShadowPrecision(float inP);
 
     //getters
     vec3 getDirection();
@@ -32,6 +34,7 @@ public:
 
     //overrides
     void updateLight() override;
+    void updateTransform() override;
 
 };
 

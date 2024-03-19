@@ -1,12 +1,12 @@
 #include "Transform.hpp"
 
 //constructors
-Transform::Transform(){}
+Transform::Transform(){
+    updateTransform();
+}
 
 Transform::Transform(TransformData inputTransform){
-    Position=inputTransform.position;
-    Rotation=inputTransform.rotation;
-    Scale=inputTransform.scale;
+    loadData(inputTransform);
 }
 
 
@@ -19,6 +19,7 @@ void Transform::loadData(TransformData inputTransform){
     Position=inputTransform.position;
     Rotation=inputTransform.rotation;
     Scale=inputTransform.scale;
+    generateVectors();
     updateTransform();
 }
 
@@ -29,6 +30,7 @@ void Transform::setPosition(vec3 newPosition){
 
 void Transform::setRotation(vec3 newRotation){
     Rotation=newRotation;
+    generateVectors();
     updateTransform();
 }
 
@@ -44,6 +46,7 @@ void Transform::move(vec3 movement){
 
 void Transform::rotate(vec3 rot){
     Rotation+=rot;
+    generateVectors();
     updateTransform();
 }
 
@@ -115,6 +118,8 @@ void Transform::lookAt(vec3 destination, vec3 up){
     upVector = {lookMat[1], lookMat[5], lookMat[9]};
 
     free(lookMat);
+
+    updateTransform();
 }
 
 void Transform::moveForward(float step){
@@ -136,3 +141,25 @@ void Transform::moveUp(float step){
 
 //updaters (generally for overrides)
 void Transform::updateTransform(){}
+
+void Transform::updateOVM(){
+    for(int  i = 0; i < 3; i++){
+        OVM[(i*4)] = rightVector[i];
+        OVM[(i*4)+1] = upVector[i];
+        OVM[(i*4)+2] = forwardVector[i];
+        OVM[(i*4)+3] = 0;
+        OVM[i+12] = 0;
+    }
+    OVM[15] = 1;
+
+    float transMat[16] = {
+        1, 0, 0, Position.x,
+        0, 1, 0, Position.y,
+        0, 0, 1, Position.z,
+        0, 0, 0, 1
+    };
+    
+    m4_multiply(transMat, OVM);
+    m4_copy(OVM, transMat);
+    m4_transpose(OVM);
+}

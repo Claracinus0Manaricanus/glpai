@@ -48,6 +48,10 @@ void CMGL_DirectLight::setDirection(vec3 inDir){
     updateLight();
 }
 
+void CMGL_DirectLight::setShadowPrecision(float inP){
+    shadowPrecision = inP;
+}
+
 
 //getters
 vec3 CMGL_DirectLight::getDirection(){
@@ -85,20 +89,34 @@ void CMGL_DirectLight::updateLight(){
         up.y = 0;
     }
 
+    float transMat[16] = {
+        1,0,0,-Transform::Position.x,
+        0,1,0,-Transform::Position.y,
+        0,0,1,-Transform::Position.z,
+        0,0,0,1
+    };
+
     float scaleMat[16] = {
         1,0,0,0,
         0,1,0,0,
         0,0,1,0,
-        0,0,0,25
+        0,0,0,shadowPrecision
     };
 
     free(LVM);
     LVM = m4_lookAt({0,0,0}, -direction, up);
+    m4_transpose(LVM);
+    m4_multiply(scaleMat, transMat);
     m4_multiply(LVM, scaleMat);
 
+    m4_transpose(LVM);
     
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float)*16, LVM);
     glBufferSubData(GL_SHADER_STORAGE_BUFFER, sizeof(float)*16, sizeof(float)*8, data);
 
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+}
+
+void CMGL_DirectLight::updateTransform(){
+    updateLight();
 }
