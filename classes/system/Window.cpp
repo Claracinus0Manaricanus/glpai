@@ -30,6 +30,10 @@ ivec2 Window::getResolution(){
 	return temp;
 }
 
+void Window::getCursorPos(double* xPos, double* yPos){
+	glfwGetCursorPos(ID, xPos, yPos);
+}
+
 bool Window::getKey(int key){
 	if(glfwGetKey(ID, key) == GLFW_PRESS){
 		return true;
@@ -62,6 +66,14 @@ int Window::changeAttrib(int attrib, int value){
 	glfwSetWindowAttrib(ID, attrib, value);
 	return 0;
 }//error check needed
+
+void Window::setInputMode(int mode, int value){
+	glfwSetInputMode(ID, mode, value);
+}
+
+void Window::setCursorPos(double xPos, double yPos){
+	glfwSetCursorPos(ID, xPos, yPos);
+}
 
 
 //utility

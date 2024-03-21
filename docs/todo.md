@@ -25,12 +25,8 @@
 # Just Do It
 - Window class getCursorPos
 - Window class setCursorPos
-- SceneManager
+- CMGL_Scene class
 - fix heightmaps
 
+
 # done (gets cleared once in a while)
-- OVM now at Transform
-- added m4_copy to copy 4D matrices
-- updated CMGL_GameObject to use OVM from transform
-- updated camera to use OVM from transform
-- added shadow precision float to CMGL_DirectLight

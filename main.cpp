@@ -73,7 +73,6 @@ int main(int argc, char** argv){
 
 	//Setting up opengl (should be carried to GL related scene manager)
 	glClearColor(0.0f,0.0f,0.0f,1.0f);
-	glViewport(0, 0, winData.resolution.x, winData.resolution.y);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_DEBUG_OUTPUT);
 	glEnable(GL_BLEND);
@@ -92,7 +91,7 @@ int main(int argc, char** argv){
 	glfwSwapInterval(0);//synchronizing framerate
 
 	//initalizing mouse
-	glfwSetInputMode(mainWin.getid(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	mainWin.setInputMode(GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
 	/******************************************************************************************/
@@ -105,8 +104,8 @@ int main(int argc, char** argv){
 	//data
 	//plane
 	ObjectData OBJData;
-	OBJData.trData = {{0,0,0}, {-PI/2.0f,0,0}, {100,100,1}};
-	OBJData.mData = importOBJ("objects/plane.obj");
+	OBJData.trData = {{0,-1,0}, {-PI/2.0f,0,0}, {100,100,1}};
+	OBJData.mData = importOBJ("objects/cube.obj");
 	objects[0].loadData(OBJData);
 	free(OBJData.mData.vertices);
 
@@ -180,7 +179,7 @@ int main(int argc, char** argv){
 	CMGL_Texture depthBuffer({0, FBWidth, FBHeight, GL_TEXTURE_2D, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
 	CMGL_Texture colorBuffer({0, FBWidth, FBHeight, GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_CLAMP_TO_BORDER, GL_LINEAR, NULL});
 
-	CMGL_Framebuffer renderFB({GL_FRAMEBUFFER});
+	CMGL_Framebuffer renderFB({GL_FRAMEBUFFER, FBWidth, FBHeight});
 	renderFB.setColorAttachment(colorBuffer.getid());
 	renderFB.setDepthAttachment(depthBuffer.getid());
 
@@ -190,7 +189,7 @@ int main(int argc, char** argv){
 	lightDepthBuffer.bind();
 	glTexParameterfv(GL_TEXTURE_2D,  GL_TEXTURE_BORDER_COLOR, tempDepthColor);
 	lightDepthBuffer.unbind();
-	CMGL_Framebuffer lightFB({GL_FRAMEBUFFER});
+	CMGL_Framebuffer lightFB({GL_FRAMEBUFFER, 2048, 2048});
 	lightFB.setDepthAttachment(lightDepthBuffer.getid());
 
 
@@ -204,7 +203,7 @@ int main(int argc, char** argv){
 	double cursorX=0,cursorY=0;//cursor input
 	CMGL_Camera mainCam(120, 1);
 	mainCam.setAspectRatio((float)FBWidth/FBHeight);
-	mainCam.setPosition({0,1,0});
+	mainCam.setPosition({0,1,-1});
 	float camSpeed = 5.0f;
 	/*while loop variables*/
 
@@ -218,11 +217,10 @@ int main(int argc, char** argv){
 		glfwSetTime(0);
 		totalTime+=deltaTime;
 		printCheck+=deltaTime;
-
-
+		
+		
 		//updating resolution
 		winData.resolution=mainWin.getResolution();
-		glViewport(0, 0, FBWidth, FBHeight);
 
 
 		//getting framerate
@@ -239,19 +237,18 @@ int main(int argc, char** argv){
 			printf("camx: %f  camy: %f  camz: %f\n",mainCam.getPosition().x, mainCam.getPosition().y, mainCam.getPosition().z);
 		}
 
+
 		//object sheningans
 		denLight0.setPosition(mainCam.getPosition());
 		denLight1.setPosition(mainCam.getPosition());
 
 		//light pass
-		glViewport(0, 0, 2048, 2048);
 		lightFB.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 		denLight0.bindAsCam();
 		mainRenderer.renderGameObjectsA(objects, objectsCount, shadowMapPRG);
 
 		//render pass
-		glViewport(0, 0, FBWidth, FBHeight);
 		renderFB.bind();
 		lightDepthBuffer.bind();
 
@@ -261,15 +258,14 @@ int main(int argc, char** argv){
 		glFrontFace(GL_CW);
 		mainRenderer.renderGameObjectsA(objects, objectsCount, sprg);
 
+
 		//light pass
-		glViewport(0, 0, 2048, 2048);
 		lightFB.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 		denLight1.bindAsCam();
 		mainRenderer.renderGameObjectsA(objects, objectsCount, shadowMapPRG);
 
 		//render pass
-		glViewport(0, 0, FBWidth, FBHeight);
 		renderFB.bind();
 		lightDepthBuffer.bind();
 
@@ -334,19 +330,19 @@ int main(int argc, char** argv){
 		//cursor capture
 		if(!cursor){
 			//hide cursor
-			glfwSetInputMode(mainWin.getid(),GLFW_CURSOR,GLFW_CURSOR_DISABLED);
+			mainWin.setInputMode(GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 			if(!escAllow)
-				glfwSetCursorPos(mainWin.getid(),0,0);
+				mainWin.setCursorPos(0, 0);
 
 			//use cursor input for camera rotation
-			glfwGetCursorPos(mainWin.getid(), &cursorX, &cursorY);
+			mainWin.getCursorPos(&cursorX, &cursorY);
 			mainCam.rotate({(float)cursorY * 0.001f, (float)cursorX * 0.001f, 0});
 
 			//reset cursor position
-			glfwSetCursorPos(mainWin.getid(),0,0);
+			mainWin.setCursorPos(0, 0);
 		}else{
 			//make cursor visible
-			glfwSetInputMode(mainWin.getid(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);
+			mainWin.setInputMode(GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		}
 
 

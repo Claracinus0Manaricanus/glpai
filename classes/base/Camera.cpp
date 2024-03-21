@@ -92,16 +92,25 @@ void Camera::updateOVM(){
     m4_multiply(OVM, transMat);
 
     if(type == 1){//perspective
-        float projection[16]{
+        float projection[16] = {
             1/tan((3.14159265f/180.0f)*fov/2.0f),0,0,0,
             0,aspectRatio/tan((3.14159265f/180.0f)*fov/2.0f),0,0,
             0,0,1,-0.01f,
             0,0,1,0
         };
-
+        m4_multiply(projection, OVM);
+        m4_copy(OVM, projection);
+    }else{
+        float projection[16] = {
+            1,0,0,0,
+            0,aspectRatio,0,0,
+            0,0,1,0,
+            0,0,0,fov
+        };
         m4_multiply(projection, OVM);
         m4_copy(OVM, projection);
     }
     
+
     m4_transpose(OVM);
 }

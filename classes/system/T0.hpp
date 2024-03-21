@@ -277,6 +277,8 @@ struct TransformData{
 
 struct FramebufferData{
 	uint32_t framebufferType = 0;
+	int width = 0;
+	int height = 0;
 };
 
 struct TextureData{
@@ -313,6 +315,10 @@ struct ObjectData{
 struct DirectLightData{
 	vec4 color = {1,1,1,1};
 	vec3 direction = {0,0,0};
+};
+
+struct SceneData{
+
 };
 
 struct WindowData{

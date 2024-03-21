@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o.d"
+  "CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.o"
+  "CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.o.d"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o"
   "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o.d"
   "CMakeFiles/pai.dir/classes/system/Image.cpp.o"

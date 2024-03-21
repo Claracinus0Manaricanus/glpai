@@ -22,6 +22,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Framebuffer.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Framebuffer.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_GameObject.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_GameObject.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.o.d"
+  "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Scene.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/opengl/CMGL_Texture.cpp" "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/opengl/CMGL_Texture.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/system/Image.cpp" "CMakeFiles/pai.dir/classes/system/Image.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/system/Image.cpp.o.d"
   "/home/cm/codes/c++/glpai/classes/system/U0.cpp" "CMakeFiles/pai.dir/classes/system/U0.cpp.o" "gcc" "CMakeFiles/pai.dir/classes/system/U0.cpp.o.d"

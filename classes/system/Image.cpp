@@ -30,8 +30,8 @@ int Image::load(ImageData data){
 	stbi_set_flip_vertically_on_load(data.flipImage);
 	imgData = stbi_load(data.imageFile,&iWidth,&iHeight,&iChannel,data.desiredChannels);
 
-	//for now we only keep desiredChannel value which represents current data format
-	iChannel=data.desiredChannels;
+	if(data.desiredChannels != 0)//if channel preferation specified
+		iChannel=data.desiredChannels;
 
 	if(imgData == NULL){
 		printf("Failed to load image: %s\n",data.imageFile);

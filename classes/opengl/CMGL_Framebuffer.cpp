@@ -10,6 +10,8 @@ CMGL_Framebuffer::CMGL_Framebuffer(){
 CMGL_Framebuffer::CMGL_Framebuffer(FramebufferData inData){
     glGenFramebuffers(1, &ID);
     framebufferType = inData.framebufferType;
+    width = inData.width;
+    height = inData.height;
 }
 
 
@@ -47,7 +49,12 @@ uint32_t CMGL_Framebuffer::getType(){
 
 
 //utility
+void CMGL_Framebuffer::setViewport(){
+    glViewport(0, 0, width, height);
+}
+
 void CMGL_Framebuffer::bind(){
+    setViewport();
     glBindFramebuffer(framebufferType, ID);
 }
 

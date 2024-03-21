@@ -465,6 +465,30 @@ classes/opengl/CMGL_Renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Renderer.cpp.s
 .PHONY : classes/opengl/CMGL_Renderer.cpp.s
 
+classes/opengl/CMGL_Scene.o: classes/opengl/CMGL_Scene.cpp.o
+.PHONY : classes/opengl/CMGL_Scene.o
+
+# target to build an object file
+classes/opengl/CMGL_Scene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.o
+.PHONY : classes/opengl/CMGL_Scene.cpp.o
+
+classes/opengl/CMGL_Scene.i: classes/opengl/CMGL_Scene.cpp.i
+.PHONY : classes/opengl/CMGL_Scene.i
+
+# target to preprocess a source file
+classes/opengl/CMGL_Scene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.i
+.PHONY : classes/opengl/CMGL_Scene.cpp.i
+
+classes/opengl/CMGL_Scene.s: classes/opengl/CMGL_Scene.cpp.s
+.PHONY : classes/opengl/CMGL_Scene.s
+
+# target to generate assembly for a file
+classes/opengl/CMGL_Scene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pai.dir/build.make CMakeFiles/pai.dir/classes/opengl/CMGL_Scene.cpp.s
+.PHONY : classes/opengl/CMGL_Scene.cpp.s
+
 classes/opengl/CMGL_Texture.o: classes/opengl/CMGL_Texture.cpp.o
 .PHONY : classes/opengl/CMGL_Texture.o
 
@@ -660,6 +684,9 @@ help:
 	@echo "... classes/opengl/CMGL_Renderer.o"
 	@echo "... classes/opengl/CMGL_Renderer.i"
 	@echo "... classes/opengl/CMGL_Renderer.s"
+	@echo "... classes/opengl/CMGL_Scene.o"
+	@echo "... classes/opengl/CMGL_Scene.i"
+	@echo "... classes/opengl/CMGL_Scene.s"
 	@echo "... classes/opengl/CMGL_Texture.o"
 	@echo "... classes/opengl/CMGL_Texture.i"
 	@echo "... classes/opengl/CMGL_Texture.s"

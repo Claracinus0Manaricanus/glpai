@@ -8,6 +8,7 @@ class CMGL_Framebuffer{
 protected:
     uint32_t ID = 0;
     uint32_t framebufferType = 0;
+    int width=0, height=0;
 
 public:
     //constructors
@@ -26,6 +27,7 @@ public:
     uint32_t getType();
 
     //utility
+    void setViewport();
     void bind();
     void unbind();
 
