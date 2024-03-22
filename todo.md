@@ -1,18 +1,3 @@
-# docs
-- CMGL_Texture
-- Mesh
-- U0
-- T0
-- Camera
-- CMGL_Camera
-- CMGL_CubeMap
-- CMGL_Program
-- Light
-- CMGL_Renderer
-- CMGL_GameObject
-- Transform
-- CMGL_Framebuffer
-
 # when I feel like it
 - seperating opengl from glew and glfw to support custom libraries
 - adding (optional) "auto" support for glfw and glew

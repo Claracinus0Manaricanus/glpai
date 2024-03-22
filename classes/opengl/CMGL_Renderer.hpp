@@ -14,10 +14,6 @@ public:
     //constructors
     CMGL_Renderer();
 
-    //rendering functions
-    static int renderGenericArray(CMGL_Base* toRender, int vCount, CMGL_Program& renderPrg);//glDrawArrays
-    static int renderGenericElement(CMGL_Base* toRender, int fCount, CMGL_Program& renderPrg);//glDrawElements
-
     //CMGL_GameObject rendering
     static int renderGameObjects(CMGL_GameObject* objects, int objectsCount, CMGL_Framebuffer& FB, CMGL_Program& renderPrg);
     static int renderGameObjects(CMGL_GameObject* objects, int objectsCount, CMGL_Program& renderPrg);
