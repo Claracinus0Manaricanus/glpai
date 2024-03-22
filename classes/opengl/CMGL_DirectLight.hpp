@@ -2,6 +2,7 @@
 #define CMGL_DIRECTLIGHT
 
 #include "../base/Light.hpp"
+#include "CMGL_Renderer.hpp"
 #include <GL/glew.h>
 
 //note: binds ssb to binding 6
@@ -31,6 +32,7 @@ public:
     //utility
     void bind();
     void bindAsCam();
+    void calculateDepthBuffer(CMGL_GameObject* objects, int objectsCount, CMGL_Framebuffer& depthBuffer, CMGL_Program& depthProgram);//objects to consider, count of objects, frameBuffer that keeps depth buffer, shader program to calculate
 
     //overrides
     void updateLight() override;

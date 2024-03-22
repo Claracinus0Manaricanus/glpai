@@ -78,7 +78,6 @@ int main(int argc, char** argv){
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
-	glFrontFace(GL_CW);//clockwise winding
 	glDepthFunc(GL_LEQUAL);//depth test pass condition (LEQUAL=less or equal)
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);//blend coefficients
 	glBlendEquationSeparate(GL_FUNC_ADD,GL_MAX);
@@ -133,8 +132,6 @@ int main(int argc, char** argv){
 	UI_Out.setInt("tex0", 0);
 
 	CMGL_Program shadowMapPRG("shaders/perspective(L)/ShadMapD/vert.sha","shaders/perspective(L)/ShadMapD/frag.sha");
-
-	CMGL_Renderer mainRenderer;
 
 	//render plane
 	ObjectData renderPlaneOBJ;
@@ -191,6 +188,7 @@ int main(int argc, char** argv){
 	lightDepthBuffer.unbind();
 	CMGL_Framebuffer lightFB({GL_FRAMEBUFFER, 2048, 2048});
 	lightFB.setDepthAttachment(lightDepthBuffer.getid());
+	lightDepthBuffer.bind();//binds to unit 1
 
 
 	/********************************************/
@@ -238,79 +236,48 @@ int main(int argc, char** argv){
 		}
 
 
-		//object sheningans
+		//skybox /*****************************/
+		renderFB.clearColor();
+		renderFB.clearDepth();
+
+		glFrontFace(GL_CCW);
+		mainCam.render(&cubeMapsCube, 1, renderFB, skyBoxPrg);
+		glFrontFace(GL_CW);
+
+		//light position updates
 		denLight0.setPosition(mainCam.getPosition());
 		denLight1.setPosition(mainCam.getPosition());
 
 		//light pass
-		lightFB.bind();
-		glClear(GL_DEPTH_BUFFER_BIT);
-		denLight0.bindAsCam();
-		mainRenderer.renderGameObjectsA(objects, objectsCount, shadowMapPRG);
+		denLight0.calculateDepthBuffer(objects, objectsCount, lightFB, shadowMapPRG);
 
 		//render pass
-		renderFB.bind();
-		lightDepthBuffer.bind();
-
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		mainCam.bind();
 		denLight0.bind();
-		glFrontFace(GL_CW);
-		mainRenderer.renderGameObjectsA(objects, objectsCount, sprg);
-
+		mainCam.render(objects, objectsCount, renderFB, sprg);
 
 		//light pass
-		lightFB.bind();
-		glClear(GL_DEPTH_BUFFER_BIT);
-		denLight1.bindAsCam();
-		mainRenderer.renderGameObjectsA(objects, objectsCount, shadowMapPRG);
-
+		denLight1.calculateDepthBuffer(objects, objectsCount, lightFB, shadowMapPRG);
+		
 		//render pass
-		renderFB.bind();
-		lightDepthBuffer.bind();
-
-		mainCam.bind();
 		denLight1.bind();
 		glBlendFunc(GL_ONE,GL_ONE);
-		mainRenderer.renderGameObjectsA(objects, objectsCount, sprg);
+		mainCam.render(objects, objectsCount, renderFB, sprg);
 		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
-
-		//skybox /*****************************/
-		glFrontFace(GL_CCW);
-		mainRenderer.renderGenericArray(&cubeMapsCube, cubeMapsCube.getVCount(), skyBoxPrg);
-
 		renderFB.unbind();
 
 		
 		//clearing screen and rendering
 		glViewport(0, 0, winData.resolution.x, winData.resolution.y);
 
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
 		glFrontFace(GL_CW);
-		renderPlane.loadTexture(colorBuffer, false);
-		mainRenderer.renderGenericArray(&renderPlane, renderPlane.getVCount(), UI_Out);
+		CMGL_Renderer::renderGameObjects(&renderPlane, 1, UI_Out);
 
 
 		//input from keyboard (camera movement)
 		mainCam.moveForward(mainWin.getAxis(GLFW_KEY_W, GLFW_KEY_S)*deltaTime*camSpeed);
 		mainCam.moveRight(mainWin.getAxis(GLFW_KEY_D, GLFW_KEY_A)*deltaTime*camSpeed);
 		mainCam.moveUp(mainWin.getAxis(GLFW_KEY_E, GLFW_KEY_Q)*deltaTime*camSpeed);
-
-		//shader switching
-		if(mainWin.getKey(GLFW_KEY_F)){
-			sprg.load("shaders/perspective(L)/point/vert.sha", "shaders/perspective(L)/point/frag.sha");
-			sprg.setInt("T0", 0);
-			printf("loading perspective(L)/point\n");
-		}else if(mainWin.getKey(GLFW_KEY_G)){
-			sprg.load("shaders/imgV/vert.sha", "shaders/imgV/frag.sha");
-			sprg.setInt("T0", 0);
-			printf("loading imgV\n");
-		}else if(mainWin.getKey(GLFW_KEY_H)){
-			sprg.load("shaders/perspective(L)/directional/vert.sha", "shaders/perspective(L)/directional/frag.sha");
-			sprg.setInt("T0", 0);
-			printf("loading perspective(L)/directional\n");
-		}
 		
 
 		//toggle cursor

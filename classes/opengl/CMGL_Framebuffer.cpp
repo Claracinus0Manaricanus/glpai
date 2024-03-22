@@ -61,3 +61,15 @@ void CMGL_Framebuffer::bind(){
 void CMGL_Framebuffer::unbind(){
     glBindFramebuffer(framebufferType, 0);
 }
+
+void CMGL_Framebuffer::clearColor(){
+    bind();
+    glClear(GL_COLOR_BUFFER_BIT);
+    unbind();
+}
+
+void CMGL_Framebuffer::clearDepth(){
+    bind();
+    glClear(GL_DEPTH_BUFFER_BIT);
+    unbind();
+}

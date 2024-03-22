@@ -24,7 +24,7 @@ CMGL_DirectLight::CMGL_DirectLight(DirectLightData data){
     Light::dataLength = 2;
     
     Light::setColor(data.color);
-    direction = data.direction;
+    setDirection(data.direction);
 
     glGenBuffers(1, &SSB);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, SSB);
@@ -66,6 +66,17 @@ void CMGL_DirectLight::bind(){
 
 void CMGL_DirectLight::bindAsCam(){
     glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 5, SSB, 0, sizeof(float)*24);
+}
+
+void CMGL_DirectLight::calculateDepthBuffer(CMGL_GameObject* objects, int objectsCount, CMGL_Framebuffer& depthBuffer, CMGL_Program& depthProgram){
+    depthBuffer.bind();
+    glClear(GL_DEPTH_BUFFER_BIT);
+
+    bindAsCam();
+    
+    CMGL_Renderer::renderGameObjects(objects, objectsCount, depthProgram);
+
+    depthBuffer.unbind();
 }
 
 

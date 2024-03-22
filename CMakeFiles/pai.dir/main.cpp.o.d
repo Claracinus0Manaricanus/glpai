@@ -182,6 +182,8 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/../system/Image.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Base.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../cmMath/matrix4.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Program.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../graphics/CMGL_Shader.hpp \
  /usr/include/unistd.h /usr/include/bits/posix_opt.h \
@@ -205,8 +207,8 @@ CMakeFiles/pai.dir/main.cpp.o: /home/cm/codes/c++/glpai/main.cpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Camera.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Camera.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Transform.hpp \
+ /home/cm/codes/c++/glpai/classes/opengl/CMGL_Renderer.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_CubeMap.hpp \
- /home/cm/codes/c++/glpai/classes/opengl/../system/T0.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_Framebuffer.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/CMGL_DirectLight.hpp \
  /home/cm/codes/c++/glpai/classes/opengl/../base/Light.hpp \

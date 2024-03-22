@@ -30,6 +30,8 @@ public:
     void setViewport();
     void bind();
     void unbind();
+    void clearColor();
+    void clearDepth();
 
 };
 

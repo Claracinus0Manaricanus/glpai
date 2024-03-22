@@ -30,6 +30,15 @@ void CMGL_Camera::bind(){
     glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 5, SSB, 0, sizeof(float)*16);
 }
 
+void CMGL_Camera::unbind(){
+    glBindBufferRange(GL_SHADER_STORAGE_BUFFER, 5, 0, 0, NULL);
+}
+
+void CMGL_Camera::render(CMGL_GameObject* objects, int objectsCount, CMGL_Framebuffer& FB, CMGL_Program& program){
+    bind();
+    CMGL_Renderer::renderGameObjects(objects, objectsCount, FB, program);
+}
+
 
 //Transform overrides
 void CMGL_Camera::updateTransform(){

@@ -3,6 +3,7 @@
 
 #include "../base/Camera.hpp"
 #include "CMGL_Base.hpp"
+#include "CMGL_Renderer.hpp"
 #include <GL/glew.h>
 
 //note: binds ssb to binding 5
@@ -24,6 +25,8 @@ public:
 
     //utility
     void bind();
+    void unbind();
+    void render(CMGL_GameObject* objects, int objectsCount, CMGL_Framebuffer& FB, CMGL_Program& program);
 
     //Transform overrides
     void updateTransform() override;
